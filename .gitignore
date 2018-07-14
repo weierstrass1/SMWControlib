@@ -4,6 +4,6 @@
 
 .\TestWindows\bin
 
-.\backend\obj\Debug
-.\controls\obj\Debug
-.\TestWindows\obj\Debug
+.\backend\obj
+.\controls\obj
+.\TestWindows\obj

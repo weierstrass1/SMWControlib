@@ -1,9 +1,6 @@
 .\backend\bin
-
 .\controls\bin
-
 .\TestWindows\bin
-
 .\backend\obj
 .\controls\obj
 .\TestWindows\obj

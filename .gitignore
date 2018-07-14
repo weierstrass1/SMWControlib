@@ -4,3 +4,7 @@ TestWindows/bin
 backend/obj
 controls/obj
 TestWindows/obj
+.vs/SMWControlib/v15/.suo
+.vs/SMWControlib/v15/Server/sqlite3/storage.ide-shm
+.vs/SMWControlib/v15/Server/sqlite3/storage.ide-wal
+.vs/SMWControlib/v15/.suo

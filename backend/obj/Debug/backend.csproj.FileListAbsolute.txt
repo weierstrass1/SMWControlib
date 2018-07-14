@@ -1,0 +1,6 @@
+C:\Users\Patricio Diaz\source\repos\Dyzen\backend\bin\Debug\backend.dll
+C:\Users\Patricio Diaz\source\repos\Dyzen\backend\bin\Debug\backend.pdb
+C:\Users\Patricio Diaz\source\repos\Dyzen\backend\obj\Debug\backend.csprojResolveAssemblyReference.cache
+C:\Users\Patricio Diaz\source\repos\Dyzen\backend\obj\Debug\backend.csproj.CoreCompileInputs.cache
+C:\Users\Patricio Diaz\source\repos\Dyzen\backend\obj\Debug\backend.dll
+C:\Users\Patricio Diaz\source\repos\Dyzen\backend\obj\Debug\backend.pdb

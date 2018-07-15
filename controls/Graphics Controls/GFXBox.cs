@@ -9,14 +9,14 @@ namespace controls
     public partial class GFXBox : PictureBox
     {
         #region Properties
-        Bitmap behindBitmap;
-        Rectangle selection;
-        Pen selectionColor = Pens.White;
-        int selectionMinSize = 1;
-        int selectionAccuracy = 1;
-        int zoom = 1;
-        int tileSize = 16;
-        zoom tilezoom = backend.Zoom.x1;
+        private Bitmap behindBitmap;
+        private Rectangle selection;
+        private Pen selectionColor = Pens.White;
+        private int selectionMinSize = 1;
+        private int selectionAccuracy = 1;
+        private int zoom = 1;
+        private int tileSize = 16;
+        private Zoom tilezoom = backend.Zoom.x1;
 
         [
             Category("Int"),
@@ -32,9 +32,10 @@ namespace controls
                 }
             }
         }
-        Tile[,] tiles16;
-        Tile[,] tiles8;
-        Tile[,] selectedTiles;
+
+        private Tile[,] tiles16;
+        private Tile[,] tiles8;
+        private Tile[,] selectedTiles;
 
         [
             Category("Image"),
@@ -131,9 +132,10 @@ namespace controls
                 SetZoom(value);
             }
         }
-        int selectionStartX, selectionStartY;
-        int selectionEndX, selectionEndY;
-        bool selecting = false;
+
+        private int selectionStartX, selectionStartY;
+        private int selectionEndX, selectionEndY;
+        private bool selecting = false;
         public event Action SelectionChanged;
         #endregion
 

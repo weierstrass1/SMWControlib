@@ -37,6 +37,7 @@ namespace TestWindows
                     g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
                     g.DrawImage(tuples[i].Item3, tuples[i].Item1, tuples[i].Item2,
                         tuples[i].Item3.Width, tuples[i].Item3.Height);
+                    
                 }
             }
         }

@@ -61,8 +61,9 @@ namespace backend
             {
                 for (int j = 0; j < colors.GetLength(1); j++)
                 {
-                    using (Graphics g = Graphics.FromImage(bp))
+                    using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(bp))
                     {
+                        g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
                         g.FillRectangle(new SolidBrush(palette.GetColor(colors[i, j])),
                         new RectangleF(i * zoom, j * zoom, zoom, zoom));
                     }

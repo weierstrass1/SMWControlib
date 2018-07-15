@@ -6,40 +6,36 @@ namespace backend
     public enum TileSize { Size8x8 = 8, Size16x16 = 16 };
     public enum BaseTile { Top = 0, Botton = 8 , None = -1};
 
-    public static class Zoom
+    public struct Zoom
     {
-        public static readonly zoom x1 = 1;
-        public static readonly zoom x2 = 2;
-        public static readonly zoom x4 = 4;
-        public static readonly zoom x6 = 6;
-        public static readonly zoom x8 = 8;
-        public static readonly zoom x10 = 10;
-        public static readonly zoom x12 = 12;
-        public static readonly zoom x14 = 14;
-        public static readonly zoom x16 = 16;
-        public static readonly zoom x18 = 18;
-        public static readonly zoom x20 = 20;
-    }
+        public static readonly Zoom x1 = 1;
+        public static readonly Zoom x2 = 2;
+        public static readonly Zoom x4 = 4;
+        public static readonly Zoom x6 = 6;
+        public static readonly Zoom x8 = 8;
+        public static readonly Zoom x10 = 10;
+        public static readonly Zoom x12 = 12;
+        public static readonly Zoom x14 = 14;
+        public static readonly Zoom x16 = 16;
+        public static readonly Zoom x18 = 18;
+        public static readonly Zoom x20 = 20;
+        private int value;
 
-    public struct zoom
-    {
-        int value;
-
-        private zoom(int Value)
+        private Zoom(int Value)
         {
             value = Value;
             if (value < 1) value = 1;
             if (value > 20) value = 20;
         }
 
-        public static implicit operator int(zoom z)
+        public static implicit operator int(Zoom z)
         {
             return z.value;
         }
 
-        public static implicit operator zoom(int i)
+        public static implicit operator Zoom(int i)
         {
-            return new zoom(i);
+            return new Zoom(i);
         }
     }
 
@@ -49,8 +45,8 @@ namespace backend
         public int Size { get; private set; }
         public bool FullyDirty { get; private set; }
         private bool[] Dirty;
-        byte[,] colors;
-        Bitmap[,] images;
+        private byte[,] colors;
+        private Bitmap[,] images;
 
 
         private Tile()
@@ -124,7 +120,7 @@ namespace backend
             return target;
         }
 
-        public Bitmap GetImage(PaletteId i, zoom zoom)
+        public Bitmap GetImage(PaletteId i, Zoom zoom)
         {
             if (images == null || images[(int)i, zoom / 2]==null || FullyDirty || Dirty[(int)i])
                 GenerateBitmap(i, zoom);
@@ -132,7 +128,7 @@ namespace backend
             return images[(int)i, zoom / 2];
         }
 
-        public void GenerateBitmap(PaletteId paletteId, zoom zoom)
+        public void GenerateBitmap(PaletteId paletteId, Zoom zoom)
         {
             ColorPalette cp = ColorPalette.GetPalette(ColorPalette.SelectedPalette);
 
@@ -150,7 +146,7 @@ namespace backend
             {
                 for (int j = 0; j < Size; j++)
                 {
-                    using (Graphics g = Graphics.FromImage(bp))
+                    using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(bp))
                     {
                         g.FillRectangle(new SolidBrush(cp.GetColor(colors[i, j])),
                         new RectangleF(i * zoom, j * zoom, zoom, zoom));
@@ -161,7 +157,7 @@ namespace backend
             SetDirty(npid, false);
         }
 
-        static char[] intToHex = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+        private static char[] intToHex = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
         public static Tile[,] GenerateTilesFromColorMatrix(byte[,] colors, TileSize size, BaseTile baseTile,out BaseTile baseTileout)
         {
             baseTileout = baseTile;

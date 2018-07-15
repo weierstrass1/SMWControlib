@@ -137,6 +137,8 @@ namespace controls
         private int selectionEndX, selectionEndY;
         private bool selecting = false;
         public event Action SelectionChanged;
+        bool tilesNotFiled16 = true;
+        bool tilesNotFiled8 = true;
         #endregion
 
         public GFXBox()
@@ -295,6 +297,7 @@ namespace controls
                                 tiles = tiles8;
                                 go = true;
                             }
+                            tilesNotFiled8 = false;
                         }
                         else if (this.tileSize == 16)
                         {
@@ -304,8 +307,9 @@ namespace controls
                                 tiles = tiles16;
                                 go = true;
                             }
+                            tilesNotFiled16 = false;
                         }
-                        if(go)
+                        if (go)
                         {
                             for (int i = 0; i < tiles.GetLength(0); i++)
                             {
@@ -374,6 +378,16 @@ namespace controls
                     "Invalid GFX Error",
                     MessageBoxButtons.OK, 
                     MessageBoxIcon.Error);
+            }
+            if (tilesNotFiled16 && tiles16 != null)
+            {
+                Tile.FillTileMatrix(tiles16, TileSize.Size16x16, BaseTile.Top);
+                tilesNotFiled16 = false;
+            }
+            if (tilesNotFiled8 && tiles8 != null)
+            {
+                Tile.FillTileMatrix(tiles8, TileSize.Size8x8, BaseTile.Top);
+                tilesNotFiled8 = false;
             }
         }
 

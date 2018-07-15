@@ -159,6 +159,36 @@ namespace backend
         }
 
         private static char[] intToHex = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+
+        public static void FillTileMatrix(Tile[,] tiles, TileSize size, BaseTile baseTile)
+        {
+            if (tiles == null) return;
+            int maxs = 16;
+            if (size == TileSize.Size16x16) maxs = 15;
+            int numBase = (int)baseTile;
+            int maxh = maxs - numBase;
+
+            if (tiles.GetLength(0) > maxs)
+                throw new Exception("The Width of Tile Matrix must be of " + maxs + " or less.");
+            if (tiles.GetLength(1) > maxh)
+                throw new Exception("The Height of Tile Matrix must be of " + maxh + " or less.");
+
+            int numbSize = (int)size;
+
+            for (int i = 0; i < tiles.GetLength(0); i++)
+            {
+                for (int j = 0; j < tiles.GetLength(1); j++)
+                {
+                    if (tiles[i, j] == null)
+                    {
+                        tiles[i, j] = new Tile();
+                        tiles[i, j].colors = new byte[numbSize, numbSize];
+                        tiles[i, j].Code = "$" + intToHex[numBase + j] + intToHex[i];
+                        tiles[i, j].Size = numbSize;
+                    }
+                }
+            }
+        }
         public static Tile[,] GenerateTilesFromColorMatrix(byte[,] colors, TileSize size, BaseTile baseTile,out BaseTile baseTileout)
         {
             baseTileout = baseTile;

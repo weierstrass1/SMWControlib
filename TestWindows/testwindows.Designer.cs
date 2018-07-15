@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(testwindows));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.gfxBox1 = new controls.GFXBox();
+            this.gfxButton1 = new controls.Graphics_Controls.GFXButton();
+            this.gfxButton2 = new controls.Graphics_Controls.GFXButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gfxBox1)).BeginInit();
             this.SuspendLayout();
@@ -59,11 +61,37 @@
             this.gfxBox1.TileZoom = 2;
             this.gfxBox1.Zoom = 2;
             // 
+            // gfxButton1
+            // 
+            this.gfxButton1.BaseTile = 0;
+            this.gfxButton1.Location = new System.Drawing.Point(42, 310);
+            this.gfxButton1.Name = "gfxButton1";
+            this.gfxButton1.Size = new System.Drawing.Size(75, 23);
+            this.gfxButton1.StartFolder = "";
+            this.gfxButton1.TabIndex = 2;
+            this.gfxButton1.Text = "Load Top";
+            this.gfxButton1.Tilesize = 16;
+            this.gfxButton1.UseVisualStyleBackColor = true;
+            // 
+            // gfxButton2
+            // 
+            this.gfxButton2.BaseTile = 8;
+            this.gfxButton2.Location = new System.Drawing.Point(123, 310);
+            this.gfxButton2.Name = "gfxButton2";
+            this.gfxButton2.Size = new System.Drawing.Size(75, 23);
+            this.gfxButton2.StartFolder = "";
+            this.gfxButton2.TabIndex = 3;
+            this.gfxButton2.Text = "Load Bottom";
+            this.gfxButton2.Tilesize = 16;
+            this.gfxButton2.UseVisualStyleBackColor = true;
+            // 
             // testwindows
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.gfxButton2);
+            this.Controls.Add(this.gfxButton1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.gfxBox1);
             this.Name = "testwindows";
@@ -78,5 +106,7 @@
 
         private controls.GFXBox gfxBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private controls.Graphics_Controls.GFXButton gfxButton1;
+        private controls.Graphics_Controls.GFXButton gfxButton2;
     }
 }

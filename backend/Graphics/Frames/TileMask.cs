@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace backend.Graphics.Frames
 {
     public enum TileSP { SP01 = 0, SP23 = 1 };
-    public enum TilePriority { BehindLayer3 = 0, BehindLayer3P1NotForcedAbove = 16, AboveP0 = 32, AboveAllExceptLayer3P1ForcedAbove = 48};
+    public enum TilePriority { BehindLayer3 = 0, BehindLayer3P1NotForcedAbove = 16, AboveAllLayersP0 = 32, AboveAllExceptLayer3P1ForcedAbove = 48};
     public class TileMask
     {
         private sbyte xDisp;
@@ -32,7 +32,7 @@ namespace backend.Graphics.Frames
             }
         }
 
-        public TilePriority Priority { get; set; } = TilePriority.AboveP0;
+        public TilePriority Priority { get; set; } = TilePriority.AboveAllLayersP0;
 
         private bool flipX = false;
 

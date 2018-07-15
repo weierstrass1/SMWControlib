@@ -93,11 +93,21 @@ namespace backend.Graphics.Frames
             }
         }
 
+        public TileMask(TileSP SP)
+        {
+            sp = SP;
+        }
+
         public TilePriority Priotity { get => Priority; set => Priority = value; }
 
         public Bitmap GetBitmap(Zoom zoom)
         {
             if (!dirty) return graphics;
+            if (tile == null)
+            {
+                graphics = null;
+                return graphics;
+            }
             Bitmap bp = tile.GetImage(palette, zoom);
             if (bp == null)
             {

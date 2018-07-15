@@ -281,14 +281,45 @@ namespace controls
 
                 this.tileSize = (int)tileSize;
                 Tile[,] tils = Tile.GenerateTilesFromColorMatrix(colors, tileSize, baseTile, out baseTile);
-                switch(baseTile)
+                Tile[,] tiles = null;
+
+                switch (baseTile)
                 {
                     case BaseTile.None:
-                        if (this.tileSize == 8) tiles8 = tils;
-                        else if (this.tileSize == 16) tiles16 = tils;
+                        bool go = false;
+                        if (this.tileSize == 8)
+                        {
+                            if (tiles8 == null) tiles8 = tils;
+                            else
+                            {
+                                tiles = tiles8;
+                                go = true;
+                            }
+                        }
+                        else if (this.tileSize == 16)
+                        {
+                            if (tiles16 == null) tiles16 = tils;
+                            else
+                            {
+                                tiles = tiles16;
+                                go = true;
+                            }
+                        }
+                        if(go)
+                        {
+                            for (int i = 0; i < tiles.GetLength(0); i++)
+                            {
+                                for (int j = 0; j < tiles.GetLength(1); j++)
+                                {
+                                    if (tiles[i, j] != null)
+                                        Tile.fusionTiles(tiles[i, j], tils[i, j], BaseTile.None);
+                                    else tiles[i, j] = tils[i, j];
+                                }
+                            }
+                        }
                         break;
                     default:
-                        Tile[,] tiles = null;
+                        tiles = null;
                         int adder = 0;
                         int jFusion = 7;
                         int xlim = 16;
@@ -327,7 +358,10 @@ namespace controls
                                 }
                                 else
                                 {
-                                    tiles[i, j + adder + canFusion] = tils[i, j];
+                                    if (tiles[i, j + adder + canFusion] == null)
+                                        tiles[i, j + adder + canFusion] = tils[i, j];
+                                    else Tile.fusionTiles(tiles[i, j + adder + canFusion], tils[i, j], BaseTile.None);
+
                                 }
                             }
                         }

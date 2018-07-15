@@ -117,6 +117,7 @@ namespace backend
                     }
                     break;
             }
+            target.SetDirty();
             return target;
         }
 
@@ -173,6 +174,12 @@ namespace backend
                 baseTileout = baseTile;
             }
             if (baseTile == BaseTile.None) h = 16;
+            
+            if(size == TileSize.Size16x16)
+            {
+                w--;
+                if (h == 16) h--;
+            }
 
             Tile[,] tiles = new Tile[w, h];
             int numSize = (int)size;

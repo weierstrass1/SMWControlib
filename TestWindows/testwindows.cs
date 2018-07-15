@@ -18,7 +18,7 @@ namespace TestWindows
         {
             InitializeComponent();
             ColorPalette.GeneratePalette("Doom3.pal", 16);
-            ColorPalette.SelectedPalette = PaletteId.pF;
+            ColorPalette.SelectedPalette = PaletteId.p5;
             gfxBox1.GetTiles("Doom.bin", TileSize.Size16x16, BaseTile.Top);
             gfxBox1.GetTiles("Doom3.bin", TileSize.Size16x16, BaseTile.Botton);
             gfxBox1.SelectionChanged += GfxBox1_SelectionChanged;

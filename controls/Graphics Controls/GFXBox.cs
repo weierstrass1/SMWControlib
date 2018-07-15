@@ -17,13 +17,18 @@ namespace controls
         int zoom = 1;
         int tileSize = 16;
         zoom tilezoom = backend.Zoom.x1;
-        public zoom TileZoom { get { return tilezoom; }
+
+        [
+            Category("Int"),
+            Description("Zoom of the bitmaps generated from tiles.")
+        ]
+        public int TileZoom { get { return tilezoom; }
             set
             {
                 tilezoom = value;
                 if (selectedTiles != null)
                 {
-                    GetTilesFromSelection(value);
+                    GetTilesFromSelection();
                 }
             }
         }
@@ -67,11 +72,11 @@ namespace controls
             Category("Pen"),
             Description("Color of the selection.")
         ]
-        public Pen SelectionColor
+        public Color SelectionColor
         {
             get
             {
-                return selectionColor;
+                return selectionColor.Color;
             }
             set
             {
@@ -176,7 +181,7 @@ namespace controls
             bool oddY = even1 != even2;
 
             x = 0;
-            int zsiz = tileSize * zoom;
+            int zsiz = tileSize * TileZoom;
             for (int i = 0; i < selectedTiles.GetLength(0); i++, x += zsiz)
             {
                 if (oddX && i == w)
@@ -187,7 +192,8 @@ namespace controls
                 {
                     if (oddY && j == h)
                         y -= (zsiz / 2);
-                    tuples[k] = new Tuple<int, int, Bitmap>(x, y, selectedTiles[i, j].GetImage(5, zoom));
+                    tuples[k] = new Tuple<int, int, Bitmap>(x, y, 
+                        selectedTiles[i, j].GetImage(ColorPalette.SelectedPalette, TileZoom));
                     k++;
                 }
             }
@@ -239,8 +245,8 @@ namespace controls
             if (miny > ylim) miny = ylim;
 
             int zacc = selectionAccuracy * zoom;
-            if (maxx == selectionStartX) maxx -= (maxx % zacc);
-            if (maxy == selectionStartY) maxy -= (maxy % zacc);
+            if (maxx == selectionStartX) maxx += (zacc - (maxx % zacc));
+            if (maxy == selectionStartY) maxy += (zacc - (maxy % zacc));
 
             int w = maxx - minx;
             int h = maxy - miny;
@@ -253,7 +259,7 @@ namespace controls
         {
             GFXBox_MouseMove(sender, e);
             selecting = false;
-            GetTilesFromSelection(TileZoom);
+            GetTilesFromSelection();
             SelectionChanged?.Invoke();
         }
         #endregion
@@ -264,7 +270,7 @@ namespace controls
                 byte[,] colors = SnesGraphics.generateGFX(path);
                 int y = 0;
                 if (baseTile == BaseTile.Botton) y = Height / 2;
-                Bitmap bp = SnesGraphics.GenerateBitmapFromColorMatrix(colors, zoom, ColorPalette.GetPalette(5));
+                Bitmap bp = SnesGraphics.GenerateBitmapFromColorMatrix(colors, zoom, ColorPalette.GetPalette(ColorPalette.SelectedPalette));
                 using (Graphics g = Graphics.FromImage(behindBitmap))
                 {
                     g.DrawImage(bp, 0, y, bp.Width, bp.Height);
@@ -282,14 +288,14 @@ namespace controls
                     default:
                         Tile[,] tiles = null;
                         int adder = 0;
-                        int jFusion = 8;
+                        int jFusion = 7;
                         int xlim = 16;
                         int ylim = 16;
                         if (this.tileSize == 8)
                         {
                             if (tiles8 == null) tiles8 = new Tile[16, 16];
                             tiles = tiles8;
-                            if (baseTile == BaseTile.Botton) adder = 4;
+                            if (baseTile == BaseTile.Botton) adder = 3;
                         }
                         else if (this.tileSize == 16)
                         {
@@ -299,23 +305,27 @@ namespace controls
                             ylim = 15;
                             if (baseTile == BaseTile.Botton)
                             {
-                                adder = 8;
+                                adder = 7;
                                 jFusion = 0;
                             }
                         }
 
+                        int canFusion;
                         for (int i = 0; i < xlim; i++)
                         {
-                            for (int j = 0; j < tils.GetLength(1) && j + adder < ylim; j++)
+                            canFusion = 0;
+                            for (int j = 0; j < tils.GetLength(1) && j + adder + canFusion < ylim; j++)
                             {
-                                if (j == jFusion && this.tileSize == 16)
+                                if (canFusion == 0 && j == jFusion && this.tileSize == 16)
                                 {
                                     tiles[i, j + adder] = 
                                         Tile.fusionTiles(tiles[i, j + adder], tils[i, j], baseTile);
+                                    canFusion = 1;
+                                    j--;
                                 }
                                 else
                                 {
-                                    tiles[i, j + adder] = tils[i, j];
+                                    tiles[i, j + adder + canFusion] = tils[i, j];
                                 }
                             }
                         }
@@ -331,7 +341,7 @@ namespace controls
             }
         }
 
-        private void GetTilesFromSelection(zoom tileZoom)
+        private void GetTilesFromSelection()
         {
             Tile[,] tiles = tiles16;
             if (tileSize == 8) tiles = tiles8;
@@ -353,8 +363,6 @@ namespace controls
                 for (int j = 0; j < ylim; q++)
                 {
                     selectedTiles[p, q] = tiles[xarr + i, yarr + j];
-                    if (selectedTiles[p, q] != null)
-                        selectedTiles[p, q].GenerateBitmap(5, tileZoom);
 
                     if (tileSize == 8 || (ylim % 2 != 0 && j + 3 == ylim))
                     {
@@ -402,9 +410,9 @@ namespace controls
             ReDraw();
         }
 
-        private void SetSeletionColor(Pen color)
+        private void SetSeletionColor(Color color)
         {
-            selectionColor = color;
+            selectionColor = new Pen(color);
             ReDraw();
         }
 

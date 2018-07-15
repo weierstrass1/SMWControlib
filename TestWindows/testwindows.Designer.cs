@@ -29,11 +29,19 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(testwindows));
-            this.gfxBox1 = new controls.GFXBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.gfxBox1)).BeginInit();
+            this.gfxBox1 = new controls.GFXBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gfxBox1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(350, 47);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(256, 256);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
             // 
             // gfxBox1
             // 
@@ -43,19 +51,13 @@
             this.gfxBox1.Name = "gfxBox1";
             this.gfxBox1.Selection = new System.Drawing.Rectangle(0, 0, 64, 64);
             this.gfxBox1.SelectionAccuracy = 8;
+            this.gfxBox1.SelectionColor = System.Drawing.Color.Lavender;
             this.gfxBox1.SelectionMinSize = 16;
             this.gfxBox1.Size = new System.Drawing.Size(256, 256);
             this.gfxBox1.TabIndex = 0;
             this.gfxBox1.TabStop = false;
+            this.gfxBox1.TileZoom = 2;
             this.gfxBox1.Zoom = 2;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(350, 47);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(256, 256);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
             // 
             // testwindows
             // 
@@ -66,8 +68,8 @@
             this.Controls.Add(this.gfxBox1);
             this.Name = "testwindows";
             this.Text = "testwindows";
-            ((System.ComponentModel.ISupportInitialize)(this.gfxBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gfxBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -4,10 +4,38 @@ using System.IO;
 
 namespace backend
 {
+    public enum PaletteId
+    {
+        p0 = 0, p1 = 1, p2 = 2, p3 = 3, p4 = 4, p5 = 5, p6 = 6, p7 = 7, p8 = 8,
+        p9 = 9, pA = 10, pB = 11, pC = 12, pD = 13, pE = 14, pF = 15
+    }
     public class ColorPalette
     {
         private static ColorPalette[] palettes;
+        public static int PalettesLength
+        {
+            get
+            {
+                if (palettes == null) return 0;
+                return palettes.Length;
+            }
+        }
         private Color[] colors;
+        private static PaletteId selectedPalette;
+        public static PaletteId SelectedPalette
+        {
+            get
+            {
+                return selectedPalette;
+            }
+            set
+            {
+                selectedPalette = value;
+                SelectedPaletteChange?.Invoke();
+            }
+        }
+        public static event Action SelectedPaletteChange, AllPalettesChange;
+        public static event Action<int> PalettesChange;
         public uint Length { get; private set; }
 
 
@@ -33,14 +61,11 @@ namespace backend
             colors[i] = c;
         }
 
-        public static ColorPalette GetPalette(uint i)
+        public static ColorPalette GetPalette(PaletteId i)
         {
             if (palettes == null) return null;
-            if (i >= (uint)palettes.Length)
-            {
-                i = (uint)palettes.Length - 1;
-            }
-            return palettes[i];
+            SelectedPalette = i;
+            return palettes[(int)SelectedPalette];
         }
 
         public static void GeneratePalette(string path, uint PaletteSize)
@@ -69,6 +94,11 @@ namespace backend
                     index = baseIndex + j * 3;
                     palettes[i].colors[j] = Color.FromArgb(255 ,bytes[index], bytes[index + 1], bytes[index + 2]);
                 }
+            }
+            AllPalettesChange?.Invoke();
+            for (int i = 0; i < palettes.Length; i++)
+            {
+                PalettesChange?.Invoke(i);
             }
         }
     }

@@ -27,7 +27,9 @@ namespace backend
 
         private zoom(int Value)
         {
-            value = 1;
+            value = Value;
+            if (value < 1) value = 1;
+            if (value > 20) value = 20;
         }
 
         public static implicit operator int(zoom z)
@@ -37,10 +39,7 @@ namespace backend
 
         public static implicit operator zoom(int i)
         {
-            zoom z = new zoom(i);
-            if (z.value < 1) z.value = 1;
-            if (z.value > 20) z.value = 20;
-            return z;
+            return new zoom(i);
         }
     }
 
@@ -48,11 +47,46 @@ namespace backend
     {
         public string Code { get; private set; }
         public int Size { get; private set; }
+        public bool FullyDirty { get; private set; }
+        private bool[] Dirty;
         byte[,] colors;
         Bitmap[,] images;
 
+
         private Tile()
         {
+            SetDirty();
+            ColorPalette.AllPalettesChange += ColorPalette_AllPalettesChange;
+            ColorPalette.PalettesChange += ColorPalette_PalettesChange;
+        }
+
+        private void ColorPalette_PalettesChange(int obj)
+        {
+            SetDirty(obj, true);
+        }
+
+        private void ColorPalette_AllPalettesChange()
+        {
+            SetDirty();
+        }
+
+        private void SetDirty()
+        {
+            FullyDirty = true;
+            Dirty = new bool[ColorPalette.PalettesLength];
+            for (int i = 0; i < Dirty.Length; i++)
+            {
+                SetDirty(i, true);
+            }
+        }
+
+        private void SetDirty(int i,bool val)
+        {
+            if (Dirty == null) return;
+            if (i < 0) i = 0;
+            else if (i >= Dirty.Length) i = Dirty.Length - 1;
+
+            Dirty[i] = true;
         }
 
         public static Tile fusionTiles(Tile target, Tile fusion, BaseTile baseTile)
@@ -75,13 +109,14 @@ namespace backend
                     if (target.Size == (int)TileSize.Size8x8) numbbaseTile /= 2;
 
                     int ylim = target.Size/2;
-                    if (baseTile == BaseTile.Botton) ylim = target.Size;
+                    int adder = 0;
+                    if (baseTile == BaseTile.Botton) adder = ylim;
 
                     for (int i = 0; i < target.colors.GetLength(0); i++)
                     {
-                        for (int j = numbbaseTile; j < ylim; i++)
+                        for (int j = 0; j < ylim; j++)
                         {
-                            target.colors[i, j] = fusion.colors[i, j];
+                            target.colors[i, j + adder] = fusion.colors[i, j];
                         }
                     }
                     break;
@@ -89,34 +124,27 @@ namespace backend
             return target;
         }
 
-        public Bitmap GetImage(uint i, zoom zoom)
+        public Bitmap GetImage(PaletteId i, zoom zoom)
         {
-            if (images == null) GenerateBitmap(i, zoom);
-            if (i > (uint)images.GetLength(0)) i = (uint)images.GetLength(0) - 1;
+            if (images == null || images[(int)i, zoom / 2]==null || FullyDirty || Dirty[(int)i])
+                GenerateBitmap(i, zoom);
 
-            int numbZoom = (int)zoom;
-
-            return images[i, numbZoom / 2];
+            return images[(int)i, zoom / 2];
         }
 
-        public void GenerateBitmap(uint paletteId, zoom zoom)
+        public void GenerateBitmap(PaletteId paletteId, zoom zoom)
         {
-            ColorPalette cp = ColorPalette.GetPalette(paletteId);
+            ColorPalette cp = ColorPalette.GetPalette(ColorPalette.SelectedPalette);
 
             if (cp == null) return;
 
-            if (paletteId >= cp.Length)
-            {
-                paletteId = cp.Length - 1;
-            }
+            int npid = (int)paletteId;
 
-            if (images == null || images.GetLength(0) != cp.Length) images = new Bitmap[cp.Length, 7];
+            if (images == null || images.GetLength(0) != cp.Length) images = new Bitmap[cp.Length, 10];
 
-            int numbZoom = zoom;
+            images[npid, zoom / 2] = new Bitmap(Size * zoom, Size * zoom);
 
-            images[paletteId, numbZoom / 2] = new Bitmap(Size * numbZoom, Size * numbZoom);
-
-            Bitmap bp = images[paletteId, numbZoom / 2];
+            Bitmap bp = images[npid, zoom / 2];
 
             for (int i = 0; i < Size; i++)
             {
@@ -125,10 +153,12 @@ namespace backend
                     using (Graphics g = Graphics.FromImage(bp))
                     {
                         g.FillRectangle(new SolidBrush(cp.GetColor(colors[i, j])),
-                        new RectangleF(i * numbZoom, j * numbZoom, numbZoom, numbZoom));
+                        new RectangleF(i * zoom, j * zoom, zoom, zoom));
                     }
                 }
             }
+            FullyDirty = false;
+            SetDirty(npid, false);
         }
 
         static char[] intToHex = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };

@@ -91,7 +91,7 @@ namespace backend
 
         public Bitmap GetImage(uint i, zoom zoom)
         {
-            if (images == null) return null;
+            if (images == null) GenerateBitmap(i, zoom);
             if (i > (uint)images.GetLength(0)) i = (uint)images.GetLength(0) - 1;
 
             int numbZoom = (int)zoom;
@@ -112,7 +112,7 @@ namespace backend
 
             if (images == null || images.GetLength(0) != cp.Length) images = new Bitmap[cp.Length, 7];
 
-            int numbZoom = (int)zoom;
+            int numbZoom = zoom;
 
             images[paletteId, numbZoom / 2] = new Bitmap(Size * numbZoom, Size * numbZoom);
 
@@ -135,7 +135,8 @@ namespace backend
         public static Tile[,] GenerateTilesFromColorMatrix(byte[,] colors, TileSize size, BaseTile baseTile,out BaseTile baseTileout)
         {
             baseTileout = baseTile;
-            if (colors.GetLength(0) != 128 || (colors.GetLength(1) != 128 && colors.GetLength(1) != 64))
+            if (colors.GetLength(0) != 128 || 
+                (colors.GetLength(1) != 128 && colors.GetLength(1) != 64))
                 throw new Exception("Not Valid Matrix.");
 
             int h = 8;
@@ -165,9 +166,9 @@ namespace backend
                     tiles[i, j].colors = new byte[numSize, numSize];
                     tiles[i, j].Code = "$" + intToHex[numBase + j]+ intToHex[i];
                     tiles[i, j].Size = numSize;
-                    for (int p = 0; p < numSize; p++)
+                    for (int p = 0; p < numSize && x + p < colors.GetLength(0); p++)
                     {
-                        for (int q = 0; (j < h - 1 && q < numSize) || (j == h - 1 && q < ylim); q++)
+                        for (int q = 0; y + q < colors.GetLength(1) && ((j < h - 1 && q < numSize) || (j == h - 1 && q < ylim)); q++)
                         {
                             tiles[i, j].colors[p, q] = colors[x + p, y + q];
                         }

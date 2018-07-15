@@ -129,6 +129,7 @@ namespace controls
         int selectionStartX, selectionStartY;
         int selectionEndX, selectionEndY;
         bool selecting = false;
+        public event Action SelectionChanged;
         #endregion
 
         public GFXBox()
@@ -139,6 +140,58 @@ namespace controls
             MouseMove += GFXBox_MouseMove;
             MouseUp += GFXBox_MouseUp;
             SizeChanged += GFXBox_SizeChanged;
+        }
+
+        public Tuple<int,int,Bitmap>[] GetBitmapsFromSelectedTiles()
+        {
+            if (selectedTiles == null) return null;
+            Tuple<int, int, Bitmap>[] tuples = 
+                new Tuple<int, int, Bitmap>[selectedTiles.GetLength(0) * selectedTiles.GetLength(1)];
+
+            int w = selectedTiles.GetLength(0) - 1;
+            int h = selectedTiles.GetLength(1) - 1;
+
+            int k = 0;
+            int x, y;
+            char c1, c2;
+            c1 = selectedTiles[0, 0].Code[2];
+            c2 = selectedTiles[w, 0].Code[2];
+
+            bool even1 = (c1 % 2 == 0 && c1 > '9')
+                        || (c1 % 2 == 1 && c1 <= '9');
+
+            bool even2 = (c2 % 2 == 0 && c2 > '9')
+                        || (c2 % 2 == 1 && c2 <= '9');
+
+            bool oddX = even1 != even2;
+
+            c1 = selectedTiles[0, 0].Code[1];
+            c2 = selectedTiles[0, h].Code[1];
+
+            even1 = (c1 % 2 == 0 && c1 > '9')
+            || (c1 % 2 == 1 && c1 <= '9');
+
+            even2 = (c2 % 2 == 0 && c2 > '9')
+                        || (c2 % 2 == 1 && c2 <= '9');
+            bool oddY = even1 != even2;
+
+            x = 0;
+            int zsiz = tileSize * zoom;
+            for (int i = 0; i < selectedTiles.GetLength(0); i++, x += zsiz)
+            {
+                if (oddX && i == w)
+                    x -= (zsiz / 2);
+
+                y = 0;
+                for (int j = 0; j < selectedTiles.GetLength(1); j++, y += zsiz)
+                {
+                    if (oddY && j == h)
+                        y -= (zsiz / 2);
+                    tuples[k] = new Tuple<int, int, Bitmap>(x, y, selectedTiles[i, j].GetImage(5, zoom));
+                    k++;
+                }
+            }
+            return tuples;
         }
 
         private void GFXBox_SizeChanged(object sender, EventArgs e)
@@ -200,9 +253,8 @@ namespace controls
         {
             GFXBox_MouseMove(sender, e);
             selecting = false;
-            Tile[,] tiles = tiles16;
-            if (tileSize == 8) tiles = tiles8;
-            if (tiles != null) GetTilesFromSelection(TileZoom);
+            GetTilesFromSelection(TileZoom);
+            SelectionChanged?.Invoke();
         }
         #endregion
         public void GetTiles(string path,TileSize tileSize, BaseTile baseTile)
@@ -231,6 +283,8 @@ namespace controls
                         Tile[,] tiles = null;
                         int adder = 0;
                         int jFusion = 8;
+                        int xlim = 16;
+                        int ylim = 16;
                         if (this.tileSize == 8)
                         {
                             if (tiles8 == null) tiles8 = new Tile[16, 16];
@@ -241,6 +295,8 @@ namespace controls
                         {
                             if (tiles16 == null) tiles16 = new Tile[15, 15];
                             tiles = tiles16;
+                            xlim = 15;
+                            ylim = 15;
                             if (baseTile == BaseTile.Botton)
                             {
                                 adder = 8;
@@ -248,13 +304,14 @@ namespace controls
                             }
                         }
 
-                        for (int i = 0; i < tils.GetLength(0); i++)
+                        for (int i = 0; i < xlim; i++)
                         {
-                            for (int j = 0; j < tils.GetLength(1); j++)
+                            for (int j = 0; j < tils.GetLength(1) && j + adder < ylim; j++)
                             {
                                 if (j == jFusion && this.tileSize == 16)
                                 {
-                                    tiles[i, j + adder] = Tile.fusionTiles(tiles[i, j], tils[i, j], baseTile);
+                                    tiles[i, j + adder] = 
+                                        Tile.fusionTiles(tiles[i, j + adder], tils[i, j], baseTile);
                                 }
                                 else
                                 {
@@ -262,9 +319,6 @@ namespace controls
                                 }
                             }
                         }
-
-                        break;
-                    case BaseTile.Botton:
                         break;
                 }
             }
@@ -281,6 +335,7 @@ namespace controls
         {
             Tile[,] tiles = tiles16;
             if (tileSize == 8) tiles = tiles8;
+            if (tiles == null) return;
 
             int xarr = selection.X / (8 * zoom);
             int yarr = selection.Y / (8 * zoom);
@@ -290,21 +345,30 @@ namespace controls
             int xlim = selection.Width / (8 * zoom);
             int ylim = selection.Height / (8 * zoom);
 
-            selectedTiles = new Tile[xlim, ylim];
-
-            for (int i = 0; i < xlim;)
+            selectedTiles = new Tile[(xlim / 2) + xlim % 2, (ylim / 2) + ylim % 2];
+            int p = 0, q = 0;
+            for (int i = 0; i < xlim; p++)
             {
-                for (int j = 0; j < ylim;)
+                q = 0;
+                for (int j = 0; j < ylim; q++)
                 {
-                    selectedTiles[i, j] = tiles[xarr + i, yarr + j];
-                    if (selectedTiles[i, j] != null)
-                        selectedTiles[i, j].GenerateBitmap(5, tileZoom);
+                    selectedTiles[p, q] = tiles[xarr + i, yarr + j];
+                    if (selectedTiles[p, q] != null)
+                        selectedTiles[p, q].GenerateBitmap(5, tileZoom);
 
-                    if (tileSize == 8 || (ylim % 2 != 0 && j + 2 >= ylim)) j++;
-                    else j += 2;
+                    if (tileSize == 8 || (ylim % 2 != 0 && j + 3 == ylim))
+                    {
+                        j++;
+                    }
+                    else
+                        j += 2;
                 }
-                if (tileSize == 8 || (xlim % 2 != 0 && i + 2 >= xlim)) i++;
-                else i += 2;
+                if (tileSize == 8 || (xlim % 2 != 0 && i + 3 == xlim))
+                {
+                    i++;
+                }
+                else
+                    i += 2;
             }
         }
 

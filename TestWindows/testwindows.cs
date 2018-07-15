@@ -20,8 +20,21 @@ namespace TestWindows
             ColorPalette.GeneratePalette("Doom3.pal", 16);
             gfxBox1.GetTiles("Doom.bin", TileSize.Size16x16, BaseTile.Top);
             gfxBox1.GetTiles("Doom3.bin", TileSize.Size16x16, BaseTile.Botton);
+            gfxBox1.SelectionChanged += GfxBox1_SelectionChanged;
+        }
 
-
+        private void GfxBox1_SelectionChanged()
+        {
+            Tuple<int, int, Bitmap>[] tuples = gfxBox1.GetBitmapsFromSelectedTiles();
+            if (tuples == null) return;
+            pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            for (int i = 0; i < tuples.Length; i++)
+            {
+                using (Graphics g = Graphics.FromImage(pictureBox1.Image))
+                {
+                    g.DrawImage(tuples[i].Item3, tuples[i].Item1, tuples[i].Item2, 32, 32);
+                }
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using backend;
 
 namespace TestWindows
 {
@@ -15,6 +16,8 @@ namespace TestWindows
         public Form1()
         {
             InitializeComponent();
+            bool a = BaseTile.None == BaseTile.Top;
+            int b = 0;
         }
     }
 }

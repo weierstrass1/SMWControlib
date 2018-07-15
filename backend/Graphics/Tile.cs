@@ -4,7 +4,7 @@ using System.Drawing;
 namespace backend
 {
     public enum TileSize { Size8x8 = 8, Size16x16 = 16 };
-    public enum BaseTile { Top = 0, Botton = 8 , None = 0};
+    public enum BaseTile { Top = 0, Botton = 8 , None = -1};
     public enum Zoom { x1 = 1, x2 = 2, x4 = 4, x6 = 6, x8 = 8, x10 = 10, x12 = 12 };
     public class Tile
     {
@@ -16,6 +16,40 @@ namespace backend
 
         private Tile()
         {
+        }
+
+        public static Tile fusionTiles(Tile target, Tile fusion, BaseTile baseTile)
+        {
+            if (target == null)
+            {
+                target = fusion;
+                return target;
+            }
+            if (target.Size != fusion.Size)
+                throw new Exception("Tiles aren't of the same size.");
+
+            switch(baseTile)
+            {
+                case BaseTile.None:
+                    target.colors = fusion.colors;
+                    break;
+                default:
+                    int numbbaseTile = (int)baseTile;
+                    if (target.Size == (int)TileSize.Size8x8) numbbaseTile /= 2;
+
+                    int ylim = target.Size/2;
+                    if (baseTile == BaseTile.Botton) ylim = target.Size;
+
+                    for (int i = 0; i < target.colors.GetLength(0); i++)
+                    {
+                        for (int j = numbbaseTile; j < ylim; i++)
+                        {
+                            target.colors[i, j] = fusion.colors[i, j];
+                        }
+                    }
+                    break;
+            }
+            return target;
         }
 
         public Bitmap GetImage(uint i, Zoom zoom)
@@ -61,8 +95,9 @@ namespace backend
         }
 
         static char[] intToHex = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
-        public static Tile[,] GenerateTilesFromColorMatrix(byte[,] colors, TileSize size, BaseTile baseTile)
+        public static Tile[,] GenerateTilesFromColorMatrix(byte[,] colors, TileSize size, BaseTile baseTile,out BaseTile baseTileout)
         {
+            baseTileout = baseTile;
             if (colors.GetLength(0) != 128 || (colors.GetLength(1) != 128 && colors.GetLength(1) != 64))
                 throw new Exception("Not Valid Matrix.");
 
@@ -71,17 +106,17 @@ namespace backend
             if (colors.GetLength(1) == 128)
             {
                 baseTile = BaseTile.None;
+                baseTileout = baseTile;
             }
             if (baseTile == BaseTile.None) h = 16;
-            if (size == TileSize.Size16x16)
-            {
-                w = 15;
-                h--;
-            }
+
             Tile[,] tiles = new Tile[w, h];
             int numSize = (int)size;
             int numBase = (int)baseTile;
+            if (numBase < 0) numBase = 0;
             int x, y;
+            int ylim = numSize;
+            if (size == TileSize.Size16x16) ylim /= 2;
 
             for (int i = 0; i < w; i++)
             {
@@ -95,7 +130,7 @@ namespace backend
                     tiles[i, j].Size = numSize;
                     for (int p = 0; p < numSize; p++)
                     {
-                        for (int q = 0; q < numSize; q++)
+                        for (int q = 0; (j < h - 1 && q < numSize) || (j == h - 1 && q < ylim); q++)
                         {
                             tiles[i, j].colors[p, q] = colors[x + p, y + q];
                         }

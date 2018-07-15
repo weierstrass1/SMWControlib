@@ -16,7 +16,18 @@ namespace controls
         int selectionAccuracy = 1;
         int zoom = 1;
         int tileSize = 16;
-        Tile[,] tiles;
+        public Zoom TileZoom { get { return TileZoom; }
+            set
+            {
+                TileZoom = value;
+                if (selectedTiles != null)
+                {
+                    GetTilesFromSelection(value);
+                }
+            }
+        }
+        Tile[,] tiles16;
+        Tile[,] tiles8;
         Tile[,] selectedTiles;
 
         [
@@ -128,6 +139,7 @@ namespace controls
             MouseUp += GFXBox_MouseUp;
         }
 
+        #region Mouse
         private void GFXBox_MouseDown(object sender, MouseEventArgs e)
         {
             selectionStartX = e.X;
@@ -160,6 +172,12 @@ namespace controls
             int maxx = Math.Max(selectionStartX, selectionEndX);
             int maxy = Math.Max(selectionStartY, selectionEndY);
 
+            int xlim = Width - selectionMinSize;
+            int ylim = Height - selectionMinSize;
+
+            if (minx > xlim) minx = xlim;
+            if (miny > ylim) miny = ylim;
+
             int zacc = selectionAccuracy * zoom;
             if (maxx == selectionStartX) maxx -= (maxx % zacc);
             if (maxy == selectionStartY) maxy -= (maxy % zacc);
@@ -175,9 +193,11 @@ namespace controls
         {
             GFXBox_MouseMove(sender, e);
             selecting = false;
-            if (tiles != null) GetTilesFromSelection();
+            Tile[,] tiles = tiles16;
+            if (tileSize == 8) tiles = tiles8;
+            if (tiles != null) GetTilesFromSelection(TileZoom);
         }
-
+        #endregion
         public void GetTiles(string path,TileSize tileSize, BaseTile baseTile)
         {
             try
@@ -185,8 +205,53 @@ namespace controls
                 byte[,] colors = SnesGraphics.generateGFX("Doom3.bin");
                 BehindBitmap = SnesGraphics.GenerateBitmapFromColorMatrix(colors, zoom, ColorPalette.GetPalette(5));
                 this.tileSize = (int)tileSize;
-                Tile[,] tils = Tile.GenerateTilesFromColorMatrix(colors, tileSize, baseTile);
+                Tile[,] tils = Tile.GenerateTilesFromColorMatrix(colors, tileSize, baseTile, out baseTile);
+                switch(baseTile)
+                {
+                    case BaseTile.None:
+                        if (this.tileSize == 8) tiles8 = tils;
+                        else if (this.tileSize == 16) tiles16 = tils;
+                        break;
+                    default:
+                        Tile[,] tiles = null;
+                        int adder = 0;
+                        int jFusion = 7;
+                        if (this.tileSize == 8)
+                        {
+                            if (tiles8 == null) tiles8 = new Tile[16, 16];
+                            tiles = tiles8;
+                            if (baseTile == BaseTile.Botton) adder = 4;
+                        }
+                        else if (this.tileSize == 16)
+                        {
+                            if (tiles16 == null) tiles16 = new Tile[15, 15];
+                            tiles = tiles16;
+                            if (baseTile == BaseTile.Botton)
+                            {
+                                adder = 8;
+                                jFusion = 0;
+                            }
+                        }
 
+                        for (int i = 0; i < tils.GetLength(0); i++)
+                        {
+                            for (int j = 0; j < tils.GetLength(1); j++)
+                            {
+                                if (j == jFusion && this.tileSize == 16)
+                                {
+                                    tiles[i, j + adder] = Tile.fusionTiles(tiles[i, j], tils[i, j], baseTile);
+                                }
+                                else
+                                {
+                                    tiles[i, j + adder] = tils[i, j];
+                                }
+                            }
+                        }
+
+                        break;
+                    case BaseTile.Botton:
+                        break;
+                }
             }
             catch
             {
@@ -197,8 +262,11 @@ namespace controls
             }
         }
 
-        private void GetTilesFromSelection()
+        private void GetTilesFromSelection(Zoom tileZoom)
         {
+            Tile[,] tiles = tiles16;
+            if (tileSize == 8) tiles = tiles8;
+
             int xarr = selection.X / (8 * zoom);
             int yarr = selection.Y / (8 * zoom);
             if (xarr >= tiles.GetLength(0)) xarr = tiles.GetLength(0) - 1;
@@ -214,7 +282,8 @@ namespace controls
                 for (int j = 0; j < ylim;)
                 {
                     selectedTiles[i, j] = tiles[xarr + i, yarr + j];
-                    selectedTiles[i, j].GenerateBitmap(5, backend.Zoom.x4);
+                    if (selectedTiles[i, j] != null)
+                        selectedTiles[i, j].GenerateBitmap(5, tileZoom);
 
                     if (tileSize == 8 || (ylim % 2 != 0 && j + 2 >= ylim)) j++;
                     else j += 2;

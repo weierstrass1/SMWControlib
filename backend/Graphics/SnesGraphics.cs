@@ -5,8 +5,6 @@ namespace backend
 {
     public class SnesGraphics
     {
-
-
         /// <summary>
         /// Obtain a matrix that have the colors used in each pixel.
         /// Only works for 4bpp gfx.

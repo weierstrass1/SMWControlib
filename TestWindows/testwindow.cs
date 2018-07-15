@@ -7,17 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using backend;
 
 namespace TestWindows
 {
-    public partial class Form1 : Form
+    public partial class testwindow : Form
     {
-        public Form1()
+        public testwindow()
         {
             InitializeComponent();
-            bool a = BaseTile.None == BaseTile.Top;
-            int b = 0;
         }
     }
 }

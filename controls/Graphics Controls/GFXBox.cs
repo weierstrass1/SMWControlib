@@ -16,10 +16,11 @@ namespace controls
         int selectionAccuracy = 1;
         int zoom = 1;
         int tileSize = 16;
-        public Zoom TileZoom { get { return TileZoom; }
+        zoom tilezoom = backend.Zoom.x1;
+        public zoom TileZoom { get { return tilezoom; }
             set
             {
-                TileZoom = value;
+                tilezoom = value;
                 if (selectedTiles != null)
                 {
                     GetTilesFromSelection(value);
@@ -133,10 +134,16 @@ namespace controls
         public GFXBox()
         {
             InitializeComponent();
-            behindBitmap = new Bitmap(Width, Height);
+            BehindBitmap = new Bitmap(Size.Width, Size.Height);
             MouseDown += GFXBox_MouseDown;
             MouseMove += GFXBox_MouseMove;
             MouseUp += GFXBox_MouseUp;
+            SizeChanged += GFXBox_SizeChanged;
+        }
+
+        private void GFXBox_SizeChanged(object sender, EventArgs e)
+        {
+            BehindBitmap = new Bitmap(Size.Width, Size.Height);
         }
 
         #region Mouse
@@ -172,8 +179,8 @@ namespace controls
             int maxx = Math.Max(selectionStartX, selectionEndX);
             int maxy = Math.Max(selectionStartY, selectionEndY);
 
-            int xlim = Width - selectionMinSize;
-            int ylim = Height - selectionMinSize;
+            int xlim = Width - (selectionMinSize * zoom);
+            int ylim = Height - (selectionMinSize * zoom);
 
             if (minx > xlim) minx = xlim;
             if (miny > ylim) miny = ylim;
@@ -202,8 +209,16 @@ namespace controls
         {
             try
             {
-                byte[,] colors = SnesGraphics.generateGFX("Doom3.bin");
-                BehindBitmap = SnesGraphics.GenerateBitmapFromColorMatrix(colors, zoom, ColorPalette.GetPalette(5));
+                byte[,] colors = SnesGraphics.generateGFX(path);
+                int y = 0;
+                if (baseTile == BaseTile.Botton) y = Height / 2;
+                Bitmap bp = SnesGraphics.GenerateBitmapFromColorMatrix(colors, zoom, ColorPalette.GetPalette(5));
+                using (Graphics g = Graphics.FromImage(behindBitmap))
+                {
+                    g.DrawImage(bp, 0, y, bp.Width, bp.Height);
+                }
+                BehindBitmap = behindBitmap;
+
                 this.tileSize = (int)tileSize;
                 Tile[,] tils = Tile.GenerateTilesFromColorMatrix(colors, tileSize, baseTile, out baseTile);
                 switch(baseTile)
@@ -215,7 +230,7 @@ namespace controls
                     default:
                         Tile[,] tiles = null;
                         int adder = 0;
-                        int jFusion = 7;
+                        int jFusion = 8;
                         if (this.tileSize == 8)
                         {
                             if (tiles8 == null) tiles8 = new Tile[16, 16];
@@ -262,7 +277,7 @@ namespace controls
             }
         }
 
-        private void GetTilesFromSelection(Zoom tileZoom)
+        private void GetTilesFromSelection(zoom tileZoom)
         {
             Tile[,] tiles = tiles16;
             if (tileSize == 8) tiles = tiles8;
@@ -295,6 +310,7 @@ namespace controls
 
         private void SetBehindBitmap(Bitmap newBitmap)
         {
+            if (newBitmap == null) newBitmap = new Bitmap(Width, Height);
             behindBitmap = newBitmap;
             Image = behindBitmap;
             ReDraw();

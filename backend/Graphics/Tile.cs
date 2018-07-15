@@ -5,10 +5,47 @@ namespace backend
 {
     public enum TileSize { Size8x8 = 8, Size16x16 = 16 };
     public enum BaseTile { Top = 0, Botton = 8 , None = -1};
-    public enum Zoom { x1 = 1, x2 = 2, x4 = 4, x6 = 6, x8 = 8, x10 = 10, x12 = 12 };
+
+    public static class Zoom
+    {
+        public static readonly zoom x1 = 1;
+        public static readonly zoom x2 = 2;
+        public static readonly zoom x4 = 4;
+        public static readonly zoom x6 = 6;
+        public static readonly zoom x8 = 8;
+        public static readonly zoom x10 = 10;
+        public static readonly zoom x12 = 12;
+        public static readonly zoom x14 = 14;
+        public static readonly zoom x16 = 16;
+        public static readonly zoom x18 = 18;
+        public static readonly zoom x20 = 20;
+    }
+
+    public struct zoom
+    {
+        int value;
+
+        private zoom(int Value)
+        {
+            value = 1;
+        }
+
+        public static implicit operator int(zoom z)
+        {
+            return z.value;
+        }
+
+        public static implicit operator zoom(int i)
+        {
+            zoom z = new zoom(i);
+            if (z.value < 1) z.value = 1;
+            if (z.value > 20) z.value = 20;
+            return z;
+        }
+    }
+
     public class Tile
     {
-
         public string Code { get; private set; }
         public int Size { get; private set; }
         byte[,] colors;
@@ -52,7 +89,7 @@ namespace backend
             return target;
         }
 
-        public Bitmap GetImage(uint i, Zoom zoom)
+        public Bitmap GetImage(uint i, zoom zoom)
         {
             if (images == null) return null;
             if (i > (uint)images.GetLength(0)) i = (uint)images.GetLength(0) - 1;
@@ -62,7 +99,7 @@ namespace backend
             return images[i, numbZoom / 2];
         }
 
-        public void GenerateBitmap(uint paletteId, Zoom zoom)
+        public void GenerateBitmap(uint paletteId, zoom zoom)
         {
             ColorPalette cp = ColorPalette.GetPalette(paletteId);
 

@@ -54,7 +54,7 @@
             this.gfxBox1.Selection = new System.Drawing.Rectangle(0, 0, 64, 64);
             this.gfxBox1.SelectionAccuracy = 8;
             this.gfxBox1.SelectionColor = System.Drawing.Color.Lavender;
-            this.gfxBox1.SelectionMinSize = 8;
+            this.gfxBox1.SelectionMinSize = 16;
             this.gfxBox1.Size = new System.Drawing.Size(256, 256);
             this.gfxBox1.TabIndex = 0;
             this.gfxBox1.TabStop = false;
@@ -70,7 +70,7 @@
             this.gfxButton1.StartFolder = "";
             this.gfxButton1.TabIndex = 2;
             this.gfxButton1.Text = "Load Top";
-            this.gfxButton1.Tilesize = 8;
+            this.gfxButton1.Tilesize = 16;
             this.gfxButton1.UseVisualStyleBackColor = true;
             // 
             // gfxButton2
@@ -82,7 +82,7 @@
             this.gfxButton2.StartFolder = "";
             this.gfxButton2.TabIndex = 3;
             this.gfxButton2.Text = "Load Bottom";
-            this.gfxButton2.Tilesize = 8;
+            this.gfxButton2.Tilesize = 16;
             this.gfxButton2.UseVisualStyleBackColor = true;
             // 
             // testwindows

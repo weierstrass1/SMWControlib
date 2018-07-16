@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.IO;
 
-namespace backend
+namespace SMWControlibBackend.Graphics
 {
     public enum PaletteId
     {

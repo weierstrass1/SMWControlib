@@ -1,11 +1,10 @@
-﻿using backend;
-using backend.Graphics.Frames;
+﻿using SMWControlibBackend.Graphics;
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace controls
+namespace SMWControlibControls.GraphicsControls
 {
     public partial class GFXBox : PictureBox
     {
@@ -17,7 +16,7 @@ namespace controls
         private int selectionAccuracy = 1;
         private int zoom = 1;
         private int tileSize = 16;
-        private Zoom tilezoom = backend.Zoom.x1;
+        private Zoom tilezoom = SMWControlibBackend.Graphics.Zoom.x1;
 
         private TileSP sp;
         public int SP

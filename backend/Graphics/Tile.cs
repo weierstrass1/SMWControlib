@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace backend
+namespace SMWControlibBackend.Graphics
 {
     public enum TileSize { Size8x8 = 8, Size16x16 = 16 };
     public enum BaseTile { Top = 0, Botton = 8 , None = -1};

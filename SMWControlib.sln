@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.27428.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWindows", "TestWindows\TestWindows.csproj", "{F45294FD-7D0C-4691-8AAD-0E724E8F9569}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "controls", "controls\controls.csproj", "{91DB0B53-F47F-4224-9CCF-D76817532DCE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMWControlibControls", "controls\SMWControlibControls.csproj", "{91DB0B53-F47F-4224-9CCF-D76817532DCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend", "backend\backend.csproj", "{E3597996-FB65-49CC-9CAC-D621B996F6DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMWControlibBackend", "backend\SMWControlibBackend.csproj", "{E3597996-FB65-49CC-9CAC-D621B996F6DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

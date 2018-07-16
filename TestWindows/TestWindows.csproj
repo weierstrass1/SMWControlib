@@ -79,13 +79,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\backend\backend.csproj">
+    <ProjectReference Include="..\backend\SMWControlibBackend.csproj">
       <Project>{e3597996-fb65-49cc-9cac-d621b996f6dc}</Project>
-      <Name>backend</Name>
+      <Name>SMWControlibBackend</Name>
     </ProjectReference>
-    <ProjectReference Include="..\controls\controls.csproj">
+    <ProjectReference Include="..\controls\SMWControlibControls.csproj">
       <Project>{91db0b53-f47f-4224-9ccf-d76817532dce}</Project>
-      <Name>controls</Name>
+      <Name>SMWControlibControls</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

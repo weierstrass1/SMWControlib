@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using SMWControlibBackend.Graphics;
+using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using backend;
 
-namespace controls.Graphics_Controls
+namespace SMWControlibControls.GraphicsControls
 {
     public partial class GFXButton : Button
     {
@@ -25,9 +18,9 @@ namespace controls.Graphics_Controls
             }
             set
             {
-                if (value < 0) baseTile = backend.BaseTile.None;
-                else if (value == 0) baseTile = backend.BaseTile.Top;
-                else baseTile = backend.BaseTile.Botton;
+                if (value < 0) baseTile = SMWControlibBackend.Graphics.BaseTile.None;
+                else if (value == 0) baseTile = SMWControlibBackend.Graphics.BaseTile.Top;
+                else baseTile = SMWControlibBackend.Graphics.BaseTile.Botton;
             }
         }
         public string StartFolder { get; set; } = "";

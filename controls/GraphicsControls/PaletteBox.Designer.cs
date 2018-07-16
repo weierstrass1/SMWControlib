@@ -1,4 +1,4 @@
-﻿namespace controls.Graphics_Controls
+﻿namespace SMWControlibControls.GraphicsControls
 {
     partial class PaletteBox
     {

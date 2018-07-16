@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Drawing;
 
-namespace backend
+namespace SMWControlibBackend.Graphics
 {
     public class SnesGraphics
     {

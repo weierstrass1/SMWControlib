@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(testwindows));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.gfxBox1 = new controls.GFXBox();
-            this.gfxButton1 = new controls.Graphics_Controls.GFXButton();
-            this.gfxButton2 = new controls.Graphics_Controls.GFXButton();
+            this.gfxBox1 = new SMWControlibControls.GraphicsControls.GFXBox();
+            this.gfxButton1 = new SMWControlibControls.GraphicsControls.GFXButton();
+            this.gfxButton2 = new SMWControlibControls.GraphicsControls.GFXButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gfxBox1)).BeginInit();
             this.SuspendLayout();
@@ -104,9 +104,9 @@
 
         #endregion
 
-        private controls.GFXBox gfxBox1;
+        private SMWControlibControls.GraphicsControls.GFXBox gfxBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private controls.Graphics_Controls.GFXButton gfxButton1;
-        private controls.Graphics_Controls.GFXButton gfxButton2;
+        private SMWControlibControls.GraphicsControls.GFXButton gfxButton1;
+        private SMWControlibControls.GraphicsControls.GFXButton gfxButton2;
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace controls
+﻿namespace SMWControlibControls.GraphicsControls
 {
-    partial class GFXBox
+    partial class GFXButton
     {
         /// <summary>
         /// Variable del diseñador necesaria.

@@ -332,7 +332,10 @@ namespace controls
                         {
                             if (tiles8 == null) tiles8 = new Tile[16, 16];
                             tiles = tiles8;
-                            if (baseTile == BaseTile.Botton) adder = 3;
+                            if (baseTile == BaseTile.Botton)
+                            {
+                                adder = 3;
+                            }
                         }
                         else if (this.tileSize == 16)
                         {
@@ -351,20 +354,21 @@ namespace controls
                         for (int i = 0; i < xlim; i++)
                         {
                             canFusion = 0;
-                            for (int j = 0; j < tils.GetLength(1) && j + adder + canFusion < ylim; j++)
+                            for (int j = 0; j + canFusion < tils.GetLength(1) && j + adder + canFusion < ylim; j++)
                             {
                                 if (canFusion == 0 && j == jFusion && this.tileSize == 16)
                                 {
-                                    tiles[i, j + adder] = 
+                                    tiles[i, j + adder] =
                                         Tile.fusionTiles(tiles[i, j + adder], tils[i, j], baseTile);
                                     canFusion = 1;
                                     j--;
                                 }
                                 else
-                                {
+                                {                                        
                                     if (tiles[i, j + adder + canFusion] == null)
                                         tiles[i, j + adder + canFusion] = tils[i, j];
-                                    else Tile.fusionTiles(tiles[i, j + adder + canFusion], tils[i, j], BaseTile.None);
+                                    else
+                                        Tile.fusionTiles(tiles[i, j + adder + canFusion], tils[i, j], BaseTile.None);
 
                                 }
                             }

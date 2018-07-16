@@ -92,13 +92,17 @@ namespace backend
                 target = fusion;
                 return target;
             }
+            if(fusion == null)
+            {
+                return target;
+            }
             if (target.Size != fusion.Size)
                 throw new Exception("Tiles aren't of the same size.");
 
             switch(baseTile)
             {
                 case BaseTile.None:
-                    target.colors = fusion.colors;
+                    if (fusion.colors != null) target.colors = fusion.colors;
                     break;
                 default:
                     int numbbaseTile = (int)baseTile;

@@ -59,6 +59,12 @@
     <Compile Include="GraphicsControls\PaletteBox.Designer.cs">
       <DependentUpon>PaletteBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="GraphicsControls\PaletteButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GraphicsControls\PaletteButton.Designer.cs">
+      <DependentUpon>PaletteButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>

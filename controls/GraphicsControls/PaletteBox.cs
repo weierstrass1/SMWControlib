@@ -10,7 +10,22 @@ namespace SMWControlibControls.GraphicsControls
     public partial class PaletteBox : PictureBox
     {
         private Rectangle selection;
-        public int FirstPaletteToShow { get; set; }
+        private PaletteId firstPaletteToShow;
+        public int FirstPaletteToShow
+        { get
+            {
+                return (int)firstPaletteToShow;
+            }
+         set
+            {
+                if (value > 15) value = 15;
+                if (value < 0) value = 0;
+
+                firstPaletteToShow = (PaletteId)value;
+                MouseEventArgs mae = new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0);
+                PaletteBox_Click(null, mae);
+            }
+        }
         private Zoom zoom = SMWControlibBackend.Graphics.Zoom.x1;
         public int Zoom
         { get

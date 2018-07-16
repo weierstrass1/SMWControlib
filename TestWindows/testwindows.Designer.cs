@@ -34,6 +34,7 @@
             this.gfxButton2 = new SMWControlibControls.GraphicsControls.GFXButton();
             this.gfxButton1 = new SMWControlibControls.GraphicsControls.GFXButton();
             this.gfxBox1 = new SMWControlibControls.GraphicsControls.GFXBox();
+            this.paletteButton1 = new SMWControlibControls.GraphicsControls.PaletteButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.paletteBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gfxBox1)).BeginInit();
@@ -99,11 +100,22 @@
             this.gfxBox1.TileZoom = 2;
             this.gfxBox1.Zoom = 2;
             // 
+            // paletteButton1
+            // 
+            this.paletteButton1.Location = new System.Drawing.Point(631, 181);
+            this.paletteButton1.Name = "paletteButton1";
+            this.paletteButton1.Size = new System.Drawing.Size(75, 23);
+            this.paletteButton1.StartFolder = "";
+            this.paletteButton1.TabIndex = 5;
+            this.paletteButton1.Text = "Load Palette";
+            this.paletteButton1.UseVisualStyleBackColor = true;
+            // 
             // testwindows
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(909, 450);
+            this.Controls.Add(this.paletteButton1);
             this.Controls.Add(this.paletteBox1);
             this.Controls.Add(this.gfxButton2);
             this.Controls.Add(this.gfxButton1);
@@ -125,5 +137,6 @@
         private SMWControlibControls.GraphicsControls.GFXButton gfxButton1;
         private SMWControlibControls.GraphicsControls.GFXButton gfxButton2;
         private SMWControlibControls.GraphicsControls.PaletteBox paletteBox1;
+        private SMWControlibControls.GraphicsControls.PaletteButton paletteButton1;
     }
 }

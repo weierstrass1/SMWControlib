@@ -163,10 +163,15 @@ namespace SMWControlibControls.GraphicsControls
             MouseMove += GFXBox_MouseMove;
             MouseUp += GFXBox_MouseUp;
             SizeChanged += GFXBox_SizeChanged;
-            ColorPalette.SelectedGlobalPaletteChange += ColorPalette_SelectedGlobalPaletteChange;
         }
 
-        private void ColorPalette_SelectedGlobalPaletteChange()
+        private void OneGlobalPaletteChange(PaletteId obj)
+        {
+            if(ColorPalette.SelectedPalette == obj)
+                ReDraw();
+        }
+
+        private void GlobalPaletteChange()
         {
             ReDraw();
         }
@@ -314,7 +319,13 @@ namespace SMWControlibControls.GraphicsControls
                         bool go = false;
                         if (this.tileSize == 8)
                         {
-                            if (tiles8 == null) tiles8 = tils;
+                            if (tiles8 == null)
+                            {
+                                tiles8 = tils;
+                                ColorPalette.SelectedGlobalPaletteChange += GlobalPaletteChange;
+                                ColorPalette.GlobalPalletesChange += GlobalPaletteChange;
+                                ColorPalette.OneGlobalPaletteChange += OneGlobalPaletteChange;
+                            }
                             else
                             {
                                 tiles = tiles8;
@@ -324,7 +335,13 @@ namespace SMWControlibControls.GraphicsControls
                         }
                         else if (this.tileSize == 16)
                         {
-                            if (tiles16 == null) tiles16 = tils;
+                            if (tiles16 == null)
+                            {
+                                tiles16 = tils;
+                                ColorPalette.SelectedGlobalPaletteChange += GlobalPaletteChange;
+                                ColorPalette.GlobalPalletesChange += GlobalPaletteChange;
+                                ColorPalette.OneGlobalPaletteChange += OneGlobalPaletteChange;
+                            }
                             else
                             {
                                 tiles = tiles16;
@@ -410,11 +427,17 @@ namespace SMWControlibControls.GraphicsControls
             {
                 Tile.FillTileMatrix(tiles16, TileSize.Size16x16, BaseTile.Top);
                 tilesNotFiled16 = false;
+                ColorPalette.SelectedGlobalPaletteChange += GlobalPaletteChange;
+                ColorPalette.GlobalPalletesChange += GlobalPaletteChange;
+                ColorPalette.OneGlobalPaletteChange += OneGlobalPaletteChange;
             }
             if (tilesNotFiled8 && tiles8 != null)
             {
                 Tile.FillTileMatrix(tiles8, TileSize.Size8x8, BaseTile.Top);
                 tilesNotFiled8 = false;
+                ColorPalette.SelectedGlobalPaletteChange += GlobalPaletteChange;
+                ColorPalette.GlobalPalletesChange += GlobalPaletteChange;
+                ColorPalette.OneGlobalPaletteChange += OneGlobalPaletteChange;
             }
             ReDraw();
         }

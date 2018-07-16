@@ -82,7 +82,8 @@ namespace SMWControlibBackend.Graphics
                 if(dirty!=value)
                 {
                     dirty = value;
-                    IsDirty?.Invoke();
+                    if (dirty)
+                        IsDirty?.Invoke(this);
                 }
             }
         }
@@ -105,7 +106,7 @@ namespace SMWControlibBackend.Graphics
         }
 
         private Tile tile;
-        public event Action IsDirty;
+        public event Action<TileMask> IsDirty;
 
         public string Properties
         {
@@ -142,10 +143,9 @@ namespace SMWControlibBackend.Graphics
 
         private void ColorPalette_SelectedGlobalPaletteChange()
         {
-            if (graphics == null) return;
-            if (!IsSelected && UseGlobalPalette) return;
+            if (!IsSelected || !UseGlobalPalette) return;
 
-            palette = ColorPalette.SelectedPalette;
+            Palette = ColorPalette.SelectedPalette;
         }
 
         public Bitmap GetBitmap()

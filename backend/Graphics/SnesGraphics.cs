@@ -53,7 +53,7 @@ namespace SMWControlibBackend.Graphics
         /// <param name="zoom">increase the size of the image.</param>
         /// <param name="palette">A color palette used to assign the colors</param>
         /// <returns></returns>
-        public static Bitmap GenerateBitmapFromColorMatrix(byte[,] colors,int zoom, ColorPalette palette)
+        public static Bitmap GenerateBitmapFromColorMatrix(byte[,] colors,int zoom)
         {
             Bitmap bp = new Bitmap(colors.GetLength(0) * zoom, colors.GetLength(1) * zoom);
 
@@ -64,7 +64,7 @@ namespace SMWControlibBackend.Graphics
                     using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(bp))
                     {
                         g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-                        g.FillRectangle(new SolidBrush(palette.GetColor(colors[i, j])),
+                        g.FillRectangle(new SolidBrush(ColorPalette.GetGlobalColor(colors[i, j])),
                         new RectangleF(i * zoom, j * zoom, zoom, zoom));
                     }
                 }

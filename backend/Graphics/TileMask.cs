@@ -22,8 +22,8 @@ namespace SMWControlibBackend.Graphics
             {
                 if(palette != value)
                 {
-                    dirty = true;
                     palette = value;
+                    Dirty = true;
                 }
             }
         }
@@ -42,8 +42,8 @@ namespace SMWControlibBackend.Graphics
             {
                 if(flipX != value)
                 {
-                    dirty = true;
                     flipX = value;
+                    Dirty = true;
                 }
             }
         }
@@ -60,14 +60,52 @@ namespace SMWControlibBackend.Graphics
             {
                 if (flipY != value)
                 {
-                    dirty = true;
                     flipY = value;
+                    Dirty = true;
                 }
             }
         }
+
+        public bool IsSelected { get; set; } = false;
+        public bool UseGlobalPalette { get; set; } = true;
         private Bitmap graphics;
+
         private bool dirty = true;
+        private bool Dirty
+        {
+            get
+            {
+                return dirty;
+            }
+            set
+            {
+                if(dirty!=value)
+                {
+                    dirty = value;
+                    IsDirty?.Invoke();
+                }
+            }
+        }
+
+        private Zoom zoom = 2;
+        public Zoom Zoom
+        {
+            get
+            {
+                return zoom;
+            }
+            set
+            {
+                if(zoom!=value)
+                {
+                    zoom = value;
+                    Dirty = true;
+                }
+            }
+        }
+
         private Tile tile;
+        public event Action IsDirty;
 
         public string Properties
         {
@@ -89,17 +127,30 @@ namespace SMWControlibBackend.Graphics
             }
         }
 
-        public TileMask(TileSP SP, Tile Tile)
+        public TileMask(TileSP SP, Tile Tile, Zoom Zoom, bool FlipX, bool FlipY)
         {
             sp = SP;
             xDisp = 0;
             yDisp = 0;
+            zoom = Zoom;
+            flipX = FlipX;
+            flipY = FlipY;
             tile = Tile;
+            palette = ColorPalette.SelectedPalette;
+            ColorPalette.SelectedGlobalPaletteChange += ColorPalette_SelectedGlobalPaletteChange;
         }
 
-        public Bitmap GetBitmap(Zoom zoom)
+        private void ColorPalette_SelectedGlobalPaletteChange()
         {
-            if (!dirty) return graphics;
+            if (graphics == null) return;
+            if (!IsSelected && UseGlobalPalette) return;
+
+            palette = ColorPalette.SelectedPalette;
+        }
+
+        public Bitmap GetBitmap()
+        {
+            if (!Dirty) return graphics;
             if (tile == null)
             {
                 graphics = null;
@@ -125,7 +176,7 @@ namespace SMWControlibBackend.Graphics
             else if (flipY) r = RotateFlipType.RotateNoneFlipY;
 
             if (r != RotateFlipType.RotateNoneFlipNone) graphics.RotateFlip(r);
-            dirty = false;
+            Dirty = false;
             return graphics;
         }
     }

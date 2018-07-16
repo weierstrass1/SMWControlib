@@ -210,9 +210,7 @@ namespace SMWControlibControls.GraphicsControls
                 {
                     if (oddY && j == h)
                         y -= (zsiz / 2);
-                    tms[k] = new TileMask(sp,selectedTiles[i,j]);
-                    tms[k].FlipX = flipX;
-                    tms[k].FlipY = flipY;
+                    tms[k] = new TileMask(sp, selectedTiles[i, j], Zoom, flipX, flipY);
                     tms[k].Priority = priority;
                     tms[k].xDisp = x;
                     tms[k].yDisp = y;
@@ -292,7 +290,7 @@ namespace SMWControlibControls.GraphicsControls
                 byte[,] colors = SnesGraphics.generateGFX(path);
                 int y = 0;
                 if (baseTile == BaseTile.Botton) y = Height / 2;
-                Bitmap bp = SnesGraphics.GenerateBitmapFromColorMatrix(colors, zoom, ColorPalette.GetPalette(ColorPalette.SelectedPalette));
+                Bitmap bp = SnesGraphics.GenerateBitmapFromColorMatrix(colors, zoom);
                 using (Graphics g = Graphics.FromImage(behindBitmap))
                 {
                     g.DrawImage(bp, 0, y, bp.Width, bp.Height);

@@ -9,7 +9,7 @@ namespace TestWindows
         public testwindows()
         {
             InitializeComponent();
-            ColorPalette.GeneratePalette("Doom3.pal", 16);
+            ColorPalette.GenerateGlobalPalettes("Doom3.pal", 16);
             ColorPalette.SelectedPalette = PaletteId.p5;
             gfxButton1.target = gfxBox1;
             gfxButton2.target = gfxBox1;
@@ -24,13 +24,16 @@ namespace TestWindows
             Bitmap bp;
             for (int i = 0; i < tms.Length; i++)
             {
-                bp = tms[i].GetBitmap(gfxBox1.TileZoom);
-                using (Graphics g = Graphics.FromImage(pictureBox1.Image))
+                bp = tms[i].GetBitmap();
+                if (bp != null)
                 {
-                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-                    g.DrawImage(bp, tms[i].xDisp, tms[i].yDisp,
-                        bp.Width, bp.Height);
-                    
+                    using (Graphics g = Graphics.FromImage(pictureBox1.Image))
+                    {
+                        g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                        g.DrawImage(bp, tms[i].xDisp, tms[i].yDisp,
+                            bp.Width, bp.Height);
+
+                    }
                 }
             }
         }

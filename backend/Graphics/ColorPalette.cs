@@ -11,13 +11,13 @@ namespace SMWControlibBackend.Graphics
     }
     public class ColorPalette
     {
-        private static ColorPalette[] palettes;
-        public static int PalettesLength
+        private static ColorPalette[] globalPalettes;
+        public static int GlobalPalettesLength
         {
             get
             {
-                if (palettes == null) return 0;
-                return palettes.Length;
+                if (globalPalettes == null) return 0;
+                return globalPalettes.Length;
             }
         }
         private Color[] colors;
@@ -31,74 +31,97 @@ namespace SMWControlibBackend.Graphics
             set
             {
                 selectedPalette = value;
-                SelectedPaletteChange?.Invoke();
+                SelectedGlobalPaletteChange?.Invoke();
             }
         }
-        public static event Action SelectedPaletteChange, AllPalettesChange;
-        public static event Action<int> PalettesChange;
-        public uint Length { get; private set; }
+        public static byte GlobalPaletteSize { get; private set; } = 0;
+        public static event Action SelectedGlobalPaletteChange, GlobalPalletesChange;
+        public static event Action<PaletteId> OneGlobalPaletteChange;
+        public byte Length { get; private set; }
 
 
         private ColorPalette()
         {
         }
 
-        public Color GetColor(uint i)
+        public Color GetColor(byte i)
         {
-            if (i >= Length)
-            {
-                i = Length - 1;
-            }
-            return colors[i];
+            if (Length == 0) return default(Color);
+            if (i >= Length) i = (byte)(Length - 1);
+            Color c = colors[i];
+            return Color.FromArgb(c.A, c.R, c.G, c.B);
         }
 
-        public void SetColor(uint i, Color c)
+        public void SetColor(byte i, Color c)
         {
-            if (i >= Length)
-            {
-                i = Length - 1;
-            }
+            if (Length == 0) return;
+
+            if (i >= Length) i = (byte)(Length - 1);
             colors[i] = c;
         }
 
-        public static ColorPalette GetPalette(PaletteId i)
+        public static Color GetGlobalColor(byte i)
         {
-            if (palettes == null) return null;
-            SelectedPalette = i;
-            return palettes[(int)SelectedPalette];
+            if (globalPalettes == null) return default(Color);
+
+            return globalPalettes[(int)selectedPalette].GetColor(i); ;
         }
 
-        public static void GeneratePalette(string path, uint PaletteSize)
+        public static Color GetGlobalColor(byte i, PaletteId pid)
+        {
+            if (globalPalettes == null) return default(Color);
+
+            return globalPalettes[(int)pid].GetColor(i); ;
+        }
+
+        public static void SetGlobalColor(byte i, Color c)
+        {
+            if (globalPalettes == null) return;
+
+            globalPalettes[(int)SelectedPalette].SetColor(i, c);
+            OneGlobalPaletteChange?.Invoke(selectedPalette);
+        }
+
+        public static void SetGlobalColor(byte i, Color c, PaletteId pid)
+        {
+            if (globalPalettes == null) return;
+
+            globalPalettes[(int)pid].SetColor(i, c);
+            OneGlobalPaletteChange?.Invoke(pid);
+        }
+
+        public static void GenerateGlobalPalettes(string path, byte PaletteSize)
         {
             byte[] bytes = File.ReadAllBytes(path);
-            GeneratePalette(bytes, PaletteSize);
+            GenerateGlobalPalettes(bytes, PaletteSize);
         }
 
-        public static void GeneratePalette(byte[] bytes, uint PaletteSize)
+        public static void GenerateGlobalPalettes(byte[] bytes, byte PaletteSize)
         {
             if (bytes.Length % PaletteSize != 0) 
             {
                 throw new Exception("The Palette Size is not valid.");
             }
-            palettes = new ColorPalette[(bytes.Length) / (PaletteSize * 3)];
+            globalPalettes = new ColorPalette[(bytes.Length) / (PaletteSize * 3)];
             int baseIndex = 0;
             int index = 0;
-            for (int i = 0; i < palettes.Length; i++)
+            for (int i = 0; i < globalPalettes.Length; i++)
             {
-                palettes[i] = new ColorPalette();
-                palettes[i].Length = PaletteSize;
-                palettes[i].colors = new Color[PaletteSize];
-                baseIndex = (int)(i * 3 * PaletteSize);
+                globalPalettes[i] = new ColorPalette();
+                globalPalettes[i].Length = PaletteSize;
+                GlobalPaletteSize = PaletteSize;
+                globalPalettes[i].colors = new Color[PaletteSize];
+                baseIndex = (i * 3 * PaletteSize);
                 for (int j = 0; j < PaletteSize; j++)
                 {
                     index = baseIndex + j * 3;
-                    palettes[i].colors[j] = Color.FromArgb(255 ,bytes[index], bytes[index + 1], bytes[index + 2]);
+                    globalPalettes[i].colors[j] = Color.FromArgb(255 ,bytes[index], bytes[index + 1], bytes[index + 2]);
                 }
             }
-            AllPalettesChange?.Invoke();
-            for (int i = 0; i < palettes.Length; i++)
+            GlobalPalletesChange?.Invoke();
+            for (int i = 0; i < globalPalettes.Length; i++)
             {
-                PalettesChange?.Invoke(i);
+                OneGlobalPaletteChange?.Invoke((PaletteId)(i%16));
             }
         }
     }

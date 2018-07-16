@@ -49,27 +49,30 @@ namespace SMWControlibBackend.Graphics
         private Bitmap[,] images;
 
 
-        private Tile()
+        private Tile(bool UseGlobalPalette)
         {
             SetDirty();
-            ColorPalette.AllPalettesChange += ColorPalette_AllPalettesChange;
-            ColorPalette.PalettesChange += ColorPalette_PalettesChange;
+            if(UseGlobalPalette)
+            {
+                ColorPalette.GlobalPalletesChange += ColorPalette_GlobalPalletesChange;
+                ColorPalette.OneGlobalPaletteChange += ColorPalette_OneGlobalPaletteChange;
+            }
         }
 
-        private void ColorPalette_PalettesChange(int obj)
-        {
-            SetDirty(obj, true);
-        }
-
-        private void ColorPalette_AllPalettesChange()
+        private void ColorPalette_GlobalPalletesChange()
         {
             SetDirty();
+        }
+
+        private void ColorPalette_OneGlobalPaletteChange(PaletteId obj)
+        {
+            SetDirty((int)obj, true);
         }
 
         private void SetDirty()
         {
             FullyDirty = true;
-            Dirty = new bool[ColorPalette.PalettesLength];
+            Dirty = new bool[ColorPalette.GlobalPalettesLength];
             for (int i = 0; i < Dirty.Length; i++)
             {
                 SetDirty(i, true);
@@ -82,7 +85,10 @@ namespace SMWControlibBackend.Graphics
             if (i < 0) i = 0;
             else if (i >= Dirty.Length) i = Dirty.Length - 1;
 
-            Dirty[i] = true;
+            if (Dirty[i] != val)
+            {
+                Dirty[i] = val;
+            }
         }
 
         public static Tile fusionTiles(Tile target, Tile fusion, BaseTile baseTile)
@@ -135,26 +141,25 @@ namespace SMWControlibBackend.Graphics
 
         public void GenerateBitmap(PaletteId paletteId, Zoom zoom)
         {
-            ColorPalette cp = ColorPalette.GetPalette(ColorPalette.SelectedPalette);
-
-            if (cp == null) return;
-
+            if (ColorPalette.GlobalPaletteSize == 0) return;
             int npid = (int)paletteId;
 
-            if (images == null || images.GetLength(0) != cp.Length) images = new Bitmap[cp.Length, 10];
+            if (images == null || images.GetLength(0) != ColorPalette.GlobalPaletteSize)
+                images = new Bitmap[ColorPalette.GlobalPaletteSize, 10];
 
             images[npid, zoom / 2] = new Bitmap(Size * zoom, Size * zoom);
 
             Bitmap bp = images[npid, zoom / 2];
-
+            Brush br;
             for (int i = 0; i < Size; i++)
             {
                 for (int j = 0; j < Size; j++)
                 {
                     using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(bp))
                     {
-                        g.FillRectangle(new SolidBrush(cp.GetColor(colors[i, j])),
-                        new RectangleF(i * zoom, j * zoom, zoom, zoom));
+                        g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                        br = new SolidBrush(ColorPalette.GetGlobalColor(colors[i, j], paletteId));
+                        g.FillRectangle(br, new RectangleF(i * zoom, j * zoom, zoom, zoom));
                     }
                 }
             }
@@ -185,7 +190,7 @@ namespace SMWControlibBackend.Graphics
                 {
                     if (tiles[i, j] == null)
                     {
-                        tiles[i, j] = new Tile();
+                        tiles[i, j] = new Tile(true);
                         tiles[i, j].colors = new byte[numbSize, numbSize];
                         tiles[i, j].Code = "$" + intToHex[numBase + j] + intToHex[i];
                         tiles[i, j].Size = numbSize;
@@ -229,7 +234,7 @@ namespace SMWControlibBackend.Graphics
                 for (int j = 0; j < h; j++)
                 {
                     y = j * 8;
-                    tiles[i, j] = new Tile();
+                    tiles[i, j] = new Tile(true);
                     tiles[i, j].colors = new byte[numSize, numSize];
                     tiles[i, j].Code = "$" + intToHex[numBase + j]+ intToHex[i];
                     tiles[i, j].Size = numSize;

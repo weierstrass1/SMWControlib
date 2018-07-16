@@ -334,7 +334,7 @@ namespace controls
                             tiles = tiles8;
                             if (baseTile == BaseTile.Botton)
                             {
-                                adder = 3;
+                                adder = 8;
                             }
                         }
                         else if (this.tileSize == 16)
@@ -409,7 +409,9 @@ namespace controls
             int xlim = selection.Width / (8 * zoom);
             int ylim = selection.Height / (8 * zoom);
 
-            selectedTiles = new Tile[(xlim / 2) + xlim % 2, (ylim / 2) + ylim % 2];
+            if (tileSize == 16) selectedTiles = new Tile[(xlim / 2) + xlim % 2, (ylim / 2) + ylim % 2];
+            else selectedTiles = new Tile[xlim, ylim];
+
             int p = 0, q = 0;
             for (int i = 0; i < xlim; p++)
             {

@@ -50,5 +50,10 @@
   <ItemGroup>
     <Folder Include="Graphics\Frames\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DefaultPalette.pal">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

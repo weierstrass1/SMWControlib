@@ -30,10 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(testwindows));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.gfxBox1 = new SMWControlibControls.GraphicsControls.GFXBox();
-            this.gfxButton1 = new SMWControlibControls.GraphicsControls.GFXButton();
+            this.paletteBox1 = new SMWControlibControls.GraphicsControls.PaletteBox();
             this.gfxButton2 = new SMWControlibControls.GraphicsControls.GFXButton();
+            this.gfxButton1 = new SMWControlibControls.GraphicsControls.GFXButton();
+            this.gfxBox1 = new SMWControlibControls.GraphicsControls.GFXBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.paletteBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gfxBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,33 +47,16 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
-            // gfxBox1
+            // paletteBox1
             // 
-            this.gfxBox1.BehindBitmap = ((System.Drawing.Bitmap)(resources.GetObject("gfxBox1.BehindBitmap")));
-            this.gfxBox1.Image = ((System.Drawing.Image)(resources.GetObject("gfxBox1.Image")));
-            this.gfxBox1.Location = new System.Drawing.Point(42, 47);
-            this.gfxBox1.Name = "gfxBox1";
-            this.gfxBox1.Selection = new System.Drawing.Rectangle(0, 0, 64, 64);
-            this.gfxBox1.SelectionAccuracy = 8;
-            this.gfxBox1.SelectionColor = System.Drawing.Color.Lavender;
-            this.gfxBox1.SelectionMinSize = 16;
-            this.gfxBox1.Size = new System.Drawing.Size(256, 256);
-            this.gfxBox1.TabIndex = 0;
-            this.gfxBox1.TabStop = false;
-            this.gfxBox1.TileZoom = 2;
-            this.gfxBox1.Zoom = 2;
-            // 
-            // gfxButton1
-            // 
-            this.gfxButton1.BaseTile = 0;
-            this.gfxButton1.Location = new System.Drawing.Point(42, 310);
-            this.gfxButton1.Name = "gfxButton1";
-            this.gfxButton1.Size = new System.Drawing.Size(75, 23);
-            this.gfxButton1.StartFolder = "";
-            this.gfxButton1.TabIndex = 2;
-            this.gfxButton1.Text = "Load Top";
-            this.gfxButton1.Tilesize = 16;
-            this.gfxButton1.UseVisualStyleBackColor = true;
+            this.paletteBox1.FirstPaletteToShow = 8;
+            this.paletteBox1.Image = ((System.Drawing.Image)(resources.GetObject("paletteBox1.Image")));
+            this.paletteBox1.Location = new System.Drawing.Point(631, 47);
+            this.paletteBox1.Name = "paletteBox1";
+            this.paletteBox1.Size = new System.Drawing.Size(256, 128);
+            this.paletteBox1.TabIndex = 4;
+            this.paletteBox1.TabStop = false;
+            this.paletteBox1.Zoom = 16;
             // 
             // gfxButton2
             // 
@@ -85,11 +70,41 @@
             this.gfxButton2.Tilesize = 16;
             this.gfxButton2.UseVisualStyleBackColor = true;
             // 
+            // gfxButton1
+            // 
+            this.gfxButton1.BaseTile = 0;
+            this.gfxButton1.Location = new System.Drawing.Point(42, 310);
+            this.gfxButton1.Name = "gfxButton1";
+            this.gfxButton1.Size = new System.Drawing.Size(75, 23);
+            this.gfxButton1.StartFolder = "";
+            this.gfxButton1.TabIndex = 2;
+            this.gfxButton1.Text = "Load Top";
+            this.gfxButton1.Tilesize = 16;
+            this.gfxButton1.UseVisualStyleBackColor = true;
+            // 
+            // gfxBox1
+            // 
+            this.gfxBox1.BehindBitmap = ((System.Drawing.Bitmap)(resources.GetObject("gfxBox1.BehindBitmap")));
+            this.gfxBox1.Image = ((System.Drawing.Image)(resources.GetObject("gfxBox1.Image")));
+            this.gfxBox1.Location = new System.Drawing.Point(42, 47);
+            this.gfxBox1.Name = "gfxBox1";
+            this.gfxBox1.Selection = new System.Drawing.Rectangle(0, 0, 64, 64);
+            this.gfxBox1.SelectionAccuracy = 8;
+            this.gfxBox1.SelectionColor = System.Drawing.Color.Lavender;
+            this.gfxBox1.SelectionMinSize = 16;
+            this.gfxBox1.Size = new System.Drawing.Size(256, 256);
+            this.gfxBox1.SP = 0;
+            this.gfxBox1.TabIndex = 0;
+            this.gfxBox1.TabStop = false;
+            this.gfxBox1.TileZoom = 2;
+            this.gfxBox1.Zoom = 2;
+            // 
             // testwindows
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(909, 450);
+            this.Controls.Add(this.paletteBox1);
             this.Controls.Add(this.gfxButton2);
             this.Controls.Add(this.gfxButton1);
             this.Controls.Add(this.pictureBox1);
@@ -97,6 +112,7 @@
             this.Name = "testwindows";
             this.Text = "testwindows";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.paletteBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gfxBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -108,5 +124,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private SMWControlibControls.GraphicsControls.GFXButton gfxButton1;
         private SMWControlibControls.GraphicsControls.GFXButton gfxButton2;
+        private SMWControlibControls.GraphicsControls.PaletteBox paletteBox1;
     }
 }

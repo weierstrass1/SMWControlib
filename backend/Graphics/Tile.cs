@@ -47,6 +47,8 @@ namespace SMWControlibBackend.Graphics
         private bool[] Dirty;
         private byte[,] colors;
         private Bitmap[,] images;
+        public event Action<Tile> IsFullyDirty;
+        public event Action<Tile, int> IsDirty;
 
 
         private Tile(bool UseGlobalPalette)
@@ -75,8 +77,9 @@ namespace SMWControlibBackend.Graphics
             Dirty = new bool[ColorPalette.GlobalPalettesLength];
             for (int i = 0; i < Dirty.Length; i++)
             {
-                SetDirty(i, true);
+                Dirty[i] = true;
             }
+            IsFullyDirty?.Invoke(this);
         }
 
         private void SetDirty(int i,bool val)
@@ -88,6 +91,7 @@ namespace SMWControlibBackend.Graphics
             if (Dirty[i] != val)
             {
                 Dirty[i] = val;
+                if (Dirty[i]) IsDirty?.Invoke(this, i);
             }
         }
 
@@ -198,7 +202,15 @@ namespace SMWControlibBackend.Graphics
                 }
             }
         }
-        public static Tile[,] GenerateTilesFromColorMatrix(byte[,] colors, TileSize size, BaseTile baseTile,out BaseTile baseTileout)
+        public static Tile[,] GenerateTilesFromColorMatrix
+            (byte[,] colors, TileSize size, BaseTile baseTile, out BaseTile baseTileout)
+        {
+            return GenerateTilesFromColorMatrix
+                (colors, size, baseTile,out baseTileout, null, null);
+        }
+        public static Tile[,] GenerateTilesFromColorMatrix
+            (byte[,] colors, TileSize size, BaseTile baseTile, out BaseTile baseTileout,
+            Action<Tile> IsFullyDirty, Action<Tile, int> IsDirty)
         {
             baseTileout = baseTile;
             if (colors.GetLength(0) != 128 || 
@@ -245,6 +257,10 @@ namespace SMWControlibBackend.Graphics
                             tiles[i, j].colors[p, q] = colors[x + p, y + q];
                         }
                     }
+                    if (IsFullyDirty != null)
+                        tiles[i, j].IsFullyDirty += IsFullyDirty;
+                    if (IsDirty != null)
+                        tiles[i, j].IsDirty += IsDirty;
                 }
             }
 

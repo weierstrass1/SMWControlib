@@ -9,7 +9,6 @@ namespace TestWindows
         public testwindows()
         {
             InitializeComponent();
-            ColorPalette.GenerateGlobalPalettes("Doom3.pal", 16);
             ColorPalette.SelectedPalette = PaletteId.p5;
             gfxButton1.target = gfxBox1;
             gfxButton2.target = gfxBox1;

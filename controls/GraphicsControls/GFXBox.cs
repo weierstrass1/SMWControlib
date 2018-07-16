@@ -163,6 +163,12 @@ namespace SMWControlibControls.GraphicsControls
             MouseMove += GFXBox_MouseMove;
             MouseUp += GFXBox_MouseUp;
             SizeChanged += GFXBox_SizeChanged;
+            ColorPalette.SelectedGlobalPaletteChange += ColorPalette_SelectedGlobalPaletteChange;
+        }
+
+        private void ColorPalette_SelectedGlobalPaletteChange()
+        {
+            ReDraw();
         }
 
         public TileMask[] GetBitmapsFromSelectedTiles(bool flipX, bool flipY, TilePriority priority)
@@ -298,7 +304,8 @@ namespace SMWControlibControls.GraphicsControls
                 BehindBitmap = behindBitmap;
 
                 this.tileSize = (int)tileSize;
-                Tile[,] tils = Tile.GenerateTilesFromColorMatrix(colors, tileSize, baseTile, out baseTile);
+                Tile[,] tils = Tile.GenerateTilesFromColorMatrix
+                    (colors, tileSize, baseTile, out baseTile);
                 Tile[,] tiles = null;
 
                 switch (baseTile)
@@ -409,6 +416,7 @@ namespace SMWControlibControls.GraphicsControls
                 Tile.FillTileMatrix(tiles8, TileSize.Size8x8, BaseTile.Top);
                 tilesNotFiled8 = false;
             }
+            ReDraw();
         }
 
         private void GetTilesFromSelection()
@@ -513,15 +521,44 @@ namespace SMWControlibControls.GraphicsControls
 
         private void ReDraw()
         {
-            if (Image == null) return;
             Image = new Bitmap(Image.Width, Image.Height);
+
+            Tile[,] tiles = tiles16;
+            int up = 2;
+            if (tileSize == 8)
+            {
+                tiles = tiles8;
+                up = 1;
+            }
+            if(tiles!=null)
+            {
+                behindBitmap = new Bitmap(tiles.GetLength(0) * tileSize * zoom,
+                    tiles.GetLength(1) * tileSize * zoom);
+                Bitmap bp;
+                int zsiz;
+                for (int i = 0; i < tiles.GetLength(0); i += up)
+                {
+                    for (int j = 0; j <= tiles.GetLength(1); j += up)
+                    {
+                        using (Graphics g = Graphics.FromImage(behindBitmap))
+                        {
+                            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                            bp = tiles[i, j].GetImage
+                                (ColorPalette.SelectedPalette, zoom);
+                            zsiz = tiles[i, j].Size * zoom;
+                            g.DrawImage
+                                (bp, (i / up) * zsiz, (j / up) * zsiz, 
+                                zsiz, zsiz);
+                        }
+                    }
+                }
+            }
             using (Graphics g = Graphics.FromImage(Image))
             {
-                g.DrawImage(behindBitmap, 0, 0);
+                if (behindBitmap != null)
+                    g.DrawImage(behindBitmap, 0, 0);
                 if (selection != null)
-                {
                     g.DrawRectangle(selectionColor, selection);
-                }
             }
             Refresh();
         }

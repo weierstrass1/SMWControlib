@@ -11,8 +11,8 @@ namespace backend.Graphics.Frames
     public enum TilePriority { BehindLayer3 = 0, BehindLayer3P1NotForcedAbove = 16, AboveAllLayersP0 = 32, AboveAllExceptLayer3P1ForcedAbove = 48};
     public class TileMask
     {
-        private sbyte xDisp;
-        private sbyte yDisp;
+        public int xDisp;
+        public int yDisp;
         private TileSP sp = TileSP.SP23;
         private PaletteId palette = PaletteId.pF;
 
@@ -86,19 +86,20 @@ namespace backend.Graphics.Frames
             {
                 int pal = ((int)palette << 1) & 0b00001110;
                 byte[] prop = new byte[1];
-                prop[0] = (byte)((int)Priotity | pal | (int)sp);
+                prop[0] = (byte)((int)Priority | pal | (int)sp);
                 if (flipX) prop[0] += 64;
                 if (flipY) prop[0] += 128;
                 return prop;
             }
         }
 
-        public TileMask(TileSP SP)
+        public TileMask(TileSP SP, Tile Tile)
         {
             sp = SP;
+            xDisp = 0;
+            yDisp = 0;
+            tile = Tile;
         }
-
-        public TilePriority Priotity { get => Priority; set => Priority = value; }
 
         public Bitmap GetBitmap(Zoom zoom)
         {

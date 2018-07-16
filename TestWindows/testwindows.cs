@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using controls;
 using backend;
+using backend.Graphics.Frames;
 
 namespace TestWindows
 {
@@ -26,17 +27,18 @@ namespace TestWindows
 
         private void GfxBox1_SelectionChanged()
         {
-            Tuple<int, int, Bitmap>[] tuples = gfxBox1.GetBitmapsFromSelectedTiles();
-            if (tuples == null) return;
+            TileMask[] tms = gfxBox1.GetBitmapsFromSelectedTiles(false,false,TilePriority.AboveAllLayersP0);
+            if (tms == null) return;
             pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-
-            for (int i = 0; i < tuples.Length; i++)
+            Bitmap bp;
+            for (int i = 0; i < tms.Length; i++)
             {
+                bp = tms[i].GetBitmap(gfxBox1.TileZoom);
                 using (Graphics g = Graphics.FromImage(pictureBox1.Image))
                 {
                     g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-                    g.DrawImage(tuples[i].Item3, tuples[i].Item1, tuples[i].Item2,
-                        tuples[i].Item3.Width, tuples[i].Item3.Height);
+                    g.DrawImage(bp, tms[i].xDisp, tms[i].yDisp,
+                        bp.Width, bp.Height);
                     
                 }
             }

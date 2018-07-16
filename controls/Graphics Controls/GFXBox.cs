@@ -1,4 +1,5 @@
 ﻿using backend;
+using backend.Graphics.Frames;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -17,6 +18,20 @@ namespace controls
         private int zoom = 1;
         private int tileSize = 16;
         private Zoom tilezoom = backend.Zoom.x1;
+
+        private TileSP sp;
+        public int SP
+        {
+            get
+            {
+                return (int)sp;
+            }
+            set
+            {
+                if (value == 0) sp = TileSP.SP01;
+                else sp = TileSP.SP23;
+            }
+        }
 
         [
             Category("Int"),
@@ -151,11 +166,11 @@ namespace controls
             SizeChanged += GFXBox_SizeChanged;
         }
 
-        public Tuple<int,int,Bitmap>[] GetBitmapsFromSelectedTiles()
+        public TileMask[] GetBitmapsFromSelectedTiles(bool flipX, bool flipY, TilePriority priority)
         {
             if (selectedTiles == null) return null;
-            Tuple<int, int, Bitmap>[] tuples = 
-                new Tuple<int, int, Bitmap>[selectedTiles.GetLength(0) * selectedTiles.GetLength(1)];
+            TileMask[] tms = 
+                new TileMask[selectedTiles.GetLength(0) * selectedTiles.GetLength(1)];
 
             int w = selectedTiles.GetLength(0) - 1;
             int h = selectedTiles.GetLength(1) - 1;
@@ -196,12 +211,16 @@ namespace controls
                 {
                     if (oddY && j == h)
                         y -= (zsiz / 2);
-                    tuples[k] = new Tuple<int, int, Bitmap>(x, y, 
-                        selectedTiles[i, j].GetImage(ColorPalette.SelectedPalette, TileZoom));
+                    tms[k] = new TileMask(sp,selectedTiles[i,j]);
+                    tms[k].FlipX = flipX;
+                    tms[k].FlipY = flipY;
+                    tms[k].Priority = priority;
+                    tms[k].xDisp = x;
+                    tms[k].yDisp = y;
                     k++;
                 }
             }
-            return tuples;
+            return tms;
         }
 
         private void GFXBox_SizeChanged(object sender, EventArgs e)

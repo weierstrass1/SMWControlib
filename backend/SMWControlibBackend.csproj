@@ -42,14 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Graphics\ColorPalette.cs" />
+    <Compile Include="Graphics\Frames\Frame.cs" />
     <Compile Include="Graphics\TileMask.cs" />
     <Compile Include="Graphics\SnesGraphics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Graphics\Tile.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Graphics\Frames\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\DefaultPalette.pal">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

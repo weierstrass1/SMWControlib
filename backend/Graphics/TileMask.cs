@@ -11,7 +11,15 @@ namespace SMWControlibBackend.Graphics
         public int yDisp;
         private TileSP sp = TileSP.SP23;
         private PaletteId palette = PaletteId.pF;
-
+        public int Size
+        {
+            get
+            {
+                if (tile != null)
+                    return tile.Size;
+                return 0;
+            }
+        }
         public PaletteId Palette
         {
             get
@@ -178,6 +186,16 @@ namespace SMWControlibBackend.Graphics
             if (r != RotateFlipType.RotateNoneFlipNone) graphics.RotateFlip(r);
             Dirty = false;
             return graphics;
+        }
+
+        public TileMask Clone()
+        {
+            TileMask tm = new TileMask(sp, tile, zoom, flipX, flipY);
+            tm.xDisp = xDisp;
+            tm.yDisp = yDisp;
+            tm.palette = palette;
+            tm.Priority = Priority;
+            return tm;
         }
     }
 }

@@ -42,7 +42,7 @@ namespace SMWControlibControls.GraphicsControls
                 tilezoom = value;
                 if (selectedTiles != null)
                 {
-                    GetTilesFromSelection();
+                    getTilesFromSelection();
                 }
             }
         }
@@ -63,7 +63,7 @@ namespace SMWControlibControls.GraphicsControls
             }
             set
             {
-                SetBehindBitmap(value);
+                setBehindBitmap(value);
             }
         }
 
@@ -79,7 +79,7 @@ namespace SMWControlibControls.GraphicsControls
             }
             set
             {
-                SetSelection(value);
+                setSelection(value);
             }
         }
 
@@ -95,7 +95,7 @@ namespace SMWControlibControls.GraphicsControls
             }
             set
             {
-                SetSeletionColor(value);
+                setSeletionColor(value);
             }
         }
 
@@ -111,7 +111,7 @@ namespace SMWControlibControls.GraphicsControls
             }
             set
             {
-                SetSelectionMinSize(value);
+                setSelectionMinSize(value);
             }
         }
 
@@ -127,7 +127,7 @@ namespace SMWControlibControls.GraphicsControls
             }
             set
             {
-                SetSelectionAccuracy(value);
+                setSelectionAccuracy(value);
             }
         }
 
@@ -143,7 +143,7 @@ namespace SMWControlibControls.GraphicsControls
             }
             set
             {
-                SetZoom(value);
+                setZoom(value);
             }
         }
 
@@ -159,21 +159,21 @@ namespace SMWControlibControls.GraphicsControls
         {
             InitializeComponent();
             BehindBitmap = new Bitmap(Size.Width, Size.Height);
-            MouseDown += GFXBox_MouseDown;
-            MouseMove += GFXBox_MouseMove;
-            MouseUp += GFXBox_MouseUp;
-            SizeChanged += GFXBox_SizeChanged;
+            MouseDown += mouseDown;
+            MouseMove += mouseMove;
+            MouseUp += mouseUp;
+            SizeChanged += sizeChanged;
         }
 
-        private void OneGlobalPaletteChange(PaletteId obj)
+        private void oneGlobalPaletteChange(PaletteId obj)
         {
             if(ColorPalette.SelectedPalette == obj)
-                ReDraw();
+                reDraw();
         }
 
-        private void GlobalPaletteChange()
+        private void globalPaletteChange()
         {
-            ReDraw();
+            reDraw();
         }
 
         public TileMask[] GetBitmapsFromSelectedTiles(bool flipX, bool flipY, TilePriority priority)
@@ -221,23 +221,25 @@ namespace SMWControlibControls.GraphicsControls
                 {
                     if (oddY && j == h)
                         y -= (zsiz / 2);
-                    tms[k] = new TileMask(sp, selectedTiles[i, j], Zoom, flipX, flipY);
-                    tms[k].Priority = priority;
-                    tms[k].xDisp = x;
-                    tms[k].yDisp = y;
+                    tms[k] = new TileMask(sp, selectedTiles[i, j], TileZoom, flipX, flipY)
+                    {
+                        Priority = priority,
+                        xDisp = x,
+                        yDisp = y
+                    };
                     k++;
                 }
             }
             return tms;
         }
 
-        private void GFXBox_SizeChanged(object sender, EventArgs e)
+        private void sizeChanged(object sender, EventArgs e)
         {
             BehindBitmap = new Bitmap(Size.Width, Size.Height);
         }
 
         #region Mouse
-        private void GFXBox_MouseDown(object sender, MouseEventArgs e)
+        private void mouseDown(object sender, MouseEventArgs e)
         {
             selectionStartX = e.X;
             selectionStartY = e.Y;
@@ -251,7 +253,7 @@ namespace SMWControlibControls.GraphicsControls
             selecting = true;
         }
 
-        private void GFXBox_MouseMove(object sender, MouseEventArgs e)
+        private void mouseMove(object sender, MouseEventArgs e)
         {
             if (!selecting) return;
 
@@ -286,14 +288,15 @@ namespace SMWControlibControls.GraphicsControls
             Selection = new Rectangle(minx, miny, w, h);
         }
 
-        private void GFXBox_MouseUp(object sender, MouseEventArgs e)
+        private void mouseUp(object sender, MouseEventArgs e)
         {
-            GFXBox_MouseMove(sender, e);
+            mouseMove(sender, e);
             selecting = false;
-            GetTilesFromSelection();
+            getTilesFromSelection();
             SelectionChanged?.Invoke();
         }
         #endregion
+
         public void GetTiles(string path,TileSize tileSize, BaseTile baseTile)
         {
             try
@@ -322,9 +325,9 @@ namespace SMWControlibControls.GraphicsControls
                             if (tiles8 == null)
                             {
                                 tiles8 = tils;
-                                ColorPalette.SelectedGlobalPaletteChange += GlobalPaletteChange;
-                                ColorPalette.GlobalPalletesChange += GlobalPaletteChange;
-                                ColorPalette.OneGlobalPaletteChange += OneGlobalPaletteChange;
+                                ColorPalette.SelectedGlobalPaletteChange += globalPaletteChange;
+                                ColorPalette.GlobalPalletesChange += globalPaletteChange;
+                                ColorPalette.OneGlobalPaletteChange += oneGlobalPaletteChange;
                             }
                             else
                             {
@@ -338,9 +341,9 @@ namespace SMWControlibControls.GraphicsControls
                             if (tiles16 == null)
                             {
                                 tiles16 = tils;
-                                ColorPalette.SelectedGlobalPaletteChange += GlobalPaletteChange;
-                                ColorPalette.GlobalPalletesChange += GlobalPaletteChange;
-                                ColorPalette.OneGlobalPaletteChange += OneGlobalPaletteChange;
+                                ColorPalette.SelectedGlobalPaletteChange += globalPaletteChange;
+                                ColorPalette.GlobalPalletesChange += globalPaletteChange;
+                                ColorPalette.OneGlobalPaletteChange += oneGlobalPaletteChange;
                             }
                             else
                             {
@@ -427,22 +430,22 @@ namespace SMWControlibControls.GraphicsControls
             {
                 Tile.FillTileMatrix(tiles16, TileSize.Size16x16, BaseTile.Top);
                 tilesNotFiled16 = false;
-                ColorPalette.SelectedGlobalPaletteChange += GlobalPaletteChange;
-                ColorPalette.GlobalPalletesChange += GlobalPaletteChange;
-                ColorPalette.OneGlobalPaletteChange += OneGlobalPaletteChange;
+                ColorPalette.SelectedGlobalPaletteChange += globalPaletteChange;
+                ColorPalette.GlobalPalletesChange += globalPaletteChange;
+                ColorPalette.OneGlobalPaletteChange += oneGlobalPaletteChange;
             }
             if (tilesNotFiled8 && tiles8 != null)
             {
                 Tile.FillTileMatrix(tiles8, TileSize.Size8x8, BaseTile.Top);
                 tilesNotFiled8 = false;
-                ColorPalette.SelectedGlobalPaletteChange += GlobalPaletteChange;
-                ColorPalette.GlobalPalletesChange += GlobalPaletteChange;
-                ColorPalette.OneGlobalPaletteChange += OneGlobalPaletteChange;
+                ColorPalette.SelectedGlobalPaletteChange += globalPaletteChange;
+                ColorPalette.GlobalPalletesChange += globalPaletteChange;
+                ColorPalette.OneGlobalPaletteChange += oneGlobalPaletteChange;
             }
-            ReDraw();
+            reDraw();
         }
 
-        private void GetTilesFromSelection()
+        private void getTilesFromSelection()
         {
             Tile[,] tiles = tiles16;
             if (tileSize == 8) tiles = tiles8;
@@ -483,15 +486,15 @@ namespace SMWControlibControls.GraphicsControls
             }
         }
 
-        private void SetBehindBitmap(Bitmap newBitmap)
+        private void setBehindBitmap(Bitmap newBitmap)
         {
             if (newBitmap == null) newBitmap = new Bitmap(Width, Height);
             behindBitmap = newBitmap;
             Image = behindBitmap;
-            ReDraw();
+            reDraw();
         }
 
-        private void SetSelection(Rectangle rect)
+        private void setSelection(Rectangle rect)
         {
             if (rect == null) return;
 
@@ -510,30 +513,30 @@ namespace SMWControlibControls.GraphicsControls
             rect.Height = Math.Max(rect.Height, zmsz);
 
             selection = rect;
-            ReDraw();
+            reDraw();
         }
 
-        private void SetSeletionColor(Color color)
+        private void setSeletionColor(Color color)
         {
             selectionColor = new Pen(color);
-            ReDraw();
+            reDraw();
         }
 
-        private void SetSelectionMinSize(int size)
+        private void setSelectionMinSize(int size)
         {
             if (size <= 0) return;
             selectionMinSize = size;
             Selection = selection;
         }
 
-        private void SetSelectionAccuracy(int accuracy)
+        private void setSelectionAccuracy(int accuracy)
         {
             if (accuracy <= 0) return;
             selectionAccuracy = accuracy;
             Selection = selection;
         }
 
-        private void SetZoom(int newZoom)
+        private void setZoom(int newZoom)
         {
             if (newZoom <= 0) return;
 
@@ -542,11 +545,21 @@ namespace SMWControlibControls.GraphicsControls
             SelectionMinSize = selectionMinSize;
         }
 
-        private void ReDraw()
+        private void reDraw()
         {
             Image = new Bitmap(Image.Width, Image.Height);
+            try
+            {
+                using (Graphics g = Graphics.FromImage(Image))
+                {
+                    Brush br = new SolidBrush(ColorPalette.GetGlobalColor(0));
+                    g.FillRectangle(br, 0, 0, Width, Height);
+                }
+            }
+            catch { }
+            
 
-            Tile[,] tiles = tiles16;
+                Tile[,] tiles = tiles16;
             int up = 2;
             if (tileSize == 8)
             {

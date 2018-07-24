@@ -159,11 +159,14 @@ namespace SMWControlibBackend.Graphics
             {
                 for (int j = 0; j < Size; j++)
                 {
-                    using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(bp))
+                    if (colors[i, j] != 0)
                     {
-                        g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-                        br = new SolidBrush(ColorPalette.GetGlobalColor(colors[i, j], paletteId));
-                        g.FillRectangle(br, new RectangleF(i * zoom, j * zoom, zoom, zoom));
+                        using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(bp))
+                        {
+                            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                            br = new SolidBrush(ColorPalette.GetGlobalColor(colors[i, j], paletteId));
+                            g.FillRectangle(br, new RectangleF(i * zoom, j * zoom, zoom, zoom));
+                        }
                     }
                 }
             }

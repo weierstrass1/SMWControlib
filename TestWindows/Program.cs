@@ -3,13 +3,13 @@ using System.Windows.Forms;
 
 namespace TestWindows
 {
-    internal static class Program
+    public static class Program
     {
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>
         [STAThread]
-        private static void Main()
+        public static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

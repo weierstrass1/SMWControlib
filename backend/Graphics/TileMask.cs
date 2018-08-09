@@ -7,10 +7,46 @@ namespace SMWControlibBackend.Graphics
     public enum TilePriority { BehindLayer3 = 0, BehindLayer3P1NotForcedAbove = 16, AboveAllLayersP0 = 32, AboveAllExceptLayer3P1ForcedAbove = 48};
     public class TileMask
     {
-        public int xDisp;
-        public int yDisp;
+        public int XDisp;
+        public string XDispString
+        {
+            get
+            {
+                int X = XDisp / Zoom;
+                X -= 128;
+                string sx = Convert.ToString(X, 16);
+                if (sx.Length <= 1) sx = "0" + sx;
+                sx = sx.Substring(sx.Length - 2, 2);
+                sx = sx.ToUpper();
+                sx = "$" + sx;
+                return sx;
+            }
+        }
+        public int YDisp;
+        public string YDispString
+        {
+            get
+            {
+                int Y = YDisp / Zoom;
+                Y = 112 - Y;
+                string sy = Convert.ToString(Y, 16);
+                if (sy.Length <= 1) sy = "0" + sy;
+                sy = sy.Substring(sy.Length - 2, 2);
+                sy = sy.ToUpper();
+                sy = "$" + sy;
+                return sy;
+            }
+        }
         private TileSP sp = TileSP.SP23;
         private PaletteId palette = PaletteId.pF;
+        public string SizeString
+        {
+            get
+            {
+                if (Size == 8) return "$00";
+                return "$02";
+            }
+        }
         public int Size
         {
             get
@@ -114,13 +150,20 @@ namespace SMWControlibBackend.Graphics
         }
 
         private Tile tile;
+        public string Tile
+        {
+            get
+            {
+                return tile.Code;
+            }
+        }
         public event Action<TileMask> IsDirty;
 
         public string Properties
         {
             get
             {
-                return BitConverter.ToString(properties);
+                return "$" + BitConverter.ToString(properties);
             }
         }
         private byte[] properties
@@ -139,17 +182,17 @@ namespace SMWControlibBackend.Graphics
         public TileMask(TileSP SP, Tile Tile, Zoom Zoom, bool FlipX, bool FlipY)
         {
             sp = SP;
-            xDisp = 0;
-            yDisp = 0;
+            XDisp = 0;
+            YDisp = 0;
             zoom = Zoom;
             flipX = FlipX;
             flipY = FlipY;
             tile = Tile;
             palette = ColorPalette.SelectedPalette;
-            ColorPalette.SelectedGlobalPaletteChange += ColorPalette_SelectedGlobalPaletteChange;
+            ColorPalette.SelectedGlobalPaletteChange += colorPalette_SelectedGlobalPaletteChange;
         }
 
-        private void ColorPalette_SelectedGlobalPaletteChange()
+        private void colorPalette_SelectedGlobalPaletteChange()
         {
             if (!IsSelected || !UseGlobalPalette) return;
 
@@ -190,11 +233,13 @@ namespace SMWControlibBackend.Graphics
 
         public TileMask Clone()
         {
-            TileMask tm = new TileMask(sp, tile, zoom, flipX, flipY);
-            tm.xDisp = xDisp;
-            tm.yDisp = yDisp;
-            tm.palette = palette;
-            tm.Priority = Priority;
+            TileMask tm = new TileMask(sp, tile, zoom, flipX, flipY)
+            {
+                XDisp = XDisp,
+                YDisp = YDisp,
+                palette = palette,
+                Priority = Priority
+            };
             return tm;
         }
     }

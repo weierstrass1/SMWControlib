@@ -47,6 +47,12 @@
     <Compile Include="GraphicsControls\FrameCreator.Designer.cs">
       <DependentUpon>FrameCreator.cs</DependentUpon>
     </Compile>
+    <Compile Include="GraphicsControls\FrameInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GraphicsControls\FrameInfoDialog.Designer.cs">
+      <DependentUpon>FrameInfoDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="GraphicsControls\FramesSettingsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,6 +137,9 @@
   <ItemGroup>
     <EmbeddedResource Include="GraphicsControls\FrameCreator.resx">
       <DependentUpon>FrameCreator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphicsControls\FrameInfoDialog.resx">
+      <DependentUpon>FrameInfoDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GraphicsControls\FramesSettingsDialog.resx">
       <DependentUpon>FramesSettingsDialog.cs</DependentUpon>

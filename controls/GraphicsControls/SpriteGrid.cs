@@ -322,21 +322,21 @@ namespace SMWControlibControls.GraphicsControls
             int maxY = int.MinValue;
             foreach (TileMask tm in selection)
             {
-                if (tm.xDisp < minX)
+                if (tm.XDisp < minX)
                 {
-                    minX = tm.xDisp;
+                    minX = tm.XDisp;
                 }
-                if (tm.yDisp < minY)
+                if (tm.YDisp < minY)
                 {
-                    minY = tm.yDisp;
+                    minY = tm.YDisp;
                 }
-                if (tm.xDisp + tm.Size * zoom > maxX)
+                if (tm.XDisp + tm.Size * zoom > maxX)
                 {
-                    maxX = tm.xDisp + tm.Size * zoom;
+                    maxX = tm.XDisp + tm.Size * zoom;
                 }
-                if (tm.yDisp + tm.Size * zoom > maxY)
+                if (tm.YDisp + tm.Size * zoom > maxY)
                 {
-                    maxY = tm.yDisp + tm.Size * zoom;
+                    maxY = tm.YDisp + tm.Size * zoom;
                 }
             }
 
@@ -360,14 +360,14 @@ namespace SMWControlibControls.GraphicsControls
 
             foreach (TileMask tm in selection)
             {
-                tm.xDisp -= minX;
-                tm.yDisp -= minY;
-                tm.xDisp -= dMinx;
-                tm.yDisp -= dMiny;
-                tm.xDisp += selEndX + dfx2 - dfx;
-                tm.yDisp += selEndY + dfy2 - dfy;
-                tm.xDisp = (tm.xDisp / accZoom) * accZoom;
-                tm.yDisp = (tm.yDisp / accZoom) * accZoom;
+                tm.XDisp -= minX;
+                tm.YDisp -= minY;
+                tm.XDisp -= dMinx;
+                tm.YDisp -= dMiny;
+                tm.XDisp += selEndX + dfx2 - dfx;
+                tm.YDisp += selEndY + dfy2 - dfy;
+                tm.XDisp = (tm.XDisp / accZoom) * accZoom;
+                tm.YDisp = (tm.YDisp / accZoom) * accZoom;
             }
         }
         private void getDiffPos()
@@ -378,21 +378,21 @@ namespace SMWControlibControls.GraphicsControls
             int maxY = int.MinValue;
             foreach (TileMask tm in selection)
             {
-                if (tm.xDisp < minX)
+                if (tm.XDisp < minX)
                 {
-                    minX = tm.xDisp;
+                    minX = tm.XDisp;
                 }
-                if (tm.yDisp < minY)
+                if (tm.YDisp < minY)
                 {
-                    minY = tm.yDisp;
+                    minY = tm.YDisp;
                 }
-                if (tm.xDisp + tm.Size * zoom > maxX)
+                if (tm.XDisp + tm.Size * zoom > maxX)
                 {
-                    maxX = tm.xDisp + tm.Size * zoom;
+                    maxX = tm.XDisp + tm.Size * zoom;
                 }
-                if (tm.yDisp + tm.Size * zoom > maxY)
+                if (tm.YDisp + tm.Size * zoom > maxY)
                 {
-                    maxY = tm.yDisp + tm.Size * zoom;
+                    maxY = tm.YDisp + tm.Size * zoom;
                 }
             }
             dMinx = selStartX - minX;
@@ -429,8 +429,8 @@ namespace SMWControlibControls.GraphicsControls
 
             foreach (TileMask tm in Tiles)
             {
-                if (tm.xDisp + tm.Size * zoom >= minX && tm.xDisp <= maxX &&
-                    tm.yDisp + tm.Size * zoom >= minY && tm.yDisp <= maxY) 
+                if (tm.XDisp + tm.Size * zoom >= minX && tm.XDisp <= maxX &&
+                    tm.YDisp + tm.Size * zoom >= minY && tm.YDisp <= maxY) 
                 {
                     tm.IsDirty += isDirty;
                     tm.IsSelected = true;
@@ -462,8 +462,8 @@ namespace SMWControlibControls.GraphicsControls
 
             foreach(TileMask tm in selection)
             {
-                if (selStartX >= tm.xDisp && selStartX <= tm.xDisp + tm.Size * zoom &&
-                    selStartY >= tm.yDisp && selStartY <= tm.yDisp + tm.Size * zoom)
+                if (selStartX >= tm.XDisp && selStartX <= tm.XDisp + tm.Size * zoom &&
+                    selStartY >= tm.YDisp && selStartY <= tm.YDisp + tm.Size * zoom)
                 {
                     return true;
                 }
@@ -516,16 +516,16 @@ namespace SMWControlibControls.GraphicsControls
             for (int i = 0; i < NewTiles.Length; i++)
             {
                 tmaux = NewTiles[i].Clone();
-                tmaux.xDisp /= tmaux.Zoom;
-                tmaux.yDisp /= tmaux.Zoom;
-                tmaux.xDisp *= zoom;
-                tmaux.yDisp *= zoom;
-                tmaux.xDisp += xAcc;
-                tmaux.yDisp += yAcc;
+                tmaux.XDisp /= tmaux.Zoom;
+                tmaux.YDisp /= tmaux.Zoom;
+                tmaux.XDisp *= zoom;
+                tmaux.YDisp *= zoom;
+                tmaux.XDisp += xAcc;
+                tmaux.YDisp += yAcc;
                 tmaux.Zoom = zoom;
                 tmaux.IsSelected = false;
-                if (tmaux.xDisp <= Width - tmaux.Size * zoom &&
-                    tmaux.yDisp <= Height - tmaux.Size * zoom)
+                if (tmaux.XDisp <= Width - tmaux.Size * zoom &&
+                    tmaux.YDisp <= Height - tmaux.Size * zoom)
                 {
                     Tiles.Add(tmaux);
                 }
@@ -693,7 +693,7 @@ namespace SMWControlibControls.GraphicsControls
                     {
                         g.DrawImage(
                             tm.GetBitmap(),
-                            tm.xDisp, tm.yDisp);
+                            tm.XDisp, tm.YDisp);
                     }
                 }
             }
@@ -731,7 +731,7 @@ namespace SMWControlibControls.GraphicsControls
                     Pen p = new Pen(SelectionBorderColor);
                     foreach(TileMask tm in selection)
                     {
-                        g.DrawRectangle(p, tm.xDisp, tm.yDisp,
+                        g.DrawRectangle(p, tm.XDisp, tm.YDisp,
                             tm.Size * zoom, tm.Size * zoom);
                     }
                 }

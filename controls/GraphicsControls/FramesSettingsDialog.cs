@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using SMWControlibBackend.Graphics.Frames;
 
@@ -6,15 +7,51 @@ namespace SMWControlibControls.GraphicsControls
 {
     public partial class FramesSettingsDialog : Form
     {
-        public Frame[] frames;
-        public FramesSettingsDialog()
+        private Frame[] frames;
+        private FramesSettingsDialog()
         {
             InitializeComponent();
+            accept.Click += click;
         }
 
-        public void Init()
+        private void click(object sender, System.EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+            Dispose();
+        }
+
+        public static DialogResult Show(IWin32Window Owner,Frame[] Frames)
+        {
+            FramesSettingsDialog fsd = new FramesSettingsDialog
+            {
+                frames = Frames
+            };
+            fsd.init();
+            return fsd.ShowDialog(Owner);
+        }
+
+        private void init()
         {
             buildTable();
+        }
+
+        public void validName(Frame fr)
+        {
+            bool notValid = true;
+            while (notValid)
+            {
+                notValid = false;
+                foreach (Frame f in frames)
+                {
+                    if (f.Name == fr.Name && f != fr)
+                    {
+                        notValid = true;
+                        fr.Name += "0";
+                        break;
+                    }
+                }
+            }
+
         }
 
         private void buildTable()
@@ -48,10 +85,22 @@ namespace SMWControlibControls.GraphicsControls
                 tableLayoutPanel1.Controls.Add(ibtn, 2, i);
                 ibtn = new ImageButton();
                 initImageButton(ibtn, Properties.Resources.questionBlock);
+                ibtn.Click += questionClick;
                 tableLayoutPanel1.Controls.Add(ibtn, 3, i);
             }
-            
+        }
 
+        private void questionClick(object sender, System.EventArgs e)
+        {
+            ImageButton ibtn = (ImageButton)sender;
+            int row = tableLayoutPanel1.GetRow(ibtn);
+            if (FrameInfoDialog.Show(ParentForm, frames[row])
+                == DialogResult.OK)
+            {
+                validName(frames[row]);
+                tableLayoutPanel1.GetControlFromPosition(0, row)
+                    .Text = frames[row].Name;
+            }
         }
 
         private void clickUp(object sender, System.EventArgs e)

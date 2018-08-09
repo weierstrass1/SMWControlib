@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace SMWControlibControls.GraphicsControls
@@ -224,8 +225,8 @@ namespace SMWControlibControls.GraphicsControls
                     tms[k] = new TileMask(sp, selectedTiles[i, j], TileZoom, flipX, flipY)
                     {
                         Priority = priority,
-                        xDisp = x,
-                        yDisp = y
+                        XDisp = x,
+                        YDisp = y
                     };
                     k++;
                 }
@@ -301,7 +302,15 @@ namespace SMWControlibControls.GraphicsControls
         {
             try
             {
-                byte[,] colors = SnesGraphics.generateGFX(path);
+                int l = File.ReadAllBytes(path).Length;
+                if (l > 8192)
+                {
+                    MessageBox.Show("The GFX must be of 8192 or less.",
+                        "Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return;
+                }
+                byte[,] colors = SnesGraphics.GenerateGFX(path);
                 int y = 0;
                 if (baseTile == BaseTile.Botton) y = Height / 2;
                 Bitmap bp = SnesGraphics.GenerateBitmapFromColorMatrix(colors, zoom);

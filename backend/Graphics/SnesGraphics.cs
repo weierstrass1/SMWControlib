@@ -11,11 +11,11 @@ namespace SMWControlibBackend.Graphics
         /// </summary>
         /// <param name="path">Path of the gfx that you want to load.</param>
         /// <returns></returns>
-        public static byte[,] generateGFX(string path)
+        public static byte[,] GenerateGFX(string path)
         {
 
             byte[] gfx = File.ReadAllBytes(path);
-            return generateGFX(gfx);
+            return GenerateGFX(gfx);
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace SMWControlibBackend.Graphics
         /// </summary>
         /// <param name="gfx">An array of bytes that was read from .bin file</param>
         /// <returns></returns>
-        public static byte[,] generateGFX(byte[] gfx)
+        public static byte[,] GenerateGFX(byte[] gfx)
         {
             byte[,] bits = getBits(gfx);
 
@@ -43,7 +43,7 @@ namespace SMWControlibBackend.Graphics
                     }
                 }
             }
-            return GenerateColorMatrixFromColorArray(colors);
+            return generateColorMatrixFromColorArray(colors);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace SMWControlibBackend.Graphics
             return bp;
         }
 
-        private static byte[,] GenerateColorMatrixFromColorArray(byte[] colors)
+        private static byte[,] generateColorMatrixFromColorArray(byte[] colors)
         {
             int height = colors.Length / 128;
             if (colors.Length % 1024 != 0) height = ((colors.Length / 1024) + 1) * 1024;

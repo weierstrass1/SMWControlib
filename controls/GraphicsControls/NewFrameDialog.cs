@@ -19,6 +19,7 @@ namespace SMWControlibControls.GraphicsControls
 
         private void textChanged(object sender, EventArgs e)
         {
+            int st = name.SelectionStart;
             bool invalidChar = false;
             StringBuilder sb = new StringBuilder();
             foreach(char c in name.Text)
@@ -36,6 +37,8 @@ namespace SMWControlibControls.GraphicsControls
 
             if (invalidChar)
                 name.Text = sb.ToString();
+            if (st - 1 < 0) st = 1;
+            name.SelectionStart = st - 1;
         }
 
         private void checkedChanged(object sender, EventArgs e)

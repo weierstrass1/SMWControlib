@@ -28,20 +28,26 @@ namespace SMWControlibControls.GraphicsControls
         {
             InitializeComponent();
             frames = new List<Frame>();
-            create.Click += create_Click;
-            delete.Click += delete_Click;
-            settings.Click += settings_Click;
+            create.Click += createClick;
+            delete.Click += deleteClick;
+            settings.Click += settingsClick;
             SelectedFrame = null;
             frameSelector.SelectedIndexChanged += selectedIndexChanged;
-            settings.Click += Settings_Click;
         }
 
-        private void Settings_Click(object sender, EventArgs e)
+        private void settingsClick(object sender, EventArgs e)
         {
-            FramesSettingsDialog fsd = new FramesSettingsDialog();
-            fsd.frames = frames.ToArray();
-            fsd.Init();
-            fsd.ShowDialog(ParentForm);
+            Frame[] framesArr = frames.ToArray();
+            if (FramesSettingsDialog.Show(ParentForm, framesArr)
+                == DialogResult.OK)
+            {
+                frames.Clear();
+                for (int i = 0; i < framesArr.Length; i++)
+                {
+                    frames.Add(framesArr[i]);
+                }
+                refreshFrames();
+            }
         }
 
         private void selectedIndexChanged(object sender, EventArgs e)
@@ -52,7 +58,7 @@ namespace SMWControlibControls.GraphicsControls
                 SelectedFrame = null;
         }
 
-        private void create_Click(object sender, EventArgs e)
+        private void createClick(object sender, EventArgs e)
         {
             if (NewFrameDialog.Show(ParentForm, frames)
                 == DialogResult.OK)
@@ -60,7 +66,7 @@ namespace SMWControlibControls.GraphicsControls
                 refreshFrames();
             }
         }
-        private void delete_Click(object sender, EventArgs e)
+        private void deleteClick(object sender, EventArgs e)
         {
             if (SelectedFrame != null)
             {
@@ -69,11 +75,6 @@ namespace SMWControlibControls.GraphicsControls
                 if (frames.Count == 0) 
                         SelectedFrame = null;
             }
-        }
-
-        private void settings_Click(object sender, EventArgs e)
-        {
-
         }
         private void refreshFrames()
         {

@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SMWControlibBackend.Graphics;
 
@@ -60,6 +55,7 @@ namespace SMWControlibControls.GraphicsControls
                     set.SelectedTilesColorG, set.SelectedTilesColorB);
                 spriteGrid1.ActivateCenterSquare =
                     set.EnableCenterSquare;
+                spriteGrid1.GridTypeUsed = set.GridType;
             }
             catch { }
         }
@@ -70,7 +66,8 @@ namespace SMWControlibControls.GraphicsControls
                 spriteGrid1.CenterSquareColor, 
                 spriteGrid1.SelectionFillColor,
                 spriteGrid1.SelectionBorderColor, 
-                spriteGrid1.ActivateCenterSquare) == DialogResult.OK)
+                spriteGrid1.ActivateCenterSquare,
+                spriteGrid1.GridTypeUsed) == DialogResult.OK)
             {
                 spriteGrid1.GridColor = 
                     SpriteGridSettings.GridColor;
@@ -82,8 +79,9 @@ namespace SMWControlibControls.GraphicsControls
                     SpriteGridSettings.SelectedTilesColor;
                 spriteGrid1.ActivateCenterSquare =
                     SpriteGridSettings.EnableCenterSquare;
+                spriteGrid1.GridTypeUsed = (int)SpriteGridSettings.Type;
 
-                SpriteGridSettingsContainer ser = 
+                SpriteGridSettingsContainer ser =
                     new SpriteGridSettingsContainer()
                     {
                         GridColorR =
@@ -111,7 +109,8 @@ namespace SMWControlibControls.GraphicsControls
                         SelectedTilesColorB =
                         SpriteGridSettings.SelectedTilesColor.B,
                         EnableCenterSquare =
-                        SpriteGridSettings.EnableCenterSquare
+                        SpriteGridSettings.EnableCenterSquare,
+                        GridType = (int)SpriteGridSettings.Type
                     };
                 ser.Serialize("Settings/GridSettings.set");
             }

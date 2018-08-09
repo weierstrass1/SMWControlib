@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SMWControlibControls.GraphicsControls
@@ -17,6 +11,7 @@ namespace SMWControlibControls.GraphicsControls
         public static Color SelectionRectangleColor { get; private set; }
         public static Color SelectedTilesColor { get; private set; }
         public static bool EnableCenterSquare { get; private set; }
+        public static GridType Type { get; private set; }
 
         private SpriteGridSettings()
         {
@@ -27,6 +22,16 @@ namespace SMWControlibControls.GraphicsControls
             pictureBox3.DoubleClick += doubleClick;
             pictureBox4.DoubleClick += doubleClick;
             checkBox1.CheckedChanged += checkedChanged;
+            line.CheckedChanged += rButtonCheckedChanged;
+            dot.CheckedChanged += rButtonCheckedChanged;
+            dash.CheckedChanged += rButtonCheckedChanged;
+        }
+
+        private void rButtonCheckedChanged(object sender, EventArgs e)
+        {
+            if (dot.Checked) setType(0);
+            else if (line.Checked) setType(1);
+            else setType(2);
         }
 
         private void checkedChanged(object sender, EventArgs e)
@@ -59,7 +64,8 @@ namespace SMWControlibControls.GraphicsControls
         public static DialogResult Show(IWin32Window Owner,
             Color GridColor,
             Color CenterSquareColor, Color SelectionRectangleColor,
-            Color SelectedTilesColor, bool EnableCenterSquare)
+            Color SelectedTilesColor, bool EnableCenterSquare,
+            int Type)
         {
             SpriteGridSettings settings = new SpriteGridSettings();
 
@@ -69,6 +75,7 @@ namespace SMWControlibControls.GraphicsControls
             settings.setSelectedTilesColor(SelectedTilesColor);
             settings.setEnableCenterSquare(EnableCenterSquare);
             settings.checkBox1.Checked = EnableCenterSquare;
+            settings.setType(Type);
 
             return settings.ShowDialog(Owner);
         }
@@ -120,6 +127,25 @@ namespace SMWControlibControls.GraphicsControls
         private void setEnableCenterSquare(bool B)
         {
             EnableCenterSquare = B;
+        }
+
+        private void setType(int type)
+        {
+            switch(type)
+            {
+                case 0:
+                    Type = GridType.Dotted;
+                    if (!dot.Checked) dot.Checked = true;
+                    break;
+                case 1:
+                    Type = GridType.Lined;
+                    if (!line.Checked) line.Checked = true;
+                    break;
+                default:
+                    Type = GridType.Dashed;
+                    if (!dash.Checked) dash.Checked = true;
+                    break;
+            }
         }
     }
 }

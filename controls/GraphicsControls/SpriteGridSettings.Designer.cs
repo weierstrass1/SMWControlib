@@ -40,6 +40,9 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.dash = new System.Windows.Forms.RadioButton();
+            this.line = new System.Windows.Forms.RadioButton();
+            this.dot = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -48,7 +51,7 @@
             // 
             // accept
             // 
-            this.accept.Location = new System.Drawing.Point(62, 119);
+            this.accept.Location = new System.Drawing.Point(99, 119);
             this.accept.Name = "accept";
             this.accept.Size = new System.Drawing.Size(75, 23);
             this.accept.TabIndex = 0;
@@ -154,12 +157,47 @@
             // 
             this.colorDialog1.AllowFullOpen = false;
             // 
+            // dash
+            // 
+            this.dash.AutoSize = true;
+            this.dash.Location = new System.Drawing.Point(189, 57);
+            this.dash.Name = "dash";
+            this.dash.Size = new System.Drawing.Size(84, 17);
+            this.dash.TabIndex = 11;
+            this.dash.Text = "Dashed Grid";
+            this.dash.UseVisualStyleBackColor = true;
+            // 
+            // line
+            // 
+            this.line.AutoSize = true;
+            this.line.Location = new System.Drawing.Point(189, 35);
+            this.line.Name = "line";
+            this.line.Size = new System.Drawing.Size(73, 17);
+            this.line.TabIndex = 12;
+            this.line.Text = "Lined Grid";
+            this.line.UseVisualStyleBackColor = true;
+            // 
+            // dot
+            // 
+            this.dot.AutoSize = true;
+            this.dot.Checked = true;
+            this.dot.Location = new System.Drawing.Point(189, 13);
+            this.dot.Name = "dot";
+            this.dot.Size = new System.Drawing.Size(79, 17);
+            this.dot.TabIndex = 13;
+            this.dot.TabStop = true;
+            this.dot.Text = "Dotted Grid";
+            this.dot.UseVisualStyleBackColor = true;
+            // 
             // SpriteGridSettings
             // 
             this.AcceptButton = this.accept;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(195, 154);
+            this.ClientSize = new System.Drawing.Size(276, 154);
+            this.Controls.Add(this.dot);
+            this.Controls.Add(this.line);
+            this.Controls.Add(this.dash);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label4);
@@ -201,5 +239,8 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.RadioButton dash;
+        private System.Windows.Forms.RadioButton line;
+        private System.Windows.Forms.RadioButton dot;
     }
 }

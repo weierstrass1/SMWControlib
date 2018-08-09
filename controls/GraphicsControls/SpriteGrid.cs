@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace SMWControlibControls.GraphicsControls
 {
-    public enum GridType { Point = 0, Line = 1, LittleLines = 2};
+    public enum GridType { Dotted = 0, Lined = 1, Dashed = 2};
     public partial class SpriteGrid : PictureBox
     {
         private bool[,,] nonDirties;
@@ -112,13 +112,13 @@ namespace SMWControlibControls.GraphicsControls
                 switch(value)
                 {
                     case 0:
-                        gridTypeUsed = GridType.Point;
+                        gridTypeUsed = GridType.Dotted;
                         break;
                     case 1:
-                        gridTypeUsed = GridType.Line;
+                        gridTypeUsed = GridType.Lined;
                         break;
                     default:
-                        gridTypeUsed = GridType.LittleLines;
+                        gridTypeUsed = GridType.Dashed;
                         break;
                 }
                 buildGrid();
@@ -543,10 +543,10 @@ namespace SMWControlibControls.GraphicsControls
         {
             switch(gridTypeUsed)
             {
-                case GridType.Point:
+                case GridType.Dotted:
                     buildPointGrid();
                     break;
-                case GridType.Line:
+                case GridType.Lined:
                     buildLineGrid();
                     break;
                 default:

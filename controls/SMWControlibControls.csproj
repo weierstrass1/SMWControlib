@@ -53,6 +53,12 @@
     <Compile Include="GraphicsControls\FramesSettingsDialog.Designer.cs">
       <DependentUpon>FramesSettingsDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="GraphicsControls\ImageButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GraphicsControls\ImageButton.Designer.cs">
+      <DependentUpon>ImageButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="GraphicsControls\NewFrameDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +115,11 @@
     <Compile Include="GraphicsControls\SpriteGrid.Designer.cs">
       <DependentUpon>SpriteGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
@@ -123,6 +134,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GraphicsControls\FramesSettingsDialog.resx">
       <DependentUpon>FramesSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphicsControls\ImageButton.resx">
+      <DependentUpon>ImageButton.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="GraphicsControls\NewFrameDialog.resx">
       <DependentUpon>NewFrameDialog.cs</DependentUpon>
@@ -139,6 +154,19 @@
     <EmbeddedResource Include="GraphicsControls\SpriteGridSettings.resx">
       <DependentUpon>SpriteGridSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\upArrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\downArrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\questionBlock.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

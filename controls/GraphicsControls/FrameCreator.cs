@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SMWControlibBackend.Graphics.Frames;
 
@@ -39,6 +33,15 @@ namespace SMWControlibControls.GraphicsControls
             settings.Click += settings_Click;
             SelectedFrame = null;
             frameSelector.SelectedIndexChanged += selectedIndexChanged;
+            settings.Click += Settings_Click;
+        }
+
+        private void Settings_Click(object sender, EventArgs e)
+        {
+            FramesSettingsDialog fsd = new FramesSettingsDialog();
+            fsd.frames = frames.ToArray();
+            fsd.Init();
+            fsd.ShowDialog(ParentForm);
         }
 
         private void selectedIndexChanged(object sender, EventArgs e)

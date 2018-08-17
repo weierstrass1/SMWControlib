@@ -8,7 +8,8 @@ namespace SMWControlibControls.GraphicsControls
     public partial class GFXButton : Button
     {
         private OpenFileDialog open;
-        public GFXBox target;
+        public GFXBox Target;
+        public int Position { get; set; }
 
         private BaseTile baseTile;
         public int BaseTile
@@ -41,24 +42,26 @@ namespace SMWControlibControls.GraphicsControls
         public GFXButton()
         {
             InitializeComponent();
-            open = new OpenFileDialog();
-            open.Multiselect = false;
-            open.Filter = "Binary Files (*.bin)|*.bin";
-            open.CheckFileExists = true;
-            open.CheckPathExists = true;
-            Click += GFXButton_Click;
+            open = new OpenFileDialog
+            {
+                Multiselect = false,
+                Filter = "Binary Files (*.bin)|*.bin",
+                CheckFileExists = true,
+                CheckPathExists = true
+            };
+            Click += gfxClick;
         }
 
-        private void GFXButton_Click(object sender, EventArgs e)
+        private void gfxClick(object sender, EventArgs e)
         {
-            if (target != null)
+            if (Target != null)
             {
                 open.InitialDirectory = StartFolder;
                 if (open.ShowDialog() == DialogResult.OK)
                 {
                     if(File.Exists(open.FileName))
                     {
-                        target.GetTiles(open.FileName, tilesize, baseTile);
+                        Target.LoadGFX(open.FileName, Position);
                     }
                 }
             }

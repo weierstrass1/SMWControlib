@@ -23,7 +23,7 @@ namespace SMWControlibControls.GraphicsControls
             set
             {
                 tiles = value;
-                reDraw();
+                ReDraw();
             }
         }
 
@@ -40,7 +40,7 @@ namespace SMWControlibControls.GraphicsControls
             {
                 gridAccuracy = value;
                 buildGrid();
-                reDraw();
+                ReDraw();
             }
         }
 
@@ -54,7 +54,7 @@ namespace SMWControlibControls.GraphicsControls
             set
             {
                 selectionFillColor = value;
-                reDraw();
+                ReDraw();
             }
         }
 
@@ -68,7 +68,7 @@ namespace SMWControlibControls.GraphicsControls
             set
             {
                 centerSquareColor = value;
-                reDraw();
+                ReDraw();
             }
         }
 
@@ -82,7 +82,7 @@ namespace SMWControlibControls.GraphicsControls
             set
             {
                 selectionBorderColor = value;
-                reDraw();
+                ReDraw();
             }
         }
 
@@ -98,7 +98,7 @@ namespace SMWControlibControls.GraphicsControls
                 gridColor = value;
                 nonDirties = new bool[20, 20, 3];
                 buildGrid();
-                reDraw();
+                ReDraw();
             }
         }
         private GridType gridTypeUsed;
@@ -122,7 +122,7 @@ namespace SMWControlibControls.GraphicsControls
                         break;
                 }
                 buildGrid();
-                reDraw();
+                ReDraw();
             }
         }
 
@@ -138,7 +138,8 @@ namespace SMWControlibControls.GraphicsControls
                 if (zoom != value)
                 {
                     zoom = value;
-                    MaximumSize = new Size(256 * zoom, 240 * zoom);
+                    MaximumSize = new Size((256 * zoom) + 6,
+                        (240 * zoom) + 6);
                     if (Tiles != null)
                     {
                         foreach (TileMask tm in Tiles)
@@ -147,7 +148,7 @@ namespace SMWControlibControls.GraphicsControls
                         }
                     }
                     buildGrid();
-                    reDraw();
+                    ReDraw();
                 }
             }
         }
@@ -162,7 +163,7 @@ namespace SMWControlibControls.GraphicsControls
             set
             {
                 activateCenterSquare = value;
-                reDraw();
+                ReDraw();
             }
         }
 
@@ -180,7 +181,7 @@ namespace SMWControlibControls.GraphicsControls
                 {
                     buildGrid();
                 }
-                reDraw();
+                ReDraw();
             }
         }
 
@@ -247,7 +248,7 @@ namespace SMWControlibControls.GraphicsControls
                 deselect();
                 canSelect = true;
             }
-            reDraw();
+            ReDraw();
         }
         private void spriteGrid_MouseMove(object sender, MouseEventArgs e)
         {
@@ -282,14 +283,14 @@ namespace SMWControlibControls.GraphicsControls
                 selEndX = e.X;
                 selEndY = e.Y;
                 select();
-                reDraw();
+                ReDraw();
             }
             else if(moving)
             {
                 selEndX = e.X;
                 selEndY = e.Y;
                 move();
-                reDraw();
+                ReDraw();
             }
         }
         private void spriteGrid_MouseUp(object sender, MouseEventArgs e)
@@ -301,7 +302,7 @@ namespace SMWControlibControls.GraphicsControls
                 selEndX = e.X;
                 selEndY = e.Y;
                 select();
-                reDraw();
+                ReDraw();
                 if (selection == null || selection.Count == 0)
                     canSelect = true;
             }
@@ -310,7 +311,7 @@ namespace SMWControlibControls.GraphicsControls
                 selEndX = e.X;
                 selEndY = e.Y;
                 move();
-                reDraw();
+                ReDraw();
                 moving = false;
             }
         }
@@ -446,11 +447,12 @@ namespace SMWControlibControls.GraphicsControls
                 {
                     tm.IsDirty -= isDirty;
                     tm.IsSelected = false;
+                    tm.RemoveDirtyEvent();
                     Tiles.Remove(tm);
                 }
             }
             selection = new List<TileMask>();
-            reDraw();
+            ReDraw();
         }
         private bool intoSelection()
         {
@@ -478,7 +480,7 @@ namespace SMWControlibControls.GraphicsControls
             if (counter == selection.Count)
             {
                 counter = 0;
-                reDraw();
+                ReDraw();
                 Refresh();
             }
         }
@@ -489,7 +491,7 @@ namespace SMWControlibControls.GraphicsControls
             if (mea.Button == MouseButtons.Right)
             {
                 addTiles(mea.X, mea.Y);
-                reDraw();
+                ReDraw();
             }
         }
 
@@ -537,7 +539,6 @@ namespace SMWControlibControls.GraphicsControls
                     "Warning",MessageBoxButtons.OK,MessageBoxIcon.Warning);
             }
         }
-
         #region BuildGrid
         private void buildGrid()
         {
@@ -671,7 +672,7 @@ namespace SMWControlibControls.GraphicsControls
         }
         #endregion
 
-        private void reDraw()
+        public void ReDraw()
         {
             if (grids == null) buildGrid();
             Image = new Bitmap(Width, Height);
@@ -749,22 +750,22 @@ namespace SMWControlibControls.GraphicsControls
         {
             nonDirties = new bool[20, 20, 3];
             buildGrid();
-            reDraw();
+            ReDraw();
         }
 
         private void colorPalette_OneGlobalPaletteChange(PaletteId obj)
         {
-            reDraw();
+            ReDraw();
         }
 
         private void colorPalette_GlobalPalletesChange()
         {
-            reDraw();
+            ReDraw();
         }
 
         private void colorPalette_SelectedGlobalPaletteChange()
         {
-            reDraw();
+            ReDraw();
         }
         protected override void OnPaint(PaintEventArgs pe)
         {

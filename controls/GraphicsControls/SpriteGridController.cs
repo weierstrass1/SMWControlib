@@ -129,5 +129,10 @@ namespace SMWControlibControls.GraphicsControls
             MaximumSize = new Size(spriteGrid1.MaximumSize.Width,
                 spriteGrid1.MaximumSize.Height + panel2.Height);
         }
+
+        public void ReDraw()
+        {
+            spriteGrid1.ReDraw();
+        }
     }
 }

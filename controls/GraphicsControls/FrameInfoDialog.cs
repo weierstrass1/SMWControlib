@@ -41,10 +41,14 @@ namespace SMWControlibControls.GraphicsControls
             }
 
             if (invalidChar)
+            {
                 name.Text = sb.ToString();
+                if (st - 1 < 0) st = 1;
+                name.SelectionStart = st - 1;
+            }
+            else name.SelectionStart = st;
 
-            if (st - 1 < 0) st = 1;
-            name.SelectionStart = st-1;
+
         }
 
         private void click(object sender, EventArgs e)

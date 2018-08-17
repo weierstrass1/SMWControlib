@@ -101,6 +101,12 @@
     <Compile Include="GraphicsControls\PaletteButton.Designer.cs">
       <DependentUpon>PaletteButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="GraphicsControls\SpriteGFXBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GraphicsControls\SpriteGFXBox.Designer.cs">
+      <DependentUpon>SpriteGFXBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="GraphicsControls\SpriteGridController.cs">
       <SubType>UserControl</SubType>
     </Compile>

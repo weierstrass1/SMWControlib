@@ -62,5 +62,10 @@ namespace SMWControlibControls.GraphicsControls
                 down.Height = adder;
             }
         }
+
+        public void ReDraw()
+        {
+            spriteGridController1.ReDraw();
+        }
     }
 }

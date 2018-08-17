@@ -8,17 +8,17 @@ namespace SMWControlibBackend.Graphics
 
     public struct Zoom
     {
-        public static readonly Zoom x1 = 1;
-        public static readonly Zoom x2 = 2;
-        public static readonly Zoom x4 = 4;
-        public static readonly Zoom x6 = 6;
-        public static readonly Zoom x8 = 8;
-        public static readonly Zoom x10 = 10;
-        public static readonly Zoom x12 = 12;
-        public static readonly Zoom x14 = 14;
-        public static readonly Zoom x16 = 16;
-        public static readonly Zoom x18 = 18;
-        public static readonly Zoom x20 = 20;
+        public static readonly Zoom X1 = 1;
+        public static readonly Zoom X2 = 2;
+        public static readonly Zoom X4 = 4;
+        public static readonly Zoom X6 = 6;
+        public static readonly Zoom X8 = 8;
+        public static readonly Zoom X10 = 10;
+        public static readonly Zoom X12 = 12;
+        public static readonly Zoom X14 = 14;
+        public static readonly Zoom X16 = 16;
+        public static readonly Zoom X18 = 18;
+        public static readonly Zoom X20 = 20;
         private int value;
 
         private Zoom(int Value)
@@ -44,7 +44,7 @@ namespace SMWControlibBackend.Graphics
         public string Code { get; private set; }
         public int Size { get; private set; }
         public bool FullyDirty { get; private set; }
-        private bool[] Dirty;
+        private bool[] _Dirty;
         private byte[,] colors;
         private Bitmap[,] images;
         public event Action<Tile> IsFullyDirty;
@@ -53,49 +53,49 @@ namespace SMWControlibBackend.Graphics
 
         private Tile(bool UseGlobalPalette)
         {
-            SetDirty();
+            setDirty();
             if(UseGlobalPalette)
             {
-                ColorPalette.GlobalPalletesChange += ColorPalette_GlobalPalletesChange;
-                ColorPalette.OneGlobalPaletteChange += ColorPalette_OneGlobalPaletteChange;
+                ColorPalette.GlobalPalletesChange += globalPalletesChange;
+                ColorPalette.OneGlobalPaletteChange += oneGlobalPaletteChange;
             }
         }
 
-        private void ColorPalette_GlobalPalletesChange()
+        private void globalPalletesChange()
         {
-            SetDirty();
+            setDirty();
         }
 
-        private void ColorPalette_OneGlobalPaletteChange(PaletteId obj)
+        private void oneGlobalPaletteChange(PaletteId obj)
         {
-            SetDirty((int)obj, true);
+            setDirty((int)obj, true);
         }
 
-        private void SetDirty()
+        private void setDirty()
         {
             FullyDirty = true;
-            Dirty = new bool[ColorPalette.GlobalPalettesLength];
-            for (int i = 0; i < Dirty.Length; i++)
+            _Dirty = new bool[ColorPalette.GlobalPalettesLength];
+            for (int i = 0; i < _Dirty.Length; i++)
             {
-                Dirty[i] = true;
+                _Dirty[i] = true;
             }
             IsFullyDirty?.Invoke(this);
         }
 
-        private void SetDirty(int i,bool val)
+        private void setDirty(int i,bool val)
         {
-            if (Dirty == null) return;
+            if (_Dirty == null) return;
             if (i < 0) i = 0;
-            else if (i >= Dirty.Length) i = Dirty.Length - 1;
+            else if (i >= _Dirty.Length) i = _Dirty.Length - 1;
 
-            if (Dirty[i] != val)
+            if (_Dirty[i] != val)
             {
-                Dirty[i] = val;
-                if (Dirty[i]) IsDirty?.Invoke(this, i);
+                _Dirty[i] = val;
+                if (_Dirty[i]) IsDirty?.Invoke(this, i);
             }
         }
 
-        public static Tile fusionTiles(Tile target, Tile fusion, BaseTile baseTile)
+        public static Tile FusionTiles(Tile target, Tile fusion, BaseTile baseTile)
         {
             if (target == null)
             {
@@ -131,13 +131,13 @@ namespace SMWControlibBackend.Graphics
                     }
                     break;
             }
-            target.SetDirty();
+            target.setDirty();
             return target;
         }
 
         public Bitmap GetImage(PaletteId i, Zoom zoom)
         {
-            if (images == null || images[(int)i, zoom / 2]==null || FullyDirty || Dirty[(int)i])
+            if (images == null || images[(int)i, zoom / 2]==null || FullyDirty || _Dirty[(int)i])
                 GenerateBitmap(i, zoom);
 
             return images[(int)i, zoom / 2];
@@ -171,7 +171,7 @@ namespace SMWControlibBackend.Graphics
                 }
             }
             FullyDirty = false;
-            SetDirty(npid, false);
+            setDirty(npid, false);
         }
 
         private static char[] intToHex = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
@@ -197,10 +197,12 @@ namespace SMWControlibBackend.Graphics
                 {
                     if (tiles[i, j] == null)
                     {
-                        tiles[i, j] = new Tile(true);
-                        tiles[i, j].colors = new byte[numbSize, numbSize];
-                        tiles[i, j].Code = "$" + intToHex[numBase + j] + intToHex[i];
-                        tiles[i, j].Size = numbSize;
+                        tiles[i, j] = new Tile(true)
+                        {
+                            colors = new byte[numbSize, numbSize],
+                            Code = "$" + intToHex[numBase + j] + intToHex[i],
+                            Size = numbSize
+                        };
                     }
                 }
             }
@@ -249,10 +251,12 @@ namespace SMWControlibBackend.Graphics
                 for (int j = 0; j < h; j++)
                 {
                     y = j * 8;
-                    tiles[i, j] = new Tile(true);
-                    tiles[i, j].colors = new byte[numSize, numSize];
-                    tiles[i, j].Code = "$" + intToHex[numBase + j]+ intToHex[i];
-                    tiles[i, j].Size = numSize;
+                    tiles[i, j] = new Tile(true)
+                    {
+                        colors = new byte[numSize, numSize],
+                        Code = "$" + intToHex[numBase + j] + intToHex[i],
+                        Size = numSize
+                    };
                     for (int p = 0; p < numSize && x + p < colors.GetLength(0); p++)
                     {
                         for (int q = 0; y + q < colors.GetLength(1) && ((j < h - 1 && q < numSize) || (j == h - 1 && q < ylim)); q++)

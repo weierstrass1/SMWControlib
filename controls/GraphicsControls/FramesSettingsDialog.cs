@@ -35,7 +35,7 @@ namespace SMWControlibControls.GraphicsControls
             buildTable();
         }
 
-        public void validName(Frame fr)
+        private void validName(Frame fr)
         {
             bool notValid = true;
             while (notValid)

@@ -26,7 +26,7 @@ namespace SMWControlibBackend.Graphics
         /// <returns></returns>
         public static byte[,] GenerateGFX(byte[] gfx)
         {
-            byte[,] bits = getBits(gfx);
+            byte[,] bits = GetBits(gfx);
 
             byte[] colors = new byte[gfx.Length * 2];
 
@@ -134,7 +134,7 @@ namespace SMWControlibBackend.Graphics
         /// </summary>
         /// <param name="bytes">Byte array that you want to separate each bit</param>
         /// <returns></returns>
-        public static byte[,] getBits(byte[] bytes)
+        public static byte[,] GetBits(byte[] bytes)
         {
             byte[,] bits = new byte[8, bytes.Length];
             bool[] comp = new bool[bytes.Length];

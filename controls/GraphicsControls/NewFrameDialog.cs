@@ -36,9 +36,12 @@ namespace SMWControlibControls.GraphicsControls
             }
 
             if (invalidChar)
+            {
                 name.Text = sb.ToString();
-            if (st - 1 < 0) st = 1;
-            name.SelectionStart = st - 1;
+                if (st - 1 < 0) st = 1;
+                name.SelectionStart = st - 1;
+            }
+            else name.SelectionStart = st;
         }
 
         private void checkedChanged(object sender, EventArgs e)
@@ -81,7 +84,7 @@ namespace SMWControlibControls.GraphicsControls
             Dispose();
         }
 
-        public void validName()
+        private void validName()
         {
             bool notValid = true;
             while (notValid)

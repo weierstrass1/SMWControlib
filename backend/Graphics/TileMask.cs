@@ -67,7 +67,7 @@ namespace SMWControlibBackend.Graphics
                 if(palette != value)
                 {
                     palette = value;
-                    Dirty = true;
+                    _Dirty = true;
                 }
             }
         }
@@ -87,7 +87,7 @@ namespace SMWControlibBackend.Graphics
                 if(flipX != value)
                 {
                     flipX = value;
-                    Dirty = true;
+                    _Dirty = true;
                 }
             }
         }
@@ -105,7 +105,7 @@ namespace SMWControlibBackend.Graphics
                 if (flipY != value)
                 {
                     flipY = value;
-                    Dirty = true;
+                    _Dirty = true;
                 }
             }
         }
@@ -115,7 +115,7 @@ namespace SMWControlibBackend.Graphics
         private Bitmap graphics;
 
         private bool dirty = true;
-        private bool Dirty
+        private bool _Dirty
         {
             get
             {
@@ -144,7 +144,7 @@ namespace SMWControlibBackend.Graphics
                 if(zoom!=value)
                 {
                     zoom = value;
-                    Dirty = true;
+                    _Dirty = true;
                 }
             }
         }
@@ -201,7 +201,7 @@ namespace SMWControlibBackend.Graphics
 
         public Bitmap GetBitmap()
         {
-            if (!Dirty) return graphics;
+            if (!_Dirty) return graphics;
             if (tile == null)
             {
                 graphics = null;
@@ -227,10 +227,18 @@ namespace SMWControlibBackend.Graphics
             else if (flipY) r = RotateFlipType.RotateNoneFlipY;
 
             if (r != RotateFlipType.RotateNoneFlipNone) graphics.RotateFlip(r);
-            Dirty = false;
+            _Dirty = false;
             return graphics;
         }
-
+        private void tileDirty(Tile t)
+        {
+            _Dirty = true;
+            GetBitmap();
+        }
+        public void RemoveDirtyEvent()
+        {
+            tile.IsFullyDirty -= tileDirty;
+        }
         public TileMask Clone()
         {
             TileMask tm = new TileMask(sp, tile, zoom, flipX, flipY)
@@ -240,7 +248,13 @@ namespace SMWControlibBackend.Graphics
                 palette = palette,
                 Priority = Priority
             };
+            tm.tile.IsFullyDirty += tm.tileDirty;
             return tm;
+        }
+
+        private void getbi(Tile obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }

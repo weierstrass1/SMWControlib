@@ -26,7 +26,7 @@ namespace SMWControlibControls.GraphicsControls
                 PaletteBox_Click(null, mae);
             }
         }
-        private Zoom zoom = SMWControlibBackend.Graphics.Zoom.x1;
+        private Zoom zoom = SMWControlibBackend.Graphics.Zoom.X1;
         public int Zoom
         { get
             {

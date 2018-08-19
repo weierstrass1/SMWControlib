@@ -9,6 +9,14 @@ namespace SMWControlibControls.GraphicsControls
     {
         List<Frame> frames;
 
+        public Frame[] Frames
+        {
+            get
+            {
+                return frames.ToArray();
+            }
+        }
+
         private Frame selectedFrame;
         public Frame SelectedFrame
         {

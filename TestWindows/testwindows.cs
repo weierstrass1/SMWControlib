@@ -19,6 +19,19 @@ namespace TestWindows
             frameCreator1.SelectionChanged += frameCreator1_SelectionChanged;
             spriteGFXBox1.GraphicsLoaded += graphicsLoaded;
             spriteGFXBox2.GraphicsLoaded += graphicsLoaded;
+            tabControl1.SelectedIndexChanged += selectedIndexChanged;
+            animationEditor1.AddClick += AnimationEditor1_AddClick;
+        }
+
+        private void AnimationEditor1_AddClick(AnimationEditor obj)
+        {
+            animationEditor1.Selection = frameSelector1.GetSelection();
+        }
+
+        private void selectedIndexChanged(object sender, System.EventArgs e)
+        {
+            frameSelector1.Frames = frameCreator1.Frames;
+            frameSelector1.BuildTable();
         }
 
         private void graphicsLoaded()

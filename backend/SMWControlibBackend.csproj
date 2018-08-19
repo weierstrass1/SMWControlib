@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Graphics\ColorPalette.cs" />
+    <Compile Include="Graphics\Frames\Animation.cs" />
     <Compile Include="Graphics\Frames\Frame.cs" />
+    <Compile Include="Graphics\Frames\FrameMask.cs" />
     <Compile Include="Graphics\TileMask.cs" />
     <Compile Include="Graphics\SnesGraphics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

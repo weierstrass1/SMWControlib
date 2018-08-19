@@ -41,6 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GraphicsControls\AnimationEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GraphicsControls\AnimationEditor.Designer.cs">
+      <DependentUpon>AnimationEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GraphicsControls\AnimationFrameEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GraphicsControls\AnimationFrameEditor.Designer.cs">
+      <DependentUpon>AnimationFrameEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="GraphicsControls\FrameCreator.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -52,6 +64,12 @@
     </Compile>
     <Compile Include="GraphicsControls\FrameInfoDialog.Designer.cs">
       <DependentUpon>FrameInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GraphicsControls\FrameSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GraphicsControls\FrameSelector.Designer.cs">
+      <DependentUpon>FrameSelector.cs</DependentUpon>
     </Compile>
     <Compile Include="GraphicsControls\FramesSettingsDialog.cs">
       <SubType>Form</SubType>
@@ -141,11 +159,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="GraphicsControls\AnimationEditor.resx">
+      <DependentUpon>AnimationEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphicsControls\AnimationFrameEditor.resx">
+      <DependentUpon>AnimationFrameEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GraphicsControls\FrameCreator.resx">
       <DependentUpon>FrameCreator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GraphicsControls\FrameInfoDialog.resx">
       <DependentUpon>FrameInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphicsControls\FrameSelector.resx">
+      <DependentUpon>FrameSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GraphicsControls\FramesSettingsDialog.resx">
       <DependentUpon>FramesSettingsDialog.cs</DependentUpon>
@@ -175,6 +202,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Super-Mario-World.ttf" />
     <None Include="Resources\upArrow.png" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +210,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\questionBlock.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\replace.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

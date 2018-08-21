@@ -7,6 +7,8 @@ namespace SMWControlibBackend.Graphics.Frames
     {
         public string Name;
         public List<TileMask> Tiles { get; private set; }
+        public int MidX;
+        public int MidY;
 
         public Frame()
         {

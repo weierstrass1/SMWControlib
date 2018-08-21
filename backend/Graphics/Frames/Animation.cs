@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace SMWControlibBackend.Graphics.Frames
 {
+    public enum PlayType { OnlyOnce = 0, Continuous = 1 } 
     public class Animation
     {
         FrameMask first;
         public int Length{ get; private set; }
+        public PlayType PlayType = PlayType.Continuous;
 
         public Animation()
         {
@@ -103,6 +105,7 @@ namespace SMWControlibBackend.Graphics.Frames
                     iterator = iterator.Next;
                     newInd++;
                 }
+                Length--;
                 return;
             }
 

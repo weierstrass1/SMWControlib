@@ -17,7 +17,20 @@ namespace SMWControlibControls.GraphicsControls
     public partial class FrameSelector : UserControl
     {
         public Frame[] Frames;
-        public int FramesPerRow = 8;
+
+        private int framesPerRow = 8;
+        public int FramesPerRow
+        {
+            get
+            {
+                return framesPerRow;
+            }
+            set
+            {
+                framesPerRow = value;
+                BuildTable();
+            }
+        }
         private List<int> selection;
         public FrameSelector()
         {
@@ -39,6 +52,13 @@ namespace SMWControlibControls.GraphicsControls
 
         public void BuildTable()
         {
+            if (Frames == null || Frames.Length <= 0)
+            {
+                tableLayoutPanel1.Controls.Clear();
+                tableLayoutPanel1.RowStyles.Clear();
+                tableLayoutPanel1.ColumnStyles.Clear();
+                return;
+            }
             int rows = Frames.Length / FramesPerRow;
             if (Frames.Length % FramesPerRow > 0) rows++;
             tableLayoutPanel1.Controls.Clear();
@@ -123,7 +143,7 @@ namespace SMWControlibControls.GraphicsControls
                     col = i % FramesPerRow;
                     pbaux =
                         (PictureBox)tableLayoutPanel1.
-                        GetControlFromPosition(col, r);
+                        GetControlFromPosition(col, r * 2);
                     pbaux.Image = new Bitmap(pbaux.Width - 3,
                         pbaux.Height - 3);
                     using (Graphics g = Graphics.FromImage(pbaux.Image))

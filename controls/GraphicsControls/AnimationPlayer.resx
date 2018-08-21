@@ -117,44 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="play" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\play.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="imageButton3.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD6SURBVFhH3ZfRDsMgCEXZX+/z+lm+dRrFrlQEIw6zJjw0
+        afVwS68AcLteJ8DKuO/2dZc3DSG044AzzMQ7vh/jSu4B4grQyjwSB4OgqrWV2AqgnzV+w2F1UAlZgU0B
+        rszzXzKsxKwC6wGQkFQ+3Rh9QmtWtVZEBdwBqgPmIuQyZ52ScdC6jqiAO0AhtMqc1ko9R1gf2AUAq9ZK
+        CX0NkL/AHUBS4g99gDEiTgn7s2B3gKcSg92S6ISCAr8DUIKoOyJ1T0gftGhI0xpqgOLRU71/b27A9dmz
+        wBcgTSllMCGkaZqxDHkyMt6QwncAcFZbOZimtcXLHUAkNH/gA0Jx8flAH6WCAAAAAElFTkSuQmCC
+</value>
   </data>
-  <data name="plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="imageButton2.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD1SURBVFhH5ZddEoMgDITTW/d4PRZvFsbEn0Bc1CDaOpMH
+        ZzB8LLAmRKvnNRC1jPVsi7dx0hBCOT40hDPxjt/HmBeXgXQFKK08EgeH0KqVlbgVwL5Vy55CtUQJrMBD
+        AOaVj7cGKuGtgD+AEPLJrzUj7RumElCB7gDsgFpa0xktx8zy8KGGCnQHYEIvBUS5KR9U4NcAsttwtQKH
+        AcTT/9AHlBGhv1tzK749gD4rCHiqJ816YOcWtAM4CGIqUF0T6oEeBWnKUQ3Ae3Oq9t/qGyS/eQb6AqQu
+        hRsTRZq6Gc/AnZHzhBp+A0B6tZaNacoNn+4AkNB9wBdspvH5WT8adQAAAABJRU5ErkJggg==
+</value>
   </data>
-  <data name="minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\minus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="next" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\next.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="up" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\up.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="replace" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\replace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="questionBlock" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\questionBlock.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="mirrorV" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\mirrorV.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="downArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\downArrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="mirrorH" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\mirrorH.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="previus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\previus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="upArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\upArrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="down" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="imageButton1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADwSURBVFhH1ZfrDoMgDIXrW+/x9lj95yDacRlw0NLUmTRR
+        g/TrsUBLVFzbTmRppbfs6XDKzG17084ae4Xvg6XgfkBcAVqRB2JOJuT5u6n7WrW2Eo8C6EV+5IZaCazA
+        wwFklVxWQnJBq4AdgBBmmR+zPEXa3h+mlYAKuAN8d8BxEvZ2SqgEVMAd4OYvqBXpKgEV+HcAfQ4oFXAD
+        gI5lX7HKATeAacdWCrgBXHa8WgF7ALgcy7MC1oXTNWE9sHssWwGclYqq9h/1DTJ/tyLyBYhdytmYVKSx
+        m1lpuDNa7LCGHwBIr2bZmMa54eUOAAmXD/gAnPn5qXbCpU8AAAAASUVORK5CYII=
+</value>
   </data>
 </root>

@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.section1 = new System.Windows.Forms.Panel();
-            this.spriteGridController1 = new SMWControlibControls.GraphicsControls.SpriteGridController();
             this.down = new System.Windows.Forms.Panel();
             this.up = new System.Windows.Forms.Panel();
             this.right = new System.Windows.Forms.Panel();
             this.left = new System.Windows.Forms.Panel();
+            this.spriteGridController1 = new SMWControlibControls.GraphicsControls.SpriteGridController();
             this.section1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,26 +48,15 @@
             this.section1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.section1.Location = new System.Drawing.Point(0, 0);
             this.section1.Name = "section1";
-            this.section1.Size = new System.Drawing.Size(516, 519);
+            this.section1.Size = new System.Drawing.Size(599, 571);
             this.section1.TabIndex = 1;
-            // 
-            // spriteGridController1
-            // 
-            this.spriteGridController1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.spriteGridController1.Location = new System.Drawing.Point(0, 0);
-            this.spriteGridController1.Margin = new System.Windows.Forms.Padding(0);
-            this.spriteGridController1.MaximumSize = new System.Drawing.Size(512, 515);
-            this.spriteGridController1.MinimumSize = new System.Drawing.Size(135, 120);
-            this.spriteGridController1.Name = "spriteGridController1";
-            this.spriteGridController1.Size = new System.Drawing.Size(512, 515);
-            this.spriteGridController1.TabIndex = 4;
             // 
             // down
             // 
             this.down.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.down.Location = new System.Drawing.Point(0, 515);
+            this.down.Location = new System.Drawing.Point(0, 567);
             this.down.Name = "down";
-            this.down.Size = new System.Drawing.Size(512, 0);
+            this.down.Size = new System.Drawing.Size(595, 0);
             this.down.TabIndex = 3;
             // 
             // up
@@ -75,15 +64,15 @@
             this.up.Dock = System.Windows.Forms.DockStyle.Top;
             this.up.Location = new System.Drawing.Point(0, 0);
             this.up.Name = "up";
-            this.up.Size = new System.Drawing.Size(512, 0);
+            this.up.Size = new System.Drawing.Size(595, 0);
             this.up.TabIndex = 2;
             // 
             // right
             // 
             this.right.Dock = System.Windows.Forms.DockStyle.Right;
-            this.right.Location = new System.Drawing.Point(512, 0);
+            this.right.Location = new System.Drawing.Point(595, 0);
             this.right.Name = "right";
-            this.right.Size = new System.Drawing.Size(0, 515);
+            this.right.Size = new System.Drawing.Size(0, 567);
             this.right.TabIndex = 1;
             // 
             // left
@@ -91,8 +80,19 @@
             this.left.Dock = System.Windows.Forms.DockStyle.Left;
             this.left.Location = new System.Drawing.Point(0, 0);
             this.left.Name = "left";
-            this.left.Size = new System.Drawing.Size(0, 515);
+            this.left.Size = new System.Drawing.Size(0, 567);
             this.left.TabIndex = 0;
+            // 
+            // spriteGridController1
+            // 
+            this.spriteGridController1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spriteGridController1.Location = new System.Drawing.Point(0, 0);
+            this.spriteGridController1.Margin = new System.Windows.Forms.Padding(0);
+            this.spriteGridController1.MaximumSize = new System.Drawing.Size(547, 560);
+            this.spriteGridController1.MinimumSize = new System.Drawing.Size(439, 120);
+            this.spriteGridController1.Name = "spriteGridController1";
+            this.spriteGridController1.Size = new System.Drawing.Size(547, 560);
+            this.spriteGridController1.TabIndex = 4;
             // 
             // ResizeableSpriteGridController
             // 
@@ -100,7 +100,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.section1);
             this.Name = "ResizeableSpriteGridController";
-            this.Size = new System.Drawing.Size(516, 519);
+            this.Size = new System.Drawing.Size(599, 571);
             this.section1.ResumeLayout(false);
             this.ResumeLayout(false);
 

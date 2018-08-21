@@ -22,6 +22,9 @@ namespace SMWControlibControls.GraphicsControls
                 spriteGrid1.NewTiles = value;
             }
         }
+        public Size MaxS { get; private set; }
+        public event Action ZoomChanged;
+
         public SpriteGridController()
         {
             InitializeComponent();
@@ -31,6 +34,118 @@ namespace SMWControlibControls.GraphicsControls
             grid.CheckedChanged += checkedChanged;
             settings.Click += click;
             grid.Checked = true;
+            trackBar1.ValueChanged += tb1ValueChanged;
+            trackBar2.ValueChanged += tb2ValueChanged;
+            zoom.SelectedIndexChanged += selectedIndexChanged;
+            zoom.SelectedIndex = 1;
+            cellSize.SelectedIndexChanged += cellSizeSelectedIndexChanged;
+            cellSize.SelectedIndex = 4;
+            moveLeft.Click += moveLeftClick;
+            moveUp.Click += moveUpClick;
+            moveDown.Click += moveDownClick;
+            moveRight.Click += moveRightClick;
+            mirrorH.Click += mirrorHClick;
+            mirrorV.Click += mirrorVClick;
+            toolTip1.SetToolTip(mirrorH,
+                "Flip selected tiles horizontally.\nHotkey: 'H'");
+            toolTip1.SetToolTip(mirrorV,
+                "Flip selected tiles vertically.\nHotkey: 'V'");
+            toolTip1.SetToolTip(moveLeft, 
+                "Move the selected tiles to Left.\nHotkey: 'A'");
+            toolTip1.SetToolTip(moveUp,
+                "Move the selected tiles to Up.\nHotkey: 'W'");
+            toolTip1.SetToolTip(moveDown,
+                "Move the selected tiles to Down.\nHotkey: 'S'");
+            toolTip1.SetToolTip(moveRight,
+                "Move the selected tiles to Right.\nHotkey: 'D'");
+            toolTip1.SetToolTip(spriteGrid1.ToolTipControl, "Here you can build the frame.\n" +
+                                  "Select tiles and then you can add them\n" +
+                                  "to the grid with 'Right Click'.\n" +
+                                  "You can select tiles and move them with\n" +
+                                  "the mouse, also you can delete them pressing\n" +
+                                  "'Delete' key.");
+            toolTip1.SetToolTip(grid, "Show or Hide the grid.");
+            toolTip1.SetToolTip(settings, "Change some properties of the\n" +
+                                         "grid, for example, the color.");
+        }
+
+        public void MoveLeft()
+        {
+            spriteGrid1.MoveSelection(-spriteGrid1.GridAccuracy, 0);
+        }
+
+        public void MoveUp()
+        {
+            spriteGrid1.MoveSelection(0, -spriteGrid1.GridAccuracy);
+        }
+
+        public void MoveDown()
+        {
+            spriteGrid1.MoveSelection(0, spriteGrid1.GridAccuracy);
+        }
+
+        public void MoveRight()
+        {
+            spriteGrid1.MoveSelection(spriteGrid1.GridAccuracy, 0);
+        }
+
+        private void mirrorHClick(object sender, EventArgs e)
+        {
+            spriteGrid1.Mirror(true, false);
+        }
+
+        private void mirrorVClick(object sender, EventArgs e)
+        {
+            spriteGrid1.Mirror(false, true);
+        }
+
+        private void moveLeftClick(object sender, EventArgs e)
+        {
+            MoveLeft();
+        }
+        private void moveUpClick(object sender, EventArgs e)
+        {
+            MoveUp();
+        }
+        private void moveDownClick(object sender, EventArgs e)
+        {
+            MoveDown();
+        }
+        private void moveRightClick(object sender, EventArgs e)
+        {
+            MoveRight();
+        }
+
+        Zoom[] cellSizes = { 1, 2, 4, 8, 16 };
+        private void cellSizeSelectedIndexChanged(object sender, EventArgs e)
+        {
+            spriteGrid1.GridAccuracy = cellSizes[cellSize.SelectedIndex];
+        }
+
+        public void AdaptSize()
+        {
+            MaximumSize = new Size(spriteGrid1.MaximumSize.Width + trackBar2.Width + 8,
+                spriteGrid1.MaximumSize.Height + panel2.Height
+                + trackBar1.Height + panel3.Height + 8);
+            MaxS = MaximumSize;
+        }
+
+        private void selectedIndexChanged(object sender, EventArgs e)
+        {
+            spriteGrid1.Zoom = zoom.SelectedIndex + 1;
+            spriteGrid1.Size = new Size(spriteGrid1.MaximumSize.Width,
+                spriteGrid1.MaximumSize.Height);
+            AdaptSize();
+            ZoomChanged?.Invoke();
+        }
+
+        private void tb1ValueChanged(object sender, EventArgs e)
+        {
+            spriteGrid1.MidX = (trackBar1.Value - 136);
+        }
+        private void tb2ValueChanged(object sender, EventArgs e)
+        {
+            spriteGrid1.MidY = (120 - trackBar2.Value);
         }
 
         public void Init()
@@ -58,6 +173,7 @@ namespace SMWControlibControls.GraphicsControls
                 spriteGrid1.GridTypeUsed = set.GridType;
             }
             catch { }
+            selectedIndexChanged(null, null);
         }
         private void click(object sender, EventArgs e)
         {
@@ -126,8 +242,12 @@ namespace SMWControlibControls.GraphicsControls
         }
         private void sizeChanged(object sender, EventArgs e)
         {
-            MaximumSize = new Size(spriteGrid1.MaximumSize.Width,
-                spriteGrid1.MaximumSize.Height + panel2.Height);
+            trackBar1.Width = spriteGrid1.Width + 17;
+            trackBar2.Height = spriteGrid1.Height + 17;
+            int w = Width - panel5.Width;
+            w /= 2;
+            panel4.Width = w;
+            panel6.Width = w;
         }
 
         public void ReDraw()

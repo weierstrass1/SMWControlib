@@ -22,9 +22,23 @@ namespace SMWControlibControls.GraphicsControls
             set
             {
                 zoom = value;
+                Init();
             }
         }
-        public Image Source { get; set; }
+
+        private Image source;
+        public Image Source
+        {
+            get
+            {
+                return source;
+            }
+            set
+            {
+                source = value;
+                Init();
+            }
+        }
 
         public ImageButton()
         {

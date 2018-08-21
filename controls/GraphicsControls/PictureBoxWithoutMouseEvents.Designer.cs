@@ -1,6 +1,6 @@
 ﻿namespace SMWControlibControls.GraphicsControls
 {
-    partial class SpriteGrid
+    partial class PictureBoxWithoutMouseEvents
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -28,25 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cursorPosition = new System.Windows.Forms.Label();
-            this.SuspendLayout();
-            // 
-            // cursorPosition
-            // 
-            this.cursorPosition.AutoSize = true;
-            this.cursorPosition.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cursorPosition.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cursorPosition.Location = new System.Drawing.Point(0, 0);
-            this.cursorPosition.Name = "cursorPosition";
-            this.cursorPosition.Size = new System.Drawing.Size(100, 23);
-            this.cursorPosition.TabIndex = 0;
-            this.cursorPosition.Text = "X: $00 - Y: $00";
-            this.ResumeLayout(false);
-
+            components = new System.ComponentModel.Container();
         }
 
         #endregion
-
-        private System.Windows.Forms.Label cursorPosition;
     }
 }

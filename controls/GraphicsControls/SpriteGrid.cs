@@ -7,7 +7,7 @@ using System.Windows.Forms;
 namespace SMWControlibControls.GraphicsControls
 {
     public enum GridType { Dotted = 0, Lined = 1, Dashed = 2};
-    public partial class SpriteGrid : PictureBox
+    public partial class SpriteGrid : Panel
     {
         private bool[,,] nonDirties;
         private Bitmap[,,] grids;
@@ -40,7 +40,6 @@ namespace SMWControlibControls.GraphicsControls
             {
                 gridAccuracy = value;
                 buildGrid();
-                ReDraw();
             }
         }
 
@@ -54,6 +53,7 @@ namespace SMWControlibControls.GraphicsControls
             set
             {
                 selectionFillColor = value;
+                buildSelectionBox();
                 ReDraw();
             }
         }
@@ -68,6 +68,7 @@ namespace SMWControlibControls.GraphicsControls
             set
             {
                 centerSquareColor = value;
+                buildCenterSquare();
                 ReDraw();
             }
         }
@@ -82,6 +83,7 @@ namespace SMWControlibControls.GraphicsControls
             set
             {
                 selectionBorderColor = value;
+                buildSelectionBox();
                 ReDraw();
             }
         }
@@ -144,7 +146,11 @@ namespace SMWControlibControls.GraphicsControls
                     {
                         foreach (TileMask tm in Tiles)
                         {
+                            tm.XDisp /= tm.Zoom;
+                            tm.YDisp /= tm.Zoom;
                             tm.Zoom = zoom;
+                            tm.XDisp *= tm.Zoom;
+                            tm.YDisp *= tm.Zoom;
                         }
                     }
                     buildGrid();
@@ -163,7 +169,14 @@ namespace SMWControlibControls.GraphicsControls
             set
             {
                 activateCenterSquare = value;
-                ReDraw();
+                if (ActivateCenterSquare)
+                {
+                    centerSquare.Image = centerSquareImg;
+                }
+                else
+                {
+                    centerSquare.Image = new Bitmap(Width, Height);
+                }
             }
         }
 
@@ -181,7 +194,37 @@ namespace SMWControlibControls.GraphicsControls
                 {
                     buildGrid();
                 }
-                ReDraw();
+                else
+                {
+                    gridBox.Image = new Bitmap(Width, Height);
+                }
+            }
+        }
+
+        private int midX = 0, midY = 0;
+        public int MidX
+        {
+            get
+            {
+                return midX;
+            }
+            set
+            {
+                midX = value;
+                buildCenterSquare();
+            }
+        }
+
+        public int MidY
+        {
+            get
+            {
+                return midY;
+            }
+            set
+            {
+                midY = value;
+                buildCenterSquare();
             }
         }
 
@@ -191,6 +234,10 @@ namespace SMWControlibControls.GraphicsControls
         private int counter = 0;
         private int dMinx = 0, dMiny = 0;
         private int dMaxx = 0, dMaxy = 0;
+        private PictureBox baseImage, gridBox, centerSquare, 
+            selectionBox;
+        public Control ToolTipControl { get { return selectionBox; } }
+        private Bitmap gridBoxImg, centerSquareImg;
         public SpriteGrid()
         {
             InitializeComponent();
@@ -201,30 +248,75 @@ namespace SMWControlibControls.GraphicsControls
                 colorPalette_GlobalPalletesChange;
             ColorPalette.OneGlobalPaletteChange += 
                 colorPalette_OneGlobalPaletteChange;
-            Click += spriteGrid_Click;
-            MouseDown += spriteGrid_MouseDown;
-            MouseMove += spriteGrid_MouseMove;
-            MouseUp += spriteGrid_MouseUp;
             cursorPosition.Parent = this;
+
             cursorPosition.Location = new Point(0, 0);
+            baseImage = new PictureBox
+            {
+                Margin = new Padding(0, 0, 0, 0),
+                Padding = new Padding(0, 0, 0, 0),
+                Parent = this,
+                Location = new Point(0, 0),
+                BackColor = Color.Transparent
+            };
+            gridBox = new PictureBox
+            {
+                Margin = new Padding(0, 0, 0, 0),
+                Padding = new Padding(0, 0, 0, 0),
+                Parent = this,
+                Location = new Point(0, 0),
+                BackColor = Color.Transparent
+            };
+            gridBox.BringToFront();
+            centerSquare = new PictureBox
+            {
+                Margin = new Padding(0, 0, 0, 0),
+                Padding = new Padding(0, 0, 0, 0),
+                Parent = gridBox,
+                Location = new Point(0, 0),
+                BackColor = Color.Transparent
+            };
+            selectionBox = new PictureBox
+            {
+                Margin = new Padding(0, 0, 0, 0),
+                Padding = new Padding(0, 0, 0, 0),
+                Parent = centerSquare,
+                Location = new Point(0, 0),
+                BackColor = Color.Transparent
+            };
+            selectionBox.Click += spriteGrid_Click;
+            selectionBox.MouseDown += spriteGrid_MouseDown;
+            selectionBox.MouseMove += spriteGrid_MouseMove;
+            selectionBox.MouseUp += spriteGrid_MouseUp;
+            SizeChanged += sizeChanged;
         }
+
+        private void sizeChanged(object sender, EventArgs e)
+        {
+            buildGrid();
+            ReDraw();
+        }
+
         private void spriteGrid_MouseDown(object sender, MouseEventArgs e)
         {
+            int X = e.X;
+            int Y = e.Y;
+
             if (canSelect && e.Button == MouseButtons.Left)
             {
                 selecting = true;
-                selStartX = e.X;
-                selStartY = e.Y;
-                selEndX = e.X;
-                selEndY = e.Y;
+                selStartX = X;
+                selStartY = Y;
+                selEndX = X;
+                selEndY = Y;
                 select();
             }
             else if (e.Button == MouseButtons.Left)
             {
-                selStartX = e.X;
-                selStartY = e.Y;
-                selEndX = e.X;
-                selEndY = e.Y;
+                selStartX = X;
+                selStartY = Y;
+                selEndX = X;
+                selEndY = Y;
                 if (intoSelection())
                 {
                     getDiffPos();
@@ -236,10 +328,10 @@ namespace SMWControlibControls.GraphicsControls
                     deselect();
                     canSelect = true;
                     selecting = true;
-                    selStartX = e.X;
-                    selStartY = e.Y;
-                    selEndX = e.X;
-                    selEndY = e.Y;
+                    selStartX = X;
+                    selStartY = Y;
+                    selEndX = X;
+                    selEndY = Y;
                     select();
                 }
             }
@@ -252,9 +344,12 @@ namespace SMWControlibControls.GraphicsControls
         }
         private void spriteGrid_MouseMove(object sender, MouseEventArgs e)
         {
+            int X = e.X;
+            int Y = e.Y;
+
             int zacc = gridAccuracy * zoom;
-            int accX = (e.X / zacc) * zacc;
-            int accY = (e.Y / zacc) * zacc;
+            int accX = (X / zacc) * zacc;
+            int accY = (Y / zacc) * zacc;
             int posx = (accX / zoom) - 128;
             int posy = 112 - (accY / zoom);
             string sx = Convert.ToString(posx, 16);
@@ -280,27 +375,29 @@ namespace SMWControlibControls.GraphicsControls
             cursorPosition.Location = new Point(newX, newY);
             if (canSelect && selecting)
             {
-                selEndX = e.X;
-                selEndY = e.Y;
+                selEndX = X;
+                selEndY = Y;
                 select();
                 ReDraw();
             }
             else if(moving)
             {
-                selEndX = e.X;
-                selEndY = e.Y;
+                selEndX = X;
+                selEndY = Y;
                 move();
-                ReDraw();
             }
         }
         private void spriteGrid_MouseUp(object sender, MouseEventArgs e)
         {
+            int X = e.X;
+            int Y = e.Y;
+
             if (canSelect && selecting)
             {
                 selecting = false;
                 canSelect = false;
-                selEndX = e.X;
-                selEndY = e.Y;
+                selEndX = X;
+                selEndY = Y;
                 select();
                 ReDraw();
                 if (selection == null || selection.Count == 0)
@@ -308,15 +405,117 @@ namespace SMWControlibControls.GraphicsControls
             }
             else if (moving)
             {
-                selEndX = e.X;
-                selEndY = e.Y;
+                selEndX = X;
+                selEndY = Y;
                 move();
-                ReDraw();
                 moving = false;
             }
         }
+
+        public void Mirror(bool FlipX, bool FlipY)
+        {
+            if (selection == null || selection.Count <= 0) return;
+            int minX = int.MaxValue;
+            int minY = int.MaxValue;
+            int maxX = int.MinValue;
+            int maxY = int.MinValue;
+            foreach (TileMask tm in selection)
+            {
+                if (tm.XDisp < minX)
+                {
+                    minX = tm.XDisp;
+                }
+                if (tm.YDisp < minY)
+                {
+                    minY = tm.YDisp;
+                }
+                if (tm.XDisp > maxX)
+                {
+                    maxX = tm.XDisp;
+                }
+                if (tm.YDisp > maxY)
+                {
+                    maxY = tm.YDisp;
+                }
+            }
+
+            foreach (TileMask tm in selection)
+            {
+                if(FlipX)
+                {
+                    tm.FlipX = !tm.FlipX;
+                    tm.XDisp = minX + maxX - tm.XDisp;
+                }
+                if (FlipY)
+                {
+                    tm.FlipY = !tm.FlipY;
+                    tm.YDisp = minY + maxY - tm.YDisp;
+                }
+            }
+            buildSelectionBox();
+        }
+
+        public void MoveSelection(int x, int y)
+        {
+            if (selection == null || selection.Count <= 0) return;
+            int minX = int.MaxValue;
+            int minY = int.MaxValue;
+            int maxX = int.MinValue;
+            int maxY = int.MinValue;
+            foreach (TileMask tm in selection)
+            {
+                if (tm.XDisp < minX)
+                {
+                    minX = tm.XDisp;
+                }
+                if (tm.YDisp < minY)
+                {
+                    minY = tm.YDisp;
+                }
+                if (tm.XDisp + tm.Size * zoom > maxX)
+                {
+                    maxX = tm.XDisp + tm.Size * zoom;
+                }
+                if (tm.YDisp + tm.Size * zoom > maxY)
+                {
+                    maxY = tm.YDisp + tm.Size * zoom;
+                }
+            }
+
+            int xZoom = x * Zoom;
+            int yZoom = y * Zoom;
+            int w = maxX - minX;
+            int h = maxY - minY;
+
+            int dfx = minX + xZoom + w;
+            if (dfx > Width) dfx -= Width;
+            else dfx = 0;
+
+            int dfx2 = minX + xZoom;
+            if (dfx2 < 0) dfx2 *= -1;
+            else dfx2 = 0;
+
+            int dfy = minY + yZoom + h;
+            if (dfy > Height) dfy -= Height;
+            else dfy = 0;
+
+            int dfy2 = minY + yZoom;
+            if (dfy2 < 0) dfy2 *= -1;
+            else dfy2 = 0;
+
+            int accZoom = gridAccuracy * zoom;
+            foreach (TileMask tm in selection)
+            {
+                tm.XDisp += xZoom + dfx2 - dfx;
+                tm.YDisp += yZoom + dfy2 - dfy;
+                tm.XDisp = (tm.XDisp / accZoom) * accZoom;
+                tm.YDisp = (tm.YDisp / accZoom) * accZoom;
+            }
+            buildSelectionBox();
+        }
         private void move()
         {
+            if (selection == null || selection.Count <= 0) return;
             int minX = int.MaxValue;
             int minY = int.MaxValue;
             int maxX = int.MinValue;
@@ -370,6 +569,8 @@ namespace SMWControlibControls.GraphicsControls
                 tm.XDisp = (tm.XDisp / accZoom) * accZoom;
                 tm.YDisp = (tm.YDisp / accZoom) * accZoom;
             }
+
+            buildSelectionBox();
         }
         private void getDiffPos()
         {
@@ -412,6 +613,7 @@ namespace SMWControlibControls.GraphicsControls
                 }
             }
             selection = new List<TileMask>();
+            buildSelectionBox();
         }
         private void select()
         {
@@ -438,6 +640,7 @@ namespace SMWControlibControls.GraphicsControls
                     selection.Add(tm);
                 }
             }
+            buildSelectionBox();
         }
         public void DeleteSelection()
         {
@@ -452,7 +655,7 @@ namespace SMWControlibControls.GraphicsControls
                 }
             }
             selection = new List<TileMask>();
-            ReDraw();
+            buildSelectionBox();
         }
         private bool intoSelection()
         {
@@ -564,7 +767,16 @@ namespace SMWControlibControls.GraphicsControls
                 nonDirties = new bool[20, 20, 3];
             }
 
-            if (nonDirties[gridAccuracy - 1, zoom - 1, 2]) return;
+            if (nonDirties[gridAccuracy - 1, zoom - 1, 2])
+            {
+                if (ActivateGrid)
+                    gridBox.Image = grids[gridAccuracy - 1, zoom - 1, 2];
+                gridBox.Size = new Size(gridBox.Image.Width, gridBox.Image.Height);
+                gridBoxImg = grids[gridAccuracy - 1, zoom - 1, 2];
+                buildCenterSquare();
+                buildSelectionBox();
+                return;
+            }
 
             Bitmap bp = new Bitmap(Width, Height);
             List<RectangleF> recs = new List<RectangleF>();
@@ -575,7 +787,7 @@ namespace SMWControlibControls.GraphicsControls
             {
                 for (int j = 0; j < Height; j += 8)
                 {
-                    recs.Add(new RectangleF(i, j, 1, 4));
+                    recs.Add(new RectangleF(i, j - 1, 1, 3));
                 }
             }
 
@@ -583,7 +795,7 @@ namespace SMWControlibControls.GraphicsControls
             {
                 for (int j = 0; j < Height; j += adder)
                 {
-                    recs.Add(new RectangleF(i, j, 4, 1));
+                    recs.Add(new RectangleF(i - 1, j, 3, 1));
                 }
             }
 
@@ -595,6 +807,12 @@ namespace SMWControlibControls.GraphicsControls
 
             grids[gridAccuracy - 1, zoom - 1, 2] = bp;
             nonDirties[gridAccuracy - 1, zoom - 1, 2] = true;
+            if (ActivateGrid)
+                gridBox.Image = grids[gridAccuracy - 1, zoom - 1, 2];
+            gridBox.Size = new Size(gridBox.Image.Width, gridBox.Image.Height);
+            gridBoxImg = grids[gridAccuracy - 1, zoom - 1, 2];
+            buildCenterSquare();
+            buildSelectionBox();
         }
 
         private void buildLineGrid()
@@ -605,7 +823,16 @@ namespace SMWControlibControls.GraphicsControls
                 nonDirties = new bool[20, 20, 3];
             }
 
-            if (nonDirties[gridAccuracy - 1, zoom - 1, 1]) return;
+            if (nonDirties[gridAccuracy - 1, zoom - 1, 1])
+            {
+                if (ActivateGrid)
+                    gridBox.Image = grids[gridAccuracy - 1, zoom - 1, 1];
+                gridBox.Size = new Size(gridBox.Image.Width, gridBox.Image.Height);
+                gridBoxImg = grids[gridAccuracy - 1, zoom - 1, 1];
+                buildCenterSquare();
+                buildSelectionBox();
+                return;
+            }
 
             Bitmap bp = new Bitmap(Width, Height);
             List<RectangleF> recs = new List<RectangleF>();
@@ -628,6 +855,12 @@ namespace SMWControlibControls.GraphicsControls
 
             grids[gridAccuracy - 1, zoom - 1, 1] = bp;
             nonDirties[gridAccuracy - 1, zoom - 1, 1] = true;
+            if (ActivateGrid)
+                gridBox.Image = grids[gridAccuracy - 1, zoom - 1, 1];
+            gridBox.Size = new Size(gridBox.Image.Width, gridBox.Image.Height);
+            gridBoxImg = grids[gridAccuracy - 1, zoom - 1, 1];
+            buildCenterSquare();
+            buildSelectionBox();
         }
 
         private void buildPointGrid()
@@ -638,7 +871,16 @@ namespace SMWControlibControls.GraphicsControls
                 nonDirties = new bool[20, 20, 3];
             }
 
-            if (nonDirties[gridAccuracy - 1, zoom - 1, 0]) return;
+            if (nonDirties[gridAccuracy - 1, zoom - 1, 0])
+            {
+                if (ActivateGrid)
+                    gridBox.Image = grids[gridAccuracy - 1, zoom - 1, 0];
+                gridBox.Size = new Size(gridBox.Image.Width, gridBox.Image.Height);
+                gridBoxImg = grids[gridAccuracy - 1, zoom - 1, 0];
+                buildCenterSquare();
+                buildSelectionBox();
+                return;
+            }
 
             Bitmap bp = new Bitmap(Width, Height);
             List<RectangleF> recs = new List<RectangleF>();
@@ -669,16 +911,95 @@ namespace SMWControlibControls.GraphicsControls
 
             grids[gridAccuracy - 1, zoom - 1, 0] = bp;
             nonDirties[gridAccuracy - 1, zoom - 1, 0] = true;
+            if (ActivateGrid)
+                gridBox.Image = grids[gridAccuracy - 1, zoom - 1, 0];
+            gridBox.Size = new Size(gridBox.Image.Width, gridBox.Image.Height);
+            gridBoxImg = grids[gridAccuracy - 1, zoom - 1, 0];
+            buildCenterSquare();
+            buildSelectionBox();
         }
         #endregion
 
+        private void buildCenterSquare()
+        {
+            Pen p1 = new Pen(centerSquareColor);
+            Bitmap newImage = new Bitmap(Width, Height);
+            using (Graphics g = Graphics.FromImage(newImage))
+            {
+                g.DrawRectangle(p1, 128 * zoom, 112 * zoom, 16 * zoom, 16 * zoom);
+                g.DrawLine(p1, (midX + 136) * zoom, 0, 
+                    (midX + 136) * zoom, newImage.Height);
+                g.DrawLine(p1, 0, (midY + 120) * zoom,
+                    newImage.Width, (midY + 120) * zoom);
+            }
+            centerSquare.Size = new Size(Width, Height);
+            centerSquareImg = newImage;
+
+            if (ActivateCenterSquare)
+                centerSquare.Image = newImage;
+        }
+
+        private void buildSelectionBox()
+        {
+            int minX = int.MaxValue;
+            int minY = int.MaxValue;
+            int maxX = int.MinValue;
+            int maxY = int.MinValue;
+            selectionBox.Image = new Bitmap(Width, Height);
+            selectionBox.Size = new Size(selectionBox.Image.Width,
+                selectionBox.Image.Height);
+
+            if (selection != null && selection.Count > 0)
+            {
+                selectionBox.Image = new Bitmap(Width, Height);
+                selectionBox.Size = new Size(selectionBox.Image.Width,
+                    selectionBox.Image.Height);
+                using (Graphics g = Graphics.FromImage(selectionBox.Image))
+                {
+                    if (selection != null && selection.Count != 0)
+                    {
+                        Pen p = new Pen(SelectionBorderColor);
+                        foreach (TileMask tm in selection)
+                        {
+                            g.DrawImage(tm.GetBitmap(),
+                                tm.XDisp, tm.YDisp);
+                            g.DrawRectangle(p, tm.XDisp, tm.YDisp,
+                                tm.Size * zoom, tm.Size * zoom);
+                        }
+                    }
+                }
+            }
+           
+            using (Graphics g = Graphics.FromImage(selectionBox.Image))
+            {
+                if (selecting)
+                {
+                    selectionFillColor = Color.FromArgb(96,
+                        SelectionFillColor.R, SelectionFillColor.G,
+                        SelectionFillColor.B);
+                    Brush br = new SolidBrush(SelectionFillColor);
+
+                    minX = Math.Min(selStartX, selEndX);
+                    minY = Math.Min(selStartY, selEndY);
+                    maxX = Math.Max(selStartX, selEndX);
+                    maxY = Math.Max(selStartY, selEndY);
+
+                    minX = Math.Max(0, minX);
+                    minY = Math.Max(0, minY);
+                    maxX = Math.Min(maxX, Width - 1);
+                    maxY = Math.Min(maxY, Height - 1);
+
+                    g.FillRectangle(br, minX, minY, maxX - minX, maxY - minY);
+                }
+            }
+        }
         public void ReDraw()
         {
             if (grids == null) buildGrid();
-            Image = new Bitmap(Width, Height);
+            baseImage.Image = new Bitmap(Width, Height);
             try
             {
-                using (Graphics g = Graphics.FromImage(Image))
+                using (Graphics g = Graphics.FromImage(baseImage.Image))
                 {
                     Brush br = new SolidBrush(ColorPalette.GetGlobalColor(0));
                     g.FillRectangle(br, 0, 0, Width, Height);
@@ -690,60 +1011,19 @@ namespace SMWControlibControls.GraphicsControls
             {
                 foreach (TileMask tm in Tiles)
                 {
-                    using (Graphics g = Graphics.FromImage(Image))
+                    if (!selection.Contains(tm))
                     {
-                        g.DrawImage(
-                            tm.GetBitmap(),
-                            tm.XDisp, tm.YDisp);
+                        using (Graphics g = Graphics.FromImage(baseImage.Image))
+                        {
+                            g.DrawImage(
+                                tm.GetBitmap(),
+                                tm.XDisp, tm.YDisp);
+                        }
                     }
                 }
             }
-
-            using (Graphics g = Graphics.FromImage(Image))
-            {
-                if(activateGrid)
-                {
-                    g.DrawImage(
-                    grids[gridAccuracy - 1, zoom - 1, GridTypeUsed],
-                    0, 0);
-                }
-                
-                if(selecting)
-                {
-                    selectionFillColor = Color.FromArgb(96,
-                        SelectionFillColor.R, SelectionFillColor.G,
-                        SelectionFillColor.B);
-                    Brush br = new SolidBrush(SelectionFillColor);
-
-                    int minX = Math.Min(selStartX, selEndX);
-                    int minY = Math.Min(selStartY, selEndY);
-                    int maxX = Math.Max(selStartX, selEndX);
-                    int maxY = Math.Max(selStartY, selEndY);
-
-                    minX = Math.Max(0, minX);
-                    minY = Math.Max(0, minY);
-                    maxX = Math.Min(maxX, Width - 1);
-                    maxY = Math.Min(maxY, Height - 1);
-
-                    g.FillRectangle(br, minX, minY, maxX - minX, maxY - minY);
-                }
-                if (selection != null && selection.Count != 0)
-                {
-                    Pen p = new Pen(SelectionBorderColor);
-                    foreach(TileMask tm in selection)
-                    {
-                        g.DrawRectangle(p, tm.XDisp, tm.YDisp,
-                            tm.Size * zoom, tm.Size * zoom);
-                    }
-                }
-
-                if (activateGrid && ActivateCenterSquare)
-                {
-                    Pen p1 = new Pen(centerSquareColor);
-                    g.DrawRectangle(p1, 128 * zoom, 112 * zoom, 16 * zoom, 16 * zoom);
-                }
-            }
-            
+            baseImage.Size = new Size(Width, Height);
+            BackgroundImage = baseImage.Image;
         }
 
         private void spriteGrid_SizeChanged(object sender, EventArgs e)

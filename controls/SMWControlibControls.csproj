@@ -41,6 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GraphicsControls\AnimationCreator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GraphicsControls\AnimationCreator.Designer.cs">
+      <DependentUpon>AnimationCreator.cs</DependentUpon>
+    </Compile>
     <Compile Include="GraphicsControls\AnimationEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -52,6 +58,12 @@
     </Compile>
     <Compile Include="GraphicsControls\AnimationFrameEditor.Designer.cs">
       <DependentUpon>AnimationFrameEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GraphicsControls\AnimationPlayer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GraphicsControls\AnimationPlayer.Designer.cs">
+      <DependentUpon>AnimationPlayer.cs</DependentUpon>
     </Compile>
     <Compile Include="GraphicsControls\FrameCreator.cs">
       <SubType>UserControl</SubType>
@@ -88,6 +100,12 @@
     </Compile>
     <Compile Include="GraphicsControls\NewFrameDialog.Designer.cs">
       <DependentUpon>NewFrameDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GraphicsControls\PictureBoxWithoutMouseEvents.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GraphicsControls\PictureBoxWithoutMouseEvents.Designer.cs">
+      <DependentUpon>PictureBoxWithoutMouseEvents.cs</DependentUpon>
     </Compile>
     <Compile Include="GraphicsControls\ResizeableSpriteGridController.cs">
       <SubType>UserControl</SubType>
@@ -159,11 +177,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="GraphicsControls\AnimationCreator.resx">
+      <DependentUpon>AnimationCreator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GraphicsControls\AnimationEditor.resx">
       <DependentUpon>AnimationEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GraphicsControls\AnimationFrameEditor.resx">
       <DependentUpon>AnimationFrameEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphicsControls\AnimationPlayer.resx">
+      <DependentUpon>AnimationPlayer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GraphicsControls\FrameCreator.resx">
       <DependentUpon>FrameCreator.cs</DependentUpon>
@@ -219,6 +243,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\replace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\previus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mirrorH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mirrorV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

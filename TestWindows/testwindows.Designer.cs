@@ -47,8 +47,14 @@
             this.gfxButton3 = new SMWControlibControls.GraphicsControls.GFXButton();
             this.gfxButton4 = new SMWControlibControls.GraphicsControls.GFXButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.animationEditor1 = new SMWControlibControls.GraphicsControls.AnimationEditor();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.frameSelector1 = new SMWControlibControls.GraphicsControls.FrameSelector();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.animationEditor1 = new SMWControlibControls.GraphicsControls.AnimationEditor();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.animationCreator1 = new SMWControlibControls.GraphicsControls.AnimationCreator();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -61,6 +67,9 @@
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spriteGFXBox2)).BeginInit();
             this.tabPage2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -72,7 +81,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1075, 750);
+            this.tabControl1.Size = new System.Drawing.Size(1116, 642);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -84,7 +93,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1067, 724);
+            this.tabPage1.Size = new System.Drawing.Size(1108, 616);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Frames";
             // 
@@ -93,7 +102,7 @@
             this.resizeableSpriteGridController1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.resizeableSpriteGridController1.Location = new System.Drawing.Point(275, 3);
             this.resizeableSpriteGridController1.Name = "resizeableSpriteGridController1";
-            this.resizeableSpriteGridController1.Size = new System.Drawing.Size(522, 718);
+            this.resizeableSpriteGridController1.Size = new System.Drawing.Size(563, 610);
             this.resizeableSpriteGridController1.TabIndex = 14;
             // 
             // panel2
@@ -102,9 +111,9 @@
             this.panel2.Controls.Add(this.paletteButton1);
             this.panel2.Controls.Add(this.paletteBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(797, 3);
+            this.panel2.Location = new System.Drawing.Point(838, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(267, 718);
+            this.panel2.Size = new System.Drawing.Size(267, 610);
             this.panel2.TabIndex = 13;
             // 
             // frameCreator1
@@ -143,7 +152,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(272, 718);
+            this.panel1.Size = new System.Drawing.Size(272, 610);
             this.panel1.TabIndex = 12;
             // 
             // tabControl2
@@ -278,32 +287,96 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage2.Controls.Add(this.animationEditor1);
-            this.tabPage2.Controls.Add(this.frameSelector1);
+            this.tabPage2.Controls.Add(this.panel3);
+            this.tabPage2.Controls.Add(this.panel4);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1067, 724);
+            this.tabPage2.Size = new System.Drawing.Size(1108, 616);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Animations";
             // 
-            // animationEditor1
+            // panel3
             // 
-            this.animationEditor1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.animationEditor1.Location = new System.Drawing.Point(3, 3);
-            this.animationEditor1.MaximumSize = new System.Drawing.Size(0, 185);
-            this.animationEditor1.Name = "animationEditor1";
-            this.animationEditor1.Size = new System.Drawing.Size(1061, 185);
-            this.animationEditor1.TabIndex = 1;
+            this.panel3.Controls.Add(this.frameSelector1);
+            this.panel3.Controls.Add(this.label1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel3.Location = new System.Drawing.Point(951, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(154, 405);
+            this.panel3.TabIndex = 4;
             // 
             // frameSelector1
             // 
-            this.frameSelector1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.frameSelector1.Location = new System.Drawing.Point(3, 194);
-            this.frameSelector1.MinimumSize = new System.Drawing.Size(0, 527);
+            this.frameSelector1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.frameSelector1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.frameSelector1.FramesPerRow = 1;
+            this.frameSelector1.Location = new System.Drawing.Point(0, 25);
             this.frameSelector1.Name = "frameSelector1";
-            this.frameSelector1.Size = new System.Drawing.Size(1061, 527);
-            this.frameSelector1.TabIndex = 0;
+            this.frameSelector1.Size = new System.Drawing.Size(154, 380);
+            this.frameSelector1.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(6);
+            this.label1.Name = "label1";
+            this.label1.Padding = new System.Windows.Forms.Padding(6);
+            this.label1.Size = new System.Drawing.Size(86, 25);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Select Frames";
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.animationEditor1);
+            this.panel4.Controls.Add(this.label2);
+            this.panel4.Controls.Add(this.panel5);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(3, 408);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(1102, 205);
+            this.panel4.TabIndex = 5;
+            // 
+            // animationEditor1
+            // 
+            this.animationEditor1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.animationEditor1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.animationEditor1.Location = new System.Drawing.Point(0, 25);
+            this.animationEditor1.Name = "animationEditor1";
+            this.animationEditor1.Size = new System.Drawing.Size(894, 188);
+            this.animationEditor1.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Margin = new System.Windows.Forms.Padding(6);
+            this.label2.Name = "label2";
+            this.label2.Padding = new System.Windows.Forms.Padding(6);
+            this.label2.Size = new System.Drawing.Size(102, 25);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Animation Frames";
+            // 
+            // panel5
+            // 
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel5.Controls.Add(this.animationCreator1);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel5.Location = new System.Drawing.Point(894, 0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(208, 205);
+            this.panel5.TabIndex = 0;
+            // 
+            // animationCreator1
+            // 
+            this.animationCreator1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.animationCreator1.Location = new System.Drawing.Point(0, 0);
+            this.animationCreator1.Name = "animationCreator1";
+            this.animationCreator1.Size = new System.Drawing.Size(204, 201);
+            this.animationCreator1.TabIndex = 0;
             // 
             // tabPage5
             // 
@@ -311,7 +384,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1067, 724);
+            this.tabPage5.Size = new System.Drawing.Size(1108, 616);
             this.tabPage5.TabIndex = 2;
             this.tabPage5.Text = "Interaction";
             // 
@@ -319,13 +392,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1075, 750);
+            this.ClientSize = new System.Drawing.Size(1116, 642);
             this.Controls.Add(this.tabControl1);
             this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(691, 333);
             this.Name = "testwindows";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "testwindows";
+            this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))));
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -337,6 +411,11 @@
             this.tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.spriteGFXBox2)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -361,8 +440,14 @@
         private SMWControlibControls.GraphicsControls.GFXButton gfxButton3;
         private SMWControlibControls.GraphicsControls.GFXButton gfxButton4;
         private System.Windows.Forms.TabPage tabPage2;
-        private SMWControlibControls.GraphicsControls.FrameSelector frameSelector1;
         private SMWControlibControls.GraphicsControls.AnimationEditor animationEditor1;
         private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panel3;
+        private SMWControlibControls.GraphicsControls.FrameSelector frameSelector1;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel5;
+        private SMWControlibControls.GraphicsControls.AnimationCreator animationCreator1;
     }
 }

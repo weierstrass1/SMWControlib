@@ -45,6 +45,12 @@ namespace SMWControlibControls.GraphicsControls
 
         private void settingsClick(object sender, EventArgs e)
         {
+            if (frames == null || frames.Count <= 0)
+            {
+                MessageBox.Show("You must create a frame first.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             Frame[] framesArr = frames.ToArray();
             if (FramesSettingsDialog.Show(ParentForm, framesArr)
                 == DialogResult.OK)

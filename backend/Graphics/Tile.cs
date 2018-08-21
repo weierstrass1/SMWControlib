@@ -137,10 +137,10 @@ namespace SMWControlibBackend.Graphics
 
         public Bitmap GetImage(PaletteId i, Zoom zoom)
         {
-            if (images == null || images[(int)i, zoom / 2]==null || FullyDirty || _Dirty[(int)i])
+            if (images == null || images[(int)i, zoom - 1] == null || FullyDirty || _Dirty[(int)i])
                 GenerateBitmap(i, zoom);
 
-            return images[(int)i, zoom / 2];
+            return images[(int)i, zoom - 1];
         }
 
         public void GenerateBitmap(PaletteId paletteId, Zoom zoom)
@@ -149,11 +149,11 @@ namespace SMWControlibBackend.Graphics
             int npid = (int)paletteId;
 
             if (images == null || images.GetLength(0) != ColorPalette.GlobalPaletteSize)
-                images = new Bitmap[ColorPalette.GlobalPaletteSize, 10];
+                images = new Bitmap[ColorPalette.GlobalPaletteSize, 20];
 
-            images[npid, zoom / 2] = new Bitmap(Size * zoom, Size * zoom);
+            images[npid, zoom - 1] = new Bitmap(Size * zoom, Size * zoom);
 
-            Bitmap bp = images[npid, zoom / 2];
+            Bitmap bp = images[npid, zoom - 1];
             Brush br;
             for (int i = 0; i < Size; i++)
             {

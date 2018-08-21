@@ -60,6 +60,22 @@ namespace TestWindows
             {
                 resizeableSpriteGridController1.DeleteSelection();
             }
+            if (keyData == Keys.A)
+            {
+                resizeableSpriteGridController1.MoveLeft();
+            }
+            if (keyData == Keys.W)
+            {
+                resizeableSpriteGridController1.MoveUp();
+            }
+            if (keyData == Keys.S)
+            {
+                resizeableSpriteGridController1.MoveDown();
+            }
+            if (keyData == Keys.D)
+            {
+                resizeableSpriteGridController1.MoveRight();
+            }
             return base.ProcessCmdKey(ref msg, keyData);
         }
     }

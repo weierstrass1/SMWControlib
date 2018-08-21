@@ -63,7 +63,7 @@ namespace SMWControlibControls.GraphicsControls
                 fm = fm.Next;
                 i++;
             }
-            panel1.AutoScrollPosition = new Point(scroll, 0);
+            panel1.AutoScrollPosition = new Point(scroll, panel1.AutoScrollPosition.Y);
         }
 
         private void addClick(AnimationFrameEditor obj)
@@ -85,9 +85,35 @@ namespace SMWControlibControls.GraphicsControls
         private void removeClick(AnimationFrameEditor obj)
         {
             if (obj.FrameMask == null) return;
+            Control c;
+            AnimationFrameEditor afex;
+            int fmInd = obj.FrameMask.Index;
+            animation.Remove(fmInd);
+            if (animation.Length <= 0)
+            {
+                buildTable();
+                return;
+            }
 
-            animation.Remove(obj.FrameMask.Index);
-            buildTable();
+            tableLayoutPanel1.Controls.Remove(obj);
+            for (int i = fmInd; i < tableLayoutPanel1.ColumnCount - 1; i++)
+            {
+
+                c = tableLayoutPanel1.GetControlFromPosition(i + 1, 0);
+                afex = (AnimationFrameEditor)c;
+                afex.FrameMask = afex.FrameMask;
+                tableLayoutPanel1.Controls.Remove(c);
+                tableLayoutPanel1.Controls.Add(c, i, 0);
+            }
+            if (fmInd >= animation.Length)
+            {
+                c = tableLayoutPanel1.
+                    GetControlFromPosition(animation.Length - 1, 0);
+                afex = (AnimationFrameEditor)c;
+                afex.FrameMask = afex.FrameMask;
+            }
+            tableLayoutPanel1.ColumnCount = animation.Length;
+            tableLayoutPanel1.Width = 208 * tableLayoutPanel1.ColumnCount;
         }
 
         private void exchangeClick(AnimationFrameEditor obj)
@@ -95,7 +121,13 @@ namespace SMWControlibControls.GraphicsControls
             if (obj.FrameMask == null) return;
 
             animation.Exchange(obj.FrameMask.Index);
-            buildTable();
+
+            obj.FrameMask = obj.FrameMask;
+            int ind = obj.FrameMask.Index + 1;
+
+            AnimationFrameEditor obj2 =
+                (AnimationFrameEditor)tableLayoutPanel1.GetControlFromPosition(ind, 0);
+            obj2.FrameMask = obj2.FrameMask;
         }
     }
 }

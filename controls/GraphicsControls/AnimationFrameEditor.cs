@@ -69,39 +69,56 @@ namespace SMWControlibControls.GraphicsControls
         {
             if (frameMask == null || frameMask.Next == null)
             {
-                imageButton2.Enabled = false;
                 imageButton3.Enabled = false;
-                imageButton2.Init();
                 imageButton3.Init();
             }
             else
             {
-                imageButton2.Enabled = true;
                 imageButton3.Enabled = true;
-                imageButton2.Init();
                 imageButton3.Init();
             }
-            if (frameMask != null) label1.Text = frameMask.Frame.Name;
+            if (frameMask != null)
+            {
+                imageButton2.Enabled = true;
+                imageButton2.Init();
+                label1.Text = frameMask.Frame.Name;
+            }
+            else
+            {
+                imageButton2.Enabled = false;
+                imageButton2.Init();
+                imageButton2.Refresh();
+                label1.Text = "Frame0";
+            }
             pictureBox1.Image = new Bitmap(pictureBox1.Width - 3, 
                 pictureBox1.Height - 3);
             Brush b = new SolidBrush(ColorPalette.GetGlobalColor(0));
-            Bitmap bp = FrameMask.Frame.GetBitmap();
-            float per = pictureBox1.Image.Width / (float)bp.Width;
-            if (bp.Width < bp.Height)
+            Bitmap bp = null;
+            float per = 1;
+            Font f = null;
+            if (FrameMask != null)
             {
-                per = pictureBox1.Image.Height / (float)bp.Height;
+                bp = FrameMask.Frame.GetBitmap();
+                per = pictureBox1.Image.Width / (float)bp.Width;
+
+                if (bp.Width < bp.Height)
+                {
+                    per = pictureBox1.Image.Height / (float)bp.Height;
+                }
+                f = new Font("Consolas", 11, FontStyle.Bold);
             }
-            Font f = new Font("Consolas", 11, FontStyle.Bold);
             using (Graphics g = Graphics.FromImage(pictureBox1.Image))
             {
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
                 g.FillRectangle(b, 0, 0,
                     pictureBox1.Image.Width, pictureBox1.Image.Height);
                 if (FrameMask != null)
+                {
                     g.DrawImage(bp, 0, 0,
                     bp.Width * per, bp.Height * per);
-                g.DrawString("" + frameMask.Index, f,
-                        Brushes.Black, 1, 1);
+                    g.DrawString("" + frameMask.Index, f,
+                            Brushes.Black, 1, 1);
+                }
             }
         }
     }

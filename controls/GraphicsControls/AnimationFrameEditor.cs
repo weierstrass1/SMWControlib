@@ -27,8 +27,9 @@ namespace SMWControlibControls.GraphicsControls
                 reDraw();
             }
         }
-        public event Action<AnimationFrameEditor> AddClick, 
-            RemoveClick, ExchangeClick;
+        public event Action<AnimationFrameEditor> AddClick,
+            RemoveClick, ExchangeClick, FlipXChanged, 
+            FlipYChanged, TimeChanged;
 
         public AnimationFrameEditor()
         {
@@ -42,12 +43,31 @@ namespace SMWControlibControls.GraphicsControls
             imageButton2.Click += removeClick;
             imageButton3.Click += exchangeClick;
             numericUpDown1.ValueChanged += valueChanged;
+            checkBox1.CheckedChanged += flipXCheckedChanged;
+            checkBox2.CheckedChanged += flipYCheckedChanged;
+        }
+
+        private void flipYCheckedChanged(object sender, EventArgs e)
+        {
+            frameMask.FlipY = checkBox2.Checked;
+            reDraw();
+            FlipYChanged?.Invoke(this);
+        }
+
+        private void flipXCheckedChanged(object sender, EventArgs e)
+        {
+            frameMask.FlipX = checkBox1.Checked;
+            reDraw();
+            FlipXChanged?.Invoke(this);
         }
 
         private void valueChanged(object sender, EventArgs e)
         {
             if (FrameMask != null)
+            {
                 FrameMask.Time = (int)numericUpDown1.Value;
+                TimeChanged?.Invoke(this);
+            }
         }
 
         private void addClick(object sender, EventArgs e)

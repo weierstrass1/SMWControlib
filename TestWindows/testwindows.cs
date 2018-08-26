@@ -20,10 +20,24 @@ namespace TestWindows
             spriteGFXBox1.GraphicsLoaded += graphicsLoaded;
             spriteGFXBox2.GraphicsLoaded += graphicsLoaded;
             tabControl1.SelectedIndexChanged += selectedIndexChanged;
-            animationEditor1.AddClick += AnimationEditor1_AddClick;
+            animationEditor1.AddClick += addClick;
+            animationEditor1.AnimationChanged += animationChanged;
+            resizeableSpriteGridController1.MidChanged += midChanged;
+            
         }
 
-        private void AnimationEditor1_AddClick(AnimationEditor obj)
+        private void midChanged()
+        {
+            frameCreator1.ChangeMid(resizeableSpriteGridController1.MidX,
+                resizeableSpriteGridController1.MidY);
+        }
+
+        private void animationChanged()
+        {
+            animationPlayer1.Animation = animationEditor1.Animation;
+        }
+
+        private void addClick(AnimationEditor obj)
         {
             animationEditor1.Selection = frameSelector1.GetSelection();
         }
@@ -32,6 +46,7 @@ namespace TestWindows
         {
             frameSelector1.Frames = frameCreator1.Frames;
             frameSelector1.BuildTable();
+            animationEditor1.Animation = animationEditor1.Animation;
         }
 
         private void graphicsLoaded()

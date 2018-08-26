@@ -23,7 +23,10 @@ namespace SMWControlibControls.GraphicsControls
             }
         }
         public Size MaxS { get; private set; }
-        public event Action ZoomChanged;
+        public event Action ZoomChanged, MidChanged;
+
+        public int MidX { get { return spriteGrid1.MidX; } }
+        public int MidY { get { return spriteGrid1.MidY; } }
 
         public SpriteGridController()
         {
@@ -46,6 +49,7 @@ namespace SMWControlibControls.GraphicsControls
             moveRight.Click += moveRightClick;
             mirrorH.Click += mirrorHClick;
             mirrorV.Click += mirrorVClick;
+            spriteGrid1.MidChanged += midChange;
             toolTip1.SetToolTip(mirrorH,
                 "Flip selected tiles horizontally.\nHotkey: 'H'");
             toolTip1.SetToolTip(mirrorV,
@@ -67,6 +71,11 @@ namespace SMWControlibControls.GraphicsControls
             toolTip1.SetToolTip(grid, "Show or Hide the grid.");
             toolTip1.SetToolTip(settings, "Change some properties of the\n" +
                                          "grid, for example, the color.");
+        }
+
+        private void midChange()
+        {
+            MidChanged?.Invoke();
         }
 
         public void MoveLeft()

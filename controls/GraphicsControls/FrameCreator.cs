@@ -43,6 +43,15 @@ namespace SMWControlibControls.GraphicsControls
             frameSelector.SelectedIndexChanged += selectedIndexChanged;
         }
 
+        public void ChangeMid(int MidX, int MidY)
+        {
+            foreach(Frame f in frames)
+            {
+                f.MidX = MidX;
+                f.MidY = MidY;
+            }
+        }
+
         private void settingsClick(object sender, EventArgs e)
         {
             if (frames == null || frames.Count <= 0)

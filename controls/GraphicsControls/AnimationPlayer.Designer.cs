@@ -28,12 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AnimationPlayer));
             this.panel1 = new System.Windows.Forms.Panel();
             this.bottom = new System.Windows.Forms.Panel();
-            this.imageButton3 = new SMWControlibControls.GraphicsControls.ImageButton();
-            this.imageButton2 = new SMWControlibControls.GraphicsControls.ImageButton();
-            this.imageButton1 = new SMWControlibControls.GraphicsControls.ImageButton();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.animationSelector = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.previus = new SMWControlibControls.GraphicsControls.ImageButton();
+            this.next = new SMWControlibControls.GraphicsControls.ImageButton();
+            this.play = new SMWControlibControls.GraphicsControls.ImageButton();
             this.bottomRight = new System.Windows.Forms.Panel();
             this.bottomLeft = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -41,10 +46,7 @@
             this.player = new System.Windows.Forms.PictureBox();
             this.topRight = new System.Windows.Forms.Panel();
             this.topLeft = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.animationSelector = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.bottom.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -69,9 +71,9 @@
             this.bottom.Controls.Add(this.label2);
             this.bottom.Controls.Add(this.animationSelector);
             this.bottom.Controls.Add(this.label1);
-            this.bottom.Controls.Add(this.imageButton3);
-            this.bottom.Controls.Add(this.imageButton2);
-            this.bottom.Controls.Add(this.imageButton1);
+            this.bottom.Controls.Add(this.previus);
+            this.bottom.Controls.Add(this.next);
+            this.bottom.Controls.Add(this.play);
             this.bottom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bottom.Location = new System.Drawing.Point(61, 0);
             this.bottom.MaximumSize = new System.Drawing.Size(414, 41);
@@ -80,71 +82,136 @@
             this.bottom.Size = new System.Drawing.Size(414, 41);
             this.bottom.TabIndex = 2;
             // 
-            // imageButton3
+            // comboBox1
             // 
-            this.imageButton3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("imageButton3.BackgroundImage")));
-            this.imageButton3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.imageButton3.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.imageButton3.FlatAppearance.BorderSize = 0;
-            this.imageButton3.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.imageButton3.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.imageButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.imageButton3.Location = new System.Drawing.Point(153, 6);
-            this.imageButton3.Name = "imageButton3";
-            this.imageButton3.OffSetX1 = 1;
-            this.imageButton3.OffSetX2 = 4;
-            this.imageButton3.OffSetY1 = 1;
-            this.imageButton3.OffSetY2 = 4;
-            this.imageButton3.Size = new System.Drawing.Size(32, 32);
-            this.imageButton3.Source = global::SMWControlibControls.Properties.Resources.previus;
-            this.imageButton3.TabIndex = 5;
-            this.imageButton3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.imageButton3.UseVisualStyleBackColor = true;
-            this.imageButton3.Zoom = 2;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "X1",
+            "X2",
+            "X3",
+            "X4",
+            "X5",
+            "X6",
+            "X7",
+            "X8"});
+            this.comboBox1.Location = new System.Drawing.Point(68, 11);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 8, 6, 3);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(76, 21);
+            this.comboBox1.TabIndex = 9;
             // 
-            // imageButton2
+            // label2
             // 
-            this.imageButton2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("imageButton2.BackgroundImage")));
-            this.imageButton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.imageButton2.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.imageButton2.FlatAppearance.BorderSize = 0;
-            this.imageButton2.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.imageButton2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.imageButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.imageButton2.Location = new System.Drawing.Point(229, 6);
-            this.imageButton2.Name = "imageButton2";
-            this.imageButton2.OffSetX1 = 1;
-            this.imageButton2.OffSetX2 = 4;
-            this.imageButton2.OffSetY1 = 1;
-            this.imageButton2.OffSetY2 = 4;
-            this.imageButton2.Size = new System.Drawing.Size(32, 32);
-            this.imageButton2.Source = global::SMWControlibControls.Properties.Resources.next;
-            this.imageButton2.TabIndex = 4;
-            this.imageButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.imageButton2.UseVisualStyleBackColor = true;
-            this.imageButton2.Zoom = 2;
+            this.label2.Location = new System.Drawing.Point(9, 9);
+            this.label2.Margin = new System.Windows.Forms.Padding(6);
+            this.label2.Name = "label2";
+            this.label2.Padding = new System.Windows.Forms.Padding(6);
+            this.label2.Size = new System.Drawing.Size(50, 25);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Zoom";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // imageButton1
+            // animationSelector
             // 
-            this.imageButton1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("imageButton1.BackgroundImage")));
-            this.imageButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.imageButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.imageButton1.FlatAppearance.BorderSize = 0;
-            this.imageButton1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.imageButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.imageButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.imageButton1.Location = new System.Drawing.Point(191, 6);
-            this.imageButton1.Name = "imageButton1";
-            this.imageButton1.OffSetX1 = 1;
-            this.imageButton1.OffSetX2 = 4;
-            this.imageButton1.OffSetY1 = 1;
-            this.imageButton1.OffSetY2 = 4;
-            this.imageButton1.Size = new System.Drawing.Size(32, 32);
-            this.imageButton1.Source = global::SMWControlibControls.Properties.Resources.play;
-            this.imageButton1.TabIndex = 3;
-            this.imageButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.imageButton1.UseVisualStyleBackColor = true;
-            this.imageButton1.Zoom = 2;
+            this.animationSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.animationSelector.FormattingEnabled = true;
+            this.animationSelector.Items.AddRange(new object[] {
+            "X0.125",
+            "X0.25",
+            "X0.5",
+            "X0.75",
+            "X1",
+            "X1.5",
+            "X2",
+            "X2.5",
+            "X3",
+            "X3.5",
+            "X4",
+            ""});
+            this.animationSelector.Location = new System.Drawing.Point(329, 11);
+            this.animationSelector.Margin = new System.Windows.Forms.Padding(3, 8, 6, 3);
+            this.animationSelector.Name = "animationSelector";
+            this.animationSelector.Size = new System.Drawing.Size(76, 21);
+            this.animationSelector.TabIndex = 7;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(270, 9);
+            this.label1.Margin = new System.Windows.Forms.Padding(6);
+            this.label1.Name = "label1";
+            this.label1.Padding = new System.Windows.Forms.Padding(6);
+            this.label1.Size = new System.Drawing.Size(50, 25);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Speed";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // previus
+            // 
+            this.previus.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("previus.BackgroundImage")));
+            this.previus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.previus.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.previus.FlatAppearance.BorderSize = 0;
+            this.previus.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.previus.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.previus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.previus.Location = new System.Drawing.Point(153, 6);
+            this.previus.Name = "previus";
+            this.previus.OffSetX1 = 1;
+            this.previus.OffSetX2 = 4;
+            this.previus.OffSetY1 = 1;
+            this.previus.OffSetY2 = 4;
+            this.previus.Size = new System.Drawing.Size(32, 32);
+            this.previus.Source = global::SMWControlibControls.Properties.Resources.previus;
+            this.previus.TabIndex = 5;
+            this.previus.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.previus.UseVisualStyleBackColor = true;
+            this.previus.Zoom = 2;
+            // 
+            // next
+            // 
+            this.next.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("next.BackgroundImage")));
+            this.next.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.next.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.next.FlatAppearance.BorderSize = 0;
+            this.next.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.next.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.next.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.next.Location = new System.Drawing.Point(229, 6);
+            this.next.Name = "next";
+            this.next.OffSetX1 = 1;
+            this.next.OffSetX2 = 4;
+            this.next.OffSetY1 = 1;
+            this.next.OffSetY2 = 4;
+            this.next.Size = new System.Drawing.Size(32, 32);
+            this.next.Source = global::SMWControlibControls.Properties.Resources.next;
+            this.next.TabIndex = 4;
+            this.next.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.next.UseVisualStyleBackColor = true;
+            this.next.Zoom = 2;
+            // 
+            // play
+            // 
+            this.play.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("play.BackgroundImage")));
+            this.play.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.play.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.play.FlatAppearance.BorderSize = 0;
+            this.play.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.play.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.play.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.play.Location = new System.Drawing.Point(191, 6);
+            this.play.Name = "play";
+            this.play.OffSetX1 = 1;
+            this.play.OffSetX2 = 4;
+            this.play.OffSetY1 = 1;
+            this.play.OffSetY2 = 4;
+            this.play.Size = new System.Drawing.Size(32, 32);
+            this.play.Source = global::SMWControlibControls.Properties.Resources.play;
+            this.play.TabIndex = 3;
+            this.play.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.play.UseVisualStyleBackColor = true;
+            this.play.Zoom = 2;
             // 
             // bottomRight
             // 
@@ -209,71 +276,6 @@
             this.topLeft.Size = new System.Drawing.Size(61, 266);
             this.topLeft.TabIndex = 0;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(270, 9);
-            this.label1.Margin = new System.Windows.Forms.Padding(6);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(6);
-            this.label1.Size = new System.Drawing.Size(50, 25);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Speed";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // animationSelector
-            // 
-            this.animationSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.animationSelector.FormattingEnabled = true;
-            this.animationSelector.Items.AddRange(new object[] {
-            "X0.125",
-            "X0.25",
-            "X0.5",
-            "X0.75",
-            "X1",
-            "X1.5",
-            "X2",
-            "X2.5",
-            "X3",
-            "X3.5",
-            "X4",
-            ""});
-            this.animationSelector.Location = new System.Drawing.Point(329, 11);
-            this.animationSelector.Margin = new System.Windows.Forms.Padding(3, 8, 6, 3);
-            this.animationSelector.Name = "animationSelector";
-            this.animationSelector.Size = new System.Drawing.Size(76, 21);
-            this.animationSelector.TabIndex = 7;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "X1",
-            "X2",
-            "X3",
-            "X4",
-            "X5",
-            "X6",
-            "X7",
-            "X8"});
-            this.comboBox1.Location = new System.Drawing.Point(68, 11);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 8, 6, 3);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(76, 21);
-            this.comboBox1.TabIndex = 9;
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(9, 9);
-            this.label2.Margin = new System.Windows.Forms.Padding(6);
-            this.label2.Name = "label2";
-            this.label2.Padding = new System.Windows.Forms.Padding(6);
-            this.label2.Size = new System.Drawing.Size(50, 25);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Zoom";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // AnimationPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -303,12 +305,13 @@
         private System.Windows.Forms.Panel topRight;
         private System.Windows.Forms.Panel topLeft;
         private System.Windows.Forms.PictureBox player;
-        private ImageButton imageButton1;
-        private ImageButton imageButton2;
-        private ImageButton imageButton3;
+        private ImageButton play;
+        private ImageButton next;
+        private ImageButton previus;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox animationSelector;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Timer timer1;
     }
 }

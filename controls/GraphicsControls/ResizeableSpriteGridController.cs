@@ -22,12 +22,22 @@ namespace SMWControlibControls.GraphicsControls
                 spriteGridController1.NewTiles = value;
             }
         }
+
+        public event Action MidChanged;
+
+        public int MidX { get { return spriteGridController1.MidX; } }
+        public int MidY { get { return spriteGridController1.MidY; } }
         public ResizeableSpriteGridController()
         {
             InitializeComponent();
             SizeChanged += sizeChanged;
             spriteGridController1.ZoomChanged += zoomChanged;
+            spriteGridController1.MidChanged += midChange;
             spriteGridController1.Init();
+        }
+        private void midChange()
+        {
+            MidChanged?.Invoke();
         }
 
         public void MoveLeft()

@@ -23,7 +23,8 @@ namespace SMWControlibControls.GraphicsControls
             set
             {
                 tiles = value;
-                ReDraw();
+                deselect();
+                applyZoom(zoom);
             }
         }
 
@@ -139,24 +140,28 @@ namespace SMWControlibControls.GraphicsControls
             {
                 if (zoom != value)
                 {
-                    zoom = value;
-                    MaximumSize = new Size((256 * zoom) + 6,
-                        (240 * zoom) + 6);
-                    if (Tiles != null)
-                    {
-                        foreach (TileMask tm in Tiles)
-                        {
-                            tm.XDisp /= tm.Zoom;
-                            tm.YDisp /= tm.Zoom;
-                            tm.Zoom = zoom;
-                            tm.XDisp *= tm.Zoom;
-                            tm.YDisp *= tm.Zoom;
-                        }
-                    }
-                    buildGrid();
-                    ReDraw();
+                    applyZoom(value);
                 }
             }
+        }
+        private void applyZoom(int value)
+        {
+            zoom = value;
+            MaximumSize = new Size((256 * zoom) + 6,
+                (240 * zoom) + 6);
+            if (Tiles != null)
+            {
+                foreach (TileMask tm in Tiles)
+                {
+                    tm.XDisp /= tm.Zoom;
+                    tm.YDisp /= tm.Zoom;
+                    tm.Zoom = zoom;
+                    tm.XDisp *= tm.Zoom;
+                    tm.YDisp *= tm.Zoom;
+                }
+            }
+            buildGrid();
+            ReDraw();
         }
 
         private bool activateCenterSquare = true;
@@ -202,6 +207,7 @@ namespace SMWControlibControls.GraphicsControls
         }
 
         private int midX = 0, midY = 0;
+        public event Action MidChanged;
         public int MidX
         {
             get
@@ -212,6 +218,7 @@ namespace SMWControlibControls.GraphicsControls
             {
                 midX = value;
                 buildCenterSquare();
+                MidChanged?.Invoke();
             }
         }
 
@@ -225,6 +232,7 @@ namespace SMWControlibControls.GraphicsControls
             {
                 midY = value;
                 buildCenterSquare();
+                MidChanged?.Invoke();
             }
         }
 

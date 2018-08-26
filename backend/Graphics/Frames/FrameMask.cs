@@ -17,62 +17,74 @@ namespace SMWControlibBackend.Graphics.Frames
 
         public Bitmap GetBitmap()
         {
+            if (Frame.Tiles == null || Frame.Tiles.Count <= 0) return null;
             Bitmap bp = Frame.GetBitmap();
             Bitmap bp2 = null;
-            int leftDist = int.MinValue;
-            int rightDist = int.MinValue;
-            int topDist = int.MinValue;
-            int bottomDist = int.MinValue;
+            int leftDist = 0;
+            int rightDist = 0;
+            int topDist = 0;
+            int bottomDist = 0;
             int fMidX = (Frame.MidX);
             int fMidY = (Frame.MidY);
+            int zoom = Frame.Tiles.First().Zoom;
+            int fmidXZ = fMidX + 8;
+            int fmidYZ = fMidY + 8;
+            int xd = 0, yd = 0;
+            int minX = int.MaxValue, minY = int.MaxValue
+                , maxX = int.MinValue, maxY = int.MinValue;
             foreach (TileMask tm in Frame.Tiles)
             {
-                if (fMidX * tm.Zoom - tm.XDisp > leftDist)
-                {
-                    leftDist = fMidX * tm.Zoom - tm.XDisp;
-                }
-                if (tm.XDisp + tm.Size * tm.Zoom - fMidX * tm.Zoom > rightDist) 
-                {
-                    rightDist = tm.XDisp + tm.Size * tm.Zoom - fMidX * tm.Zoom;
-                }
-                if (fMidY * tm.Zoom - tm.YDisp > topDist)
-                {
-                    topDist = fMidY * tm.Zoom - tm.YDisp;
-                }
-                if (tm.YDisp + tm.Size * tm.Zoom - fMidY * tm.Zoom > bottomDist)
-                {
-                    bottomDist = tm.YDisp + tm.Size * tm.Zoom - fMidY * tm.Zoom;
-                }
+                xd = tm.XDisp / zoom;
+                yd = tm.YDisp / zoom;
+                if (xd < minX) minX = xd;
+                if (yd < minY) minY = yd;
+                xd += tm.Size;
+                yd += tm.Size;
+                if (xd > maxX) maxX = xd;
+                if (yd > maxY) maxY = yd;
             }
 
-            if (FlipX && FlipY)
-            {
-                bp.RotateFlip(RotateFlipType.RotateNoneFlipXY);
-            }
-            else if (FlipX)
-            {
-                bp.RotateFlip(RotateFlipType.RotateNoneFlipX);
-            }
-            else if(FlipY)
-            {
-                bp.RotateFlip(RotateFlipType.RotateNoneFlipY);
-            }
+            minX -= 128;
+            maxX -= 128;
+            minY -= 112;
+            maxY -= 112;
 
-            int w = Math.Abs(Math.Max(leftDist, rightDist) * 2);
-            int h = Math.Abs(Math.Max(bottomDist, topDist) * 2);
+            leftDist = minX - fmidXZ;
+            rightDist = maxX - fmidXZ;
+            topDist = minY - fmidYZ;
+            bottomDist = maxY - fmidYZ;
+
+            int w = Math.Max(Math.Abs(leftDist), Math.Abs(rightDist)) * 2;
+            int h = Math.Max(Math.Abs(bottomDist), Math.Abs(topDist)) * 2;
+
+            if (w < 1) w = 1;
+            if (h < 1) h = 1;
+
             bp2 = new Bitmap(w, h);
+
+            int dx = (fmidXZ - minX - 8);
+            xd = w / 2;
+            xd -= 8;
+            xd -= dx;
+            int dy = (fmidYZ - minY - 8);
+            yd = h / 2;
+            yd -= 8;
+            yd -= dy;
+
             using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(bp2))
             {
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-                if (FlipX && FlipY)
-                    g.DrawImage(bp, 0, 0);
-                else if (FlipX)
-                    g.DrawImage(bp, 0, fMidY - topDist);
-                else if (FlipY)
-                    g.DrawImage(bp, fMidX - leftDist, 0);
-                else
-                    g.DrawImage(bp, fMidX - leftDist, fMidY - topDist);
+
+                g.DrawImage(bp, xd, yd,
+                    bp.Width / zoom, bp.Height / zoom);
             }
+
+            if (FlipX && FlipY)
+                bp2.RotateFlip(RotateFlipType.RotateNoneFlipXY);
+            else if (FlipX)
+                bp2.RotateFlip(RotateFlipType.RotateNoneFlipX);
+            else if (FlipY)
+                bp2.RotateFlip(RotateFlipType.RotateNoneFlipY);
 
             return bp2;
         }

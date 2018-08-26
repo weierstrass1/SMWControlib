@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(testwindows));
+            SMWControlibBackend.Graphics.Frames.Animation animation1 = new SMWControlibBackend.Graphics.Frames.Animation();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.resizeableSpriteGridController1 = new SMWControlibControls.GraphicsControls.ResizeableSpriteGridController();
@@ -47,6 +48,7 @@
             this.gfxButton3 = new SMWControlibControls.GraphicsControls.GFXButton();
             this.gfxButton4 = new SMWControlibControls.GraphicsControls.GFXButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.animationPlayer1 = new SMWControlibControls.GraphicsControls.AnimationPlayer();
             this.panel3 = new System.Windows.Forms.Panel();
             this.frameSelector1 = new SMWControlibControls.GraphicsControls.FrameSelector();
             this.label1 = new System.Windows.Forms.Label();
@@ -287,6 +289,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.animationPlayer1);
             this.tabPage2.Controls.Add(this.panel3);
             this.tabPage2.Controls.Add(this.panel4);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -296,6 +299,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Animations";
             // 
+            // animationPlayer1
+            // 
+            this.animationPlayer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.animationPlayer1.Interval = 16;
+            this.animationPlayer1.Location = new System.Drawing.Point(3, 3);
+            this.animationPlayer1.Name = "animationPlayer1";
+            this.animationPlayer1.Size = new System.Drawing.Size(948, 385);
+            this.animationPlayer1.SpeedFPS = 62;
+            this.animationPlayer1.TabIndex = 6;
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.frameSelector1);
@@ -303,7 +316,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel3.Location = new System.Drawing.Point(951, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(154, 405);
+            this.panel3.Size = new System.Drawing.Size(154, 385);
             this.panel3.TabIndex = 4;
             // 
             // frameSelector1
@@ -313,7 +326,7 @@
             this.frameSelector1.FramesPerRow = 1;
             this.frameSelector1.Location = new System.Drawing.Point(0, 25);
             this.frameSelector1.Name = "frameSelector1";
-            this.frameSelector1.Size = new System.Drawing.Size(154, 380);
+            this.frameSelector1.Size = new System.Drawing.Size(154, 360);
             this.frameSelector1.TabIndex = 3;
             // 
             // label1
@@ -334,18 +347,19 @@
             this.panel4.Controls.Add(this.label2);
             this.panel4.Controls.Add(this.panel5);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(3, 408);
+            this.panel4.Location = new System.Drawing.Point(3, 388);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1102, 205);
+            this.panel4.Size = new System.Drawing.Size(1102, 225);
             this.panel4.TabIndex = 5;
             // 
             // animationEditor1
             // 
+            this.animationEditor1.Animation = animation1;
             this.animationEditor1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.animationEditor1.Dock = System.Windows.Forms.DockStyle.Top;
             this.animationEditor1.Location = new System.Drawing.Point(0, 25);
             this.animationEditor1.Name = "animationEditor1";
-            this.animationEditor1.Size = new System.Drawing.Size(894, 188);
+            this.animationEditor1.Size = new System.Drawing.Size(894, 208);
             this.animationEditor1.TabIndex = 1;
             // 
             // label2
@@ -367,7 +381,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel5.Location = new System.Drawing.Point(894, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(208, 205);
+            this.panel5.Size = new System.Drawing.Size(208, 225);
             this.panel5.TabIndex = 0;
             // 
             // animationCreator1
@@ -375,7 +389,7 @@
             this.animationCreator1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.animationCreator1.Location = new System.Drawing.Point(0, 0);
             this.animationCreator1.Name = "animationCreator1";
-            this.animationCreator1.Size = new System.Drawing.Size(204, 201);
+            this.animationCreator1.Size = new System.Drawing.Size(204, 221);
             this.animationCreator1.TabIndex = 0;
             // 
             // tabPage5
@@ -449,5 +463,6 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
         private SMWControlibControls.GraphicsControls.AnimationCreator animationCreator1;
+        private SMWControlibControls.GraphicsControls.AnimationPlayer animationPlayer1;
     }
 }

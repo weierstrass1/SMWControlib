@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.section1 = new System.Windows.Forms.Panel();
+            this.spriteGridController1 = new SMWControlibControls.GraphicsControls.SpriteGridController();
             this.down = new System.Windows.Forms.Panel();
             this.up = new System.Windows.Forms.Panel();
             this.right = new System.Windows.Forms.Panel();
             this.left = new System.Windows.Forms.Panel();
-            this.spriteGridController1 = new SMWControlibControls.GraphicsControls.SpriteGridController();
             this.section1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,6 +50,17 @@
             this.section1.Name = "section1";
             this.section1.Size = new System.Drawing.Size(599, 571);
             this.section1.TabIndex = 1;
+            // 
+            // spriteGridController1
+            // 
+            this.spriteGridController1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spriteGridController1.Location = new System.Drawing.Point(0, 0);
+            this.spriteGridController1.Margin = new System.Windows.Forms.Padding(0);
+            this.spriteGridController1.MaximumSize = new System.Drawing.Size(547, 560);
+            this.spriteGridController1.MinimumSize = new System.Drawing.Size(439, 120);
+            this.spriteGridController1.Name = "spriteGridController1";
+            this.spriteGridController1.Size = new System.Drawing.Size(547, 560);
+            this.spriteGridController1.TabIndex = 4;
             // 
             // down
             // 
@@ -82,17 +93,6 @@
             this.left.Name = "left";
             this.left.Size = new System.Drawing.Size(0, 567);
             this.left.TabIndex = 0;
-            // 
-            // spriteGridController1
-            // 
-            this.spriteGridController1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.spriteGridController1.Location = new System.Drawing.Point(0, 0);
-            this.spriteGridController1.Margin = new System.Windows.Forms.Padding(0);
-            this.spriteGridController1.MaximumSize = new System.Drawing.Size(547, 560);
-            this.spriteGridController1.MinimumSize = new System.Drawing.Size(439, 120);
-            this.spriteGridController1.Name = "spriteGridController1";
-            this.spriteGridController1.Size = new System.Drawing.Size(547, 560);
-            this.spriteGridController1.TabIndex = 4;
             // 
             // ResizeableSpriteGridController
             // 

@@ -13,9 +13,31 @@ namespace SMWControlibControls.GraphicsControls
 {
     public partial class AnimationEditor : UserControl
     {
-        Animation animation;
+        private Animation animation;
+        public Animation Animation
+        {
+            get
+            {
+                return animation;
+            }
+            set
+            {
+                animation = value;
+                buildTable();
+                AnimationChanged?.Invoke();
+            }
+        }
+        private Animation _Animation
+        {
+            set
+            {
+                animation = value;
+                AnimationChanged?.Invoke();
+            }
+        }
         public Frame[] Selection;
         public event Action<AnimationEditor> AddClick;
+        public event Action AnimationChanged;
         public AnimationEditor()
         {
             InitializeComponent();
@@ -59,11 +81,24 @@ namespace SMWControlibControls.GraphicsControls
                 afe.AddClick += addClick;
                 afe.RemoveClick += removeClick;
                 afe.ExchangeClick += exchangeClick;
+                afe.TimeChanged += timeChanged;
+                afe.FlipXChanged += flipChanged;
+                afe.FlipYChanged += flipChanged;
                 tableLayoutPanel1.Controls.Add(afe, i, 0);
                 fm = fm.Next;
                 i++;
             }
             panel1.AutoScrollPosition = new Point(scroll, panel1.AutoScrollPosition.Y);
+        }
+
+        private void timeChanged(AnimationFrameEditor obj)
+        {
+            _Animation = animation;
+        }
+
+        private void flipChanged(AnimationFrameEditor obj)
+        {
+            _Animation = animation;
         }
 
         private void addClick(AnimationFrameEditor obj)
@@ -81,6 +116,7 @@ namespace SMWControlibControls.GraphicsControls
                 animation.Add(Selection, obj.FrameMask.Index);
             }
             buildTable();
+            _Animation = animation;
         }
         private void removeClick(AnimationFrameEditor obj)
         {
@@ -114,6 +150,7 @@ namespace SMWControlibControls.GraphicsControls
             }
             tableLayoutPanel1.ColumnCount = animation.Length;
             tableLayoutPanel1.Width = 208 * tableLayoutPanel1.ColumnCount;
+            _Animation = animation;
         }
 
         private void exchangeClick(AnimationFrameEditor obj)
@@ -128,6 +165,7 @@ namespace SMWControlibControls.GraphicsControls
             AnimationFrameEditor obj2 =
                 (AnimationFrameEditor)tableLayoutPanel1.GetControlFromPosition(ind, 0);
             obj2.FrameMask = obj2.FrameMask;
+            _Animation = animation;
         }
     }
 }

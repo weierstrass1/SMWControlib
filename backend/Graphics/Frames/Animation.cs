@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,70 @@ namespace SMWControlibBackend.Graphics.Frames
 
         public Animation()
         {
+        }
+
+        public FrameMask[] GetFrameMasks()
+        {
+            if (Length <= 0) return null;
+            FrameMask[] list = new FrameMask[Length];
+            FrameMask fmaux = first;
+            int i = 0;
+            while (fmaux != null)
+            {
+                list[i] = fmaux;
+                fmaux = fmaux.Next;
+                i++;
+            }
+            return list;
+        }
+
+        public Bitmap[] GetBitmaps()
+        {
+            if (Length <= 0) return null;
+            FrameMask fmaux = first;
+
+            List<Bitmap> list = new List<Bitmap>();
+            Bitmap bp;
+            int w = 1, h = 1;
+
+            while (fmaux != null)
+            {
+                bp = first.GetBitmap();
+                if(bp!=null)
+                {
+                    if (bp.Width > w) w = bp.Width;
+                    if (bp.Height > h) h = bp.Height;
+                }
+                list.Add(bp);
+                fmaux = fmaux.Next;
+            }
+
+            Bitmap[] ret = new Bitmap[list.Count];
+            
+            int x, y;
+            int i = 0;
+
+            foreach (Bitmap b in list)
+            {
+                bp = new Bitmap(w, h);
+                if (b != null)
+                {
+                    using (System.Drawing.Graphics g = System.Drawing.
+                    Graphics.FromImage(bp))
+                    {
+                        x = w - b.Width;
+                        x /= 2;
+                        y = h - b.Height;
+                        y /= 2;
+
+                        g.DrawImage(b, x, y);
+                    }
+                }
+                ret[i] = bp;
+                i++;
+            }
+
+            return ret.ToArray();
         }
 
         public void Exchange(int index)

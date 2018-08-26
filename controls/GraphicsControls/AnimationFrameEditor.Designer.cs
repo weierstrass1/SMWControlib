@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AnimationFrameEditor));
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.imageButton3 = new SMWControlibControls.GraphicsControls.ImageButton();
@@ -35,6 +36,8 @@
             this.imageButton1 = new SMWControlibControls.GraphicsControls.ImageButton();
             this.label2 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
@@ -60,6 +63,7 @@
             // 
             // imageButton3
             // 
+            this.imageButton3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("imageButton3.BackgroundImage")));
             this.imageButton3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.imageButton3.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.imageButton3.FlatAppearance.BorderSize = 0;
@@ -81,6 +85,7 @@
             // 
             // imageButton2
             // 
+            this.imageButton2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("imageButton2.BackgroundImage")));
             this.imageButton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.imageButton2.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.imageButton2.FlatAppearance.BorderSize = 0;
@@ -102,6 +107,7 @@
             // 
             // imageButton1
             // 
+            this.imageButton1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("imageButton1.BackgroundImage")));
             this.imageButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.imageButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.imageButton1.FlatAppearance.BorderSize = 0;
@@ -152,10 +158,32 @@
             0,
             0});
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(3, 166);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(52, 17);
+            this.checkBox1.TabIndex = 7;
+            this.checkBox1.Text = "Flip X";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(61, 166);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(52, 17);
+            this.checkBox2.TabIndex = 8;
+            this.checkBox2.Text = "Flip Y";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
             // AnimationFrameEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.imageButton3);
@@ -163,13 +191,14 @@
             this.Controls.Add(this.imageButton1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
-            this.MaximumSize = new System.Drawing.Size(184, 163);
-            this.MinimumSize = new System.Drawing.Size(184, 163);
+            this.MaximumSize = new System.Drawing.Size(184, 184);
+            this.MinimumSize = new System.Drawing.Size(184, 184);
             this.Name = "AnimationFrameEditor";
-            this.Size = new System.Drawing.Size(184, 163);
+            this.Size = new System.Drawing.Size(184, 184);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -182,5 +211,7 @@
         private ImageButton imageButton3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
     }
 }

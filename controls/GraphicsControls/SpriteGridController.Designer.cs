@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpriteGridController));
             this.panel1 = new System.Windows.Forms.Panel();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.spriteGrid1 = new SMWControlibControls.GraphicsControls.SpriteGrid();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cellSize = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,16 +42,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.spriteGrid1 = new SMWControlibControls.GraphicsControls.SpriteGrid();
             this.mirrorH = new SMWControlibControls.GraphicsControls.ImageButton();
             this.mirrorV = new SMWControlibControls.GraphicsControls.ImageButton();
             this.moveDown = new SMWControlibControls.GraphicsControls.ImageButton();
             this.moveLeft = new SMWControlibControls.GraphicsControls.ImageButton();
             this.moveUp = new SMWControlibControls.GraphicsControls.ImageButton();
             this.moveRight = new SMWControlibControls.GraphicsControls.ImageButton();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.toolTip1 = new System.Windows.Forms.ToolTip();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
@@ -97,6 +96,28 @@
             this.trackBar2.Size = new System.Drawing.Size(20, 504);
             this.trackBar2.TabIndex = 2;
             this.trackBar2.Value = 120;
+            // 
+            // spriteGrid1
+            // 
+            this.spriteGrid1.ActivateCenterSquare = true;
+            this.spriteGrid1.ActivateGrid = false;
+            this.spriteGrid1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("spriteGrid1.BackgroundImage")));
+            this.spriteGrid1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.spriteGrid1.CenterSquareColor = System.Drawing.SystemColors.WindowFrame;
+            this.spriteGrid1.GridAccuracy = 8;
+            this.spriteGrid1.GridColor = System.Drawing.SystemColors.ControlLightLight;
+            this.spriteGrid1.GridTypeUsed = 0;
+            this.spriteGrid1.Location = new System.Drawing.Point(20, 20);
+            this.spriteGrid1.Margin = new System.Windows.Forms.Padding(0);
+            this.spriteGrid1.MaximumSize = new System.Drawing.Size(518, 486);
+            this.spriteGrid1.MidX = 0;
+            this.spriteGrid1.MidY = 0;
+            this.spriteGrid1.Name = "spriteGrid1";
+            this.spriteGrid1.SelectionBorderColor = System.Drawing.SystemColors.AppWorkspace;
+            this.spriteGrid1.SelectionFillColor = System.Drawing.SystemColors.WindowFrame;
+            this.spriteGrid1.Size = new System.Drawing.Size(518, 486);
+            this.spriteGrid1.TabIndex = 0;
+            this.spriteGrid1.Zoom = 2;
             // 
             // panel2
             // 
@@ -214,44 +235,6 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(234, 38);
             this.panel5.TabIndex = 7;
-            // 
-            // panel6
-            // 
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(405, 0);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(156, 38);
-            this.panel6.TabIndex = 8;
-            // 
-            // panel4
-            // 
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(156, 38);
-            this.panel4.TabIndex = 6;
-            // 
-            // spriteGrid1
-            // 
-            this.spriteGrid1.ActivateCenterSquare = true;
-            this.spriteGrid1.ActivateGrid = false;
-            this.spriteGrid1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("spriteGrid1.BackgroundImage")));
-            this.spriteGrid1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.spriteGrid1.CenterSquareColor = System.Drawing.SystemColors.WindowFrame;
-            this.spriteGrid1.GridAccuracy = 8;
-            this.spriteGrid1.GridColor = System.Drawing.SystemColors.ControlLightLight;
-            this.spriteGrid1.GridTypeUsed = 0;
-            this.spriteGrid1.Location = new System.Drawing.Point(20, 20);
-            this.spriteGrid1.Margin = new System.Windows.Forms.Padding(0);
-            this.spriteGrid1.MaximumSize = new System.Drawing.Size(518, 486);
-            this.spriteGrid1.MidX = 0;
-            this.spriteGrid1.MidY = 0;
-            this.spriteGrid1.Name = "spriteGrid1";
-            this.spriteGrid1.SelectionBorderColor = System.Drawing.SystemColors.AppWorkspace;
-            this.spriteGrid1.SelectionFillColor = System.Drawing.SystemColors.WindowFrame;
-            this.spriteGrid1.Size = new System.Drawing.Size(518, 486);
-            this.spriteGrid1.TabIndex = 0;
-            this.spriteGrid1.Zoom = 2;
             // 
             // mirrorH
             // 
@@ -384,6 +367,22 @@
             this.moveRight.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.moveRight.UseVisualStyleBackColor = true;
             this.moveRight.Zoom = 2;
+            // 
+            // panel6
+            // 
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel6.Location = new System.Drawing.Point(405, 0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(156, 38);
+            this.panel6.TabIndex = 8;
+            // 
+            // panel4
+            // 
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(156, 38);
+            this.panel4.TabIndex = 6;
             // 
             // toolTip1
             // 

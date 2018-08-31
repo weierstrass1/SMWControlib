@@ -53,6 +53,16 @@ namespace SMWControlibControls.GraphicsControls
             }
         }
         private Zoom zoom = 2;
+        public int Zoom
+        {
+            set
+            {
+                zoom = value;
+                bool p = playing;
+                Animation = animation;
+                if (p) Playing = true;
+            }
+        }
         private FrameMask[] frames;
         private Bitmap[] framesBitmaps;
         private bool playing;
@@ -102,10 +112,12 @@ namespace SMWControlibControls.GraphicsControls
                         , framesBitmaps[index].Height + 4);
                     player.Image = framesBitmaps[index];
                 }
+                TimeChanged?.Invoke(index, timer);
             }
         }
         private int timer = 0;
 
+        private int initInterval;
         public int SpeedFPS
         {
             get
@@ -118,6 +130,7 @@ namespace SMWControlibControls.GraphicsControls
                 if (value > 1000) value = 1000; 
                 timer1.Interval = 1000 / value;
                 Interval = timer1.Interval;
+                initInterval = Interval;
             }
         }
         public int Interval
@@ -132,6 +145,8 @@ namespace SMWControlibControls.GraphicsControls
             }
         }
 
+        public event Action<int, int> TimeChanged;
+
         public AnimationPlayer()
         {
             InitializeComponent();
@@ -140,16 +155,69 @@ namespace SMWControlibControls.GraphicsControls
             previus.Click += previusClick;
             play.Click += playClick;
             next.Click += nextClick;
+            zoomBox.SelectedIndexChanged += zoomBoxSelectedIndexChanged;
+            speedBox.SelectedIndexChanged += speedBoxSelectedIndexChanged;
+            player.SizeChanged += sizeChanged;
+            SizeChanged += sizeChanged;
+        }
+
+        private void sizeChanged(object sender, EventArgs e)
+        {
+            int w = Width - player.Width;
+            w /= 2;
+            int h = top.Height - player.Height;
+            h /= 2;
+
+            midTop.AutoScroll = false;
+            if (w < 0)
+            {
+                w = 0;
+                midTop.AutoScroll = true;
+            }
+            if (h < 0)
+            {
+                h = 0;
+                midTop.AutoScroll = true;
+            }
+
+            topLeft.Width = w;
+            topRight.Width = w;
+            topTop.Height = h;
+            bottomTop.Height = h;
+
+            w = Width - bottom.Width;
+            w /= 2;
+
+            if (w < 0) w = 0;
+
+            bottomLeft.Width = w;
+            bottomRight.Width = w;
+        }
+
+        float[] intervals = { 0.125f, 0.25f, 0.5f, 0.75f, 1f,
+            1.5f, 2f, 2.5f, 3f, 3.5f, 4 };
+        private void speedBoxSelectedIndexChanged(object sender, EventArgs e)
+        {
+            timer1.Interval = (int)(initInterval /
+                intervals[speedBox.SelectedIndex]);
+        }
+
+        private void zoomBoxSelectedIndexChanged(object sender, EventArgs e)
+        {
+            Zoom = zoomBox.SelectedIndex + 1;
         }
 
         private void nextClick(object sender, EventArgs e)
         {
-            if (playing) Playing = false;
-            else
+            if (playing)
             {
-                if (index + 1 < animation.Length)
-                    Index = index + 1;
+                Playing = false;
+                Index = 0;
             }
+            else if (index + 1 >= animation.Length)
+                Index = 0;
+            else
+                Index = index + 1;
         }
 
         private void playClick(object sender, EventArgs e)
@@ -159,7 +227,9 @@ namespace SMWControlibControls.GraphicsControls
 
         private void previusClick(object sender, EventArgs e)
         {
-            if (index - 1 >= 0)
+            if (index - 1 < 0)
+                Index = animation.Length - 1;
+            else
                 Index = index - 1;
         }
 
@@ -181,6 +251,8 @@ namespace SMWControlibControls.GraphicsControls
                 player.Size = new Size(framesBitmaps[index].Width + 4, framesBitmaps[index].Height + 4);
                 player.Image = framesBitmaps[index];
             }
+
+            TimeChanged?.Invoke(index, timer);
         }
     }
 }

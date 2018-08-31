@@ -45,6 +45,41 @@ namespace SMWControlibControls.GraphicsControls
             buildTable();
         }
 
+        public void SetCurrentFrameAndTime(int FrameID, int Time)
+        {
+            if (animation.Length <= 0) return;
+            if (FrameID < 0) FrameID = 0;
+            if (FrameID >= animation.Length) FrameID = animation.Length - 1;
+
+            AnimationFrameEditor afe;
+
+            for (int i = 0; i < animation.Length; i++)
+            {
+                afe = (AnimationFrameEditor)
+                    tableLayoutPanel1.GetControlFromPosition(i, 0);
+                if (afe != null)
+                {
+                    afe.SetCurrentTimer();
+                    afe.SetBorderVisible(false);
+                }
+            }
+
+            for (int i = 0; i < FrameID; i++)
+            {
+                afe = (AnimationFrameEditor)
+                    tableLayoutPanel1.GetControlFromPosition(i, 0);
+                if (afe != null)
+                    afe.SetCurrentTimer(0);
+            }
+            afe = (AnimationFrameEditor)
+                    tableLayoutPanel1.GetControlFromPosition(FrameID, 0);
+            if (afe != null)
+            {
+                afe.SetCurrentTimer(Time);
+                afe.SetBorderVisible(true);
+            }
+        }
+
         private void buildTable()
         {
             if (animation == null || animation.Length == 0)
@@ -84,6 +119,8 @@ namespace SMWControlibControls.GraphicsControls
                 afe.TimeChanged += timeChanged;
                 afe.FlipXChanged += flipChanged;
                 afe.FlipYChanged += flipChanged;
+                afe.FlipX = fm.FlipX;
+                afe.FlipY = fm.FlipY;
                 tableLayoutPanel1.Controls.Add(afe, i, 0);
                 fm = fm.Next;
                 i++;

@@ -119,6 +119,7 @@ namespace SMWControlibControls.GraphicsControls
                 };
                 tableLayoutPanel1.Controls.Add(lab, x, y + 1);
             }
+            selection.Clear();
         }
 
         private void pictureBoxClick(object sender, EventArgs e)

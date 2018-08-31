@@ -33,6 +33,7 @@
             this.isDuplicate = new System.Windows.Forms.CheckBox();
             this.frameSelector = new System.Windows.Forms.ComboBox();
             this.accept = new System.Windows.Forms.Button();
+            this.autosel = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -76,19 +77,30 @@
             // 
             // accept
             // 
-            this.accept.Location = new System.Drawing.Point(124, 65);
+            this.accept.Location = new System.Drawing.Point(124, 85);
             this.accept.Name = "accept";
             this.accept.Size = new System.Drawing.Size(75, 23);
             this.accept.TabIndex = 4;
             this.accept.Text = "Accept";
             this.accept.UseVisualStyleBackColor = true;
             // 
+            // autosel
+            // 
+            this.autosel.AutoSize = true;
+            this.autosel.Location = new System.Drawing.Point(18, 63);
+            this.autosel.Name = "autosel";
+            this.autosel.Size = new System.Drawing.Size(78, 17);
+            this.autosel.TabIndex = 5;
+            this.autosel.Text = "AutoSelect";
+            this.autosel.UseVisualStyleBackColor = true;
+            // 
             // NewFrameDialog
             // 
             this.AcceptButton = this.accept;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(313, 100);
+            this.ClientSize = new System.Drawing.Size(313, 118);
+            this.Controls.Add(this.autosel);
             this.Controls.Add(this.accept);
             this.Controls.Add(this.frameSelector);
             this.Controls.Add(this.isDuplicate);
@@ -110,5 +122,6 @@
         private System.Windows.Forms.CheckBox isDuplicate;
         private System.Windows.Forms.ComboBox frameSelector;
         private System.Windows.Forms.Button accept;
+        private System.Windows.Forms.CheckBox autosel;
     }
 }

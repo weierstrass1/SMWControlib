@@ -44,7 +44,7 @@ namespace SMWControlibBackend.Graphics.Frames
 
             while (fmaux != null)
             {
-                bp = first.GetBitmap();
+                bp = fmaux.GetBitmap();
                 if(bp!=null)
                 {
                     if (bp.Width > w) w = bp.Width;

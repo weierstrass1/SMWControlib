@@ -8,13 +8,20 @@ namespace SMWControlibControls.GraphicsControls
 {
     public partial class NewFrameDialog : Form
     {
+        public static bool Duplicate = false, AutoSelect = true;
         List<Frame> frames;
         private NewFrameDialog()
         {
             InitializeComponent();
             accept.Click += click;
             isDuplicate.CheckedChanged += checkedChanged;
+            autosel.CheckedChanged += autoselCheckedChanged;
             name.TextChanged += textChanged;
+        }
+
+        private void autoselCheckedChanged(object sender, EventArgs e)
+        {
+            AutoSelect = autosel.Checked;
         }
 
         private void textChanged(object sender, EventArgs e)
@@ -47,6 +54,7 @@ namespace SMWControlibControls.GraphicsControls
         private void checkedChanged(object sender, EventArgs e)
         {
             frameSelector.Enabled = isDuplicate.Checked;
+            Duplicate = isDuplicate.Checked;
         }
 
         private void click(object sender, EventArgs e)
@@ -120,6 +128,9 @@ namespace SMWControlibControls.GraphicsControls
                 nfd.isDuplicate.Enabled = false;
             if (Frames != null && Frames.Count != 0)
                 nfd.frameSelector.SelectedIndex = 0;
+
+            nfd.isDuplicate.Checked = Duplicate;
+            nfd.autosel.Checked = AutoSelect;
 
             return nfd.ShowDialog(Owner);
         }

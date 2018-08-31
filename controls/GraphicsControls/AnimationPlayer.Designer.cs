@@ -32,9 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AnimationPlayer));
             this.panel1 = new System.Windows.Forms.Panel();
             this.bottom = new System.Windows.Forms.Panel();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.zoomBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.animationSelector = new System.Windows.Forms.ComboBox();
+            this.speedBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.previus = new SMWControlibControls.GraphicsControls.ImageButton();
             this.next = new SMWControlibControls.GraphicsControls.ImageButton();
@@ -47,11 +47,15 @@
             this.topRight = new System.Windows.Forms.Panel();
             this.topLeft = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.topTop = new System.Windows.Forms.Panel();
+            this.bottomTop = new System.Windows.Forms.Panel();
+            this.midTop = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.bottom.SuspendLayout();
             this.panel2.SuspendLayout();
             this.top.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.player)).BeginInit();
+            this.midTop.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -67,9 +71,9 @@
             // 
             // bottom
             // 
-            this.bottom.Controls.Add(this.comboBox1);
+            this.bottom.Controls.Add(this.zoomBox);
             this.bottom.Controls.Add(this.label2);
-            this.bottom.Controls.Add(this.animationSelector);
+            this.bottom.Controls.Add(this.speedBox);
             this.bottom.Controls.Add(this.label1);
             this.bottom.Controls.Add(this.previus);
             this.bottom.Controls.Add(this.next);
@@ -82,11 +86,11 @@
             this.bottom.Size = new System.Drawing.Size(414, 41);
             this.bottom.TabIndex = 2;
             // 
-            // comboBox1
+            // zoomBox
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.zoomBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.zoomBox.FormattingEnabled = true;
+            this.zoomBox.Items.AddRange(new object[] {
             "X1",
             "X2",
             "X3",
@@ -95,11 +99,11 @@
             "X6",
             "X7",
             "X8"});
-            this.comboBox1.Location = new System.Drawing.Point(68, 11);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 8, 6, 3);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(76, 21);
-            this.comboBox1.TabIndex = 9;
+            this.zoomBox.Location = new System.Drawing.Point(68, 11);
+            this.zoomBox.Margin = new System.Windows.Forms.Padding(3, 8, 6, 3);
+            this.zoomBox.Name = "zoomBox";
+            this.zoomBox.Size = new System.Drawing.Size(76, 21);
+            this.zoomBox.TabIndex = 9;
             // 
             // label2
             // 
@@ -112,11 +116,11 @@
             this.label2.Text = "Zoom";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // animationSelector
+            // speedBox
             // 
-            this.animationSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.animationSelector.FormattingEnabled = true;
-            this.animationSelector.Items.AddRange(new object[] {
+            this.speedBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.speedBox.FormattingEnabled = true;
+            this.speedBox.Items.AddRange(new object[] {
             "X0.125",
             "X0.25",
             "X0.5",
@@ -129,11 +133,11 @@
             "X3.5",
             "X4",
             ""});
-            this.animationSelector.Location = new System.Drawing.Point(329, 11);
-            this.animationSelector.Margin = new System.Windows.Forms.Padding(3, 8, 6, 3);
-            this.animationSelector.Name = "animationSelector";
-            this.animationSelector.Size = new System.Drawing.Size(76, 21);
-            this.animationSelector.TabIndex = 7;
+            this.speedBox.Location = new System.Drawing.Point(329, 11);
+            this.speedBox.Margin = new System.Windows.Forms.Padding(3, 8, 6, 3);
+            this.speedBox.Name = "speedBox";
+            this.speedBox.Size = new System.Drawing.Size(76, 21);
+            this.speedBox.TabIndex = 7;
             // 
             // label1
             // 
@@ -242,8 +246,9 @@
             // 
             // top
             // 
-            this.top.AutoScroll = true;
-            this.top.Controls.Add(this.player);
+            this.top.Controls.Add(this.midTop);
+            this.top.Controls.Add(this.bottomTop);
+            this.top.Controls.Add(this.topTop);
             this.top.Dock = System.Windows.Forms.DockStyle.Fill;
             this.top.Location = new System.Drawing.Point(61, 0);
             this.top.Name = "top";
@@ -256,7 +261,7 @@
             this.player.Location = new System.Drawing.Point(0, 0);
             this.player.Margin = new System.Windows.Forms.Padding(0);
             this.player.Name = "player";
-            this.player.Size = new System.Drawing.Size(100, 50);
+            this.player.Size = new System.Drawing.Size(128, 128);
             this.player.TabIndex = 0;
             this.player.TabStop = false;
             // 
@@ -276,6 +281,32 @@
             this.topLeft.Size = new System.Drawing.Size(61, 266);
             this.topLeft.TabIndex = 0;
             // 
+            // topTop
+            // 
+            this.topTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.topTop.Location = new System.Drawing.Point(0, 0);
+            this.topTop.Name = "topTop";
+            this.topTop.Size = new System.Drawing.Size(414, 36);
+            this.topTop.TabIndex = 1;
+            // 
+            // bottomTop
+            // 
+            this.bottomTop.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bottomTop.Location = new System.Drawing.Point(0, 204);
+            this.bottomTop.Name = "bottomTop";
+            this.bottomTop.Size = new System.Drawing.Size(414, 62);
+            this.bottomTop.TabIndex = 2;
+            // 
+            // midTop
+            // 
+            this.midTop.AutoScroll = true;
+            this.midTop.Controls.Add(this.player);
+            this.midTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.midTop.Location = new System.Drawing.Point(0, 36);
+            this.midTop.Name = "midTop";
+            this.midTop.Size = new System.Drawing.Size(414, 168);
+            this.midTop.TabIndex = 3;
+            // 
             // AnimationPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -290,6 +321,7 @@
             this.panel2.ResumeLayout(false);
             this.top.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.player)).EndInit();
+            this.midTop.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -309,9 +341,12 @@
         private ImageButton next;
         private ImageButton previus;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox animationSelector;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox speedBox;
+        private System.Windows.Forms.ComboBox zoomBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Panel midTop;
+        private System.Windows.Forms.Panel bottomTop;
+        private System.Windows.Forms.Panel topTop;
     }
 }

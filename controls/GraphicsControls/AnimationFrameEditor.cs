@@ -31,6 +31,27 @@ namespace SMWControlibControls.GraphicsControls
             RemoveClick, ExchangeClick, FlipXChanged, 
             FlipYChanged, TimeChanged;
 
+        public bool FlipX
+        {
+            set
+            {
+                checkBox1.Checked = value;
+            }
+        }
+
+
+        public bool FlipY
+        {
+            set
+            {
+                checkBox2.Checked = value;
+            }
+        }
+
+        private PictureBox rectangle, border;
+        private int borderSize = 3;
+        private Bitmap borderImg;
+
         public AnimationFrameEditor()
         {
             InitializeComponent();
@@ -45,6 +66,59 @@ namespace SMWControlibControls.GraphicsControls
             numericUpDown1.ValueChanged += valueChanged;
             checkBox1.CheckedChanged += flipXCheckedChanged;
             checkBox2.CheckedChanged += flipYCheckedChanged;
+
+            border = new PictureBox()
+            {
+                Margin = new Padding(0, 0, 0, 0),
+                Padding = new Padding(0, 0, 0, 0),
+                Parent = pictureBox1,
+                Location = new Point(0, 0),
+                Dock = DockStyle.Fill,
+                BackColor = Color.FromArgb(0, 0, 0, 0)
+            };
+
+            rectangle = new PictureBox()
+            {
+                Margin = new Padding(0, 0, 0, 0),
+                Padding = new Padding(0, 0, 0, 0),
+                Parent = border,
+                Location = new Point(0, 0),
+                Width = 0,
+                Dock = DockStyle.Left,
+                BackColor = Color.FromArgb(90, 0, 0, 255)
+            };
+
+            Brush b = new SolidBrush(Color.FromArgb(0, 0, 0, 0));
+            borderImg = new Bitmap(border.Width, border.Height);
+            using (Graphics g = Graphics.FromImage(borderImg))
+            {
+                g.FillRectangle(Brushes.Red, 0, 0, border.Width, borderSize);
+                g.FillRectangle(Brushes.Red, 0, 0, borderSize, border.Height);
+                g.FillRectangle(Brushes.Red, 0, border.Height - borderSize
+                    , border.Width, borderSize);
+                g.FillRectangle(Brushes.Red, border.Width - borderSize, 0
+                    , borderSize, border.Height);
+            }
+        }
+
+        public void SetBorderVisible(bool visible)
+        {
+            if (visible)
+                border.Image = borderImg;
+            else
+                border.Image = null;
+        }
+        public void SetCurrentTimer()
+        {
+            rectangle.Width = 0;
+        }
+
+        public void SetCurrentTimer(int time)
+        {
+            float perc = (frameMask.Time - time) / (float)frameMask.Time;
+            if (perc < 0) perc = 0;
+
+            rectangle.Width = (int)(pictureBox1.Width * perc);
         }
 
         private void flipYCheckedChanged(object sender, EventArgs e)
@@ -118,7 +192,7 @@ namespace SMWControlibControls.GraphicsControls
             Font f = null;
             if (FrameMask != null)
             {
-                bp = FrameMask.Frame.GetBitmap();
+                bp = FrameMask.GetBitmap();
                 per = pictureBox1.Image.Width / (float)bp.Width;
 
                 if (bp.Width < bp.Height)

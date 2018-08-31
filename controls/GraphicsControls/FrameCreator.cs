@@ -87,6 +87,10 @@ namespace SMWControlibControls.GraphicsControls
                 == DialogResult.OK)
             {
                 refreshFrames();
+                if(NewFrameDialog.AutoSelect)
+                {
+                    frameSelector.SelectedIndex = frames.Count - 1;
+                }
             }
         }
         private void deleteClick(object sender, EventArgs e)

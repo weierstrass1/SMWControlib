@@ -691,7 +691,7 @@ namespace SMWControlibControls.GraphicsControls
             if (counter == selection.Count)
             {
                 counter = 0;
-                ReDraw();
+                buildSelectionBox();
                 Refresh();
             }
         }
@@ -736,6 +736,7 @@ namespace SMWControlibControls.GraphicsControls
                 tmaux.XDisp += xAcc;
                 tmaux.YDisp += yAcc;
                 tmaux.Zoom = zoom;
+                tmaux.Palette = ColorPalette.SelectedPalette;
                 tmaux.IsSelected = false;
                 if (tmaux.XDisp <= Width - tmaux.Size * zoom &&
                     tmaux.YDisp <= Height - tmaux.Size * zoom)
@@ -1043,17 +1044,17 @@ namespace SMWControlibControls.GraphicsControls
 
         private void colorPalette_OneGlobalPaletteChange(PaletteId obj)
         {
-            ReDraw();
+            buildSelectionBox();
         }
 
         private void colorPalette_GlobalPalletesChange()
         {
-            ReDraw();
+            buildSelectionBox();
         }
 
         private void colorPalette_SelectedGlobalPaletteChange()
         {
-            ReDraw();
+            buildSelectionBox();
         }
         protected override void OnPaint(PaintEventArgs pe)
         {

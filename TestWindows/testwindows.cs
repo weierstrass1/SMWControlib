@@ -23,7 +23,12 @@ namespace TestWindows
             animationEditor1.AddClick += addClick;
             animationEditor1.AnimationChanged += animationChanged;
             resizeableSpriteGridController1.MidChanged += midChanged;
-            
+            animationPlayer1.TimeChanged += playerTimeChanged;
+        }
+
+        private void playerTimeChanged(int arg1, int arg2)
+        {
+            animationEditor1.SetCurrentFrameAndTime(arg1, arg2);
         }
 
         private void midChanged()

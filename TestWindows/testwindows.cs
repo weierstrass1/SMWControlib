@@ -24,6 +24,13 @@ namespace TestWindows
             animationEditor1.AnimationChanged += animationChanged;
             resizeableSpriteGridController1.MidChanged += midChanged;
             animationPlayer1.TimeChanged += playerTimeChanged;
+            animationCreator1.SelectionChanged += animationCreatorSelectionChanged;
+        }
+
+        private void animationCreatorSelectionChanged()
+        {
+            animationEditor1.Animation = animationCreator1.SelectedAnimation;
+            animationPlayer1.Reset();
         }
 
         private void playerTimeChanged(int arg1, int arg2)
@@ -52,6 +59,9 @@ namespace TestWindows
             frameSelector1.Frames = frameCreator1.Frames;
             frameSelector1.BuildTable();
             animationEditor1.Animation = animationEditor1.Animation;
+            if (tabControl1.SelectedIndex == 2)
+            {
+            }
         }
 
         private void graphicsLoaded()

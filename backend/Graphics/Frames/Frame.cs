@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SMWControlibBackend.Interaction;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace SMWControlibBackend.Graphics.Frames
@@ -6,6 +7,7 @@ namespace SMWControlibBackend.Graphics.Frames
     public class Frame
     {
         public string Name;
+        public List<HitBox> HitBoxes;
         public List<TileMask> Tiles { get; private set; }
         public int MidX;
         public int MidY;
@@ -13,6 +15,7 @@ namespace SMWControlibBackend.Graphics.Frames
         public Frame()
         {
             Tiles = new List<TileMask>();
+            HitBoxes = new List<HitBox>();
         }
 
         public Frame Duplicate()
@@ -27,6 +30,27 @@ namespace SMWControlibBackend.Graphics.Frames
                 frame.Tiles.Add(tm.Clone());
             }
             return frame;
+        }
+
+        public Bitmap GetBitmap(int BitmapWidth, int BitmapHeight)
+        {
+            Bitmap bp = new Bitmap(BitmapWidth, BitmapHeight);
+            using (System.Drawing.Graphics g =
+                System.Drawing.Graphics.FromImage(bp))
+            {
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                int aux = 0;
+                foreach (TileMask tm in Tiles)
+                {
+                    aux = tm.Zoom;
+                    tm.Zoom = 1;
+
+                    g.DrawImage(tm.GetBitmap(),
+                        tm.XDisp / tm.Zoom, tm.YDisp / tm.Zoom);
+                    tm.Zoom = aux;
+                }
+            }
+            return bp;
         }
 
         public Bitmap GetBitmap()

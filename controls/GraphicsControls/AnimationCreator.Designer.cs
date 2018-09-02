@@ -34,8 +34,8 @@
             this.delete = new System.Windows.Forms.Button();
             this.rename = new System.Windows.Forms.Button();
             this.info = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.onlyOnce = new System.Windows.Forms.RadioButton();
+            this.continuous = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // label1
@@ -95,39 +95,39 @@
             this.info.Text = "Info";
             this.info.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // onlyOnce
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(9, 122);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(6);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Padding = new System.Windows.Forms.Padding(6);
-            this.radioButton1.Size = new System.Drawing.Size(87, 29);
-            this.radioButton1.TabIndex = 7;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Only Once";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.onlyOnce.AutoSize = true;
+            this.onlyOnce.Location = new System.Drawing.Point(9, 122);
+            this.onlyOnce.Margin = new System.Windows.Forms.Padding(6);
+            this.onlyOnce.Name = "onlyOnce";
+            this.onlyOnce.Padding = new System.Windows.Forms.Padding(6);
+            this.onlyOnce.Size = new System.Drawing.Size(87, 29);
+            this.onlyOnce.TabIndex = 7;
+            this.onlyOnce.TabStop = true;
+            this.onlyOnce.Text = "Only Once";
+            this.onlyOnce.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // continuous
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Checked = true;
-            this.radioButton2.Location = new System.Drawing.Point(107, 122);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(6);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Padding = new System.Windows.Forms.Padding(6);
-            this.radioButton2.Size = new System.Drawing.Size(90, 29);
-            this.radioButton2.TabIndex = 8;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Continuous";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.continuous.AutoSize = true;
+            this.continuous.Checked = true;
+            this.continuous.Location = new System.Drawing.Point(107, 122);
+            this.continuous.Margin = new System.Windows.Forms.Padding(6);
+            this.continuous.Name = "continuous";
+            this.continuous.Padding = new System.Windows.Forms.Padding(6);
+            this.continuous.Size = new System.Drawing.Size(90, 29);
+            this.continuous.TabIndex = 8;
+            this.continuous.TabStop = true;
+            this.continuous.Text = "Continuous";
+            this.continuous.UseVisualStyleBackColor = true;
             // 
             // AnimationCreator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
+            this.Controls.Add(this.continuous);
+            this.Controls.Add(this.onlyOnce);
             this.Controls.Add(this.info);
             this.Controls.Add(this.rename);
             this.Controls.Add(this.delete);
@@ -149,7 +149,7 @@
         private System.Windows.Forms.Button delete;
         private System.Windows.Forms.Button rename;
         private System.Windows.Forms.Button info;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton onlyOnce;
+        private System.Windows.Forms.RadioButton continuous;
     }
 }

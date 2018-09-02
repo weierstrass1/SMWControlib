@@ -43,19 +43,19 @@
             this.bottomLeft = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.top = new System.Windows.Forms.Panel();
+            this.midTop = new System.Windows.Forms.Panel();
             this.player = new System.Windows.Forms.PictureBox();
+            this.bottomTop = new System.Windows.Forms.Panel();
+            this.topTop = new System.Windows.Forms.Panel();
             this.topRight = new System.Windows.Forms.Panel();
             this.topLeft = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.topTop = new System.Windows.Forms.Panel();
-            this.bottomTop = new System.Windows.Forms.Panel();
-            this.midTop = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.bottom.SuspendLayout();
             this.panel2.SuspendLayout();
             this.top.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.player)).BeginInit();
             this.midTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.player)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -131,8 +131,7 @@
             "X2.5",
             "X3",
             "X3.5",
-            "X4",
-            ""});
+            "X4"});
             this.speedBox.Location = new System.Drawing.Point(329, 11);
             this.speedBox.Margin = new System.Windows.Forms.Padding(3, 8, 6, 3);
             this.speedBox.Name = "speedBox";
@@ -255,6 +254,16 @@
             this.top.Size = new System.Drawing.Size(414, 266);
             this.top.TabIndex = 2;
             // 
+            // midTop
+            // 
+            this.midTop.AutoScroll = true;
+            this.midTop.Controls.Add(this.player);
+            this.midTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.midTop.Location = new System.Drawing.Point(0, 36);
+            this.midTop.Name = "midTop";
+            this.midTop.Size = new System.Drawing.Size(414, 168);
+            this.midTop.TabIndex = 3;
+            // 
             // player
             // 
             this.player.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -264,6 +273,22 @@
             this.player.Size = new System.Drawing.Size(128, 128);
             this.player.TabIndex = 0;
             this.player.TabStop = false;
+            // 
+            // bottomTop
+            // 
+            this.bottomTop.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bottomTop.Location = new System.Drawing.Point(0, 204);
+            this.bottomTop.Name = "bottomTop";
+            this.bottomTop.Size = new System.Drawing.Size(414, 62);
+            this.bottomTop.TabIndex = 2;
+            // 
+            // topTop
+            // 
+            this.topTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.topTop.Location = new System.Drawing.Point(0, 0);
+            this.topTop.Name = "topTop";
+            this.topTop.Size = new System.Drawing.Size(414, 36);
+            this.topTop.TabIndex = 1;
             // 
             // topRight
             // 
@@ -281,32 +306,6 @@
             this.topLeft.Size = new System.Drawing.Size(61, 266);
             this.topLeft.TabIndex = 0;
             // 
-            // topTop
-            // 
-            this.topTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.topTop.Location = new System.Drawing.Point(0, 0);
-            this.topTop.Name = "topTop";
-            this.topTop.Size = new System.Drawing.Size(414, 36);
-            this.topTop.TabIndex = 1;
-            // 
-            // bottomTop
-            // 
-            this.bottomTop.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomTop.Location = new System.Drawing.Point(0, 204);
-            this.bottomTop.Name = "bottomTop";
-            this.bottomTop.Size = new System.Drawing.Size(414, 62);
-            this.bottomTop.TabIndex = 2;
-            // 
-            // midTop
-            // 
-            this.midTop.AutoScroll = true;
-            this.midTop.Controls.Add(this.player);
-            this.midTop.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.midTop.Location = new System.Drawing.Point(0, 36);
-            this.midTop.Name = "midTop";
-            this.midTop.Size = new System.Drawing.Size(414, 168);
-            this.midTop.TabIndex = 3;
-            // 
             // AnimationPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -320,8 +319,8 @@
             this.bottom.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.top.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.player)).EndInit();
             this.midTop.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.player)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -13,6 +13,7 @@ namespace SMWControlibBackend.Graphics.Frames
         FrameMask first;
         public int Length{ get; private set; }
         public PlayType PlayType = PlayType.Continuous;
+        public string Name;
 
         public Animation()
         {
@@ -197,6 +198,11 @@ namespace SMWControlibBackend.Graphics.Frames
             }
             
             Length--;
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
 
         public FrameMask this[int key]

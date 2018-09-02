@@ -47,6 +47,12 @@
     <Compile Include="Graphics\Frames\FrameMask.cs" />
     <Compile Include="Graphics\TileMask.cs" />
     <Compile Include="Graphics\SnesGraphics.cs" />
+    <Compile Include="Interaction\HitBox.cs" />
+    <Compile Include="Interaction\RectangleHitBox.cs" />
+    <Compile Include="Logic\Code.cs" />
+    <Compile Include="Logic\CodeComponent.cs" />
+    <Compile Include="Logic\Routine.cs" />
+    <Compile Include="Logic\Table.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Graphics\Tile.cs" />
   </ItemGroup>

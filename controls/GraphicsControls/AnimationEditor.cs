@@ -13,7 +13,7 @@ namespace SMWControlibControls.GraphicsControls
 {
     public partial class AnimationEditor : UserControl
     {
-        private Animation animation;
+        private Animation animation = null;
         public Animation Animation
         {
             get
@@ -41,12 +41,12 @@ namespace SMWControlibControls.GraphicsControls
         public AnimationEditor()
         {
             InitializeComponent();
-            animation = new Animation();
             buildTable();
         }
 
         public void SetCurrentFrameAndTime(int FrameID, int Time)
         {
+            if (animation == null) return;
             if (animation.Length <= 0) return;
             if (FrameID < 0) FrameID = 0;
             if (FrameID >= animation.Length) FrameID = animation.Length - 1;
@@ -130,16 +130,35 @@ namespace SMWControlibControls.GraphicsControls
 
         private void timeChanged(AnimationFrameEditor obj)
         {
+            if (animation == null)
+            {
+                MessageBox.Show("You must create an animation first.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             _Animation = animation;
         }
 
         private void flipChanged(AnimationFrameEditor obj)
         {
+            if (animation == null)
+            {
+                MessageBox.Show("You must create an animation first.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             _Animation = animation;
         }
 
         private void addClick(AnimationFrameEditor obj)
         {
+            if (animation == null)
+            {
+                MessageBox.Show("You must create an animation first.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             AddClick?.Invoke(this);
 
             if (Selection == null || Selection.Length <= 0) return;

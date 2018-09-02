@@ -1050,6 +1050,7 @@ namespace SMWControlibControls.GraphicsControls
         private void colorPalette_GlobalPalletesChange()
         {
             buildSelectionBox();
+            ReDraw();
         }
 
         private void colorPalette_SelectedGlobalPaletteChange()

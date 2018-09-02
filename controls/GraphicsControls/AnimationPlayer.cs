@@ -15,12 +15,13 @@ namespace SMWControlibControls.GraphicsControls
 {
     public partial class AnimationPlayer : UserControl
     {
-        private Animation animation;
+        private Animation animation = null;
         public Animation Animation
         {
             set
             {
                 animation = value;
+                if (animation == null) return;
                 frames = animation.GetFrameMasks();
                 framesBitmaps = animation.GetBitmaps();
                 if (framesBitmaps == null || framesBitmaps.Length <= 0) return;
@@ -117,7 +118,7 @@ namespace SMWControlibControls.GraphicsControls
         }
         private int timer = 0;
 
-        private int initInterval;
+        private int initInterval = 17;
         public int SpeedFPS
         {
             get
@@ -127,8 +128,8 @@ namespace SMWControlibControls.GraphicsControls
             set
             {
                 if (value < 1) value = 1;
-                if (value > 1000) value = 1000; 
-                timer1.Interval = 1000 / value;
+                if (value > 1000) value = 1000;
+                timer1.Interval = (int)Math.Round(1000f / value, 0);
                 Interval = timer1.Interval;
                 initInterval = Interval;
             }
@@ -159,6 +160,13 @@ namespace SMWControlibControls.GraphicsControls
             speedBox.SelectedIndexChanged += speedBoxSelectedIndexChanged;
             player.SizeChanged += sizeChanged;
             SizeChanged += sizeChanged;
+            zoomBox.SelectedIndex = 1;
+            speedBox.SelectedIndex = 4;
+        }
+
+        public void Reset()
+        {
+            Index = 0;
         }
 
         private void sizeChanged(object sender, EventArgs e)
@@ -209,6 +217,7 @@ namespace SMWControlibControls.GraphicsControls
 
         private void nextClick(object sender, EventArgs e)
         {
+            if (animation == null) return;
             if (playing)
             {
                 Playing = false;
@@ -222,11 +231,13 @@ namespace SMWControlibControls.GraphicsControls
 
         private void playClick(object sender, EventArgs e)
         {
+            if (animation == null) return;
             Playing = !playing;
         }
 
         private void previusClick(object sender, EventArgs e)
         {
+            if (animation == null) return;
             if (index - 1 < 0)
                 Index = animation.Length - 1;
             else
@@ -236,6 +247,7 @@ namespace SMWControlibControls.GraphicsControls
         private void tick(object sender, EventArgs e)
         {
             if (frames == null || frames.Length <= 0) return;
+            if (animation == null) return;
 
             timer--;
             if(timer <= 0)

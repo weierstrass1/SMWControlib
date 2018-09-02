@@ -95,6 +95,12 @@
     <Compile Include="GraphicsControls\ImageButton.Designer.cs">
       <DependentUpon>ImageButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="GraphicsControls\NewAnimationDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GraphicsControls\NewAnimationDialog.Designer.cs">
+      <DependentUpon>NewAnimationDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="GraphicsControls\NewFrameDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,6 +162,12 @@
       <DependentUpon>SpriteGridSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="GraphicsControls\SpriteGridSettingsContainer.cs" />
+    <Compile Include="InteractionControls\InteractionGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="InteractionControls\InteractionGrid.Designer.cs">
+      <DependentUpon>InteractionGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GraphicsControls\SpriteGrid.cs">
       <SubType>Component</SubType>
@@ -205,6 +217,9 @@
     <EmbeddedResource Include="GraphicsControls\ImageButton.resx">
       <DependentUpon>ImageButton.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphicsControls\NewAnimationDialog.resx">
+      <DependentUpon>NewAnimationDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GraphicsControls\NewFrameDialog.resx">
       <DependentUpon>NewFrameDialog.cs</DependentUpon>
@@ -301,5 +316,6 @@
   <ItemGroup>
     <None Include="Resources\stop.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

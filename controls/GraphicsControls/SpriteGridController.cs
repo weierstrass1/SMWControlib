@@ -42,7 +42,7 @@ namespace SMWControlibControls.GraphicsControls
             zoom.SelectedIndexChanged += selectedIndexChanged;
             zoom.SelectedIndex = 1;
             cellSize.SelectedIndexChanged += cellSizeSelectedIndexChanged;
-            cellSize.SelectedIndex = 4;
+            cellSize.SelectedIndex = 3;
             moveLeft.Click += moveLeftClick;
             moveUp.Click += moveUpClick;
             moveDown.Click += moveDownClick;

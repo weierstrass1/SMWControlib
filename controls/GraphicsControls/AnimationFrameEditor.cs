@@ -123,6 +123,11 @@ namespace SMWControlibControls.GraphicsControls
 
         private void flipYCheckedChanged(object sender, EventArgs e)
         {
+            if (frameMask == null)
+            {
+                FlipYChanged?.Invoke(this);
+                return;
+            }
             frameMask.FlipY = checkBox2.Checked;
             reDraw();
             FlipYChanged?.Invoke(this);
@@ -130,6 +135,11 @@ namespace SMWControlibControls.GraphicsControls
 
         private void flipXCheckedChanged(object sender, EventArgs e)
         {
+            if (frameMask == null)
+            {
+                FlipXChanged?.Invoke(this);
+                return;
+            }
             frameMask.FlipX = checkBox1.Checked;
             reDraw();
             FlipXChanged?.Invoke(this);
@@ -140,6 +150,10 @@ namespace SMWControlibControls.GraphicsControls
             if (FrameMask != null)
             {
                 FrameMask.Time = (int)numericUpDown1.Value;
+                TimeChanged?.Invoke(this);
+            }
+            else
+            {
                 TimeChanged?.Invoke(this);
             }
         }
@@ -193,12 +207,16 @@ namespace SMWControlibControls.GraphicsControls
             if (FrameMask != null)
             {
                 bp = FrameMask.GetBitmap();
-                per = pictureBox1.Image.Width / (float)bp.Width;
-
-                if (bp.Width < bp.Height)
+                if (bp != null)
                 {
-                    per = pictureBox1.Image.Height / (float)bp.Height;
+                    per = pictureBox1.Image.Width / (float)bp.Width;
+
+                    if (bp.Width < bp.Height)
+                    {
+                        per = pictureBox1.Image.Height / (float)bp.Height;
+                    }
                 }
+                
                 f = new Font("Consolas", 11, FontStyle.Bold);
             }
             using (Graphics g = Graphics.FromImage(pictureBox1.Image))
@@ -208,8 +226,11 @@ namespace SMWControlibControls.GraphicsControls
                     pictureBox1.Image.Width, pictureBox1.Image.Height);
                 if (FrameMask != null)
                 {
-                    g.DrawImage(bp, 0, 0,
-                    bp.Width * per, bp.Height * per);
+                    if (bp != null)
+                    {
+                        g.DrawImage(bp, 0, 0,
+                            bp.Width * per, bp.Height * per);
+                    }
                     g.DrawString("" + frameMask.Index, f,
                             Brushes.Black, 1, 1);
                 }

@@ -97,10 +97,21 @@ namespace SMWControlibControls.GraphicsControls
         {
             if (SelectedFrame != null)
             {
+                int i = frames.IndexOf(SelectedFrame);
                 frames.Remove(SelectedFrame);
+                if (frames.Count == 0)
+                {
+                    SelectedFrame = null;
+                }
+                else
+                {
+                    if (i >= frames.Count)
+                    {
+                        i = frames.Count - 1;
+                    }
+                    SelectedFrame = frames[i];
+                }
                 refreshFrames();
-                if (frames.Count == 0) 
-                        SelectedFrame = null;
             }
         }
         private void refreshFrames()
@@ -112,8 +123,6 @@ namespace SMWControlibControls.GraphicsControls
             }
             if (SelectedFrame != null)
                 frameSelector.SelectedItem = SelectedFrame;
-            else
-                frameSelector.SelectedIndex = 0;
         }
 
     }

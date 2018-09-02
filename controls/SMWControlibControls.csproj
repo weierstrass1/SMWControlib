@@ -95,6 +95,12 @@
     <Compile Include="GraphicsControls\ImageButton.Designer.cs">
       <DependentUpon>ImageButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="InteractionControls\InteractionMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InteractionControls\InteractionMenu.Designer.cs">
+      <DependentUpon>InteractionMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="GraphicsControls\NewAnimationDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -217,6 +223,9 @@
     <EmbeddedResource Include="GraphicsControls\ImageButton.resx">
       <DependentUpon>ImageButton.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InteractionControls\InteractionMenu.resx">
+      <DependentUpon>InteractionMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GraphicsControls\NewAnimationDialog.resx">
       <DependentUpon>NewAnimationDialog.cs</DependentUpon>

@@ -1,6 +1,6 @@
-﻿namespace SMWControlibControls.GraphicsControls
+﻿namespace SMWControlibControls.InteractionControls
 {
-    partial class NewAnimationDialog
+    partial class NewHitboxDiaglog
     {
         /// <summary>
         /// Required designer variable.
@@ -40,7 +40,7 @@
             this.autosel.Location = new System.Drawing.Point(18, 40);
             this.autosel.Name = "autosel";
             this.autosel.Size = new System.Drawing.Size(78, 17);
-            this.autosel.TabIndex = 11;
+            this.autosel.TabIndex = 19;
             this.autosel.Text = "AutoSelect";
             this.autosel.UseVisualStyleBackColor = true;
             // 
@@ -49,7 +49,7 @@
             this.accept.Location = new System.Drawing.Point(124, 65);
             this.accept.Name = "accept";
             this.accept.Size = new System.Drawing.Size(75, 23);
-            this.accept.TabIndex = 10;
+            this.accept.TabIndex = 18;
             this.accept.Text = "Accept";
             this.accept.UseVisualStyleBackColor = true;
             // 
@@ -58,8 +58,8 @@
             this.name.Location = new System.Drawing.Point(71, 14);
             this.name.Name = "name";
             this.name.Size = new System.Drawing.Size(230, 20);
-            this.name.TabIndex = 7;
-            this.name.Text = "Animation0";
+            this.name.TabIndex = 17;
+            this.name.Text = "Hitbox0";
             // 
             // label1
             // 
@@ -69,10 +69,10 @@
             this.label1.Margin = new System.Windows.Forms.Padding(6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 15);
-            this.label1.TabIndex = 6;
+            this.label1.TabIndex = 16;
             this.label1.Text = "Name: ";
             // 
-            // NewAnimationDialog
+            // NewHitboxDiaglog
             // 
             this.AcceptButton = this.accept;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -83,9 +83,9 @@
             this.Controls.Add(this.name);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "NewAnimationDialog";
+            this.Name = "NewHitboxDiaglog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "New Animation";
+            this.Text = "New Hitbox";
             this.ResumeLayout(false);
             this.PerformLayout();
 

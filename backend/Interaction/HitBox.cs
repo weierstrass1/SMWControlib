@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace SMWControlibBackend.Interaction
 {
-    public class HitBoxType
+    public struct HitBoxType
     {
         public static readonly HitBoxType Rectangle = new HitBoxType(0);
+        public static readonly HitBoxType InteractionPoint = new HitBoxType(1);
 
         public int Value { get; private set; }
 
@@ -30,7 +31,8 @@ namespace SMWControlibBackend.Interaction
     {
         public string Name;
         public int XOffset, YOffset;
-        public Color BorderColor, FrontColor;
+        public Color BorderColor = Color.FromArgb(255, 0, 0),
+            FrontColor = Color.FromArgb(120, 255, 0, 0);
         public HitBoxType Type { get; protected set; }
         public Routine Action;
 

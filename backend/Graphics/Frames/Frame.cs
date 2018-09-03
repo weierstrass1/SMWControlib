@@ -7,7 +7,8 @@ namespace SMWControlibBackend.Graphics.Frames
     public class Frame
     {
         public string Name;
-        public List<HitBox> HitBoxes;
+        public List<HitBox> HitBoxes { get; private set; }
+        public List<InteractionPoint> InteractionPoints { get; private set; }
         public List<TileMask> Tiles { get; private set; }
         public int MidX;
         public int MidY;
@@ -16,6 +17,7 @@ namespace SMWControlibBackend.Graphics.Frames
         {
             Tiles = new List<TileMask>();
             HitBoxes = new List<HitBox>();
+            InteractionPoints = new List<InteractionPoint>();
         }
 
         public Frame Duplicate()
@@ -32,9 +34,9 @@ namespace SMWControlibBackend.Graphics.Frames
             return frame;
         }
 
-        public Bitmap GetBitmap(int BitmapWidth, int BitmapHeight)
+        public Bitmap GetBitmap(int BitmapWidth, int BitmapHeight, Zoom zoom)
         {
-            Bitmap bp = new Bitmap(BitmapWidth, BitmapHeight);
+            Bitmap bp = new Bitmap(BitmapWidth * zoom, BitmapHeight * zoom);
             using (System.Drawing.Graphics g =
                 System.Drawing.Graphics.FromImage(bp))
             {
@@ -43,10 +45,10 @@ namespace SMWControlibBackend.Graphics.Frames
                 foreach (TileMask tm in Tiles)
                 {
                     aux = tm.Zoom;
-                    tm.Zoom = 1;
+                    tm.Zoom = zoom;
 
                     g.DrawImage(tm.GetBitmap(),
-                        tm.XDisp / tm.Zoom, tm.YDisp / tm.Zoom);
+                        (tm.XDisp / aux) * zoom, (tm.YDisp / aux) * zoom);
                     tm.Zoom = aux;
                 }
             }

@@ -15,11 +15,63 @@ using SMWControlibControls.GraphicsControls;
 
 namespace SMWControlibControls.InteractionControls
 {
+    public struct GrabType
+    {
+        public static readonly GrabType Top = new GrabType(0);
+        public static readonly GrabType Bottom = new GrabType(1);
+        public static readonly GrabType Left = new GrabType(2);
+        public static readonly GrabType Right = new GrabType(3);
+        public static readonly GrabType TopLeft = new GrabType(4);
+        public static readonly GrabType TopRight = new GrabType(5);
+        public static readonly GrabType BottomLeft = new GrabType(6);
+        public static readonly GrabType BottomRight = new GrabType(7);
+        public static readonly GrabType Center = new GrabType(8);
+        public static readonly GrabType None = new GrabType(9);
+
+        public int Value { get; private set; }
+
+        private GrabType(int value)
+        {
+            Value = value;
+        }
+
+        public static implicit operator int(GrabType d)
+        {
+            return d.Value;
+        }
+    }
     public partial class InteractionGrid : PictureBox
     {
 
         Frame selectedFrame;
+        public Frame SelectedFrame
+        {
+            get
+            {
+                return selectedFrame;
+            }
+            set
+            {
+                selectedFrame = value;
+                buildBack();
+                buildBoxes();
+                buildCurrentBox();
+            }
+        }
         HitBox selectedHitbox;
+        public HitBox SelectedHitbox
+        {
+            get
+            {
+                return selectedHitbox;
+            }
+            set
+            {
+                selectedHitbox = value;
+                buildBoxes();
+                buildCurrentBox();
+            }
+        }
         private Zoom zoom = 1;
         public int Zoom
         {
@@ -35,6 +87,9 @@ namespace SMWControlibControls.InteractionControls
                 }
             }
         }
+
+        bool editing = false;
+        GrabType grabType = GrabType.None;
         private void applyZoom(int value)
         {
             zoom = value;
@@ -126,16 +181,18 @@ namespace SMWControlibControls.InteractionControls
 
         PictureBox grid, boxes, currentBox;
         private Bitmap gridBoxImg;
+
         public InteractionGrid()
         {
             InitializeComponent();
+            Color t = Color.FromArgb(0, 0, 0, 0);
             grid = new PictureBox
             {
                 Margin = new Padding(0, 0, 0, 0),
                 Padding = new Padding(0, 0, 0, 0),
                 Parent = this,
                 Location = new Point(0, 0),
-                BackColor = Color.Transparent
+                BackColor = t
             };
             boxes = new PictureBox
             {
@@ -143,7 +200,7 @@ namespace SMWControlibControls.InteractionControls
                 Padding = new Padding(0, 0, 0, 0),
                 Parent = grid,
                 Location = new Point(0, 0),
-                BackColor = Color.Transparent
+                BackColor = t
             };
             currentBox = new PictureBox
             {
@@ -151,8 +208,223 @@ namespace SMWControlibControls.InteractionControls
                 Padding = new Padding(0, 0, 0, 0),
                 Parent = boxes,
                 Location = new Point(0, 0),
-                BackColor = Color.Transparent
+                BackColor = t
             };
+
+            currentBox.MouseDown += mouseDown;
+            currentBox.MouseMove += mouseMove;
+            currentBox.MouseUp += mouseUp;
+        }
+
+        private void mouseUp(object sender, MouseEventArgs e)
+        {
+            editing = false;
+        }
+
+        private void mouseDown(object sender, MouseEventArgs e)
+        {
+            editing = true;
+        }
+
+        private void mouseMove(object sender, MouseEventArgs e)
+        {
+            if (SelectedHitbox == null) return;
+
+            int x = e.X;
+            int y = e.Y;
+            int xoff = SelectedHitbox.XOffset + 128;
+            xoff *= zoom;
+            int yoff = SelectedHitbox.YOffset + 112;
+            yoff *= zoom;
+
+            if (SelectedHitbox.Type == HitBoxType.Rectangle)
+            {
+                RectangleHitBox r = (RectangleHitBox)SelectedHitbox;
+                int w = r.Width * zoom;
+                int h = r.Height * zoom;
+
+                if (editing)
+                {
+                    int zacc = GridAccuracy * zoom;
+                    int xAcc = (x / zacc) * zacc;
+                    int yAcc = (y / zacc) * zacc;
+                    int right = xoff + w;
+                    int bottom = yoff + h;
+
+                    if (grabType == GrabType.Top)
+                    {
+                        yAcc += zacc;
+                        if (y % zacc != 0) yAcc -= zacc;
+                        if (yAcc >= bottom - zacc) yAcc = bottom - zacc;
+                        if (yAcc < 0) yAcc = 0;
+
+                        r.YOffset = (yAcc / zoom) - 112;
+                        r.Height = (bottom - yAcc) / Zoom;
+                    }
+                    else if (grabType == GrabType.Bottom)
+                    {
+                        if (y % zacc != 0) yAcc += zacc;
+                        if (yAcc - yoff <= zacc) yAcc = yoff + zacc;
+                        if (yAcc >= 240 * zoom) yAcc = 240 * zoom;
+
+                        r.Height = (yAcc - yoff) / Zoom;
+                    }
+                    else if (grabType == GrabType.Left)
+                    {
+                        xAcc += zacc;
+                        if (x % zacc != 0) xAcc -= zacc;
+                        if (xAcc >= right - zacc) xAcc = right - zacc;
+                        if (xAcc < 0) xAcc = 0;
+
+                        r.XOffset = (xAcc / zoom) - 128;
+                        r.Width = (right - xAcc) / Zoom;
+                    }
+                    else if (grabType == GrabType.Right)
+                    {
+                        if (x % zacc != 0) xAcc += zacc;
+                        if (xAcc - xoff <= zacc) xAcc = xoff + zacc;
+                        if (xAcc >= 256 * zoom) xAcc = 256 * zoom;
+
+                        r.Width = (xAcc - xoff) / Zoom;
+                    }
+                    else if (grabType == GrabType.TopLeft)
+                    {
+                        yAcc += zacc;
+                        if (y % zacc != 0) yAcc -= zacc;
+                        if (yAcc >= bottom - zacc) yAcc = bottom - zacc;
+                        if (yAcc < 0) yAcc = 0;
+
+                        r.YOffset = (yAcc / zoom) - 112;
+                        r.Height = (bottom - yAcc) / Zoom;
+
+                        xAcc += zacc;
+                        if (x % zacc != 0) xAcc -= zacc;
+                        if (xAcc >= right - zacc) xAcc = right - zacc;
+                        if (xAcc < 0) xAcc = 0;
+
+                        r.XOffset = (xAcc / zoom) - 128;
+                        r.Width = (right - xAcc) / Zoom;
+                    }
+                    else if (grabType == GrabType.TopRight)
+                    {
+                        yAcc += zacc;
+                        if (y % zacc != 0) yAcc -= zacc;
+                        if (yAcc >= bottom - zacc) yAcc = bottom - zacc;
+                        if (yAcc < 0) yAcc = 0;
+
+                        r.YOffset = (yAcc / zoom) - 112;
+                        r.Height = (bottom - yAcc) / Zoom;
+
+                        if (x % zacc != 0) xAcc += zacc;
+                        if (xAcc - xoff <= zacc) xAcc = xoff + zacc;
+                        if (xAcc >= 256 * zoom) xAcc = 256 * zoom;
+
+                        r.Width = (xAcc - xoff) / Zoom;
+                    }
+                    else if (grabType == GrabType.BottomLeft) 
+                    {
+                        if (y % zacc != 0) yAcc += zacc;
+                        if (yAcc - yoff <= zacc) yAcc = yoff + zacc;
+                        if (yAcc >= 240 * zoom) yAcc = 240 * zoom;
+
+                        r.Height = (yAcc - yoff) / Zoom;
+
+                        xAcc += zacc;
+                        if (x % zacc != 0) xAcc -= zacc;
+                        if (xAcc >= right - zacc) xAcc = right - zacc;
+                        if (xAcc < 0) xAcc = 0;
+
+                        r.XOffset = (xAcc / zoom) - 128;
+                        r.Width = (right - xAcc) / Zoom;
+                    }
+                    else if (grabType == GrabType.BottomRight)
+                    {
+                        if (y % zacc != 0) yAcc += zacc;
+                        if (yAcc - yoff <= zacc) yAcc = yoff + zacc;
+                        if (yAcc >= 240 * zoom) yAcc = 240 * zoom;
+
+                        r.Height = (yAcc - yoff) / Zoom;
+
+                        if (x % zacc != 0) xAcc += zacc;
+                        if (xAcc - xoff <= zacc) xAcc = xoff + zacc;
+                        if (xAcc >= 256 * zoom) xAcc = 256 * zoom;
+
+                        r.Width = (xAcc - xoff) / Zoom;
+                    }
+
+                    buildCurrentBox();
+                    return;
+                }
+
+                if (x >= xoff - 2 &&
+                    x <= xoff + 2 &&
+                    y >= yoff - 2 &&
+                    y <= yoff + 2)
+                {
+                    Cursor = Cursors.SizeNWSE;
+                    grabType = GrabType.TopLeft;
+                }
+                else if (x >= xoff + w - 2 &&
+                    x <= xoff + w + 2 &&
+                    y >= yoff - 2 &&
+                    y <= yoff + 2)
+                {
+                    Cursor = Cursors.SizeNESW;
+                    grabType = GrabType.TopRight;
+                }
+                else if (x >= xoff - 2 &&
+                    x <= xoff + 2 &&
+                    y >= yoff + h - 2 &&
+                    y <= yoff + h + 2)
+                {
+                    Cursor = Cursors.SizeNESW;
+                    grabType = GrabType.BottomLeft;
+                }
+                else if (x >= xoff + w - 2 &&
+                    x <= xoff + w + 2 &&
+                    y >= yoff + h - 2 &&
+                    y <= yoff + h + 2)
+                {
+                    Cursor = Cursors.SizeNWSE;
+                    grabType = GrabType.BottomRight;
+                }
+                else if (x >= xoff && x <= xoff + w &&
+                    y >= yoff && y <= yoff + 2)
+                {
+                    Cursor = Cursors.SizeNS;
+                    grabType = GrabType.Top;
+                }
+                else if (x >= xoff && x <= xoff + w &&
+                    y >= yoff + h && y <= yoff + h + 2)
+                {
+                    Cursor = Cursors.SizeNS;
+                    grabType = GrabType.Bottom;
+                }
+                else if (x >= xoff && x <= xoff + 2 &&
+                    y >= yoff && y <= yoff + h)
+                {
+                    Cursor = Cursors.SizeWE;
+                    grabType = GrabType.Left;
+                }
+                else if (x >= xoff + w && x <= xoff + w + 2 &&
+                    y >= yoff && y <= yoff + h)
+                {
+                    Cursor = Cursors.SizeWE;
+                    grabType = GrabType.Right;
+                }
+                else if (x >= xoff && x <= xoff + w &&
+                    y >= yoff && y <= yoff + h)
+                {
+                    Cursor = Cursors.SizeAll;
+                    grabType = GrabType.Center;
+                }
+                else
+                {
+                    Cursor = Cursors.Default;
+                    grabType = GrabType.None;
+                }
+            }
+            
         }
 
         void buildBack()
@@ -161,7 +433,7 @@ namespace SMWControlibControls.InteractionControls
 
             Bitmap b = null;
             if (selectedFrame != null)
-                selectedFrame.GetBitmap(128, 112);
+                b = selectedFrame.GetBitmap(256, 240, zoom);
 
             using (Graphics g = Graphics.FromImage(Image))
             {
@@ -173,7 +445,7 @@ namespace SMWControlibControls.InteractionControls
                 }
                 catch { }
                 if (b != null)
-                    g.DrawImage(b, 0, 0, b.Width * zoom, Height * zoom);
+                    g.DrawImage(b, 0, 0);
             }
         }
         #region BuildGrid
@@ -365,7 +637,7 @@ namespace SMWControlibControls.InteractionControls
 
             using (Graphics g = Graphics.FromImage(currentBox.Image))
             {
-                selectedHitbox.Draw(g, 128, 112, zoom, 3);
+                selectedHitbox.Draw(g, 128, 112, zoom, 2);
             }
         }
 

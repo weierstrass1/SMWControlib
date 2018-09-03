@@ -48,6 +48,7 @@
     <Compile Include="Graphics\TileMask.cs" />
     <Compile Include="Graphics\SnesGraphics.cs" />
     <Compile Include="Interaction\HitBox.cs" />
+    <Compile Include="Interaction\InteractionPoint.cs" />
     <Compile Include="Interaction\RectangleHitBox.cs" />
     <Compile Include="Logic\Code.cs" />
     <Compile Include="Logic\CodeComponent.cs" />

@@ -710,7 +710,7 @@ namespace SMWControlibControls.GraphicsControls
         {
             if (Tiles == null) 
             {
-                MessageBox.Show("You must create a new frame before add tiles to the grid.",
+                MessageBox.Show("You must create a new frame before adding tiles to the grid.",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }

@@ -424,10 +424,12 @@
             this.interactionGrid1.GridColor = System.Drawing.SystemColors.ControlLightLight;
             this.interactionGrid1.GridTypeUsed = 0;
             this.interactionGrid1.Image = ((System.Drawing.Image)(resources.GetObject("interactionGrid1.Image")));
-            this.interactionGrid1.Location = new System.Drawing.Point(164, 52);
+            this.interactionGrid1.Location = new System.Drawing.Point(119, 24);
             this.interactionGrid1.MaximumSize = new System.Drawing.Size(518, 486);
             this.interactionGrid1.Name = "interactionGrid1";
-            this.interactionGrid1.Size = new System.Drawing.Size(262, 246);
+            this.interactionGrid1.SelectedFrame = null;
+            this.interactionGrid1.SelectedHitbox = null;
+            this.interactionGrid1.Size = new System.Drawing.Size(518, 486);
             this.interactionGrid1.TabIndex = 0;
             this.interactionGrid1.TabStop = false;
             this.interactionGrid1.Zoom = 2;

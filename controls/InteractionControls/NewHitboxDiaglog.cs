@@ -1,4 +1,5 @@
 ﻿using SMWControlibBackend.Graphics.Frames;
+using SMWControlibBackend.Interaction;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,14 +10,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SMWControlibControls.GraphicsControls
+namespace SMWControlibControls.InteractionControls
 {
-    public partial class NewAnimationDialog : Form
+    public partial class NewHitboxDiaglog : Form
     {
         public static bool AutoSelect = true;
-        List<Animation> animations;
+        Frame frame;
 
-        public NewAnimationDialog()
+        public NewHitboxDiaglog()
         {
             InitializeComponent();
             accept.Click += click;
@@ -58,21 +59,25 @@ namespace SMWControlibControls.GraphicsControls
 
         private void click(object sender, EventArgs e)
         {
-            Animation NewAnimation = null;
+            HitBox NewHitbox = null;
 
             if (name.Text == null || name.Text.Length == 0 || name.Text == "" ||
                 (!(name.Text[0] >= 'a' && name.Text[0] <= 'z') &&
                 !(name.Text[0] >= 'A' && name.Text[0] <= 'Z')))
-                name.Text = "a" + name.Text;
+                name.Text = "h" + name.Text;
 
             validName();
 
-            NewAnimation = new Animation()
+            NewHitbox = new RectangleHitBox()
             {
-                Name = name.Text
+                Name = name.Text,
+                XOffset = 0,
+                YOffset = 0,
+                Width = 16,
+                Height = 16
             };
 
-            animations.Add(NewAnimation);
+            frame.HitBoxes.Add(NewHitbox);
             DialogResult = DialogResult.OK;
             Dispose();
         }
@@ -83,7 +88,7 @@ namespace SMWControlibControls.GraphicsControls
             while (notValid)
             {
                 notValid = false;
-                foreach (Animation f in animations)
+                foreach (HitBox f in frame.HitBoxes)
                 {
                     if (f.Name == name.Text)
                     {
@@ -97,14 +102,14 @@ namespace SMWControlibControls.GraphicsControls
         }
 
         public static DialogResult Show(IWin32Window Owner,
-            List<Animation> Animations)
+            Frame Frame)
         {
-            NewAnimationDialog nfd = new NewAnimationDialog()
+            NewHitboxDiaglog nfd = new NewHitboxDiaglog()
             {
-                animations = Animations
+                frame = Frame
             };
 
-            nfd.name.Text = "Animation" + Animations.Count;
+            nfd.name.Text = "Hitbox" + Frame.HitBoxes.Count;
 
             nfd.autosel.Checked = AutoSelect;
 

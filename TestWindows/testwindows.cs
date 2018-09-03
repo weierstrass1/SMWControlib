@@ -25,6 +25,18 @@ namespace TestWindows
             resizeableSpriteGridController1.MidChanged += midChanged;
             animationPlayer1.TimeChanged += playerTimeChanged;
             animationCreator1.SelectionChanged += animationCreatorSelectionChanged;
+            interactionMenu1.FrameSelectionChanged += interactionMenuFrameSelectionChanged;
+            interactionMenu1.HitboxSelectionChanged += interactionMenu1HitboxSelectionChanged;
+        }
+
+        private void interactionMenu1HitboxSelectionChanged()
+        {
+            interactionGrid1.SelectedHitbox = interactionMenu1.SelectedHitBox;
+        }
+
+        private void interactionMenuFrameSelectionChanged()
+        {
+            interactionGrid1.SelectedFrame = interactionMenu1.SelectedFrame;
         }
 
         private void animationCreatorSelectionChanged()
@@ -61,6 +73,7 @@ namespace TestWindows
             animationEditor1.Animation = animationEditor1.Animation;
             if (tabControl1.SelectedIndex == 2)
             {
+                interactionMenu1.UpdateFrameList(frameCreator1.Frames);
             }
         }
 

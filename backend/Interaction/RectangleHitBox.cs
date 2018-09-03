@@ -41,10 +41,20 @@ namespace SMWControlibBackend.Interaction
             int h = Height * Zoom;
             g.FillRectangle(new SolidBrush(FrontColor), x, y, w, h);
             Brush b = new SolidBrush(BorderColor);
-            g.FillRectangle(b, 0, 0, w, borderSize);
-            g.FillRectangle(b, 0, 0, borderSize, h);
-            g.FillRectangle(b, 0, h - borderSize, w, borderSize);
-            g.FillRectangle(b, w - borderSize, 0, borderSize, h);
+            g.FillRectangle(b, x, y, w, borderSize);
+            g.FillRectangle(b, x, y, borderSize, h);
+            g.FillRectangle(b, x, y + h - borderSize, w, borderSize);
+            g.FillRectangle(b, x + w - borderSize, y, borderSize, h);
+            int borderSize2 = 2 * borderSize;
+            int dborderSize = borderSize;
+            g.FillRectangle(b, x - dborderSize, y - dborderSize,
+                borderSize2, borderSize2);
+            g.FillRectangle(b, x - dborderSize, y - borderSize + h,
+                borderSize2, borderSize2);
+            g.FillRectangle(b, x - borderSize + w, y - dborderSize,
+                borderSize2, borderSize2);
+            g.FillRectangle(b, x - borderSize + w, y - borderSize + h,
+                borderSize2, borderSize2);
         }
     }
 }

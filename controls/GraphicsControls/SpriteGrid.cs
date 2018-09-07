@@ -252,7 +252,7 @@ namespace SMWControlibControls.GraphicsControls
             SizeChanged += spriteGrid_SizeChanged;
             ColorPalette.SelectedGlobalPaletteChange += 
                 colorPalette_SelectedGlobalPaletteChange;
-            ColorPalette.GlobalPalletesChange += 
+            ColorPalette.GlobalPalletesChangeExcecuted += 
                 colorPalette_GlobalPalletesChange;
             ColorPalette.OneGlobalPaletteChange += 
                 colorPalette_OneGlobalPaletteChange;

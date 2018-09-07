@@ -39,9 +39,50 @@ namespace SMWControlibControls.InteractionControls
         {
             return d.Value;
         }
+
+        public override string ToString()
+        {
+            return "" + Value;
+        }
     }
     public partial class InteractionGrid : PictureBox
     {
+        public Color SelectedHitboxBorderColor
+        {
+            set
+            {
+                if (SelectedHitbox != null)
+                {
+                    SelectedHitbox.BorderColor = value;
+                    buildCurrentBox();
+                }
+            }
+        }
+
+        public Color SelectedHitboxFillColor
+        {
+            set
+            {
+                if (SelectedHitbox != null)
+                {
+                    SelectedHitbox.FrontColor = Color.FromArgb(120, value);
+                    buildCurrentBox();
+                }
+            }
+        }
+
+        public Color SelectedInteractionPointColor
+        {
+            set
+            {
+                if (selectedInteractionPoint != null)
+                {
+                    selectedInteractionPoint.FrontColor = Color.FromArgb(120, value);
+                    buildCurrentBox();
+                }
+            }
+        }
+
 
         Frame selectedFrame;
         public Frame SelectedFrame
@@ -72,7 +113,23 @@ namespace SMWControlibControls.InteractionControls
                 buildCurrentBox();
             }
         }
-        private Zoom zoom = 1;
+
+        InteractionPoint selectedInteractionPoint;
+        public InteractionPoint SelectedInteractionPoint
+        {
+            get
+            {
+                return selectedInteractionPoint;
+            }
+            set
+            {
+                selectedInteractionPoint = value;
+                buildBoxes();
+                buildCurrentBox();
+            }
+        }
+
+        private Zoom zoom = 20;
         public int Zoom
         {
             get
@@ -93,8 +150,10 @@ namespace SMWControlibControls.InteractionControls
         private void applyZoom(int value)
         {
             zoom = value;
-            MaximumSize = new Size((256 * zoom) + 6,
-                (240 * zoom) + 6);
+            MaximumSize= new Size((256 * zoom) + 6,
+                 (240 * zoom) + 6);
+            Size = new Size(MaximumSize.Width,
+                MaximumSize.Height);
 
             buildBack();
             buildGrid();
@@ -103,6 +162,7 @@ namespace SMWControlibControls.InteractionControls
         }
 
         private bool[,,] nonDirties;
+
         private Bitmap[,,] grids;
         private GridType gridTypeUsed;
         public int GridTypeUsed
@@ -181,6 +241,21 @@ namespace SMWControlibControls.InteractionControls
 
         PictureBox grid, boxes, currentBox;
         private Bitmap gridBoxImg;
+        private int difX, difY;
+        private bool selectingHitbox = true;
+        public bool SelectingHitbox
+        {
+            get
+            {
+                return selectingHitbox;
+            }
+            set
+            {
+                selectingHitbox = value;
+                buildBoxes();
+                buildCurrentBox();
+            }
+        }
 
         public InteractionGrid()
         {
@@ -223,31 +298,32 @@ namespace SMWControlibControls.InteractionControls
 
         private void mouseDown(object sender, MouseEventArgs e)
         {
-            editing = true;
+            if (grabType != GrabType.None)
+                editing = true;
         }
 
         private void mouseMove(object sender, MouseEventArgs e)
         {
-            if (SelectedHitbox == null) return;
-
             int x = e.X;
             int y = e.Y;
-            int xoff = SelectedHitbox.XOffset + 128;
-            xoff *= zoom;
-            int yoff = SelectedHitbox.YOffset + 112;
-            yoff *= zoom;
+            int xoff = 0;
+            int yoff = 0;
+            int zacc = GridAccuracy * zoom;
+            int xAcc = (x / zacc) * zacc;
+            int yAcc = (y / zacc) * zacc;
 
-            if (SelectedHitbox.Type == HitBoxType.Rectangle)
+            if (SelectedHitbox != null && selectingHitbox && SelectedHitbox.Type == HitBoxType.Rectangle)
             {
+                xoff = SelectedHitbox.XOffset + 128;
+                xoff *= zoom;
+                yoff = SelectedHitbox.YOffset + 112;
+                yoff *= zoom;
                 RectangleHitBox r = (RectangleHitBox)SelectedHitbox;
                 int w = r.Width * zoom;
                 int h = r.Height * zoom;
 
                 if (editing)
                 {
-                    int zacc = GridAccuracy * zoom;
-                    int xAcc = (x / zacc) * zacc;
-                    int yAcc = (y / zacc) * zacc;
                     int right = xoff + w;
                     int bottom = yoff + h;
 
@@ -321,7 +397,7 @@ namespace SMWControlibControls.InteractionControls
 
                         r.Width = (xAcc - xoff) / Zoom;
                     }
-                    else if (grabType == GrabType.BottomLeft) 
+                    else if (grabType == GrabType.BottomLeft)
                     {
                         if (y % zacc != 0) yAcc += zacc;
                         if (yAcc - yoff <= zacc) yAcc = yoff + zacc;
@@ -350,6 +426,24 @@ namespace SMWControlibControls.InteractionControls
                         if (xAcc >= 256 * zoom) xAcc = 256 * zoom;
 
                         r.Width = (xAcc - xoff) / Zoom;
+                    }
+                    else if (grabType == GrabType.Center)
+                    {
+                        int nx = x + difX;
+                        nx /= zacc;
+                        nx *= zacc;
+                        nx /= zoom;
+                        int ny = y + difY;
+                        ny /= zacc;
+                        ny *= zacc;
+                        ny /= zoom;
+                        if (nx < 0) nx = 0;
+                        if (ny < 0) ny = 0;
+                        if (nx + r.Width >= 256) nx = 256 - r.Width;
+                        if (ny + r.Height >= 240) ny = 240 - r.Height;
+
+                        r.XOffset = nx - 128;
+                        r.YOffset = ny - 112;
                     }
 
                     buildCurrentBox();
@@ -417,6 +511,8 @@ namespace SMWControlibControls.InteractionControls
                 {
                     Cursor = Cursors.SizeAll;
                     grabType = GrabType.Center;
+                    difX = xoff - x;
+                    difY = yoff - y;
                 }
                 else
                 {
@@ -424,7 +520,55 @@ namespace SMWControlibControls.InteractionControls
                     grabType = GrabType.None;
                 }
             }
-            
+
+            if (SelectedInteractionPoint != null && !selectingHitbox)
+            {
+                xoff = SelectedInteractionPoint.XOffset + 128;
+                xoff *= zoom;
+                yoff = SelectedInteractionPoint.YOffset + 112;
+                yoff *= zoom;
+
+                if (editing)
+                {
+                    int nx = x + difX;
+                    nx /= zacc;
+                    nx *= zacc;
+                    nx /= zoom;
+                    int ny = y + difY;
+                    ny /= zacc;
+                    ny *= zacc;
+                    ny /= zoom;
+                    if (nx < 0) nx = 0;
+                    if (ny < 0) ny = 0;
+                    if (nx >= 256) nx = 255;
+                    if (ny >= 240) ny = 239;
+
+                    SelectedInteractionPoint.XOffset = nx - 128;
+                    SelectedInteractionPoint.YOffset = ny - 112;
+
+                    buildCurrentBox();
+                    return;
+                }
+
+                int distX = xoff - x;
+                distX = distX * distX;
+                int distY = yoff - y;
+                distY = distY * distY;
+
+                double dist = Math.Sqrt(distX + distY);
+                if (dist <= 2.5 * zoom)
+                {
+                    Cursor = Cursors.SizeAll;
+                    grabType = GrabType.Center;
+                    difX = xoff - x;
+                    difY = yoff - y;
+                }
+                else
+                {
+                    Cursor = Cursors.Default;
+                    grabType = GrabType.None;
+                }
+            }
         }
 
         void buildBack()
@@ -616,28 +760,42 @@ namespace SMWControlibControls.InteractionControls
 
         void buildBoxes()
         {
-            if (selectedFrame == null || selectedFrame.HitBoxes.Count <= 0)
+            if (selectedFrame == null)
                 return;
             boxes.Size = new Size(Width, Height);
             boxes.Image = new Bitmap(Width, Height);
             using (Graphics g = Graphics.FromImage(boxes.Image))
             {
-                foreach(HitBox h in selectedFrame.HitBoxes)
+                if (selectedFrame.HitBoxes.Count > 0)
                 {
-                    if (selectedHitbox != h)
-                        h.Draw(g, 128, 112, zoom);
+                    foreach (HitBox h in selectedFrame.HitBoxes)
+                    {
+                        if (selectedHitbox != h || !selectingHitbox)
+                            h.Draw(g, 128, 112, zoom);
+                    }
+                }
+
+                if (selectedFrame.InteractionPoints.Count > 0)
+                {
+                    foreach (InteractionPoint h in selectedFrame.InteractionPoints)
+                    {
+                        if (SelectedInteractionPoint != h || selectingHitbox)
+                            h.Draw(g, 128, 112, zoom, zoom * 4);
+                    }
                 }
             }
         }
         void buildCurrentBox()
         {
-            if (selectedHitbox == null) return;
             currentBox.Size = new Size(Width, Height);
             currentBox.Image = new Bitmap(Width, Height);
 
             using (Graphics g = Graphics.FromImage(currentBox.Image))
             {
-                selectedHitbox.Draw(g, 128, 112, zoom, 2);
+                if (selectedHitbox != null && selectingHitbox)
+                    SelectedHitbox.Draw(g, 128, 112, zoom, 2);
+                else if (SelectedInteractionPoint != null && !selectingHitbox)
+                    SelectedInteractionPoint.Draw(g, 128, 112, zoom, zoom * 5);
             }
         }
 

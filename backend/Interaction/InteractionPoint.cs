@@ -49,18 +49,19 @@ namespace SMWControlibBackend.Interaction
             int y = centerY + YOffset;
             x *= Zoom;
             y *= Zoom;
-            g.DrawRectangle(new Pen(BorderColor), x, y, 1, 1);
+            g.DrawRectangle(new Pen(BorderColor), x, y, Zoom, Zoom);
         }
 
         public override void Draw(System.Drawing.Graphics g, int centerX, int centerY, Zoom Zoom, int borderSize)
         {
             int x = centerX + XOffset;
             int y = centerY + YOffset;
-            x -= (borderSize / 2);
-            y -= (borderSize / 2);
             x *= Zoom;
             y *= Zoom;
-            g.DrawRectangle(new Pen(BorderColor), x, y, borderSize, borderSize);
+            int bx = x + (Zoom / 2) - (borderSize / 2) - (borderSize % 2);
+            int by = y + (Zoom / 2) - (borderSize / 2) - (borderSize % 2);
+            g.FillEllipse(new SolidBrush(FrontColor), bx, by, borderSize, borderSize);
+            g.DrawRectangle(new Pen(BorderColor), x, y, Zoom, Zoom);
         }
     }
 }

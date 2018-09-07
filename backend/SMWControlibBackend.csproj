@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -50,14 +52,21 @@
     <Compile Include="Interaction\HitBox.cs" />
     <Compile Include="Interaction\InteractionPoint.cs" />
     <Compile Include="Interaction\RectangleHitBox.cs" />
+    <Compile Include="Logic\ArgsTypes.cs" />
+    <Compile Include="Logic\Asar.cs" />
     <Compile Include="Logic\Code.cs" />
     <Compile Include="Logic\CodeComponent.cs" />
+    <Compile Include="Logic\Command.cs" />
     <Compile Include="Logic\Routine.cs" />
     <Compile Include="Logic\Table.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Graphics\Tile.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="asar.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\DefaultPalette.pal">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

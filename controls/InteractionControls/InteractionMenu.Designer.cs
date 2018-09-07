@@ -30,18 +30,16 @@
         {
             this.frameSelector = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.dontShareRadioButton = new System.Windows.Forms.RadioButton();
+            this.shareAllRadioButton = new System.Windows.Forms.RadioButton();
+            this.shareWithRadioButton = new System.Windows.Forms.RadioButton();
+            this.shareSelector = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.hbSelector = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.info = new System.Windows.Forms.Button();
             this.rename = new System.Windows.Forms.Button();
             this.delete = new System.Windows.Forms.Button();
@@ -60,32 +58,41 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.borderC = new System.Windows.Forms.PictureBox();
+            this.fillC = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.ipType = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.ipColor = new System.Windows.Forms.PictureBox();
             this.label14 = new System.Windows.Forms.Label();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.radioButton11 = new System.Windows.Forms.RadioButton();
-            this.radioButton9 = new System.Windows.Forms.RadioButton();
-            this.radioButton8 = new System.Windows.Forms.RadioButton();
-            this.radioButton7 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.buttonIP = new System.Windows.Forms.Button();
+            this.createIP = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.ipSelector = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.settings = new System.Windows.Forms.Button();
+            this.grid = new System.Windows.Forms.CheckBox();
+            this.cellSize = new System.Windows.Forms.ComboBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.zoom = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.borderC)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fillC)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ipColor)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // frameSelector
@@ -109,50 +116,54 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Frames";
             // 
-            // radioButton1
+            // dontShareRadioButton
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(16, 64);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(6);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(131, 17);
-            this.radioButton1.TabIndex = 5;
-            this.radioButton1.Text = "Don\'t share interaction";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.dontShareRadioButton.AutoSize = true;
+            this.dontShareRadioButton.Checked = true;
+            this.dontShareRadioButton.Enabled = false;
+            this.dontShareRadioButton.Location = new System.Drawing.Point(16, 64);
+            this.dontShareRadioButton.Margin = new System.Windows.Forms.Padding(6);
+            this.dontShareRadioButton.Name = "dontShareRadioButton";
+            this.dontShareRadioButton.Size = new System.Drawing.Size(131, 17);
+            this.dontShareRadioButton.TabIndex = 5;
+            this.dontShareRadioButton.TabStop = true;
+            this.dontShareRadioButton.Text = "Don\'t share interaction";
+            this.dontShareRadioButton.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // shareAllRadioButton
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Checked = true;
-            this.radioButton2.Location = new System.Drawing.Point(16, 93);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(6);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(187, 17);
-            this.radioButton2.TabIndex = 6;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Share all interaction with all frames";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.shareAllRadioButton.AutoSize = true;
+            this.shareAllRadioButton.Enabled = false;
+            this.shareAllRadioButton.Location = new System.Drawing.Point(16, 93);
+            this.shareAllRadioButton.Margin = new System.Windows.Forms.Padding(6);
+            this.shareAllRadioButton.Name = "shareAllRadioButton";
+            this.shareAllRadioButton.Size = new System.Drawing.Size(187, 17);
+            this.shareAllRadioButton.TabIndex = 6;
+            this.shareAllRadioButton.Text = "Share all interaction with all frames";
+            this.shareAllRadioButton.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // shareWithRadioButton
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(16, 122);
-            this.radioButton3.Margin = new System.Windows.Forms.Padding(6);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(143, 17);
-            this.radioButton3.TabIndex = 7;
-            this.radioButton3.Text = "Share all interaction with:";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.shareWithRadioButton.AutoSize = true;
+            this.shareWithRadioButton.Enabled = false;
+            this.shareWithRadioButton.Location = new System.Drawing.Point(16, 122);
+            this.shareWithRadioButton.Margin = new System.Windows.Forms.Padding(6);
+            this.shareWithRadioButton.Name = "shareWithRadioButton";
+            this.shareWithRadioButton.Size = new System.Drawing.Size(143, 17);
+            this.shareWithRadioButton.TabIndex = 7;
+            this.shareWithRadioButton.Text = "Share all interaction with:";
+            this.shareWithRadioButton.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // shareSelector
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(35, 151);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 6, 6, 3);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(171, 21);
-            this.comboBox1.TabIndex = 8;
+            this.shareSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.shareSelector.Enabled = false;
+            this.shareSelector.FormattingEnabled = true;
+            this.shareSelector.Location = new System.Drawing.Point(35, 151);
+            this.shareSelector.Margin = new System.Windows.Forms.Padding(3, 6, 6, 3);
+            this.shareSelector.Name = "shareSelector";
+            this.shareSelector.Size = new System.Drawing.Size(171, 21);
+            this.shareSelector.TabIndex = 8;
             // 
             // label2
             // 
@@ -205,6 +216,7 @@
             this.label5.Size = new System.Drawing.Size(108, 15);
             this.label5.TabIndex = 16;
             this.label5.Text = "Interact with player";
+            this.label5.Visible = false;
             // 
             // checkBox1
             // 
@@ -218,29 +230,11 @@
             this.checkBox1.Size = new System.Drawing.Size(16, 24);
             this.checkBox1.TabIndex = 15;
             this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox2.Location = new System.Drawing.Point(12, 180);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(6);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(16, 16);
-            this.pictureBox2.TabIndex = 13;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 152);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(6);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(16, 16);
-            this.pictureBox1.TabIndex = 11;
-            this.pictureBox1.TabStop = false;
+            this.checkBox1.Visible = false;
             // 
             // info
             // 
+            this.info.Enabled = false;
             this.info.Location = new System.Drawing.Point(110, 93);
             this.info.Name = "info";
             this.info.Size = new System.Drawing.Size(92, 23);
@@ -250,6 +244,7 @@
             // 
             // rename
             // 
+            this.rename.Enabled = false;
             this.rename.Location = new System.Drawing.Point(12, 93);
             this.rename.Name = "rename";
             this.rename.Size = new System.Drawing.Size(92, 23);
@@ -259,6 +254,7 @@
             // 
             // delete
             // 
+            this.delete.Enabled = false;
             this.delete.Location = new System.Drawing.Point(110, 64);
             this.delete.Name = "delete";
             this.delete.Size = new System.Drawing.Size(92, 23);
@@ -285,6 +281,7 @@
             this.label6.Size = new System.Drawing.Size(111, 15);
             this.label6.TabIndex = 22;
             this.label6.Text = "Interact with sprites";
+            this.label6.Visible = false;
             // 
             // checkBox2
             // 
@@ -296,6 +293,7 @@
             this.checkBox2.Size = new System.Drawing.Size(16, 24);
             this.checkBox2.TabIndex = 21;
             this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.Visible = false;
             // 
             // label7
             // 
@@ -307,6 +305,7 @@
             this.label7.Size = new System.Drawing.Size(118, 15);
             this.label7.TabIndex = 24;
             this.label7.Text = "Interact with fireballs";
+            this.label7.Visible = false;
             // 
             // checkBox3
             // 
@@ -318,6 +317,7 @@
             this.checkBox3.Size = new System.Drawing.Size(16, 24);
             this.checkBox3.TabIndex = 23;
             this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.Visible = false;
             // 
             // label8
             // 
@@ -329,6 +329,7 @@
             this.label8.Size = new System.Drawing.Size(117, 15);
             this.label8.TabIndex = 28;
             this.label8.Text = "Interact with clusters";
+            this.label8.Visible = false;
             // 
             // checkBox4
             // 
@@ -340,6 +341,7 @@
             this.checkBox4.Size = new System.Drawing.Size(16, 24);
             this.checkBox4.TabIndex = 27;
             this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.Visible = false;
             // 
             // label9
             // 
@@ -351,6 +353,7 @@
             this.label9.Size = new System.Drawing.Size(126, 15);
             this.label9.TabIndex = 26;
             this.label9.Text = "Interact with extended";
+            this.label9.Visible = false;
             // 
             // checkBox5
             // 
@@ -362,6 +365,7 @@
             this.checkBox5.Size = new System.Drawing.Size(16, 24);
             this.checkBox5.TabIndex = 25;
             this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkBox5.Visible = false;
             // 
             // radioButton4
             // 
@@ -375,6 +379,7 @@
             this.radioButton4.TabIndex = 30;
             this.radioButton4.Text = "Circle";
             this.radioButton4.UseVisualStyleBackColor = true;
+            this.radioButton4.Visible = false;
             // 
             // radioButton5
             // 
@@ -390,17 +395,18 @@
             this.radioButton5.TabStop = true;
             this.radioButton5.Text = "Rectangle";
             this.radioButton5.UseVisualStyleBackColor = true;
+            this.radioButton5.Visible = false;
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 181);
+            this.tabControl1.Location = new System.Drawing.Point(0, 283);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(6);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(234, 546);
+            this.tabControl1.Size = new System.Drawing.Size(234, 444);
             this.tabControl1.TabIndex = 31;
             // 
             // tabPage1
@@ -412,11 +418,11 @@
             this.tabPage1.Controls.Add(this.radioButton4);
             this.tabPage1.Controls.Add(this.hbSelector);
             this.tabPage1.Controls.Add(this.radioButton5);
-            this.tabPage1.Controls.Add(this.pictureBox1);
+            this.tabPage1.Controls.Add(this.borderC);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.checkBox4);
-            this.tabPage1.Controls.Add(this.pictureBox2);
+            this.tabPage1.Controls.Add(this.fillC);
             this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.checkBox5);
@@ -433,13 +439,14 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(226, 520);
+            this.tabPage1.Size = new System.Drawing.Size(226, 418);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Hitboxes";
             // 
             // comboBox4
             // 
             this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox4.Enabled = false;
             this.comboBox4.FormattingEnabled = true;
             this.comboBox4.Location = new System.Drawing.Point(61, 124);
             this.comboBox4.Margin = new System.Windows.Forms.Padding(3, 6, 6, 3);
@@ -450,6 +457,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
+            this.label11.Enabled = false;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(9, 125);
             this.label11.Margin = new System.Windows.Forms.Padding(6);
@@ -458,21 +466,40 @@
             this.label11.TabIndex = 31;
             this.label11.Text = "Action:";
             // 
+            // borderC
+            // 
+            this.borderC.BackColor = System.Drawing.Color.Red;
+            this.borderC.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.borderC.Location = new System.Drawing.Point(12, 152);
+            this.borderC.Margin = new System.Windows.Forms.Padding(6);
+            this.borderC.Name = "borderC";
+            this.borderC.Size = new System.Drawing.Size(16, 16);
+            this.borderC.TabIndex = 11;
+            this.borderC.TabStop = false;
+            // 
+            // fillC
+            // 
+            this.fillC.BackColor = System.Drawing.Color.Red;
+            this.fillC.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.fillC.Location = new System.Drawing.Point(12, 180);
+            this.fillC.Margin = new System.Windows.Forms.Padding(6);
+            this.fillC.Name = "fillC";
+            this.fillC.Size = new System.Drawing.Size(16, 16);
+            this.fillC.TabIndex = 13;
+            this.fillC.TabStop = false;
+            // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage2.Controls.Add(this.pictureBox3);
+            this.tabPage2.Controls.Add(this.ipType);
+            this.tabPage2.Controls.Add(this.label15);
+            this.tabPage2.Controls.Add(this.ipColor);
             this.tabPage2.Controls.Add(this.label14);
             this.tabPage2.Controls.Add(this.checkBox6);
             this.tabPage2.Controls.Add(this.label13);
             this.tabPage2.Controls.Add(this.comboBox5);
             this.tabPage2.Controls.Add(this.label12);
-            this.tabPage2.Controls.Add(this.radioButton11);
-            this.tabPage2.Controls.Add(this.radioButton9);
-            this.tabPage2.Controls.Add(this.radioButton8);
-            this.tabPage2.Controls.Add(this.radioButton7);
-            this.tabPage2.Controls.Add(this.radioButton6);
-            this.tabPage2.Controls.Add(this.buttonIP);
+            this.tabPage2.Controls.Add(this.createIP);
             this.tabPage2.Controls.Add(this.button2);
             this.tabPage2.Controls.Add(this.button3);
             this.tabPage2.Controls.Add(this.button4);
@@ -481,19 +508,47 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(226, 520);
+            this.tabPage2.Size = new System.Drawing.Size(226, 418);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Object interaction";
             // 
-            // pictureBox3
+            // ipType
             // 
-            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox3.Location = new System.Drawing.Point(12, 182);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(6);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(16, 16);
-            this.pictureBox3.TabIndex = 45;
-            this.pictureBox3.TabStop = false;
+            this.ipType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ipType.FormattingEnabled = true;
+            this.ipType.Items.AddRange(new object[] {
+            "Above Detector",
+            "Below Detector",
+            "Left Side Detector",
+            "Right Side Detector",
+            "Slope Detector"});
+            this.ipType.Location = new System.Drawing.Point(51, 209);
+            this.ipType.Margin = new System.Windows.Forms.Padding(3, 6, 6, 3);
+            this.ipType.Name = "ipType";
+            this.ipType.Size = new System.Drawing.Size(151, 21);
+            this.ipType.TabIndex = 48;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(9, 210);
+            this.label15.Margin = new System.Windows.Forms.Padding(6);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(36, 15);
+            this.label15.TabIndex = 47;
+            this.label15.Text = "Type:";
+            // 
+            // ipColor
+            // 
+            this.ipColor.BackColor = System.Drawing.Color.Red;
+            this.ipColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.ipColor.Location = new System.Drawing.Point(12, 182);
+            this.ipColor.Margin = new System.Windows.Forms.Padding(6);
+            this.ipColor.Name = "ipColor";
+            this.ipColor.Size = new System.Drawing.Size(16, 16);
+            this.ipColor.TabIndex = 45;
+            this.ipColor.TabStop = false;
             // 
             // label14
             // 
@@ -507,8 +562,7 @@
             // 
             // checkBox6
             // 
-            this.checkBox6.Checked = true;
-            this.checkBox6.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox6.Enabled = false;
             this.checkBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox6.Location = new System.Drawing.Point(12, 149);
             this.checkBox6.Name = "checkBox6";
@@ -520,6 +574,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
+            this.label13.Enabled = false;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.Location = new System.Drawing.Point(35, 153);
             this.label13.Name = "label13";
@@ -530,6 +585,7 @@
             // comboBox5
             // 
             this.comboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox5.Enabled = false;
             this.comboBox5.FormattingEnabled = true;
             this.comboBox5.Location = new System.Drawing.Point(61, 124);
             this.comboBox5.Margin = new System.Windows.Forms.Padding(3, 6, 6, 3);
@@ -540,6 +596,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
+            this.label12.Enabled = false;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.Location = new System.Drawing.Point(9, 125);
             this.label12.Margin = new System.Windows.Forms.Padding(6);
@@ -548,72 +605,18 @@
             this.label12.TabIndex = 41;
             this.label12.Text = "Action:";
             // 
-            // radioButton11
+            // createIP
             // 
-            this.radioButton11.AutoSize = true;
-            this.radioButton11.Location = new System.Drawing.Point(12, 326);
-            this.radioButton11.Margin = new System.Windows.Forms.Padding(6);
-            this.radioButton11.Name = "radioButton11";
-            this.radioButton11.Size = new System.Drawing.Size(94, 17);
-            this.radioButton11.TabIndex = 40;
-            this.radioButton11.Text = "Slope detector";
-            this.radioButton11.UseVisualStyleBackColor = true;
-            // 
-            // radioButton9
-            // 
-            this.radioButton9.AutoSize = true;
-            this.radioButton9.Location = new System.Drawing.Point(12, 297);
-            this.radioButton9.Margin = new System.Windows.Forms.Padding(6);
-            this.radioButton9.Name = "radioButton9";
-            this.radioButton9.Size = new System.Drawing.Size(114, 17);
-            this.radioButton9.TabIndex = 38;
-            this.radioButton9.Text = "Right side detector";
-            this.radioButton9.UseVisualStyleBackColor = true;
-            // 
-            // radioButton8
-            // 
-            this.radioButton8.AutoSize = true;
-            this.radioButton8.Location = new System.Drawing.Point(12, 268);
-            this.radioButton8.Margin = new System.Windows.Forms.Padding(6);
-            this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(107, 17);
-            this.radioButton8.TabIndex = 37;
-            this.radioButton8.Text = "Left side detector";
-            this.radioButton8.UseVisualStyleBackColor = true;
-            // 
-            // radioButton7
-            // 
-            this.radioButton7.AutoSize = true;
-            this.radioButton7.Location = new System.Drawing.Point(12, 239);
-            this.radioButton7.Margin = new System.Windows.Forms.Padding(6);
-            this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(96, 17);
-            this.radioButton7.TabIndex = 36;
-            this.radioButton7.Text = "Below detector";
-            this.radioButton7.UseVisualStyleBackColor = true;
-            // 
-            // radioButton6
-            // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(12, 210);
-            this.radioButton6.Margin = new System.Windows.Forms.Padding(6);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(98, 17);
-            this.radioButton6.TabIndex = 9;
-            this.radioButton6.Text = "Above detector";
-            this.radioButton6.UseVisualStyleBackColor = true;
-            // 
-            // buttonIP
-            // 
-            this.buttonIP.Location = new System.Drawing.Point(12, 64);
-            this.buttonIP.Name = "buttonIP";
-            this.buttonIP.Size = new System.Drawing.Size(92, 23);
-            this.buttonIP.TabIndex = 32;
-            this.buttonIP.Text = "New";
-            this.buttonIP.UseVisualStyleBackColor = true;
+            this.createIP.Location = new System.Drawing.Point(12, 64);
+            this.createIP.Name = "createIP";
+            this.createIP.Size = new System.Drawing.Size(92, 23);
+            this.createIP.TabIndex = 32;
+            this.createIP.Text = "New";
+            this.createIP.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
+            this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(110, 64);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(92, 23);
@@ -623,6 +626,7 @@
             // 
             // button3
             // 
+            this.button3.Enabled = false;
             this.button3.Location = new System.Drawing.Point(12, 93);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(92, 23);
@@ -632,6 +636,7 @@
             // 
             // button4
             // 
+            this.button4.Enabled = false;
             this.button4.Location = new System.Drawing.Point(110, 93);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(92, 23);
@@ -664,15 +669,128 @@
             // 
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.frameSelector);
-            this.panel1.Controls.Add(this.comboBox1);
-            this.panel1.Controls.Add(this.radioButton1);
-            this.panel1.Controls.Add(this.radioButton3);
-            this.panel1.Controls.Add(this.radioButton2);
+            this.panel1.Controls.Add(this.shareSelector);
+            this.panel1.Controls.Add(this.dontShareRadioButton);
+            this.panel1.Controls.Add(this.shareWithRadioButton);
+            this.panel1.Controls.Add(this.shareAllRadioButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Location = new System.Drawing.Point(0, 102);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(234, 181);
             this.panel1.TabIndex = 31;
+            // 
+            // colorDialog1
+            // 
+            this.colorDialog1.FullOpen = true;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.settings);
+            this.panel2.Controls.Add(this.grid);
+            this.panel2.Controls.Add(this.cellSize);
+            this.panel2.Controls.Add(this.label18);
+            this.panel2.Controls.Add(this.zoom);
+            this.panel2.Controls.Add(this.label17);
+            this.panel2.Controls.Add(this.label16);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(234, 102);
+            this.panel2.TabIndex = 32;
+            // 
+            // settings
+            // 
+            this.settings.Enabled = false;
+            this.settings.Location = new System.Drawing.Point(138, 73);
+            this.settings.Margin = new System.Windows.Forms.Padding(3, 3, 9, 3);
+            this.settings.Name = "settings";
+            this.settings.Size = new System.Drawing.Size(68, 23);
+            this.settings.TabIndex = 16;
+            this.settings.Text = "Settings";
+            this.settings.UseVisualStyleBackColor = true;
+            // 
+            // grid
+            // 
+            this.grid.AutoSize = true;
+            this.grid.Checked = true;
+            this.grid.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.grid.Enabled = false;
+            this.grid.Location = new System.Drawing.Point(138, 39);
+            this.grid.Name = "grid";
+            this.grid.Size = new System.Drawing.Size(45, 17);
+            this.grid.TabIndex = 15;
+            this.grid.Text = "Grid";
+            this.grid.UseVisualStyleBackColor = true;
+            // 
+            // cellSize
+            // 
+            this.cellSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cellSize.FormattingEnabled = true;
+            this.cellSize.Items.AddRange(new object[] {
+            "1X1",
+            "2X2",
+            "4X4",
+            "8X8",
+            "16X16"});
+            this.cellSize.Location = new System.Drawing.Point(71, 74);
+            this.cellSize.Margin = new System.Windows.Forms.Padding(3, 3, 6, 3);
+            this.cellSize.Name = "cellSize";
+            this.cellSize.Size = new System.Drawing.Size(56, 21);
+            this.cellSize.TabIndex = 14;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(15, 71);
+            this.label18.Margin = new System.Windows.Forms.Padding(6);
+            this.label18.Name = "label18";
+            this.label18.Padding = new System.Windows.Forms.Padding(6);
+            this.label18.Size = new System.Drawing.Size(59, 25);
+            this.label18.TabIndex = 13;
+            this.label18.Text = "Cell Size";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // zoom
+            // 
+            this.zoom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.zoom.FormattingEnabled = true;
+            this.zoom.Items.AddRange(new object[] {
+            "X1",
+            "X2",
+            "X3",
+            "X4",
+            "X5",
+            "X6",
+            "X7",
+            "X8"});
+            this.zoom.Location = new System.Drawing.Point(71, 37);
+            this.zoom.Margin = new System.Windows.Forms.Padding(3, 3, 6, 3);
+            this.zoom.Name = "zoom";
+            this.zoom.Size = new System.Drawing.Size(56, 21);
+            this.zoom.TabIndex = 12;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(13, 34);
+            this.label17.Margin = new System.Windows.Forms.Padding(6);
+            this.label17.Name = "label17";
+            this.label17.Padding = new System.Windows.Forms.Padding(6);
+            this.label17.Size = new System.Drawing.Size(46, 25);
+            this.label17.TabIndex = 11;
+            this.label17.Text = "Zoom";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(13, 6);
+            this.label16.Margin = new System.Windows.Forms.Padding(6);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(37, 16);
+            this.label16.TabIndex = 9;
+            this.label16.Text = "Grid";
             // 
             // InteractionMenu
             // 
@@ -681,18 +799,21 @@
             this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel2);
             this.Name = "InteractionMenu";
             this.Size = new System.Drawing.Size(234, 727);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.borderC)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fillC)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ipColor)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -701,16 +822,16 @@
 
         private System.Windows.Forms.ComboBox frameSelector;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.RadioButton dontShareRadioButton;
+        private System.Windows.Forms.RadioButton shareAllRadioButton;
+        private System.Windows.Forms.RadioButton shareWithRadioButton;
+        private System.Windows.Forms.ComboBox shareSelector;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox hbSelector;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox borderC;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox fillC;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button info;
@@ -732,23 +853,29 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button buttonIP;
+        private System.Windows.Forms.Button createIP;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ComboBox ipSelector;
-        private System.Windows.Forms.RadioButton radioButton9;
-        private System.Windows.Forms.RadioButton radioButton8;
-        private System.Windows.Forms.RadioButton radioButton7;
-        private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.RadioButton radioButton11;
         private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.CheckBox checkBox6;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox comboBox5;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox ipColor;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.ComboBox ipType;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox zoom;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.ComboBox cellSize;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.CheckBox grid;
+        private System.Windows.Forms.Button settings;
     }
 }

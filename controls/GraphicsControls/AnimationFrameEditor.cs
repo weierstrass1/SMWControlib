@@ -24,6 +24,9 @@ namespace SMWControlibControls.GraphicsControls
             set
             {
                 frameMask = value;
+                numericUpDown1.Value = frameMask.Time;
+                FlipX = frameMask.FlipX;
+                FlipY = frameMask.FlipY;
                 reDraw();
             }
         }

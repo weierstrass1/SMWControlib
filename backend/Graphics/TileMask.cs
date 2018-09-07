@@ -38,7 +38,7 @@ namespace SMWControlibBackend.Graphics
             }
         }
         private TileSP sp = TileSP.SP23;
-        private PaletteId palette = PaletteId.pF;
+        private PaletteId palette = PaletteId.PF;
         public string SizeString
         {
             get

@@ -57,8 +57,10 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.animationCreator1 = new SMWControlibControls.GraphicsControls.AnimationCreator();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.interactionGrid1 = new SMWControlibControls.InteractionControls.ResizeableInteractionGrid();
             this.interactionMenu1 = new SMWControlibControls.InteractionControls.InteractionMenu();
-            this.interactionGrid1 = new SMWControlibControls.InteractionControls.InteractionGrid();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.textEditor1 = new SMWControlibControls.LogicControls.TextEditor();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -74,7 +76,7 @@
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.tabPage5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.interactionGrid1)).BeginInit();
+            this.tabPage6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -82,6 +84,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -308,7 +311,7 @@
             this.animationPlayer1.Interval = 16;
             this.animationPlayer1.Location = new System.Drawing.Point(3, 3);
             this.animationPlayer1.Name = "animationPlayer1";
-            this.animationPlayer1.Size = new System.Drawing.Size(948, 385);
+            this.animationPlayer1.Size = new System.Drawing.Size(794, 385);
             this.animationPlayer1.SpeedFPS = 62;
             this.animationPlayer1.TabIndex = 6;
             // 
@@ -317,19 +320,19 @@
             this.panel3.Controls.Add(this.frameSelector1);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(951, 3);
+            this.panel3.Location = new System.Drawing.Point(797, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(154, 385);
+            this.panel3.Size = new System.Drawing.Size(308, 385);
             this.panel3.TabIndex = 4;
             // 
             // frameSelector1
             // 
             this.frameSelector1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.frameSelector1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.frameSelector1.FramesPerRow = 1;
+            this.frameSelector1.FramesPerRow = 2;
             this.frameSelector1.Location = new System.Drawing.Point(0, 25);
             this.frameSelector1.Name = "frameSelector1";
-            this.frameSelector1.Size = new System.Drawing.Size(154, 360);
+            this.frameSelector1.Size = new System.Drawing.Size(308, 360);
             this.frameSelector1.TabIndex = 3;
             // 
             // label1
@@ -398,14 +401,22 @@
             // tabPage5
             // 
             this.tabPage5.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage5.Controls.Add(this.interactionMenu1);
             this.tabPage5.Controls.Add(this.interactionGrid1);
+            this.tabPage5.Controls.Add(this.interactionMenu1);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage5.Size = new System.Drawing.Size(1108, 616);
             this.tabPage5.TabIndex = 2;
             this.tabPage5.Text = "Interaction";
+            // 
+            // interactionGrid1
+            // 
+            this.interactionGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.interactionGrid1.Location = new System.Drawing.Point(3, 3);
+            this.interactionGrid1.Name = "interactionGrid1";
+            this.interactionGrid1.Size = new System.Drawing.Size(868, 610);
+            this.interactionGrid1.TabIndex = 1;
             // 
             // interactionMenu1
             // 
@@ -414,25 +425,31 @@
             this.interactionMenu1.Location = new System.Drawing.Point(871, 3);
             this.interactionMenu1.Name = "interactionMenu1";
             this.interactionMenu1.Size = new System.Drawing.Size(234, 610);
-            this.interactionMenu1.TabIndex = 1;
+            this.interactionMenu1.TabIndex = 0;
             // 
-            // interactionGrid1
+            // tabPage6
             // 
-            this.interactionGrid1.ActivateGrid = true;
-            this.interactionGrid1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.interactionGrid1.GridAccuracy = 8;
-            this.interactionGrid1.GridColor = System.Drawing.SystemColors.ControlLightLight;
-            this.interactionGrid1.GridTypeUsed = 0;
-            this.interactionGrid1.Image = ((System.Drawing.Image)(resources.GetObject("interactionGrid1.Image")));
-            this.interactionGrid1.Location = new System.Drawing.Point(119, 24);
-            this.interactionGrid1.MaximumSize = new System.Drawing.Size(518, 486);
-            this.interactionGrid1.Name = "interactionGrid1";
-            this.interactionGrid1.SelectedFrame = null;
-            this.interactionGrid1.SelectedHitbox = null;
-            this.interactionGrid1.Size = new System.Drawing.Size(518, 486);
-            this.interactionGrid1.TabIndex = 0;
-            this.interactionGrid1.TabStop = false;
-            this.interactionGrid1.Zoom = 2;
+            this.tabPage6.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage6.Controls.Add(this.textEditor1);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(1108, 616);
+            this.tabPage6.TabIndex = 3;
+            this.tabPage6.Text = "Logic";
+            // 
+            // textEditor1
+            // 
+            this.textEditor1.AcceptsTab = true;
+            this.textEditor1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
+            this.textEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textEditor1.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textEditor1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.textEditor1.Location = new System.Drawing.Point(3, 3);
+            this.textEditor1.Name = "textEditor1";
+            this.textEditor1.Size = new System.Drawing.Size(1102, 610);
+            this.textEditor1.TabIndex = 0;
+            this.textEditor1.Text = resources.GetString("textEditor1.Text");
             // 
             // testwindows
             // 
@@ -463,7 +480,7 @@
             this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.interactionGrid1)).EndInit();
+            this.tabPage6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -498,7 +515,9 @@
         private System.Windows.Forms.Panel panel5;
         private SMWControlibControls.GraphicsControls.AnimationCreator animationCreator1;
         private SMWControlibControls.GraphicsControls.AnimationPlayer animationPlayer1;
-        private SMWControlibControls.InteractionControls.InteractionGrid interactionGrid1;
+        private System.Windows.Forms.TabPage tabPage6;
+        private SMWControlibControls.InteractionControls.ResizeableInteractionGrid interactionGrid1;
         private SMWControlibControls.InteractionControls.InteractionMenu interactionMenu1;
+        private SMWControlibControls.LogicControls.TextEditor textEditor1;
     }
 }

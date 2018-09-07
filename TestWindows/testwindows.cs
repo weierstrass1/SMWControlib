@@ -27,6 +27,48 @@ namespace TestWindows
             animationCreator1.SelectionChanged += animationCreatorSelectionChanged;
             interactionMenu1.FrameSelectionChanged += interactionMenuFrameSelectionChanged;
             interactionMenu1.HitboxSelectionChanged += interactionMenu1HitboxSelectionChanged;
+            interactionMenu1.InteractionPointSelectionChanged += interactionMenuInteractionPointSelectionChanged;
+            interactionMenu1.OptionChanged += interactionMenuOptionChanged;
+            interactionMenu1.BorderColorChanged += interactionMenuBorderColorChanged;
+            interactionMenu1.FillColorChanged += interactionMenuFillColorChanged;
+            interactionMenu1.IPColorChanged += interactionMenuIPColorChanged;
+            interactionMenu1.ZoomChanged += interactionMenuZoomChanged;
+            interactionMenu1.CellSizeChanged += interactionMenuCellSizeChanged;
+        }
+
+        private void interactionMenuCellSizeChanged(int obj)
+        {
+            interactionGrid1.CellSize = obj;
+        }
+
+        private void interactionMenuZoomChanged(int obj)
+        {
+            interactionGrid1.Zoom = obj;
+        }
+
+        private void interactionMenuIPColorChanged(System.Drawing.Color obj)
+        {
+            interactionGrid1.SelectedInteractionPointColor = obj;
+        }
+
+        private void interactionMenuFillColorChanged(System.Drawing.Color obj)
+        {
+            interactionGrid1.SelectedHitboxFillColor = obj;
+        }
+
+        private void interactionMenuBorderColorChanged(System.Drawing.Color obj)
+        {
+            interactionGrid1.SelectedHitboxBorderColor = obj;
+        }
+
+        private void interactionMenuOptionChanged(bool obj)
+        {
+            interactionGrid1.SelectingHitbox = obj;
+        }
+
+        private void interactionMenuInteractionPointSelectionChanged()
+        {
+            interactionGrid1.SelectedInteractionPoint = interactionMenu1.SelectedInteractionPoint;
         }
 
         private void interactionMenu1HitboxSelectionChanged()

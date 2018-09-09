@@ -1,26 +1,26 @@
-Arg;Prefix;PostFix;Bytes;type
-(dp,x);(;,x);1;numeric
-sr,s;;,s;1;numeric
-dp;;;1;numeric
-[dp];[;];1;numeric
-#const;#;;1;numeric 8bits
-#const16;#;;2;numeric 16bits
-addr;;;2;numeric
-long;;;3;numeric
-(dp),y;(;),y;1;numeric
-(dp);(;);1;numeric
-(sr,s),y;(;,s),y;1;numeric
-dp,x;;,x;1;numeric
-dp,y;;,y;1;numeric
-[dp],y;[;],y;1;numeric
-addr,y;;,y;2;numeric
-addr,x;;,x;2;numeric
-long,x;;,x;3;numeric
-(addr,x);(;,x);2;numeric
-label;;;var;string
-label+;+;;var;fixed
-label-;-;;var;fixed
-sublabel;.;;var;string
-A;A;;0;fixed
-(addr);(;);2;numeric
-[addr];[;];3;numeric
+Arg;Prefix;PostFix;Bytes;Type;Group
+(dp,x);(;,x);1;numeric;DP Arg
+sr,s;;,s;1;numeric;Stack Arg
+dp;;;1;numeric;DP Arg
+[dp];[;];1;numeric;DP Arg
+#const;#;;1;numeric 8bits;Constant Arg
+#const16;#;;2;numeric 16bits;Constant Arg
+addr;;;2;numeric;Address Arg
+long;;;3;numeric;Long Arg
+(dp),y;(;),y;1;numeric;DP Arg
+(dp);(;);1;numeric;DP Arg
+(sr,s),y;(;,s),y;1;numeric;Stack Arg
+dp,x;;,x;1;numeric;DP Arg
+dp,y;;,y;1;numeric;DP Arg
+[dp],y;[;],y;1;numeric;DP Arg
+addr,y;;,y;2;numeric;Address Arg
+addr,x;;,x;2;numeric;Address Arg
+long,x;;,x;3;numeric;Long Arg
+(addr,x);(;,x);2;numeric;Address Arg
+label;;;var;string;Arg Label
+label+;+;;var;fixed;Arg Label
+label-;-;;var;fixed;Arg Label
+sublabel;.;;var;string;Arg Label
+A;A;;0;fixed;A Arg
+(addr);(;);2;numeric;Address Arg
+[addr];[;];3;numeric;Address Arg

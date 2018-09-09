@@ -297,6 +297,9 @@
     <None Include="CSVs\Syntax\commands.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="CSVs\Syntax\groups.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Super-Mario-World.ttf" />
     <None Include="Resources\upArrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

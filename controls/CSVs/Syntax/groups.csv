@@ -1,0 +1,40 @@
+Name;Description
+Math;Used for arithmetic commands. Like ADC or SBC.
+Logic;Used for logic commands. Like AND or ORA.
+Load/Store;Used for loads and stores. Like LDA or STX.
+Jump;Used for branches and jumps. Like JMP or BCC.
+Flag;Used for commands that only changes flags. Like CLC or REP.
+Compare;Used for compares. Like CMP and CPX.
+Transfer;Used for commands that copy a register value to another register. Like TXA or TYX.
+Call;Used for commands that call routines. Like JSR and JSL.
+Move;Used for MVN and MVP.
+NOP;Used for NOP.
+Push;Used for commands that push data to stack. Like PHA or PHB.
+Pull;Used for commands that pull data from stack. Like PLA or PLB.
+Return;Used for commands that return from a routine. Like RTS or RTL.
+Danger;Used for dangerous commands Like STP and BRK.
+Label;Used for normal labels.
+Special Label;Used for sublabels, label + and label -.
+Define;Used for Defines.
+Arg Label;Used for any label when it's used as an argument.
+DP Arg;Used for arguments that use direct page.
+Address Arg;Used for arguments that use 2 bytes address.
+Long Arg;Used for arguments that use 3 bytes address.
+Constant Arg;Used for arguments that are constants.
+A Arg;Used for A when is used as an argument.
+Arg Modifier;Used for argument modifiers. Like >> or +.
+Stack Arg;Used for arguments that use stack.
+Table;Used for table signatures.
+Table Value type;Used for types of values in tables. Like dw or db.
+Table Value;Used for values in tables.
+Table String Value;Used for values when there are strings.
+Routine;Used for routine signatures.
+Register;Used for ppu registers [$2100-$21FF].
+DMA Register;Used for ppu registers [$4300-$438F].
+Other Register;Used for ppu registers [$4200-$421F].
+SA-1 Register;Used for SA-1 registers.
+Macro;Used for macro signatures.
+Macro Arg;Used for macro imputs.
+Asar;Used for asar commands.
+Comment;Used for comments.
+Tag;Used for Dyzen Tags.

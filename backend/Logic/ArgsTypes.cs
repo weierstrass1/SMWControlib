@@ -36,7 +36,7 @@ namespace SMWControlibBackend.Logic
             string[] argsSTR = File.ReadAllLines(path);
 
             if (argsSTR.Length <= 1)
-                throw new Exception("File doesn't have any command.");
+                throw new Exception("File doesn't have any arg type.");
 
             ArgsTypes[] argsTypes = new ArgsTypes[argsSTR.Length - 1];
             string[] args;

@@ -17,25 +17,35 @@ namespace SMWControlibControls.LogicControls
     {
         private static ArgsTypes[] argTypes;
         private static Dictionary<string, Command[]> commands;
+        private static SMWControlibBackend.Logic.Label[] labels;
+        private static SMWControlibBackend.Logic.Group[] groups;
 
         public TextEditor()
         {
             InitializeComponent();
+            
             try
             {
+                groups = SMWControlibBackend.Logic.Group.GetGroups(@".\CSVs\Syntax\groups.csv");
                 argTypes = ArgsTypes.GetArgsTypes(@".\CSVs\Syntax\args.csv");
                 commands = Command.GetCommands(@".\CSVs\Syntax\commands.csv", argTypes);
+                labels = new SMWControlibBackend.Logic.Label[4];
+                labels[0] = new NormalLabel();
+                labels[1] = new SubLabel();
+                labels[2] = new PlusLabel();
+                labels[3] = new MinusLabel();
             }
             catch { }
             TextChanged += textChanged;
         }
 
-        const string startSpacesPattern = "^( |\t)*";
+        const string startSpacesPattern = @"^(\ |\t)*";
+        const string separatorPattern = @"(\ |\t)+:(\ |\t)+";
         private void textChanged(object sender, EventArgs e)
         {
             if (commands == null || argTypes == null) return;
             if (Lines == null || Lines.Length <= 0) return;
-            SuspendPainting();
+            
             int l = GetLineFromCharIndex(SelectionStart - 1);
 
             int lastInd = SelectionStart;
@@ -49,34 +59,81 @@ namespace SMWControlibControls.LogicControls
             string[] comments = line.Split(';');
             if (comments == null || comments.Length <= 0) return;
 
-            string[] cmds = comments[0].Split(':');
+            CodePointer[] cmds = CodePointer.Split(comments[0], separatorPattern);
+
+            if (cmds == null) return;
+            SuspendPainting();
+
 
             string name;
             Command[] names;
             int st = 0;
-            int offset = 0;
             Match ma;
-            string cmdTrim;
+            string cmdTrim, cmdTrim2;
+
+            Select(lineInd, linel);
+            SelectionColor = Color.FromArgb(224, 224, 224);
+            SelectionFont = new Font(Font, FontStyle.Bold);
+            bool isLabel = true;
+            CodePointer[] cps;
+            int adder = 0;
+            string name2 = "";
             for (int j = 0; j < cmds.Length; j++)
             {
-                cmdTrim = cmds[j].Trim(' ').Trim('\t');
+                cmdTrim = cmds[j].Code.Trim(' ').Trim('\t');
                 name = cmdTrim.Split(' ', '\t')[0].ToLower();
-                ma = Regex.Match(cmds[j], startSpacesPattern);
+                ma = Regex.Match(cmds[j].Code, startSpacesPattern);
                 st = 0;
                 if (ma.Success)
                     st = ma.Length;
                 correct = false;
-                if (commands.ContainsKey(name))
+                isLabel = false;
+                adder = 0;
+                cps = CodePointer.Split(cmds[j].Code, ":");
+                if (cps.Length > 1) adder++;
+                for (int i = 0; i < labels.Length; i++)
+                {
+                    if(labels[i].SyntaxIsCorrect(cps[0].Code))
+                    {
+                        Select(lineInd + cmds[j].Start + st, cps[0].Code.Length + adder);
+                        SelectionColor = Color.FromArgb(80, 224, 224);
+                        SelectionFont = new Font(Font, FontStyle.Bold);
+                        isLabel = true;
+                        correct = true;
+                        break;
+                    }
+                }
+                if (adder > 0)
+                {
+                    cmdTrim2 = cps[1].Code.Trim(' ').Trim('\t');
+                    name2 = cmdTrim2.Split(' ', '\t')[0].ToLower();
+                    names = commands[name.ToLower()];
+                    for (int i = 0; i < names.Length; i++)
+                    {
+                        if (names[i].IsCorrect(cmdTrim))
+                        {
+                            Select(lineInd + cmds[j].Start + st, names[i].Name.Length);
+                            SelectionColor = Color.FromArgb(80, 80, 224);
+                            SelectionFont = new Font(Font, FontStyle.Bold);
+                            Select(lineInd + cmds[j].Start + st + SelectionLength, cmds[j].Code.Length - SelectionLength);
+                            SelectionColor = Color.FromArgb(224, 224, 224);
+                            SelectionFont = new Font(Font, FontStyle.Bold);
+                            correct = true;
+                            break;
+                        }
+                    }
+                }
+                if (!isLabel && commands.ContainsKey(name))
                 {
                     names = commands[name.ToLower()];
                     for (int i = 0; i < names.Length; i++)
                     {
                         if (names[i].IsCorrect(cmdTrim))
                         {
-                            Select(lineInd + offset + st, names[i].Name.Length);
+                            Select(lineInd + cmds[j].Start + st, names[i].Name.Length);
                             SelectionColor = Color.FromArgb(80, 80, 224);
                             SelectionFont = new Font(Font, FontStyle.Bold);
-                            Select(lineInd + offset + st + SelectionLength, cmds[j].Length - SelectionLength);
+                            Select(lineInd + cmds[j].Start + st + SelectionLength, cmds[j].Code.Length - SelectionLength);
                             SelectionColor = Color.FromArgb(224, 224, 224);
                             SelectionFont = new Font(Font, FontStyle.Bold);
                             correct = true;
@@ -86,12 +143,11 @@ namespace SMWControlibControls.LogicControls
                 }
                 if (!correct)
                 {
-                    Select(lineInd + offset, cmds[j].Length);
+                    Select(lineInd + cmds[j].Start + st, cmds[j].Code.Length);
                     SelectionBackColor = BackColor;
                     SelectionColor = Color.FromArgb(224, 0, 0);
                     SelectionFont = new Font(Font, FontStyle.Regular);
                 }
-                offset += cmds[j].Length + 1;
             }
             
             Select(lastInd, 0);

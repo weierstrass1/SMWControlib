@@ -20,6 +20,7 @@ namespace SMWControlibBackend.Logic
             }
         }
         public ArgsTypes[] Args;
+        public Group Group { get; private set; }
 
         private Command(string name, ArgsTypes[] args)
         {

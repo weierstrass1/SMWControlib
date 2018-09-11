@@ -54,6 +54,7 @@
             // spriteGridController1
             // 
             this.spriteGridController1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spriteGridController1.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold);
             this.spriteGridController1.Location = new System.Drawing.Point(0, 0);
             this.spriteGridController1.Margin = new System.Windows.Forms.Padding(0);
             this.spriteGridController1.MaximumSize = new System.Drawing.Size(547, 560);
@@ -96,8 +97,8 @@
             // 
             // ResizeableSpriteGridController
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.section1);
             this.Name = "ResizeableSpriteGridController";
             this.Size = new System.Drawing.Size(599, 571);

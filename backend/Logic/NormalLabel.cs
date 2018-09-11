@@ -8,7 +8,7 @@ namespace SMWControlibBackend.Logic
 {
     public class NormalLabel: Label
     {
-        public NormalLabel()
+        public NormalLabel(Group[] groups, string group) : base(groups, group)
         {
             reGex = @"^[a-zA-Z_]+[a-zA-Z_\d.]*\:$";
         }

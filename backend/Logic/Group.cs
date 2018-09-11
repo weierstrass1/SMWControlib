@@ -19,6 +19,20 @@ namespace SMWControlibBackend.Logic
 
         }
 
+        public static Group FindGroup(Group[] groups, string s)
+        {
+            string se = s.Trim(' ').Trim('\t');
+
+            for (int i = 0; i < groups.Length; i++)
+            {
+                if(groups[i].Name.Trim(' ').Trim('\t') == se)
+                {
+                    return groups[i];
+                }
+            }
+            return null;
+        }
+
         public static Group[] GetGroups(string path)
         {
             if (!File.Exists(path))
@@ -43,7 +57,7 @@ namespace SMWControlibBackend.Logic
                 {
                     Name = group[0],
                     Description = group[1],
-                    Color = SystemColors.Control
+                    Color = SystemColors.HighlightText
                 };
             }
             return groups;

@@ -134,7 +134,7 @@
             // panel3
             // 
             this.panel3.Controls.Add(this.props);
-            this.panel3.Location = new System.Drawing.Point(15, 239);
+            this.panel3.Location = new System.Drawing.Point(431, 57);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(407, 60);
             this.panel3.TabIndex = 8;
@@ -154,7 +154,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 211);
+            this.label4.Location = new System.Drawing.Point(428, 29);
             this.label4.Name = "label4";
             this.label4.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
             this.label4.Size = new System.Drawing.Size(54, 25);
@@ -164,7 +164,7 @@
             // panel4
             // 
             this.panel4.Controls.Add(this.tiles);
-            this.panel4.Location = new System.Drawing.Point(15, 330);
+            this.panel4.Location = new System.Drawing.Point(431, 148);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(407, 60);
             this.panel4.TabIndex = 10;
@@ -184,7 +184,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 302);
+            this.label5.Location = new System.Drawing.Point(428, 120);
             this.label5.Name = "label5";
             this.label5.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
             this.label5.Size = new System.Drawing.Size(29, 25);
@@ -194,7 +194,7 @@
             // panel5
             // 
             this.panel5.Controls.Add(this.sizes);
-            this.panel5.Location = new System.Drawing.Point(15, 421);
+            this.panel5.Location = new System.Drawing.Point(230, 239);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(407, 60);
             this.panel5.TabIndex = 12;
@@ -214,7 +214,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 393);
+            this.label6.Location = new System.Drawing.Point(227, 211);
             this.label6.Name = "label6";
             this.label6.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
             this.label6.Size = new System.Drawing.Size(32, 25);
@@ -223,7 +223,7 @@
             // 
             // accept
             // 
-            this.accept.Location = new System.Drawing.Point(184, 487);
+            this.accept.Location = new System.Drawing.Point(399, 305);
             this.accept.Name = "accept";
             this.accept.Size = new System.Drawing.Size(75, 23);
             this.accept.TabIndex = 13;
@@ -232,9 +232,9 @@
             // 
             // FrameInfoDialog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 522);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.ClientSize = new System.Drawing.Size(851, 343);
             this.Controls.Add(this.accept);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.label6);

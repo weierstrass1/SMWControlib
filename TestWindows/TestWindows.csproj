@@ -61,6 +61,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="testwindows.resx">
       <DependentUpon>testwindows.cs</DependentUpon>
@@ -87,6 +88,9 @@
       <Project>{91db0b53-f47f-4224-9ccf-d76817532dce}</Project>
       <Name>SMWControlibControls</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\4584.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

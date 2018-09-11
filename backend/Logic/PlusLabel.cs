@@ -8,7 +8,7 @@ namespace SMWControlibBackend.Logic
 {
     public class PlusLabel : Label
     {
-        public PlusLabel()
+        public PlusLabel(Group[] groups, string group) : base(groups, group)
         {
             reGex = @"^\++:?$";
         }

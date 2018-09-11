@@ -111,7 +111,7 @@
             this.label2.Margin = new System.Windows.Forms.Padding(6);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(6);
-            this.label2.Size = new System.Drawing.Size(50, 25);
+            this.label2.Size = new System.Drawing.Size(58, 25);
             this.label2.TabIndex = 8;
             this.label2.Text = "Zoom";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -308,8 +308,8 @@
             // 
             // AnimationPlayer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "AnimationPlayer";

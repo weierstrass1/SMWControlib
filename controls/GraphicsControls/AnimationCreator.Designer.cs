@@ -36,96 +36,154 @@
             this.info = new System.Windows.Forms.Button();
             this.onlyOnce = new System.Windows.Forms.RadioButton();
             this.continuous = new System.Windows.Forms.RadioButton();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.label1.Location = new System.Drawing.Point(6, 6);
             this.label1.Margin = new System.Windows.Forms.Padding(6);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 16);
+            this.label1.Size = new System.Drawing.Size(111, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Animations";
             // 
             // animationSelector
             // 
+            this.animationSelector.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(80)))), ((int)(((byte)(176)))));
             this.animationSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.animationSelector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.animationSelector.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.animationSelector.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.animationSelector.FormattingEnabled = true;
             this.animationSelector.Location = new System.Drawing.Point(9, 34);
             this.animationSelector.Margin = new System.Windows.Forms.Padding(3, 6, 6, 3);
             this.animationSelector.Name = "animationSelector";
-            this.animationSelector.Size = new System.Drawing.Size(190, 21);
+            this.animationSelector.Size = new System.Drawing.Size(190, 20);
             this.animationSelector.TabIndex = 2;
             // 
             // create
             // 
+            this.create.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(204)))), ((int)(((byte)(128)))));
+            this.create.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(102)))), ((int)(((byte)(64)))));
+            this.create.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.create.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.create.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.create.Location = new System.Drawing.Point(9, 61);
             this.create.Name = "create";
             this.create.Size = new System.Drawing.Size(92, 23);
             this.create.TabIndex = 3;
             this.create.Text = "New";
-            this.create.UseVisualStyleBackColor = true;
+            this.create.UseVisualStyleBackColor = false;
             // 
             // delete
             // 
+            this.delete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(112)))), ((int)(((byte)(248)))));
+            this.delete.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(32)))), ((int)(((byte)(176)))));
+            this.delete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(160)))), ((int)(((byte)(248)))));
+            this.delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.delete.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.delete.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.delete.Location = new System.Drawing.Point(107, 61);
             this.delete.Name = "delete";
             this.delete.Size = new System.Drawing.Size(92, 23);
             this.delete.TabIndex = 4;
             this.delete.Text = "Delete";
-            this.delete.UseVisualStyleBackColor = true;
+            this.delete.UseVisualStyleBackColor = false;
             // 
             // rename
             // 
+            this.rename.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(200)))), ((int)(((byte)(96)))));
+            this.rename.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(160)))), ((int)(((byte)(32)))));
+            this.rename.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(200)))), ((int)(((byte)(142)))));
+            this.rename.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rename.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.rename.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.rename.Location = new System.Drawing.Point(9, 90);
             this.rename.Name = "rename";
             this.rename.Size = new System.Drawing.Size(92, 23);
             this.rename.TabIndex = 5;
             this.rename.Text = "Rename";
-            this.rename.UseVisualStyleBackColor = true;
+            this.rename.UseVisualStyleBackColor = false;
             // 
             // info
             // 
+            this.info.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(64)))), ((int)(((byte)(96)))));
+            this.info.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(16)))), ((int)(((byte)(32)))));
+            this.info.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(80)))), ((int)(((byte)(124)))));
+            this.info.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.info.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.info.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.info.Location = new System.Drawing.Point(107, 90);
             this.info.Name = "info";
             this.info.Size = new System.Drawing.Size(92, 23);
             this.info.TabIndex = 6;
             this.info.Text = "Info";
-            this.info.UseVisualStyleBackColor = true;
+            this.info.UseVisualStyleBackColor = false;
             // 
             // onlyOnce
             // 
-            this.onlyOnce.AutoSize = true;
+            this.onlyOnce.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.onlyOnce.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.onlyOnce.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.onlyOnce.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
             this.onlyOnce.Location = new System.Drawing.Point(9, 122);
-            this.onlyOnce.Margin = new System.Windows.Forms.Padding(6);
+            this.onlyOnce.Margin = new System.Windows.Forms.Padding(6, 6, 3, 6);
             this.onlyOnce.Name = "onlyOnce";
-            this.onlyOnce.Padding = new System.Windows.Forms.Padding(6);
-            this.onlyOnce.Size = new System.Drawing.Size(87, 29);
+            this.onlyOnce.Size = new System.Drawing.Size(12, 12);
             this.onlyOnce.TabIndex = 7;
             this.onlyOnce.TabStop = true;
-            this.onlyOnce.Text = "Only Once";
             this.onlyOnce.UseVisualStyleBackColor = true;
             // 
             // continuous
             // 
-            this.continuous.AutoSize = true;
             this.continuous.Checked = true;
-            this.continuous.Location = new System.Drawing.Point(107, 122);
-            this.continuous.Margin = new System.Windows.Forms.Padding(6);
+            this.continuous.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.continuous.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.continuous.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.continuous.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.continuous.Location = new System.Drawing.Point(9, 146);
+            this.continuous.Margin = new System.Windows.Forms.Padding(6, 6, 3, 6);
             this.continuous.Name = "continuous";
-            this.continuous.Padding = new System.Windows.Forms.Padding(6);
-            this.continuous.Size = new System.Drawing.Size(90, 29);
+            this.continuous.Size = new System.Drawing.Size(12, 12);
             this.continuous.TabIndex = 8;
             this.continuous.TabStop = true;
-            this.continuous.Text = "Continuous";
             this.continuous.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.label2.Location = new System.Drawing.Point(30, 122);
+            this.label2.Margin = new System.Windows.Forms.Padding(6);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(65, 12);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Only once";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.label3.Location = new System.Drawing.Point(30, 146);
+            this.label3.Margin = new System.Windows.Forms.Padding(6);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(72, 12);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Continuous";
             // 
             // AnimationCreator
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.continuous);
             this.Controls.Add(this.onlyOnce);
             this.Controls.Add(this.info);
@@ -135,7 +193,7 @@
             this.Controls.Add(this.animationSelector);
             this.Controls.Add(this.label1);
             this.Name = "AnimationCreator";
-            this.Size = new System.Drawing.Size(213, 170);
+            this.Size = new System.Drawing.Size(221, 182);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -151,5 +209,7 @@
         private System.Windows.Forms.Button info;
         private System.Windows.Forms.RadioButton onlyOnce;
         private System.Windows.Forms.RadioButton continuous;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }

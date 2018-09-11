@@ -97,8 +97,8 @@
             // NewFrameDialog
             // 
             this.AcceptButton = this.accept;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(313, 118);
             this.Controls.Add(this.autosel);
             this.Controls.Add(this.accept);

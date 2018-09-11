@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SMWControlibBackend.Logic
@@ -22,11 +24,77 @@ namespace SMWControlibBackend.Logic
         public ArgsTypes[] Args;
         public Group Group { get; private set; }
 
-        private Command(string name, ArgsTypes[] args)
+        private Command(string name, ArgsTypes[] args, Group group)
         {
             Name = name;
             Args = args;
+            Group = group;
         }
+
+        string whiteSpaces = @"^(\ |\t)+";
+        public CodePointer[] GetPointers(int offset, string cmd)
+        {
+            string name = cmd.Replace('\t', ' ').Split(' ')[0];
+
+            List<CodePointer> pointers = new List<CodePointer>();
+
+            CodePointer cp;
+
+            cp = new CodePointer
+            {
+                Start = offset,
+                End = offset + name.Length - 1,
+                Code = name,
+                Group = Group
+            };
+            pointers.Add(cp);
+
+            string arg = cmd.Substring(name.Length);
+            Match m;
+            CodePointer[] newcps;
+            int offs = cp.End + 1;
+
+            if (Args != null)
+            {
+                string newAr;
+                for (int i = 0; i < Args.Length; i++)
+                {
+                    newAr = Args[i].RegEXPattern.
+                        Remove(Args[i].RegEXPattern.Length - 1);
+
+                    m = Regex.Match(arg, whiteSpaces);
+                    if (m.Success)
+                    {
+                        offs += m.Length;
+                        arg = arg.Substring(m.Length);
+                    }
+
+                    m = Regex.Match(arg, newAr);
+                    if(m.Success)
+                    {
+                        newcps = Args[i].GetPointers(offs, m.ToString());
+
+                        if (newcps != null)
+                        {
+                            foreach(CodePointer codp in newcps)
+                            {
+                                pointers.Add(codp);
+                            }
+                        }
+                        arg = cmd.Substring(m.ToString().Length);
+                        offs += m.ToString().Length;
+                    }
+                    if (i < Args.Length - 1)
+                    {
+                        arg = cmd.Substring(1);
+                        offs++;
+                    }
+                }
+            }
+
+            return pointers.ToArray();
+        }
+        
 
         public bool IsCorrect(string cmd)
         {
@@ -66,7 +134,8 @@ namespace SMWControlibBackend.Logic
             return true;
         }
 
-        public static Dictionary<string, Command[]> GetCommands(string path, ArgsTypes[] argsTypes)
+        public static Dictionary<string, Command[]> GetCommands(string path,
+            ArgsTypes[] argsTypes, Group[] groups)
         {
             if (!File.Exists(path))
                 throw new FileNotFoundException("File not found.");
@@ -93,7 +162,7 @@ namespace SMWControlibBackend.Logic
                     throw new Exception("Invalid Command at line: " + i);
                 }
                 
-                if(nums > cmd.Length-2)
+                if(nums > cmd.Length-3)
                 {
                     throw new Exception("Invalid Command at line: " + i);
                 }
@@ -103,7 +172,7 @@ namespace SMWControlibBackend.Logic
                     newargs = new ArgsTypes[nums];
                     for (int j = 0; j < nums; j++)
                     {
-                        newargs[j] = ArgsTypes.Exists(cmd[j + 2], argsTypes);
+                        newargs[j] = ArgsTypes.Exists(cmd[j + 3], argsTypes);
                         if (newargs[j] == null)
                         {
                             throw new Exception("Invalid Command at line: " + i);
@@ -111,7 +180,10 @@ namespace SMWControlibBackend.Logic
                     }
                 }
 
-                commands[i - 1] = new Command(cmd[0].ToLower(), newargs);
+                commands[i - 1] = new Command(cmd[0].ToLower(), newargs,
+                    Group.FindGroup(groups, cmd[2]));
+
+                commands[i - 1].Group.Color = Color.FromArgb(80, 80, 224);
             }
 
             Dictionary<string, List<Command>> dic = new Dictionary<string, List<Command>>();

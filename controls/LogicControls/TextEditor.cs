@@ -19,6 +19,8 @@ namespace SMWControlibControls.LogicControls
         private static Dictionary<string, Command[]> commands;
         private static SMWControlibBackend.Logic.Label[] labels;
         private static SMWControlibBackend.Logic.Group[] groups;
+        private static SMWControlibBackend.Logic.Group errorGroup;
+
 
         public TextEditor()
         {
@@ -27,19 +29,24 @@ namespace SMWControlibControls.LogicControls
             try
             {
                 groups = SMWControlibBackend.Logic.Group.GetGroups(@".\CSVs\Syntax\groups.csv");
-                argTypes = ArgsTypes.GetArgsTypes(@".\CSVs\Syntax\args.csv");
-                commands = Command.GetCommands(@".\CSVs\Syntax\commands.csv", argTypes);
+                argTypes = ArgsTypes.GetArgsTypes(@".\CSVs\Syntax\args.csv", groups);
+                commands = Command.GetCommands(@".\CSVs\Syntax\commands.csv", argTypes, groups);
                 labels = new SMWControlibBackend.Logic.Label[4];
-                labels[0] = new NormalLabel();
-                labels[1] = new SubLabel();
-                labels[2] = new PlusLabel();
-                labels[3] = new MinusLabel();
+                labels[0] = new NormalLabel(groups, "Label");
+                labels[0].Group.Color = Color.FromArgb(64, 248, 248);
+                labels[1] = new SubLabel(groups, "Special Label");
+                labels[1].Group.Color = Color.FromArgb(160, 248, 248);
+                labels[2] = new PlusLabel(groups, "Special Label");
+                labels[3] = new MinusLabel(groups, "Special Label");
+                errorGroup = SMWControlibBackend.Logic.Group.FindGroup(groups, "Error");
+                errorGroup.Color = Color.FromArgb(255, 0, 0);
             }
             catch { }
             TextChanged += textChanged;
         }
 
         const string startSpacesPattern = @"^(\ |\t)*";
+        const string endSpacesPattern = @"(\ |\t)*$";
         const string separatorPattern = @"(\ |\t)+:(\ |\t)+";
         private void textChanged(object sender, EventArgs e)
         {
@@ -54,104 +61,177 @@ namespace SMWControlibControls.LogicControls
             string line = Lines[l];
             int lineInd = GetFirstCharIndexFromLine(l);
             int linel = line.Length;
-            bool correct = false;
 
             string[] comments = line.Split(';');
             if (comments == null || comments.Length <= 0) return;
 
-            CodePointer[] cmds = CodePointer.Split(comments[0], separatorPattern);
-
-            if (cmds == null) return;
             SuspendPainting();
-
-
-            string name;
-            Command[] names;
-            int st = 0;
-            Match ma;
-            string cmdTrim, cmdTrim2;
 
             Select(lineInd, linel);
             SelectionColor = Color.FromArgb(224, 224, 224);
             SelectionFont = new Font(Font, FontStyle.Bold);
-            bool isLabel = true;
-            CodePointer[] cps;
-            int adder = 0;
-            string name2 = "";
+            List<CodePointer> pointers = new List<CodePointer>();
+            List<CodePointer> ps;
+
+            Match m = Regex.Match(comments[0], startPattern);
+            if (m.Success)
+            {
+                CodePointer cp = new CodePointer
+                {
+                    Start = m.Index,
+                    End = m.Index + m.Length - 1,
+                    Code = m.ToString(),
+                    Group = errorGroup
+                };
+                pointers.Add(cp);
+                paintPointers(lineInd, pointers);
+                pointers.Clear();
+            }
+
+            string shortercmds = comments[0].Substring(m.Length);
+
+            CodePointer[] cmds = CodePointer.Split(shortercmds, separatorPattern);
+
+            if (cmds == null)
+            {
+                Select(lastInd, 0);
+                ResumePainting();
+                return;
+            }
+
             for (int j = 0; j < cmds.Length; j++)
             {
-                cmdTrim = cmds[j].Code.Trim(' ').Trim('\t');
-                name = cmdTrim.Split(' ', '\t')[0].ToLower();
-                ma = Regex.Match(cmds[j].Code, startSpacesPattern);
-                st = 0;
-                if (ma.Success)
-                    st = ma.Length;
-                correct = false;
-                isLabel = false;
-                adder = 0;
-                cps = CodePointer.Split(cmds[j].Code, ":");
-                if (cps.Length > 1) adder++;
-                for (int i = 0; i < labels.Length; i++)
+                ps = highLightMiniLine(cmds[j].Code);
+                foreach(CodePointer cp in ps)
                 {
-                    if(labels[i].SyntaxIsCorrect(cps[0].Code))
-                    {
-                        Select(lineInd + cmds[j].Start + st, cps[0].Code.Length + adder);
-                        SelectionColor = Color.FromArgb(80, 224, 224);
-                        SelectionFont = new Font(Font, FontStyle.Bold);
-                        isLabel = true;
-                        correct = true;
-                        break;
-                    }
+                    pointers.Add(cp);
                 }
-                if (adder > 0)
-                {
-                    cmdTrim2 = cps[1].Code.Trim(' ').Trim('\t');
-                    name2 = cmdTrim2.Split(' ', '\t')[0].ToLower();
-                    names = commands[name.ToLower()];
-                    for (int i = 0; i < names.Length; i++)
-                    {
-                        if (names[i].IsCorrect(cmdTrim))
-                        {
-                            Select(lineInd + cmds[j].Start + st, names[i].Name.Length);
-                            SelectionColor = Color.FromArgb(80, 80, 224);
-                            SelectionFont = new Font(Font, FontStyle.Bold);
-                            Select(lineInd + cmds[j].Start + st + SelectionLength, cmds[j].Code.Length - SelectionLength);
-                            SelectionColor = Color.FromArgb(224, 224, 224);
-                            SelectionFont = new Font(Font, FontStyle.Bold);
-                            correct = true;
-                            break;
-                        }
-                    }
-                }
-                if (!isLabel && commands.ContainsKey(name))
-                {
-                    names = commands[name.ToLower()];
-                    for (int i = 0; i < names.Length; i++)
-                    {
-                        if (names[i].IsCorrect(cmdTrim))
-                        {
-                            Select(lineInd + cmds[j].Start + st, names[i].Name.Length);
-                            SelectionColor = Color.FromArgb(80, 80, 224);
-                            SelectionFont = new Font(Font, FontStyle.Bold);
-                            Select(lineInd + cmds[j].Start + st + SelectionLength, cmds[j].Code.Length - SelectionLength);
-                            SelectionColor = Color.FromArgb(224, 224, 224);
-                            SelectionFont = new Font(Font, FontStyle.Bold);
-                            correct = true;
-                            break;
-                        }
-                    }
-                }
-                if (!correct)
-                {
-                    Select(lineInd + cmds[j].Start + st, cmds[j].Code.Length);
-                    SelectionBackColor = BackColor;
-                    SelectionColor = Color.FromArgb(224, 0, 0);
-                    SelectionFont = new Font(Font, FontStyle.Regular);
-                }
+                paintPointers(lineInd + m.Length
+                    + cmds[j].Start, pointers);
             }
-            
+
+            m = Regex.Match(comments[0], endPattern);
+            if (m.Success)
+            {
+                pointers.Clear();
+                CodePointer cp = new CodePointer
+                {
+                    Start = m.Index,
+                    End = m.Index + m.Length - 1,
+                    Code = m.ToString(),
+                    Group = errorGroup
+                };
+                pointers.Add(cp);
+                paintPointers(lineInd, pointers);
+            }
+
             Select(lastInd, 0);
             ResumePainting();
+        }
+
+        private CodePointer[] separateLine(string line)
+        {
+            return CodePointer.Split(line, separatorPattern);
+        }
+
+        private List<CodePointer> labelHighlight(string line, CodePointer label)
+        {
+            List<CodePointer> pointers = new List<CodePointer>();
+            for (int j = 0; j < labels.Length; j++)
+            {
+                if (label.End + 1 < line.Length &&
+                    line[label.End + 1] == ':' &&
+                    labels[j].SyntaxIsCorrect(label.Code.TrimStart(' ')
+                    .TrimStart('\t') + line[label.End + 1]))
+                {
+                    label.Append("" + line[label.End + 1]);
+                    label.Group = labels[j].Group;
+                    pointers.Add(label);
+                    break;
+                }
+                if (labels[j].SyntaxIsCorrect(label.Code.Trim(' ').Trim('\t')))
+                {
+                    label.Group = labels[j].Group;
+                    pointers.Add(label);
+                    break;
+                }
+            }
+            return pointers;
+        }
+
+        private List<CodePointer> commandHighlight(CodePointer cmd)
+        {
+            List<CodePointer> pointers = new List<CodePointer>();
+            string tryname;
+            Command[] names;
+            CodePointer[] cpauxs;
+            int minBytes = int.MaxValue;
+            tryname = cmd.Code.Replace('\t', ' ').Split(' ')[0].ToLower();
+            if (commands.ContainsKey(tryname))
+            {
+                names = commands[tryname];
+                minBytes = int.MaxValue;
+                for (int j = 0; j < names.Length; j++)
+                {
+                    if (names[j].IsCorrect(cmd.Code))
+                    {
+                        minBytes = j;
+                    }
+                }
+                if (minBytes != int.MaxValue)
+                {
+                    cpauxs =
+                        names[minBytes].GetPointers(cmd.Start, cmd.Code);
+                    foreach (CodePointer cpx in cpauxs)
+                    {
+                        pointers.Add(cpx);
+                    }
+                }
+            }
+            return pointers;
+        }
+
+        const string startPattern = @"^(\ |\t)*(:(\ |\t)*)*";
+        const string endPattern = @"(\ |\t)+(:(\ |\t)*)*$";
+        private List<CodePointer> highLightMiniLine(string line)
+        {
+            CodePointer[] labs = CodePointer.Split(line, @":(\ |\t)*");
+            List<CodePointer> pointers = new List<CodePointer>();
+            List<CodePointer> tmp;
+
+            for (int i = 0; i < labs.Length; i++)
+            {
+                tmp = labelHighlight(line, labs[i]);
+
+                if (tmp.Count <= 0) tmp = commandHighlight(labs[i]);
+
+                if (tmp.Count <= 0)
+                {
+                    labs[i].Group = errorGroup;
+                    pointers.Add(labs[i]);
+                }
+                else
+                {
+                    foreach(CodePointer cp in tmp)
+                    {
+                        pointers.Add(cp);
+                    }
+                }
+            }
+
+            return pointers;
+        }
+
+        private void paintPointers(int ind, List<CodePointer> pointers)
+        {
+            int offset = 0;
+            foreach(CodePointer pointer in pointers)
+            {
+                Select(ind + pointer.Start, pointer.Code.Length);
+                SelectionColor = pointer.Group.Color;
+                SelectionFont = new Font(Font, FontStyle.Bold);
+                offset += pointer.Code.Length;
+            }
         }
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]

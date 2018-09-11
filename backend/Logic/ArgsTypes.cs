@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Drawing;
 
 namespace SMWControlibBackend.Logic
 {
@@ -16,9 +17,36 @@ namespace SMWControlibBackend.Logic
         public int Bytes { get; private set; }
         public string Type { get; private set; }
         public string RegEXPattern { get; private set; }
+        public Group Group { get; private set; }
 
         private ArgsTypes()
         {
+        }
+
+        string spliter = @"((\*\*|\~|\%|\<\<|\>\>|\+|\-|\/|\&|\||\*|\^)(\%[0-1]+|\$[\da-fA-F]+|\d+))+";
+        public CodePointer[] GetPointers(int offset, string arg)
+        {
+            if (arg == null || arg == "" || arg.Length <= 0) return null;
+            MatchCollection ms = Regex.Matches(arg, spliter);
+
+            List<CodePointer> pointers = new List<CodePointer>();
+            CodePointer cp;
+            if (ms == null || ms.Count <= 0) 
+            {
+                cp = new CodePointer
+                {
+                    Start = offset,
+                    End = offset + arg.Length - 1,
+                    Code = arg,
+                    Group = Group
+                };
+                pointers.Add(cp);
+                return pointers.ToArray();
+            }
+
+            
+
+            return pointers.ToArray();
         }
 
         public bool IsCorrect(string arg)
@@ -28,7 +56,7 @@ namespace SMWControlibBackend.Logic
             if (m.Count == 0) return false;
             return true;
         }
-        public static ArgsTypes[] GetArgsTypes(string path)
+        public static ArgsTypes[] GetArgsTypes(string path, Group[] groups)
         {
             if (!File.Exists(path))
                 throw new FileNotFoundException("File not found.");
@@ -46,7 +74,7 @@ namespace SMWControlibBackend.Logic
             {
                 args = argsSTR[i].Split(';');
 
-                if (args.Length != 5) 
+                if (args.Length != 6) 
                     throw new Exception("Invalid Command at line: " + i);
 
                 if (args[3] == "var")
@@ -63,7 +91,9 @@ namespace SMWControlibBackend.Logic
                     Postfix = args[2].ToLower(),
                     Bytes = b,
                     Type = args[4],
+                    Group = Group.FindGroup(groups, args[5])
                 };
+                argsTypes[i - 1].Group.Color = Color.FromArgb(255, 255, 0);
                 argsTypes[i - 1].buildRegEX();
             }
 
@@ -74,7 +104,7 @@ namespace SMWControlibBackend.Logic
                             "([0-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9]|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])",
                             "([0-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9]|[1-8][0-9]{4}|9[0-8][0-9]{3}|99[0-8][0-9]{2}|999[0-8][0-9]|9999[0-9]|[1-8][0-9]{5}|9[0-8][0-9]{4}|99[0-8][0-9]{3}|999[0-8][0-9]{2}|9999[0-8][0-9]|99999[0-9]|[1-8][0-9]{6}|9[0-8][0-9]{5}|99[0-8][0-9]{4}|999[0-8][0-9]{3}|9999[0-8][0-9]{2}|99999[0-8][0-9]|999999[0-9]|1[0-5][0-9]{6}|16[0-6][0-9]{5}|167[0-6][0-9]{4}|1677[0-6][0-9]{3}|16777[01][0-9]{2}|1677720[0-9]|1677721[0-5])"};
 
-        string numPostMod = @"((\<\<|\>\>|\+|\-|\/|\&|\||\*|\^)(\%[0-1]+|\$[\da-fA-F]+|\d+))*";
+        string numPostMod = @"((\*\*|\~|\%|\<\<|\>\>|\+|\-|\/|\&|\||\*|\^)(\%[0-1]+|\$[\da-fA-F]+|\d+))*";
         private void buildRegEX()
         {
             RegEXPattern = "^";
@@ -99,7 +129,7 @@ namespace SMWControlibBackend.Logic
             {
                 string adder = "";
                 if (Prefix.Length > 0) adder = @"\d";
-                RegEXPattern += @"(["+adder+@"a-zA-Z]|_)+(\.*_*[\da-zA-Z]*)*" + numPostMod + postf + "$";
+                RegEXPattern += @"([" + adder + @"a-zA-Z]|_)+(\.*_*[\da-zA-Z]*)*" + numPostMod + postf + "$";
                 return;
             }
             if (Type == "fixed" && Bytes < 0)

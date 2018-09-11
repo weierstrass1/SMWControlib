@@ -8,7 +8,7 @@ namespace SMWControlibBackend.Logic
 {
     public class MinusLabel : Label
     {
-        public MinusLabel()
+        public MinusLabel(Group[] groups, string group) : base(groups, group)
         {
             reGex = @"^\-+:?$";
         }

@@ -37,4 +37,5 @@ Macro;Used for macro signatures.
 Macro Arg;Used for macro imputs.
 Asar;Used for asar commands.
 Comment;Used for comments.
-Tag;Used for Dyzen Tags.
+Tag;Used for Super Scriptnes Tags.
+Error; Used for errors.

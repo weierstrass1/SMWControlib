@@ -67,12 +67,16 @@ namespace SMWControlibControls.GraphicsControls
 
         private void continuousCheckedChanged(object sender, EventArgs e)
         {
+            if (SelectedAnimation == null || anims != null || anims.Count <= 0)
+                return;
             if (continuous.Checked)
                 SelectedAnimation.PlayType = PlayType.Continuous;
         }
 
         private void onlyOnceCheckedChanged(object sender, EventArgs e)
         {
+            if (SelectedAnimation == null || anims != null || anims.Count <= 0)
+                return;
             if (onlyOnce.Checked)
                 SelectedAnimation.PlayType = PlayType.OnlyOnce;
         }

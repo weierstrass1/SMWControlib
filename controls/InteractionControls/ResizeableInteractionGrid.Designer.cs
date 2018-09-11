@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResizeableInteractionGrid));
             this.panel1 = new System.Windows.Forms.Panel();
             this.center = new System.Windows.Forms.Panel();
+            this.interactionGrid1 = new SMWControlibControls.InteractionControls.InteractionGrid();
             this.top = new System.Windows.Forms.Panel();
             this.bottom = new System.Windows.Forms.Panel();
             this.right = new System.Windows.Forms.Panel();
             this.left = new System.Windows.Forms.Panel();
-            this.interactionGrid1 = new SMWControlibControls.InteractionControls.InteractionGrid();
             this.panel1.SuspendLayout();
             this.center.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.interactionGrid1)).BeginInit();
@@ -62,6 +63,25 @@
             this.center.Name = "center";
             this.center.Size = new System.Drawing.Size(238, 180);
             this.center.TabIndex = 4;
+            // 
+            // interactionGrid1
+            // 
+            this.interactionGrid1.ActivateGrid = true;
+            this.interactionGrid1.GridAccuracy = 8;
+            this.interactionGrid1.GridColor = System.Drawing.SystemColors.ControlLightLight;
+            this.interactionGrid1.GridTypeUsed = 0;
+            this.interactionGrid1.Image = ((System.Drawing.Image)(resources.GetObject("interactionGrid1.Image")));
+            this.interactionGrid1.Location = new System.Drawing.Point(0, 0);
+            this.interactionGrid1.MaximumSize = new System.Drawing.Size(262, 246);
+            this.interactionGrid1.Name = "interactionGrid1";
+            this.interactionGrid1.SelectedFrame = null;
+            this.interactionGrid1.SelectedHitbox = null;
+            this.interactionGrid1.SelectedInteractionPoint = null;
+            this.interactionGrid1.SelectingHitbox = true;
+            this.interactionGrid1.Size = new System.Drawing.Size(262, 246);
+            this.interactionGrid1.TabIndex = 0;
+            this.interactionGrid1.TabStop = false;
+            this.interactionGrid1.Zoom = 1;
             // 
             // top
             // 
@@ -95,27 +115,10 @@
             this.left.Size = new System.Drawing.Size(200, 380);
             this.left.TabIndex = 0;
             // 
-            // interactionGrid1
-            // 
-            this.interactionGrid1.ActivateGrid = true;
-            this.interactionGrid1.GridAccuracy = 8;
-            this.interactionGrid1.GridColor = System.Drawing.SystemColors.ControlLightLight;
-            this.interactionGrid1.GridTypeUsed = 0;
-            this.interactionGrid1.Location = new System.Drawing.Point(0, 0);
-            this.interactionGrid1.Name = "interactionGrid1";
-            this.interactionGrid1.SelectedFrame = null;
-            this.interactionGrid1.SelectedHitbox = null;
-            this.interactionGrid1.SelectedInteractionPoint = null;
-            this.interactionGrid1.SelectingHitbox = true;
-            this.interactionGrid1.Size = new System.Drawing.Size(100, 50);
-            this.interactionGrid1.TabIndex = 0;
-            this.interactionGrid1.TabStop = false;
-            this.interactionGrid1.Zoom = 1;
-            // 
             // ResizeableInteractionGrid
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.panel1);
             this.Name = "ResizeableInteractionGrid";
             this.Size = new System.Drawing.Size(638, 380);

@@ -11,55 +11,75 @@ namespace SMWControlibBackend.Logic
 {
     public class CodePointer
     {
-        public int Start { get; private set; }
-        public int End { get; private set; }
-        public string Group { get; internal set; }
-        public string Code { get; internal set; }
+        public int Start { get; set; }
+        public int End { get; set; }
+        public Group Group { get; set; }
+        public string Code { get; set; }
 
-        private CodePointer()
+        public CodePointer()
         {
         }
 
+        public void Append(string s)
+        {
+            Code = Code + s;
+            End = Start + Code.Length;
+        }
         public static CodePointer[] Split(string line, string separatorPattern)
         {
+            if (line == "" || line == null || line.Length <= 0) return null;
             MatchCollection ms = Regex.Matches(line, separatorPattern);
-            string[] strings = Regex.Split(line, separatorPattern);
-            List<string> s = new List<string>();
-            foreach(string ss in strings)
+            if (ms.Count == 0)
             {
-                if (ss != "\t" && ss != " " && ss != "" && ss != null && ss.Length > 0)
+                CodePointer[] pa = new CodePointer[1];
+                pa[0] = new CodePointer
                 {
-                    s.Add(ss);
-                }
-            }
-            strings = s.ToArray();
-            if (strings == null || strings.Length <= 0) return null;
-
-            int st = 0;
-            IEnumerator enumerator = ms.GetEnumerator();
-            enumerator.Reset();
-            CodePointer[] pointers = new CodePointer[strings.Length];
-            bool moved = false;
-
-            for (int i = 0, j = -1; i < strings.Length; i++, j++)
-            {
-                if (moved)
-                {
-                    st += ((Match)enumerator.Current).Length;
-                }
-                pointers[i] = new CodePointer
-                {
-                    Start = st,
-                    End = st + strings[i].Length,
-                    Group = "Unknown",
-                    Code = strings[i]
+                    Start = 0,
+                    End = line.Length - 1,
+                    Code = line
                 };
-
-                moved = enumerator.MoveNext();
-                st += strings[i].Length;
+                return pa;
             }
 
-            return pointers;
+            List<CodePointer> pointers = new List<CodePointer>();
+            CodePointer p;
+            int s = 0;
+            int e = 0;
+
+            foreach (Match m in ms)
+            {
+                e = m.Index - 1;
+                if (e >= s)
+                {
+                    p = new CodePointer
+                    {
+                        Start = s,
+                        End = e,
+                        Code = line.Substring(s, 1 + e - s)
+                    };
+                    pointers.Add(p);
+                }
+                s = m.Index + m.Length;
+            }
+
+            e = line.Length - 1;
+            if (e >= s)
+            {
+                p = new CodePointer
+                {
+                    Start = s,
+                    End = e,
+                    Code = line.Substring(s, 1 + e - s)
+                };
+                pointers.Add(p);
+            }
+
+            return pointers.ToArray();
+        }
+
+        public override string ToString()
+        {
+            return Code;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace SMWControlibBackend.Logic
 {
     public class SubLabel : Label
     {
-        public SubLabel()
+        public SubLabel(Group[] groups, string group) : base(groups, group)
         {
             reGex = @"^\.[a-zA-Z_\d]+[a-zA-Z_\d.]*:?$";
         }

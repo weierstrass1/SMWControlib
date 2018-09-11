@@ -98,6 +98,7 @@
     <Compile Include="GraphicsControls\ImageButton.Designer.cs">
       <DependentUpon>ImageButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="GraphicsControls\Theme.cs" />
     <Compile Include="InteractionControls\InteractionMenu.cs">
       <SubType>UserControl</SubType>
     </Compile>

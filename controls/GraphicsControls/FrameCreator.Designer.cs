@@ -38,63 +38,81 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.label1.Location = new System.Drawing.Point(6, 6);
             this.label1.Margin = new System.Windows.Forms.Padding(6);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 16);
+            this.label1.Size = new System.Drawing.Size(74, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Frames";
             // 
             // frameSelector
             // 
+            this.frameSelector.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(80)))), ((int)(((byte)(176)))));
             this.frameSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.frameSelector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.frameSelector.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.frameSelector.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.frameSelector.FormattingEnabled = true;
             this.frameSelector.Location = new System.Drawing.Point(9, 34);
             this.frameSelector.Margin = new System.Windows.Forms.Padding(3, 6, 6, 3);
             this.frameSelector.Name = "frameSelector";
-            this.frameSelector.Size = new System.Drawing.Size(190, 21);
+            this.frameSelector.Size = new System.Drawing.Size(190, 20);
             this.frameSelector.TabIndex = 1;
             // 
             // create
             // 
+            this.create.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(250)))));
+            this.create.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.create.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.create.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.create.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.create.Location = new System.Drawing.Point(9, 61);
             this.create.Name = "create";
             this.create.Size = new System.Drawing.Size(92, 23);
             this.create.TabIndex = 2;
             this.create.Text = "New";
-            this.create.UseVisualStyleBackColor = true;
+            this.create.UseVisualStyleBackColor = false;
             // 
             // delete
             // 
+            this.delete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(250)))));
+            this.delete.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.delete.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.delete.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.delete.Location = new System.Drawing.Point(107, 61);
             this.delete.Name = "delete";
             this.delete.Size = new System.Drawing.Size(92, 23);
             this.delete.TabIndex = 3;
             this.delete.Text = "Delete";
-            this.delete.UseVisualStyleBackColor = true;
+            this.delete.UseVisualStyleBackColor = false;
             // 
             // settings
             // 
+            this.settings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(250)))));
+            this.settings.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.settings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.settings.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.settings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.settings.Location = new System.Drawing.Point(57, 90);
             this.settings.Margin = new System.Windows.Forms.Padding(3, 3, 3, 6);
             this.settings.Name = "settings";
             this.settings.Size = new System.Drawing.Size(92, 23);
             this.settings.TabIndex = 4;
             this.settings.Text = "Settings";
-            this.settings.UseVisualStyleBackColor = true;
+            this.settings.UseVisualStyleBackColor = false;
             // 
             // FrameCreator
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.settings);
             this.Controls.Add(this.delete);
             this.Controls.Add(this.create);
             this.Controls.Add(this.frameSelector);
             this.Controls.Add(this.label1);
-            this.MaximumSize = new System.Drawing.Size(205, 119);
-            this.MinimumSize = new System.Drawing.Size(205, 119);
             this.Name = "FrameCreator";
             this.Size = new System.Drawing.Size(205, 119);
             this.ResumeLayout(false);

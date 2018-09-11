@@ -67,20 +67,21 @@
             this.panel1.Controls.Add(this.trackBar2);
             this.panel1.Controls.Add(this.spriteGrid1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 38);
+            this.panel1.Location = new System.Drawing.Point(0, 35);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(561, 489);
+            this.panel1.Size = new System.Drawing.Size(748, 411);
             this.panel1.TabIndex = 1;
             // 
             // trackBar1
             // 
             this.trackBar1.AutoSize = false;
             this.trackBar1.LargeChange = 1;
-            this.trackBar1.Location = new System.Drawing.Point(11, 0);
+            this.trackBar1.Location = new System.Drawing.Point(10, 0);
             this.trackBar1.Margin = new System.Windows.Forms.Padding(0);
             this.trackBar1.Maximum = 256;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(535, 20);
+            this.trackBar1.Size = new System.Drawing.Size(705, 17);
             this.trackBar1.TabIndex = 1;
             this.trackBar1.Value = 136;
             // 
@@ -88,13 +89,13 @@
             // 
             this.trackBar2.AutoSize = false;
             this.trackBar2.LargeChange = 1;
-            this.trackBar2.Location = new System.Drawing.Point(0, 11);
+            this.trackBar2.Location = new System.Drawing.Point(0, 9);
             this.trackBar2.Margin = new System.Windows.Forms.Padding(0);
             this.trackBar2.Maximum = 240;
             this.trackBar2.Name = "trackBar2";
             this.trackBar2.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.trackBar2.Size = new System.Drawing.Size(20, 504);
+            this.trackBar2.Size = new System.Drawing.Size(17, 426);
             this.trackBar2.TabIndex = 2;
             this.trackBar2.Value = 120;
             // 
@@ -108,7 +109,7 @@
             this.spriteGrid1.GridAccuracy = 8;
             this.spriteGrid1.GridColor = System.Drawing.SystemColors.ControlLightLight;
             this.spriteGrid1.GridTypeUsed = 0;
-            this.spriteGrid1.Location = new System.Drawing.Point(20, 20);
+            this.spriteGrid1.Location = new System.Drawing.Point(17, 17);
             this.spriteGrid1.Margin = new System.Windows.Forms.Padding(0);
             this.spriteGrid1.MaximumSize = new System.Drawing.Size(518, 486);
             this.spriteGrid1.MidX = 0;
@@ -116,7 +117,7 @@
             this.spriteGrid1.Name = "spriteGrid1";
             this.spriteGrid1.SelectionBorderColor = System.Drawing.SystemColors.AppWorkspace;
             this.spriteGrid1.SelectionFillColor = System.Drawing.SystemColors.WindowFrame;
-            this.spriteGrid1.Size = new System.Drawing.Size(518, 486);
+            this.spriteGrid1.Size = new System.Drawing.Size(518, 412);
             this.spriteGrid1.TabIndex = 0;
             this.spriteGrid1.Zoom = 2;
             // 
@@ -129,14 +130,18 @@
             this.panel2.Controls.Add(this.grid);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 527);
+            this.panel2.Location = new System.Drawing.Point(0, 446);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(561, 35);
+            this.panel2.Size = new System.Drawing.Size(748, 30);
             this.panel2.TabIndex = 2;
             // 
             // cellSize
             // 
+            this.cellSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(80)))), ((int)(((byte)(176)))));
             this.cellSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cellSize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cellSize.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.cellSize.FormattingEnabled = true;
             this.cellSize.Items.AddRange(new object[] {
             "1X1",
@@ -144,56 +149,69 @@
             "4X4",
             "8X8",
             "16X16"});
-            this.cellSize.Location = new System.Drawing.Point(349, 8);
-            this.cellSize.Margin = new System.Windows.Forms.Padding(3, 8, 6, 3);
+            this.cellSize.Location = new System.Drawing.Point(433, 7);
+            this.cellSize.Margin = new System.Windows.Forms.Padding(4, 7, 8, 3);
             this.cellSize.Name = "cellSize";
-            this.cellSize.Size = new System.Drawing.Size(76, 21);
+            this.cellSize.Size = new System.Drawing.Size(66, 19);
             this.cellSize.TabIndex = 12;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(281, 5);
-            this.label2.Margin = new System.Windows.Forms.Padding(6);
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.label2.Location = new System.Drawing.Point(328, 5);
+            this.label2.Margin = new System.Windows.Forms.Padding(8, 5, 8, 5);
             this.label2.Name = "label2";
-            this.label2.Padding = new System.Windows.Forms.Padding(6);
-            this.label2.Size = new System.Drawing.Size(59, 25);
+            this.label2.Padding = new System.Windows.Forms.Padding(8, 5, 8, 5);
+            this.label2.Size = new System.Drawing.Size(93, 21);
             this.label2.TabIndex = 11;
             this.label2.Text = "Cell Size";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // zoom
             // 
+            this.zoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(80)))), ((int)(((byte)(176)))));
             this.zoom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.zoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.zoom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.zoom.FormattingEnabled = true;
             this.zoom.Items.AddRange(new object[] {
             "X1",
             "X2",
             "X3",
             "X4"});
-            this.zoom.Location = new System.Drawing.Point(193, 8);
-            this.zoom.Margin = new System.Windows.Forms.Padding(3, 8, 6, 3);
+            this.zoom.Location = new System.Drawing.Point(246, 7);
+            this.zoom.Margin = new System.Windows.Forms.Padding(4, 7, 8, 3);
             this.zoom.Name = "zoom";
-            this.zoom.Size = new System.Drawing.Size(76, 21);
+            this.zoom.Size = new System.Drawing.Size(66, 19);
             this.zoom.TabIndex = 10;
             // 
             // settings
             // 
-            this.settings.Location = new System.Drawing.Point(54, 6);
+            this.settings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(250)))));
+            this.settings.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.settings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.settings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.settings.Location = new System.Drawing.Point(76, 6);
+            this.settings.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.settings.Name = "settings";
-            this.settings.Size = new System.Drawing.Size(75, 23);
+            this.settings.Size = new System.Drawing.Size(100, 19);
             this.settings.TabIndex = 1;
             this.settings.Text = "Grid Settings";
-            this.settings.UseVisualStyleBackColor = true;
+            this.settings.UseVisualStyleBackColor = false;
             // 
             // grid
             // 
             this.grid.AutoSize = true;
             this.grid.Checked = true;
             this.grid.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.grid.Location = new System.Drawing.Point(3, 10);
+            this.grid.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.grid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.grid.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.grid.Location = new System.Drawing.Point(15, 8);
+            this.grid.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.grid.Name = "grid";
-            this.grid.Size = new System.Drawing.Size(45, 17);
+            this.grid.Size = new System.Drawing.Size(53, 15);
             this.grid.TabIndex = 0;
             this.grid.Text = "Grid";
             this.grid.UseVisualStyleBackColor = true;
@@ -201,11 +219,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(138, 5);
-            this.label1.Margin = new System.Windows.Forms.Padding(6);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.label1.Location = new System.Drawing.Point(188, 5);
+            this.label1.Margin = new System.Windows.Forms.Padding(8, 5, 8, 5);
             this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(6);
-            this.label1.Size = new System.Drawing.Size(46, 25);
+            this.label1.Padding = new System.Windows.Forms.Padding(8, 5, 8, 5);
+            this.label1.Size = new System.Drawing.Size(53, 21);
             this.label1.TabIndex = 6;
             this.label1.Text = "Zoom";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -217,8 +236,9 @@
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(561, 38);
+            this.panel3.Size = new System.Drawing.Size(748, 35);
             this.panel3.TabIndex = 3;
             // 
             // panel5
@@ -230,11 +250,12 @@
             this.panel5.Controls.Add(this.moveUp);
             this.panel5.Controls.Add(this.moveRight);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(156, 0);
-            this.panel5.MaximumSize = new System.Drawing.Size(234, 38);
-            this.panel5.MinimumSize = new System.Drawing.Size(234, 38);
+            this.panel5.Location = new System.Drawing.Point(208, 0);
+            this.panel5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.panel5.MaximumSize = new System.Drawing.Size(312, 35);
+            this.panel5.MinimumSize = new System.Drawing.Size(312, 35);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(234, 38);
+            this.panel5.Size = new System.Drawing.Size(312, 35);
             this.panel5.TabIndex = 7;
             // 
             // mirrorH
@@ -246,7 +267,8 @@
             this.mirrorH.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.mirrorH.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.mirrorH.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.mirrorH.Location = new System.Drawing.Point(6, 3);
+            this.mirrorH.Location = new System.Drawing.Point(8, 3);
+            this.mirrorH.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.mirrorH.Name = "mirrorH";
             this.mirrorH.OffSetX1 = 1;
             this.mirrorH.OffSetX2 = 4;
@@ -268,7 +290,8 @@
             this.mirrorV.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.mirrorV.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.mirrorV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.mirrorV.Location = new System.Drawing.Point(44, 3);
+            this.mirrorV.Location = new System.Drawing.Point(48, 3);
+            this.mirrorV.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.mirrorV.Name = "mirrorV";
             this.mirrorV.OffSetX1 = 1;
             this.mirrorV.OffSetX2 = 4;
@@ -290,7 +313,8 @@
             this.moveDown.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.moveDown.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.moveDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.moveDown.Location = new System.Drawing.Point(158, 3);
+            this.moveDown.Location = new System.Drawing.Point(168, 3);
+            this.moveDown.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.moveDown.Name = "moveDown";
             this.moveDown.OffSetX1 = 1;
             this.moveDown.OffSetX2 = 4;
@@ -312,7 +336,8 @@
             this.moveLeft.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.moveLeft.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.moveLeft.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.moveLeft.Location = new System.Drawing.Point(82, 3);
+            this.moveLeft.Location = new System.Drawing.Point(88, 3);
+            this.moveLeft.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.moveLeft.Name = "moveLeft";
             this.moveLeft.OffSetX1 = 1;
             this.moveLeft.OffSetX2 = 4;
@@ -334,7 +359,8 @@
             this.moveUp.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.moveUp.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.moveUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.moveUp.Location = new System.Drawing.Point(120, 3);
+            this.moveUp.Location = new System.Drawing.Point(128, 3);
+            this.moveUp.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.moveUp.Name = "moveUp";
             this.moveUp.OffSetX1 = 1;
             this.moveUp.OffSetX2 = 4;
@@ -356,7 +382,8 @@
             this.moveRight.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.moveRight.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.moveRight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.moveRight.Location = new System.Drawing.Point(196, 3);
+            this.moveRight.Location = new System.Drawing.Point(208, 3);
+            this.moveRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.moveRight.Name = "moveRight";
             this.moveRight.OffSetX1 = 1;
             this.moveRight.OffSetX2 = 4;
@@ -372,17 +399,19 @@
             // panel6
             // 
             this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(405, 0);
+            this.panel6.Location = new System.Drawing.Point(540, 0);
+            this.panel6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(156, 38);
+            this.panel6.Size = new System.Drawing.Size(208, 35);
             this.panel6.TabIndex = 8;
             // 
             // panel4
             // 
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(156, 38);
+            this.panel4.Size = new System.Drawing.Size(208, 35);
             this.panel4.TabIndex = 6;
             // 
             // toolTip1
@@ -397,15 +426,17 @@
             // 
             // SpriteGridController
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
-            this.MaximumSize = new System.Drawing.Size(561, 562);
-            this.MinimumSize = new System.Drawing.Size(135, 120);
+            this.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold);
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MaximumSize = new System.Drawing.Size(748, 476);
+            this.MinimumSize = new System.Drawing.Size(180, 102);
             this.Name = "SpriteGridController";
-            this.Size = new System.Drawing.Size(561, 562);
+            this.Size = new System.Drawing.Size(748, 476);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();

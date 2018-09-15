@@ -35,6 +35,7 @@
             this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.spriteGrid1 = new SMWControlibControls.GraphicsControls.SpriteGrid();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.cellSize = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.zoom = new System.Windows.Forms.ComboBox();
@@ -70,7 +71,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 35);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(748, 411);
+            this.panel1.Size = new System.Drawing.Size(748, 407);
             this.panel1.TabIndex = 1;
             // 
             // trackBar1
@@ -123,6 +124,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.cellSize);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.zoom);
@@ -130,18 +132,33 @@
             this.panel2.Controls.Add(this.grid);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 446);
+            this.panel2.Location = new System.Drawing.Point(0, 442);
             this.panel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(748, 30);
+            this.panel2.Size = new System.Drawing.Size(748, 34);
             this.panel2.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.label3.Location = new System.Drawing.Point(33, 5);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 5, 8, 5);
+            this.label3.Name = "label3";
+            this.label3.Padding = new System.Windows.Forms.Padding(8, 5, 8, 5);
+            this.label3.Size = new System.Drawing.Size(46, 22);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Grid";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cellSize
             // 
-            this.cellSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(80)))), ((int)(((byte)(176)))));
+            this.cellSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.cellSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cellSize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cellSize.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.cellSize.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.cellSize.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
             this.cellSize.FormattingEnabled = true;
             this.cellSize.Items.AddRange(new object[] {
             "1X1",
@@ -149,55 +166,58 @@
             "4X4",
             "8X8",
             "16X16"});
-            this.cellSize.Location = new System.Drawing.Point(433, 7);
+            this.cellSize.Location = new System.Drawing.Point(412, 7);
             this.cellSize.Margin = new System.Windows.Forms.Padding(4, 7, 8, 3);
             this.cellSize.Name = "cellSize";
-            this.cellSize.Size = new System.Drawing.Size(66, 19);
+            this.cellSize.Size = new System.Drawing.Size(66, 20);
             this.cellSize.TabIndex = 12;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.label2.Location = new System.Drawing.Point(328, 5);
+            this.label2.Location = new System.Drawing.Point(326, 5);
             this.label2.Margin = new System.Windows.Forms.Padding(8, 5, 8, 5);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(8, 5, 8, 5);
-            this.label2.Size = new System.Drawing.Size(93, 21);
+            this.label2.Size = new System.Drawing.Size(74, 22);
             this.label2.TabIndex = 11;
             this.label2.Text = "Cell Size";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // zoom
             // 
-            this.zoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(80)))), ((int)(((byte)(176)))));
+            this.zoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.zoom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.zoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.zoom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.zoom.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.zoom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
             this.zoom.FormattingEnabled = true;
             this.zoom.Items.AddRange(new object[] {
             "X1",
             "X2",
             "X3",
             "X4"});
-            this.zoom.Location = new System.Drawing.Point(246, 7);
+            this.zoom.Location = new System.Drawing.Point(244, 7);
             this.zoom.Margin = new System.Windows.Forms.Padding(4, 7, 8, 3);
             this.zoom.Name = "zoom";
-            this.zoom.Size = new System.Drawing.Size(66, 19);
+            this.zoom.Size = new System.Drawing.Size(66, 20);
             this.zoom.TabIndex = 10;
             // 
             // settings
             // 
-            this.settings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(250)))));
-            this.settings.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.settings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.settings.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
             this.settings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.settings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.settings.Location = new System.Drawing.Point(76, 6);
+            this.settings.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.settings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+            this.settings.Location = new System.Drawing.Point(91, 5);
             this.settings.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.settings.Name = "settings";
-            this.settings.Size = new System.Drawing.Size(100, 19);
+            this.settings.Size = new System.Drawing.Size(76, 23);
             this.settings.TabIndex = 1;
-            this.settings.Text = "Grid Settings";
+            this.settings.Text = "Settings";
             this.settings.UseVisualStyleBackColor = false;
             // 
             // grid
@@ -207,24 +227,25 @@
             this.grid.CheckState = System.Windows.Forms.CheckState.Checked;
             this.grid.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
             this.grid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.grid.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.grid.Location = new System.Drawing.Point(15, 8);
-            this.grid.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.grid.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.grid.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.grid.Location = new System.Drawing.Point(17, 11);
+            this.grid.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.grid.Name = "grid";
-            this.grid.Size = new System.Drawing.Size(53, 15);
+            this.grid.Size = new System.Drawing.Size(12, 11);
             this.grid.TabIndex = 0;
-            this.grid.Text = "Grid";
             this.grid.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.label1.Location = new System.Drawing.Point(188, 5);
+            this.label1.Location = new System.Drawing.Point(179, 5);
             this.label1.Margin = new System.Windows.Forms.Padding(8, 5, 8, 5);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(8, 5, 8, 5);
-            this.label1.Size = new System.Drawing.Size(53, 21);
+            this.label1.Size = new System.Drawing.Size(53, 22);
             this.label1.TabIndex = 6;
             this.label1.Text = "Zoom";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -243,24 +264,25 @@
             // 
             // panel5
             // 
+            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.panel5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel5.BackgroundImage")));
+            this.panel5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel5.Controls.Add(this.mirrorH);
             this.panel5.Controls.Add(this.mirrorV);
             this.panel5.Controls.Add(this.moveDown);
             this.panel5.Controls.Add(this.moveLeft);
             this.panel5.Controls.Add(this.moveUp);
             this.panel5.Controls.Add(this.moveRight);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel5.Location = new System.Drawing.Point(208, 0);
             this.panel5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel5.MaximumSize = new System.Drawing.Size(312, 35);
-            this.panel5.MinimumSize = new System.Drawing.Size(312, 35);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(312, 35);
+            this.panel5.Size = new System.Drawing.Size(250, 35);
             this.panel5.TabIndex = 7;
             // 
             // mirrorH
             // 
-            this.mirrorH.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("mirrorH.BackgroundImage")));
+            this.mirrorH.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.mirrorH.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.mirrorH.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.mirrorH.FlatAppearance.BorderSize = 0;
@@ -270,20 +292,20 @@
             this.mirrorH.Location = new System.Drawing.Point(8, 3);
             this.mirrorH.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.mirrorH.Name = "mirrorH";
-            this.mirrorH.OffSetX1 = 1;
-            this.mirrorH.OffSetX2 = 4;
-            this.mirrorH.OffSetY1 = 1;
-            this.mirrorH.OffSetY2 = 4;
+            this.mirrorH.OffSetX1 = 5;
+            this.mirrorH.OffSetX2 = 9;
+            this.mirrorH.OffSetY1 = 5;
+            this.mirrorH.OffSetY2 = 9;
             this.mirrorH.Size = new System.Drawing.Size(32, 32);
-            this.mirrorH.Source = global::SMWControlibControls.Properties.Resources.mirrorH;
+            this.mirrorH.Source = null;
             this.mirrorH.TabIndex = 0;
             this.mirrorH.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.mirrorH.UseVisualStyleBackColor = true;
-            this.mirrorH.Zoom = 2;
+            this.mirrorH.UseVisualStyleBackColor = false;
+            this.mirrorH.Zoom = 1;
             // 
             // mirrorV
             // 
-            this.mirrorV.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("mirrorV.BackgroundImage")));
+            this.mirrorV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.mirrorV.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.mirrorV.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.mirrorV.FlatAppearance.BorderSize = 0;
@@ -298,11 +320,11 @@
             this.mirrorV.OffSetY1 = 1;
             this.mirrorV.OffSetY2 = 4;
             this.mirrorV.Size = new System.Drawing.Size(32, 32);
-            this.mirrorV.Source = global::SMWControlibControls.Properties.Resources.mirrorV;
+            this.mirrorV.Source = null;
             this.mirrorV.TabIndex = 1;
             this.mirrorV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.mirrorV.UseVisualStyleBackColor = true;
-            this.mirrorV.Zoom = 2;
+            this.mirrorV.UseVisualStyleBackColor = false;
+            this.mirrorV.Zoom = 1;
             // 
             // moveDown
             // 
@@ -321,11 +343,11 @@
             this.moveDown.OffSetY1 = 1;
             this.moveDown.OffSetY2 = 4;
             this.moveDown.Size = new System.Drawing.Size(32, 32);
-            this.moveDown.Source = global::SMWControlibControls.Properties.Resources.down;
+            this.moveDown.Source = ((System.Drawing.Image)(resources.GetObject("moveDown.Source")));
             this.moveDown.TabIndex = 5;
             this.moveDown.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.moveDown.UseVisualStyleBackColor = true;
-            this.moveDown.Zoom = 2;
+            this.moveDown.Zoom = 1;
             // 
             // moveLeft
             // 
@@ -344,11 +366,11 @@
             this.moveLeft.OffSetY1 = 1;
             this.moveLeft.OffSetY2 = 4;
             this.moveLeft.Size = new System.Drawing.Size(32, 32);
-            this.moveLeft.Source = global::SMWControlibControls.Properties.Resources.previus;
+            this.moveLeft.Source = global::SMWControlibControls.Properties.Resources.snesLeft;
             this.moveLeft.TabIndex = 2;
             this.moveLeft.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.moveLeft.UseVisualStyleBackColor = true;
-            this.moveLeft.Zoom = 2;
+            this.moveLeft.Zoom = 1;
             // 
             // moveUp
             // 
@@ -367,11 +389,11 @@
             this.moveUp.OffSetY1 = 1;
             this.moveUp.OffSetY2 = 4;
             this.moveUp.Size = new System.Drawing.Size(32, 32);
-            this.moveUp.Source = global::SMWControlibControls.Properties.Resources.up;
+            this.moveUp.Source = ((System.Drawing.Image)(resources.GetObject("moveUp.Source")));
             this.moveUp.TabIndex = 4;
             this.moveUp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.moveUp.UseVisualStyleBackColor = true;
-            this.moveUp.Zoom = 2;
+            this.moveUp.Zoom = 1;
             // 
             // moveRight
             // 
@@ -390,14 +412,15 @@
             this.moveRight.OffSetY1 = 1;
             this.moveRight.OffSetY2 = 4;
             this.moveRight.Size = new System.Drawing.Size(32, 32);
-            this.moveRight.Source = global::SMWControlibControls.Properties.Resources.next;
+            this.moveRight.Source = global::SMWControlibControls.Properties.Resources.snesRight;
             this.moveRight.TabIndex = 3;
             this.moveRight.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.moveRight.UseVisualStyleBackColor = true;
-            this.moveRight.Zoom = 2;
+            this.moveRight.Zoom = 1;
             // 
             // panel6
             // 
+            this.panel6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel6.Location = new System.Drawing.Point(540, 0);
             this.panel6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -472,5 +495,6 @@
         private System.Windows.Forms.ComboBox cellSize;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label label3;
     }
 }

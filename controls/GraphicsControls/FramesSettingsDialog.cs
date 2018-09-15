@@ -75,16 +75,16 @@ namespace SMWControlibControls.GraphicsControls
                 tableLayoutPanel1.Controls.Add(lb, 0, i);
                 ibtn = new ImageButton();
                 if (i == 0) ibtn.Enabled = false;
-                initImageButton(ibtn, Properties.Resources.upArrow);
+                //initImageButton(ibtn, Properties.Resources.upArrow);
                 ibtn.Click += clickUp;
                 tableLayoutPanel1.Controls.Add(ibtn, 1, i);
                 ibtn = new ImageButton();
                 if (i == frames.Length - 1) ibtn.Enabled = false;
-                initImageButton(ibtn, Properties.Resources.downArrow);
+                //initImageButton(ibtn, Properties.Resources.downArrow);
                 ibtn.Click += clickDown;
                 tableLayoutPanel1.Controls.Add(ibtn, 2, i);
                 ibtn = new ImageButton();
-                initImageButton(ibtn, Properties.Resources.questionBlock);
+                //initImageButton(ibtn, Properties.Resources.questionBlock);
                 ibtn.Click += questionClick;
                 tableLayoutPanel1.Controls.Add(ibtn, 3, i);
             }

@@ -51,6 +51,7 @@ namespace SMWControlibControls.GraphicsControls
 
         public void Init()
         {
+            if (Source == null) return;
             Size = new Size(Source.Width * zoom, Source.Height * zoom);
             BackgroundImage = new Bitmap(Width, Height);
             Text = "";
@@ -64,6 +65,7 @@ namespace SMWControlibControls.GraphicsControls
 
         private void drawBackImage(Graphics g)
         {
+            if (Source == null) return;
             g.InterpolationMode = InterpolationMode.NearestNeighbor;
             g.DrawImage(Source, 0, 0,
                 Width, Height);

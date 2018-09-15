@@ -80,17 +80,17 @@ namespace SMWControlibControls.GraphicsControls
                 if (playing)
                 {
                     previus.Enabled = false;
-                    previus.Source = Properties.Resources.previus;
+                    /*previus.Source = Properties.Resources.previus;
                     play.Source = Properties.Resources.pause;
-                    next.Source = Properties.Resources.stop;
+                    next.Source = Properties.Resources.stop;*/
                     timer1.Start();
                 }
                 else
                 {
                     previus.Enabled = true;
-                    previus.Source = Properties.Resources.previus;
+                    /*previus.Source = Properties.Resources.previus;
                     play.Source = Properties.Resources.play;
-                    next.Source = Properties.Resources.next;
+                    next.Source = Properties.Resources.next;*/
                 }
                     
             }

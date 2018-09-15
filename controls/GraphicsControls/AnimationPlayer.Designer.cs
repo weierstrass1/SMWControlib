@@ -166,7 +166,6 @@
             this.previus.OffSetY1 = 1;
             this.previus.OffSetY2 = 4;
             this.previus.Size = new System.Drawing.Size(32, 32);
-            this.previus.Source = global::SMWControlibControls.Properties.Resources.previus;
             this.previus.TabIndex = 5;
             this.previus.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.previus.UseVisualStyleBackColor = true;
@@ -188,7 +187,6 @@
             this.next.OffSetY1 = 1;
             this.next.OffSetY2 = 4;
             this.next.Size = new System.Drawing.Size(32, 32);
-            this.next.Source = global::SMWControlibControls.Properties.Resources.next;
             this.next.TabIndex = 4;
             this.next.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.next.UseVisualStyleBackColor = true;
@@ -210,7 +208,6 @@
             this.play.OffSetY1 = 1;
             this.play.OffSetY2 = 4;
             this.play.Size = new System.Drawing.Size(32, 32);
-            this.play.Source = global::SMWControlibControls.Properties.Resources.play;
             this.play.TabIndex = 3;
             this.play.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.play.UseVisualStyleBackColor = true;

@@ -255,8 +255,8 @@ namespace SMWControlibControls.GraphicsControls
             trackBar2.Height = spriteGrid1.Height + 17;
             int w = Width - panel5.Width;
             w /= 2;
-            panel4.Width = w;
-            panel6.Width = w;
+            panel4.Width = w + 18;
+            panel6.Width = w - 18;
         }
 
         public void ReDraw()

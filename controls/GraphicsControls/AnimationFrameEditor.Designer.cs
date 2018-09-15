@@ -77,7 +77,6 @@
             this.imageButton3.OffSetY1 = 1;
             this.imageButton3.OffSetY2 = 4;
             this.imageButton3.Size = new System.Drawing.Size(32, 32);
-            this.imageButton3.Source = global::SMWControlibControls.Properties.Resources.replace;
             this.imageButton3.TabIndex = 4;
             this.imageButton3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.imageButton3.UseVisualStyleBackColor = true;
@@ -99,7 +98,6 @@
             this.imageButton2.OffSetY1 = 1;
             this.imageButton2.OffSetY2 = 4;
             this.imageButton2.Size = new System.Drawing.Size(32, 32);
-            this.imageButton2.Source = global::SMWControlibControls.Properties.Resources.minus;
             this.imageButton2.TabIndex = 3;
             this.imageButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.imageButton2.UseVisualStyleBackColor = true;
@@ -121,7 +119,6 @@
             this.imageButton1.OffSetY1 = 1;
             this.imageButton1.OffSetY2 = 4;
             this.imageButton1.Size = new System.Drawing.Size(32, 32);
-            this.imageButton1.Source = global::SMWControlibControls.Properties.Resources.plus;
             this.imageButton1.TabIndex = 2;
             this.imageButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.imageButton1.UseVisualStyleBackColor = true;

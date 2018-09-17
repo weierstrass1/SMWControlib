@@ -1,4 +1,6 @@
 ﻿using System.Drawing;
+using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using SMWControlibBackend.Graphics;
 using SMWControlibControls.GraphicsControls;
@@ -35,6 +37,17 @@ namespace TestWindows
             interactionMenu1.IPColorChanged += interactionMenuIPColorChanged;
             interactionMenu1.ZoomChanged += interactionMenuZoomChanged;
             interactionMenu1.CellSizeChanged += interactionMenuCellSizeChanged;
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(File.ReadAllText(@".\ASM\Main.asm"));
+                sb.Append(File.ReadAllText(@".\ASM\GraphicRoutine.asm"));
+                textEditor1.Text = sb.ToString();
+            }
+            catch
+            {
+
+            }
         }
 
         private void interactionMenuCellSizeChanged(int obj)

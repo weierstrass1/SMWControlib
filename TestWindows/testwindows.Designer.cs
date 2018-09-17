@@ -158,10 +158,12 @@
             // 
             // paletteButton1
             // 
-            this.paletteButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(250)))));
-            this.paletteButton1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.paletteButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.paletteButton1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
+            this.paletteButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
             this.paletteButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.paletteButton1.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.paletteButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(250)))));
             this.paletteButton1.Location = new System.Drawing.Point(6, 146);
             this.paletteButton1.Name = "paletteButton1";
             this.paletteButton1.Size = new System.Drawing.Size(75, 23);
@@ -243,6 +245,7 @@
             this.gfxButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
             this.gfxButton2.BaseTile = 8;
             this.gfxButton2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
+            this.gfxButton2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
             this.gfxButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gfxButton2.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gfxButton2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
@@ -261,6 +264,7 @@
             this.gfxButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
             this.gfxButton1.BaseTile = 0;
             this.gfxButton1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
+            this.gfxButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
             this.gfxButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gfxButton1.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gfxButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
@@ -352,11 +356,12 @@
             // animationPlayer1
             // 
             this.animationPlayer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.animationPlayer1.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
             this.animationPlayer1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.animationPlayer1.Interval = 16;
             this.animationPlayer1.Location = new System.Drawing.Point(3, 3);
             this.animationPlayer1.Name = "animationPlayer1";
-            this.animationPlayer1.Size = new System.Drawing.Size(794, 359);
+            this.animationPlayer1.Size = new System.Drawing.Size(834, 359);
             this.animationPlayer1.SpeedFPS = 62;
             this.animationPlayer1.TabIndex = 6;
             // 
@@ -365,9 +370,9 @@
             this.panel3.Controls.Add(this.frameSelector1);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(797, 3);
+            this.panel3.Location = new System.Drawing.Point(837, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(308, 359);
+            this.panel3.Size = new System.Drawing.Size(268, 359);
             this.panel3.TabIndex = 4;
             // 
             // frameSelector1
@@ -379,7 +384,7 @@
             this.frameSelector1.FramesPerRow = 2;
             this.frameSelector1.Location = new System.Drawing.Point(0, 27);
             this.frameSelector1.Name = "frameSelector1";
-            this.frameSelector1.Size = new System.Drawing.Size(308, 332);
+            this.frameSelector1.Size = new System.Drawing.Size(268, 332);
             this.frameSelector1.TabIndex = 3;
             // 
             // label1
@@ -445,6 +450,7 @@
             // 
             this.animationCreator1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.animationCreator1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.animationCreator1.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
             this.animationCreator1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.animationCreator1.Location = new System.Drawing.Point(0, 0);
             this.animationCreator1.Name = "animationCreator1";
@@ -453,9 +459,10 @@
             // 
             // tabPage5
             // 
-            this.tabPage5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.tabPage5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.tabPage5.Controls.Add(this.interactionGrid1);
             this.tabPage5.Controls.Add(this.interactionMenu1);
+            this.tabPage5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.tabPage5.Location = new System.Drawing.Point(4, 24);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
@@ -473,10 +480,10 @@
             // 
             // interactionMenu1
             // 
-            this.interactionMenu1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.interactionMenu1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.interactionMenu1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.interactionMenu1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.interactionMenu1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(248)))), ((int)(((byte)(64)))));
+            this.interactionMenu1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.interactionMenu1.Location = new System.Drawing.Point(871, 3);
             this.interactionMenu1.Name = "interactionMenu1";
             this.interactionMenu1.Size = new System.Drawing.Size(234, 584);
@@ -496,12 +503,15 @@
             // textEditor1
             // 
             this.textEditor1.AcceptsTab = true;
+            this.textEditor1.AutoWordSelection = true;
             this.textEditor1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
+            this.textEditor1.DetectUrls = false;
             this.textEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textEditor1.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textEditor1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.textEditor1.Location = new System.Drawing.Point(3, 3);
             this.textEditor1.Name = "textEditor1";
+            this.textEditor1.ShowSelectionMargin = true;
             this.textEditor1.Size = new System.Drawing.Size(1102, 584);
             this.textEditor1.TabIndex = 0;
             this.textEditor1.Text = resources.GetString("textEditor1.Text");
@@ -685,6 +695,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.ClientSize = new System.Drawing.Size(1116, 642);
             this.Controls.Add(this.tabControl1);

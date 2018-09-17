@@ -60,9 +60,6 @@ namespace SMWControlibControls.GraphicsControls
             InitializeComponent();
             imageButton2.Enabled = false;
             imageButton3.Enabled = false;
-            imageButton1.Init();
-            imageButton2.Init();
-            imageButton3.Init();
             imageButton1.Click += addClick;
             imageButton2.Click += removeClick;
             imageButton3.Click += exchangeClick;
@@ -181,23 +178,19 @@ namespace SMWControlibControls.GraphicsControls
             if (frameMask == null || frameMask.Next == null)
             {
                 imageButton3.Enabled = false;
-                imageButton3.Init();
             }
             else
             {
                 imageButton3.Enabled = true;
-                imageButton3.Init();
             }
             if (frameMask != null)
             {
                 imageButton2.Enabled = true;
-                imageButton2.Init();
                 label1.Text = frameMask.Frame.Name;
             }
             else
             {
                 imageButton2.Enabled = false;
-                imageButton2.Init();
                 imageButton2.Refresh();
                 label1.Text = "Frame0";
             }

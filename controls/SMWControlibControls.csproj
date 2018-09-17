@@ -68,6 +68,12 @@
     <Compile Include="GraphicsControls\AnimationPlayer.Designer.cs">
       <DependentUpon>AnimationPlayer.cs</DependentUpon>
     </Compile>
+    <Compile Include="GraphicsControls\ColoreableBorderComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GraphicsControls\ColoreableBorderComboBox.Designer.cs">
+      <DependentUpon>ColoreableBorderComboBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="GraphicsControls\FrameCreator.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -236,6 +242,9 @@
     <EmbeddedResource Include="GraphicsControls\AnimationPlayer.resx">
       <DependentUpon>AnimationPlayer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GraphicsControls\ColoreableBorderComboBox.resx">
+      <DependentUpon>ColoreableBorderComboBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GraphicsControls\FrameCreator.resx">
       <DependentUpon>FrameCreator.cs</DependentUpon>
     </EmbeddedResource>
@@ -320,6 +329,68 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\snesRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snesLeftBorder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snesUpBorder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snesDownBorder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snesRightBorder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snesMirrorV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snesMirrorVBorder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snesAdd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snesAddBorder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snesExchange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snesExchangeBorder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snesRemove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snesRemoveBorder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snesPlay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snesPlayBorder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snesPauseBorder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snesStopBorder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ASM\Defines.asm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ASM\GraphicRoutine.asm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ASM\Main.asm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

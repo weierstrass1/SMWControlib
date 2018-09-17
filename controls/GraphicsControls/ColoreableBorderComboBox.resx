@@ -117,71 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="snesDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\snesDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snesMirrorVBorder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\snesMirrorVBorder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snesLeftBorder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\snesLeftBorder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snesUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\snesUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snesRemoveBorder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\snesRemoveBorder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="back" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\back.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snesPlay" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\snesPlay.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snesMirrorV" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\snesMirrorV.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="back1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\back1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snesDownBorder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\snesDownBorder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snesLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\snesLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snesAdd" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\snesAdd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snesUpBorder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\snesUpBorder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snesRightBorder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\snesRightBorder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snesRemove" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\snesRemove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snesAddBorder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\snesAddBorder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snesRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\snesRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snesExchangeBorder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\snesExchangeBorder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snesExchange" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\snesExchange.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snesPlayBorder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\snesPlayBorder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snesPauseBorder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\snesPauseBorder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snesStopBorder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\snesStopBorder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
+  <metadata name="$this.TrayLargeIcon" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
 </root>

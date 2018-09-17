@@ -87,7 +87,7 @@ namespace SMWControlibControls.GraphicsControls
             }
             else
             {
-                int adder = Width - spriteGridController1.MaximumSize.Width - 4;
+                int adder = Width - spriteGridController1.MaximumSize.Width;
                 if (adder % 2 == 1) adder--;
                 adder /= 2;
                 left.Width = adder;
@@ -100,7 +100,7 @@ namespace SMWControlibControls.GraphicsControls
             }
             else
             {
-                int adder = Height - spriteGridController1.MaximumSize.Height - 4;
+                int adder = Height - spriteGridController1.MaximumSize.Height;
                 if (adder % 2 == 1) adder--;
                 adder /= 2;
                 up.Height = adder;

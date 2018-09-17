@@ -157,8 +157,6 @@ namespace SMWControlibControls.GraphicsControls
             b.TabIndex = 1;
             b.Text = "";
             b.UseVisualStyleBackColor = true;
-            b.Zoom = 2;
-            b.Init();
         }
     }
 }

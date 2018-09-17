@@ -36,9 +36,7 @@
             this.spriteGrid1 = new SMWControlibControls.GraphicsControls.SpriteGrid();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
-            this.cellSize = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.zoom = new System.Windows.Forms.ComboBox();
             this.settings = new System.Windows.Forms.Button();
             this.grid = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -53,6 +51,8 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.zoom = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
+            this.cellSize = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
@@ -68,10 +68,10 @@
             this.panel1.Controls.Add(this.trackBar2);
             this.panel1.Controls.Add(this.spriteGrid1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 35);
+            this.panel1.Location = new System.Drawing.Point(0, 45);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(748, 407);
+            this.panel1.Size = new System.Drawing.Size(748, 397);
             this.panel1.TabIndex = 1;
             // 
             // trackBar1
@@ -124,10 +124,10 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.cellSize);
-            this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.zoom);
+            this.panel2.Controls.Add(this.label3);
+            this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.settings);
             this.panel2.Controls.Add(this.grid);
             this.panel2.Controls.Add(this.label1);
@@ -152,32 +152,12 @@
             this.label3.Text = "Grid";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // cellSize
-            // 
-            this.cellSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.cellSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cellSize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cellSize.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.cellSize.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
-            this.cellSize.FormattingEnabled = true;
-            this.cellSize.Items.AddRange(new object[] {
-            "1X1",
-            "2X2",
-            "4X4",
-            "8X8",
-            "16X16"});
-            this.cellSize.Location = new System.Drawing.Point(412, 7);
-            this.cellSize.Margin = new System.Windows.Forms.Padding(4, 7, 8, 3);
-            this.cellSize.Name = "cellSize";
-            this.cellSize.Size = new System.Drawing.Size(66, 20);
-            this.cellSize.TabIndex = 12;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.label2.Location = new System.Drawing.Point(326, 5);
+            this.label2.Location = new System.Drawing.Point(320, 5);
             this.label2.Margin = new System.Windows.Forms.Padding(8, 5, 8, 5);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(8, 5, 8, 5);
@@ -186,29 +166,11 @@
             this.label2.Text = "Cell Size";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // zoom
-            // 
-            this.zoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.zoom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.zoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.zoom.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.zoom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
-            this.zoom.FormattingEnabled = true;
-            this.zoom.Items.AddRange(new object[] {
-            "X1",
-            "X2",
-            "X3",
-            "X4"});
-            this.zoom.Location = new System.Drawing.Point(244, 7);
-            this.zoom.Margin = new System.Windows.Forms.Padding(4, 7, 8, 3);
-            this.zoom.Name = "zoom";
-            this.zoom.Size = new System.Drawing.Size(66, 20);
-            this.zoom.TabIndex = 10;
-            // 
             // settings
             // 
             this.settings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
             this.settings.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
+            this.settings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
             this.settings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.settings.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
             this.settings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
@@ -252,6 +214,7 @@
             // 
             // panel3
             // 
+            this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel3.Controls.Add(this.panel5);
             this.panel3.Controls.Add(this.panel6);
             this.panel3.Controls.Add(this.panel4);
@@ -259,14 +222,14 @@
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(748, 35);
+            this.panel3.Size = new System.Drawing.Size(748, 45);
             this.panel3.TabIndex = 3;
             // 
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.panel5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel5.BackgroundImage")));
-            this.panel5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panel5.Controls.Add(this.mirrorH);
             this.panel5.Controls.Add(this.mirrorV);
             this.panel5.Controls.Add(this.moveDown);
@@ -277,19 +240,23 @@
             this.panel5.Location = new System.Drawing.Point(208, 0);
             this.panel5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(250, 35);
+            this.panel5.Size = new System.Drawing.Size(250, 45);
             this.panel5.TabIndex = 7;
             // 
             // mirrorH
             // 
             this.mirrorH.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.mirrorH.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.mirrorH.Border = null;
+            this.mirrorH.Clicked = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))));
+            this.mirrorH.Disabled = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.mirrorH.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.mirrorH.FlatAppearance.BorderSize = 0;
             this.mirrorH.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.mirrorH.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.mirrorH.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.mirrorH.Location = new System.Drawing.Point(8, 3);
+            this.mirrorH.Hovered = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.mirrorH.Location = new System.Drawing.Point(8, 8);
             this.mirrorH.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.mirrorH.Name = "mirrorH";
             this.mirrorH.OffSetX1 = 5;
@@ -301,122 +268,137 @@
             this.mirrorH.TabIndex = 0;
             this.mirrorH.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.mirrorH.UseVisualStyleBackColor = false;
-            this.mirrorH.Zoom = 1;
             // 
             // mirrorV
             // 
             this.mirrorV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
+            this.mirrorV.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("mirrorV.BackgroundImage")));
             this.mirrorV.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.mirrorV.Border = ((System.Drawing.Image)(resources.GetObject("mirrorV.Border")));
+            this.mirrorV.Clicked = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))));
+            this.mirrorV.Disabled = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.mirrorV.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.mirrorV.FlatAppearance.BorderSize = 0;
             this.mirrorV.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.mirrorV.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.mirrorV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.mirrorV.Location = new System.Drawing.Point(48, 3);
+            this.mirrorV.Hovered = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.mirrorV.Location = new System.Drawing.Point(48, 8);
             this.mirrorV.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.mirrorV.Name = "mirrorV";
-            this.mirrorV.OffSetX1 = 1;
-            this.mirrorV.OffSetX2 = 4;
-            this.mirrorV.OffSetY1 = 1;
-            this.mirrorV.OffSetY2 = 4;
+            this.mirrorV.OffSetX1 = 2;
+            this.mirrorV.OffSetX2 = 8;
+            this.mirrorV.OffSetY1 = 2;
+            this.mirrorV.OffSetY2 = 8;
             this.mirrorV.Size = new System.Drawing.Size(32, 32);
-            this.mirrorV.Source = null;
+            this.mirrorV.Source = ((System.Drawing.Image)(resources.GetObject("mirrorV.Source")));
             this.mirrorV.TabIndex = 1;
             this.mirrorV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.mirrorV.UseVisualStyleBackColor = false;
-            this.mirrorV.Zoom = 1;
             // 
             // moveDown
             // 
             this.moveDown.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("moveDown.BackgroundImage")));
             this.moveDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.moveDown.Border = ((System.Drawing.Image)(resources.GetObject("moveDown.Border")));
+            this.moveDown.Clicked = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))));
+            this.moveDown.Disabled = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.moveDown.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.moveDown.FlatAppearance.BorderSize = 0;
             this.moveDown.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.moveDown.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.moveDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.moveDown.Location = new System.Drawing.Point(168, 3);
+            this.moveDown.Hovered = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.moveDown.Location = new System.Drawing.Point(168, 8);
             this.moveDown.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.moveDown.Name = "moveDown";
-            this.moveDown.OffSetX1 = 1;
-            this.moveDown.OffSetX2 = 4;
-            this.moveDown.OffSetY1 = 1;
-            this.moveDown.OffSetY2 = 4;
+            this.moveDown.OffSetX1 = 2;
+            this.moveDown.OffSetX2 = 8;
+            this.moveDown.OffSetY1 = 2;
+            this.moveDown.OffSetY2 = 8;
             this.moveDown.Size = new System.Drawing.Size(32, 32);
             this.moveDown.Source = ((System.Drawing.Image)(resources.GetObject("moveDown.Source")));
             this.moveDown.TabIndex = 5;
             this.moveDown.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.moveDown.UseVisualStyleBackColor = true;
-            this.moveDown.Zoom = 1;
             // 
             // moveLeft
             // 
             this.moveLeft.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("moveLeft.BackgroundImage")));
             this.moveLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.moveLeft.Border = ((System.Drawing.Image)(resources.GetObject("moveLeft.Border")));
+            this.moveLeft.Clicked = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))));
+            this.moveLeft.Disabled = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.moveLeft.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.moveLeft.FlatAppearance.BorderSize = 0;
             this.moveLeft.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.moveLeft.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.moveLeft.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.moveLeft.Location = new System.Drawing.Point(88, 3);
+            this.moveLeft.Hovered = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.moveLeft.Location = new System.Drawing.Point(88, 8);
             this.moveLeft.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.moveLeft.Name = "moveLeft";
-            this.moveLeft.OffSetX1 = 1;
-            this.moveLeft.OffSetX2 = 4;
-            this.moveLeft.OffSetY1 = 1;
-            this.moveLeft.OffSetY2 = 4;
+            this.moveLeft.OffSetX1 = 2;
+            this.moveLeft.OffSetX2 = 8;
+            this.moveLeft.OffSetY1 = 2;
+            this.moveLeft.OffSetY2 = 8;
             this.moveLeft.Size = new System.Drawing.Size(32, 32);
-            this.moveLeft.Source = global::SMWControlibControls.Properties.Resources.snesLeft;
+            this.moveLeft.Source = ((System.Drawing.Image)(resources.GetObject("moveLeft.Source")));
             this.moveLeft.TabIndex = 2;
             this.moveLeft.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.moveLeft.UseVisualStyleBackColor = true;
-            this.moveLeft.Zoom = 1;
             // 
             // moveUp
             // 
             this.moveUp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("moveUp.BackgroundImage")));
             this.moveUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.moveUp.Border = ((System.Drawing.Image)(resources.GetObject("moveUp.Border")));
+            this.moveUp.Clicked = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))));
+            this.moveUp.Disabled = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.moveUp.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.moveUp.FlatAppearance.BorderSize = 0;
             this.moveUp.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.moveUp.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.moveUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.moveUp.Location = new System.Drawing.Point(128, 3);
+            this.moveUp.Hovered = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.moveUp.Location = new System.Drawing.Point(128, 8);
             this.moveUp.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.moveUp.Name = "moveUp";
-            this.moveUp.OffSetX1 = 1;
-            this.moveUp.OffSetX2 = 4;
-            this.moveUp.OffSetY1 = 1;
-            this.moveUp.OffSetY2 = 4;
+            this.moveUp.OffSetX1 = 2;
+            this.moveUp.OffSetX2 = 8;
+            this.moveUp.OffSetY1 = 2;
+            this.moveUp.OffSetY2 = 8;
             this.moveUp.Size = new System.Drawing.Size(32, 32);
             this.moveUp.Source = ((System.Drawing.Image)(resources.GetObject("moveUp.Source")));
             this.moveUp.TabIndex = 4;
             this.moveUp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.moveUp.UseVisualStyleBackColor = true;
-            this.moveUp.Zoom = 1;
             // 
             // moveRight
             // 
             this.moveRight.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("moveRight.BackgroundImage")));
             this.moveRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.moveRight.Border = ((System.Drawing.Image)(resources.GetObject("moveRight.Border")));
+            this.moveRight.Clicked = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))));
+            this.moveRight.Disabled = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.moveRight.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.moveRight.FlatAppearance.BorderSize = 0;
             this.moveRight.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.moveRight.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.moveRight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.moveRight.Location = new System.Drawing.Point(208, 3);
+            this.moveRight.Hovered = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.moveRight.Location = new System.Drawing.Point(208, 8);
             this.moveRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.moveRight.Name = "moveRight";
-            this.moveRight.OffSetX1 = 1;
-            this.moveRight.OffSetX2 = 4;
-            this.moveRight.OffSetY1 = 1;
-            this.moveRight.OffSetY2 = 4;
+            this.moveRight.OffSetX1 = 2;
+            this.moveRight.OffSetX2 = 8;
+            this.moveRight.OffSetY1 = 2;
+            this.moveRight.OffSetY2 = 8;
             this.moveRight.Size = new System.Drawing.Size(32, 32);
-            this.moveRight.Source = global::SMWControlibControls.Properties.Resources.snesRight;
+            this.moveRight.Source = ((System.Drawing.Image)(resources.GetObject("moveRight.Source")));
             this.moveRight.TabIndex = 3;
             this.moveRight.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.moveRight.UseVisualStyleBackColor = true;
-            this.moveRight.Zoom = 1;
             // 
             // panel6
             // 
@@ -425,7 +407,7 @@
             this.panel6.Location = new System.Drawing.Point(540, 0);
             this.panel6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(208, 35);
+            this.panel6.Size = new System.Drawing.Size(208, 45);
             this.panel6.TabIndex = 8;
             // 
             // panel4
@@ -434,7 +416,7 @@
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(208, 35);
+            this.panel4.Size = new System.Drawing.Size(208, 45);
             this.panel4.TabIndex = 6;
             // 
             // toolTip1
@@ -446,6 +428,45 @@
             this.toolTip1.ReshowDelay = 1500;
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Info";
+            // 
+            // zoom
+            // 
+            this.zoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.zoom.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
+            this.zoom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.zoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.zoom.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.zoom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
+            this.zoom.FormattingEnabled = true;
+            this.zoom.Items.AddRange(new object[] {
+            "X1",
+            "X2",
+            "X3",
+            "X4"});
+            this.zoom.Location = new System.Drawing.Point(243, 7);
+            this.zoom.Name = "zoom";
+            this.zoom.Size = new System.Drawing.Size(66, 20);
+            this.zoom.TabIndex = 19;
+            // 
+            // cellSize
+            // 
+            this.cellSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.cellSize.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
+            this.cellSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cellSize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cellSize.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.cellSize.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
+            this.cellSize.FormattingEnabled = true;
+            this.cellSize.Items.AddRange(new object[] {
+            "1x1",
+            "2x2",
+            "4x4",
+            "8x8",
+            "16x16"});
+            this.cellSize.Location = new System.Drawing.Point(405, 7);
+            this.cellSize.Name = "cellSize";
+            this.cellSize.Size = new System.Drawing.Size(66, 20);
+            this.cellSize.TabIndex = 20;
             // 
             // SpriteGridController
             // 
@@ -491,10 +512,10 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox zoom;
-        private System.Windows.Forms.ComboBox cellSize;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label3;
+        private ColoreableBorderComboBox zoom;
+        private ColoreableBorderComboBox cellSize;
     }
 }

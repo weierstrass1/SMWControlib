@@ -251,8 +251,14 @@ namespace SMWControlibControls.GraphicsControls
         }
         private void sizeChanged(object sender, EventArgs e)
         {
-            trackBar1.Width = spriteGrid1.Width + 17;
-            trackBar2.Height = spriteGrid1.Height + 17;
+            int mw = Math.Max(spriteGrid1.Width + trackBar2.Width + 9,
+                Math.Max(panel3.Width, panel2.Width));
+            int mh = spriteGrid1.Height + trackBar1.Height + panel2.Height +
+                panel3.Height + 9;
+
+            MaximumSize = new Size(mw, mh);
+            trackBar1.Width = spriteGrid1.Width + 12;
+            trackBar2.Height = spriteGrid1.Height + 12;
             int w = Width - panel5.Width;
             w /= 2;
             panel4.Width = w + 18;

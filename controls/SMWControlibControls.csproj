@@ -29,8 +29,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutocompleteMenu-ScintillaNET">
+      <HintPath>..\..\AutoCompleteMenu-ScintillaNET\AutocompleteMenu\bin\Release\AutocompleteMenu-ScintillaNET.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="ScintillaNET">
+      <HintPath>..\..\ScintillaNET\src\ScintillaNET\bin\Debug\ScintillaNET.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -208,6 +214,8 @@
     <Compile Include="LogicControls\TextEditor.Designer.cs">
       <DependentUpon>TextEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="LogicControls\UndoRedoDynamicArray.cs" />
+    <Compile Include="LogicControls\UndoRedoStruct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GraphicsControls\SpriteGrid.cs">
       <SubType>Component</SubType>
@@ -313,6 +321,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\DroidSansMono.ttf" />
     <None Include="Resources\snesLeft.png" />
   </ItemGroup>
   <ItemGroup>

@@ -12,7 +12,7 @@ namespace SMWControlibBackend.Logic
     {
         public string Name { get; private set; }
         public string Description { get; private set; }
-        public Color Color { get; set; }
+        public int Style;
 
         private Group()
         {
@@ -46,7 +46,7 @@ namespace SMWControlibBackend.Logic
             Group[] groups = new Group[groupsSTR.Length - 1];
             string[] group;
 
-            for (int i = 1; i < groupsSTR.Length; i++)
+            for (int i = 1; i < groupsSTR.Length && i < 256; i++)
             {
                 group = groupsSTR[i].Split(';');
 
@@ -57,7 +57,7 @@ namespace SMWControlibBackend.Logic
                 {
                     Name = group[0],
                     Description = group[1],
-                    Color = SystemColors.HighlightText
+                    Style = i
                 };
             }
             return groups;

@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -39,14 +40,16 @@ namespace TestWindows
             interactionMenu1.CellSizeChanged += interactionMenuCellSizeChanged;
             try
             {
+                textEditor1.CanUndoRedo = false;
                 StringBuilder sb = new StringBuilder();
                 sb.Append(File.ReadAllText(@".\ASM\Main.asm"));
                 sb.Append(File.ReadAllText(@".\ASM\GraphicRoutine.asm"));
-                textEditor1.Text = sb.ToString();
+                textEditor1.AppendText(sb.ToString());
+                textEditor1.CanUndoRedo = true;
             }
-            catch
+            catch (Exception e)
             {
-
+                int a = 0;
             }
         }
 
@@ -174,6 +177,20 @@ namespace TestWindows
             if (keyData == Keys.D)
             {
                 resizeableSpriteGridController1.MoveRight();
+            }
+            if (keyData == (Keys.Control | Keys.Z)) 
+            {
+                if(tabControl1.SelectedIndex == 3)
+                {
+                    textEditor1.SuperSnescriptUndo();
+                }
+            }
+            if (keyData == (Keys.Control | Keys.Space))
+            {
+                if (tabControl1.SelectedIndex == 3)
+                {
+                    textEditor1.OpenTab();
+                }
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }

@@ -31,6 +31,27 @@ namespace SMWControlibBackend.Logic
             Group = group;
         }
 
+        public CodePointer[] GetPointers(Dictionary<string, Define> Defines,
+            int offset, string cmd, int line, int startIndex)
+        {
+            CodePointer[] cps = GetPointers(offset, cmd);
+
+            if (cps.Length > 1 || Args == null || Args.Length <= 0) return cps;
+
+            CodePointer cp2 = new CodePointer
+            {
+                Start = offset + cps[0].Code.Length,
+                End = offset + cps[0].Code.Length + cmd.Length - 1,
+                Code = cmd.Substring(cps[0].Code.Length),
+                Group = Args[0].Group
+            };
+
+            CodePointer[] cps2 = new CodePointer[2];
+            cps2[0] = cps[0];
+            cps2[1] = cp2;
+            return cps2;
+        }
+
         string whiteSpaces = @"^(\ |\t)+";
         public CodePointer[] GetPointers(int offset, string cmd)
         {
@@ -81,12 +102,12 @@ namespace SMWControlibBackend.Logic
                                 pointers.Add(codp);
                             }
                         }
-                        arg = cmd.Substring(m.ToString().Length);
+                        arg = arg.Substring(m.ToString().Length);
                         offs += m.ToString().Length;
                     }
                     if (i < Args.Length - 1)
                     {
-                        arg = cmd.Substring(1);
+                        arg = arg.Substring(1);
                         offs++;
                     }
                 }
@@ -95,6 +116,17 @@ namespace SMWControlibBackend.Logic
             return pointers.ToArray();
         }
         
+        public bool IsCorrect(Dictionary<string, Define> Defines,
+            string cmd, int line, int startIndex)
+        {
+            if (IsCorrect(cmd)) return true;
+
+            string s = Define.TryReplace(Defines, cmd, line, startIndex);
+
+            if (s == "") return false;
+
+            return IsCorrect(s);
+        }
 
         public bool IsCorrect(string cmd)
         {
@@ -182,8 +214,6 @@ namespace SMWControlibBackend.Logic
 
                 commands[i - 1] = new Command(cmd[0].ToLower(), newargs,
                     Group.FindGroup(groups, cmd[2]));
-
-                commands[i - 1].Group.Color = Color.FromArgb(80, 80, 224);
             }
 
             Dictionary<string, List<Command>> dic = new Dictionary<string, List<Command>>();

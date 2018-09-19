@@ -58,6 +58,7 @@
     <Compile Include="Logic\CodeComponent.cs" />
     <Compile Include="Logic\CodePointer.cs" />
     <Compile Include="Logic\Command.cs" />
+    <Compile Include="Logic\Define.cs" />
     <Compile Include="Logic\Group.cs" />
     <Compile Include="Logic\Label.cs" />
     <Compile Include="Logic\MinusLabel.cs" />

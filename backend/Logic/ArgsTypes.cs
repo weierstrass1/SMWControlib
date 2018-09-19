@@ -93,7 +93,6 @@ namespace SMWControlibBackend.Logic
                     Type = args[4],
                     Group = Group.FindGroup(groups, args[5])
                 };
-                argsTypes[i - 1].Group.Color = Color.FromArgb(255, 255, 0);
                 argsTypes[i - 1].buildRegEX();
             }
 
@@ -125,6 +124,11 @@ namespace SMWControlibBackend.Logic
                 return;
             }
 
+            if(Type == "string with spaces")
+            {
+                RegEXPattern += @"[^\" + '"' + "]+" + postf + "$";
+                return;
+            }
             if (Type == "string")
             {
                 string adder = "";

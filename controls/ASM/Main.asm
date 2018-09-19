@@ -1,4 +1,15 @@
 ;######################################
+;############## Defines ###############
+;######################################
+
+!FrameIndex = !SpriteMiscTable1
+!AnimationTimer = !SpriteDecTimer1
+!AnimationIndex = !SpriteMiscTable2
+!AnimationFrameIndex = !SpriteMiscTable3
+!LocalFlip = !SpriteMiscTable4
+!GlobalFlip = !SpriteMiscTable5
+
+;######################################
 ;########### Init Routine #############
 ;######################################
 print "INIT ",pc

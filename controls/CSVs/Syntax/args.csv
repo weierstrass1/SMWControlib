@@ -24,3 +24,13 @@ sublabel;.;;var;string;Arg Label
 A;A;;0;fixed;A Arg
 (addr);(;);2;numeric;Address Arg
 [addr];[;];3;numeric;Address Arg
+pc;pc;;0;fixed;A Arg
+labelString;";";var;string with spaces;Arg Label
+label,x;;,x;var;string;Arg Label
+label+,x;+;,x;var;fixed;Arg Label
+label-,x;-;,x;var;fixed;Arg Label
+sublabel,x;.;,x;var;string;Arg Label
+label,y;;,y;var;string;Arg Label
+label+,y;+;,y;var;fixed;Arg Label
+label-,y;-;,y;var;fixed;Arg Label
+sublabel,y;.;,y;var;string;Arg Label

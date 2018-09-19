@@ -483,6 +483,7 @@
             this.interactionMenu1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.interactionMenu1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.interactionMenu1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.interactionMenu1.Font = new System.Drawing.Font("MS Reference Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.interactionMenu1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.interactionMenu1.Location = new System.Drawing.Point(871, 3);
             this.interactionMenu1.Name = "interactionMenu1";
@@ -502,19 +503,15 @@
             // 
             // textEditor1
             // 
-            this.textEditor1.AcceptsTab = true;
-            this.textEditor1.AutoWordSelection = true;
             this.textEditor1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
-            this.textEditor1.DetectUrls = false;
+            this.textEditor1.CaretForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(16)))), ((int)(((byte)(24)))));
             this.textEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textEditor1.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textEditor1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.textEditor1.EdgeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.textEditor1.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textEditor1.Location = new System.Drawing.Point(3, 3);
             this.textEditor1.Name = "textEditor1";
-            this.textEditor1.ShowSelectionMargin = true;
             this.textEditor1.Size = new System.Drawing.Size(1102, 584);
             this.textEditor1.TabIndex = 0;
-            this.textEditor1.Text = resources.GetString("textEditor1.Text");
             // 
             // menuStrip1
             // 
@@ -764,7 +761,6 @@
         private System.Windows.Forms.TabPage tabPage6;
         private SMWControlibControls.InteractionControls.ResizeableInteractionGrid interactionGrid1;
         private SMWControlibControls.InteractionControls.InteractionMenu interactionMenu1;
-        private SMWControlibControls.LogicControls.TextEditor textEditor1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
@@ -783,5 +779,6 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem versionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem creditsToolStripMenuItem;
+        private SMWControlibControls.LogicControls.TextEditor textEditor1;
     }
 }

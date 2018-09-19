@@ -16,6 +16,7 @@ Danger;Used for dangerous commands Like STP and BRK.
 Label;Used for normal labels.
 Special Label;Used for sublabels, label + and label -.
 Define;Used for Defines.
+Define Arg;Used for Defines Args.
 Arg Label;Used for any label when it's used as an argument.
 DP Arg;Used for arguments that use direct page.
 Address Arg;Used for arguments that use 2 bytes address.
@@ -39,3 +40,4 @@ Asar;Used for asar commands.
 Comment;Used for comments.
 Tag;Used for Super Scriptnes Tags.
 Error; Used for errors.
+Warning; Used for warnings.

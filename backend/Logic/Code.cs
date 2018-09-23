@@ -8,6 +8,9 @@ namespace SMWControlibBackend.Logic
 {
     public class Code
     {
-        public List<CodeComponent> CodeComponents;
+        public Code()
+        {
+            
+        }
     }
 }

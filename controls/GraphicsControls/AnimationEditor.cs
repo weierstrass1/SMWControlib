@@ -122,6 +122,7 @@ namespace SMWControlibControls.GraphicsControls
                 afe.FlipX = fm.FlipX;
                 afe.FlipY = fm.FlipY;
                 
+                
                 tableLayoutPanel1.Controls.Add(afe, i, 0);
                 fm = fm.Next;
                 i++;

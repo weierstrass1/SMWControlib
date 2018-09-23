@@ -116,14 +116,17 @@ namespace SMWControlibBackend.Logic
             return pointers.ToArray();
         }
         
+        public Error PossibleError = null;
         public bool IsCorrect(Dictionary<string, Define> Defines,
             string cmd, int line, int startIndex)
         {
             if (IsCorrect(cmd)) return true;
 
             string s = Define.TryReplace(Defines, cmd, line, startIndex);
+            PossibleError = Define.PossibleError;
 
             if (s == "") return false;
+            if (s == null) s = cmd;
 
             return IsCorrect(s);
         }

@@ -40,16 +40,15 @@ namespace TestWindows
             interactionMenu1.CellSizeChanged += interactionMenuCellSizeChanged;
             try
             {
-                textEditor1.CanUndoRedo = false;
+                codeEditorController1.CodeEditor.CanUndoRedo = false;
                 StringBuilder sb = new StringBuilder();
                 sb.Append(File.ReadAllText(@".\ASM\Main.asm"));
                 sb.Append(File.ReadAllText(@".\ASM\GraphicRoutine.asm"));
-                textEditor1.AppendText(sb.ToString());
-                textEditor1.CanUndoRedo = true;
+                codeEditorController1.CodeEditor.AppendText(sb.ToString());
+                codeEditorController1.CodeEditor.CanUndoRedo = true;
             }
-            catch (Exception e)
+            catch
             {
-                int a = 0;
             }
         }
 
@@ -182,14 +181,14 @@ namespace TestWindows
             {
                 if(tabControl1.SelectedIndex == 3)
                 {
-                    textEditor1.SuperSnescriptUndo();
+                    codeEditorController1.CodeEditor.SuperSnescriptUndo();
                 }
             }
             if (keyData == (Keys.Control | Keys.Space))
             {
                 if (tabControl1.SelectedIndex == 3)
                 {
-                    textEditor1.OpenTab();
+                    codeEditorController1.CodeEditor.OpenTab();
                 }
             }
             return base.ProcessCmdKey(ref msg, keyData);

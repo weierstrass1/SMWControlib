@@ -11,39 +11,24 @@ namespace SMWControlibControls.LogicControls
     public struct UndoRedoStruct
     {
         public UndoRedoAction UndoRedoAction { get; private set; }
-        BeforeModificationEventArgs e;
-        public int Position
-        {
-            get
-            {
-                return e.Position;
-            }
-        }
-        public int Length
-        {
-            get
-            {
-                return e.Text.Length;
-            }
-        }
+        public int Position { get; private set; }
+        public int Length { get; private set; }
 
-        public string Text
-        {
-            get
-            {
-                return e.Text;
-            }
-        }
+        public string Text { get; private set; }
 
-        public UndoRedoStruct(BeforeModificationEventArgs E, UndoRedoAction Action)
+        public UndoRedoStruct(BeforeModificationEventArgs e, UndoRedoAction Action)
         {
-            e = E;
+            Position = e.Position;
+            Length = e.Text.Length;
+            Text = e.Text;
             UndoRedoAction = Action;
         }
 
         public static bool operator ==(UndoRedoStruct a, UndoRedoStruct b)
         {
-            return a.e == b.e && a.UndoRedoAction == b.UndoRedoAction;
+            return a.Position == b.Position &&
+                a.UndoRedoAction == b.UndoRedoAction && 
+                a.Text == b.Text;
         }
 
         public static bool operator !=(UndoRedoStruct a, UndoRedoStruct b)
@@ -56,6 +41,30 @@ namespace SMWControlibControls.LogicControls
             if (default(UndoRedoStruct) == this) return "Default";
             if (UndoRedoAction == UndoRedoAction.Insert) return "Insert";
             return "Delete";
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is UndoRedoStruct))
+            {
+                return false;
+            }
+
+            var @struct = (UndoRedoStruct)obj;
+            return UndoRedoAction == @struct.UndoRedoAction &&
+                   Position == @struct.Position &&
+                   Text == @struct.Text;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 742094758;
+            hashCode = hashCode * -1521134295 + base.GetHashCode();
+            hashCode = hashCode * -1521134295 + UndoRedoAction.GetHashCode();
+            hashCode = hashCode * -1521134295 + Position.GetHashCode();
+            hashCode = hashCode * -1521134295 + Length.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Text);
+            return hashCode;
         }
     }
 }

@@ -177,6 +177,8 @@ namespace SMWControlibControls.GraphicsControls
                 spriteGrid1.SelectionBorderColor =
                     Color.FromArgb(set.SelectedTilesColorR,
                     set.SelectedTilesColorG, set.SelectedTilesColorB);
+                spriteGrid1.BackgroundColor = Color.FromArgb(set.BackgroundColorR,
+                    set.BackgroundColorG, set.BackgroundColorB);
                 spriteGrid1.ActivateCenterSquare =
                     set.EnableCenterSquare;
                 spriteGrid1.GridTypeUsed = set.GridType;
@@ -191,6 +193,7 @@ namespace SMWControlibControls.GraphicsControls
                 spriteGrid1.CenterSquareColor, 
                 spriteGrid1.SelectionFillColor,
                 spriteGrid1.SelectionBorderColor, 
+                spriteGrid1.BackgroundColor,
                 spriteGrid1.ActivateCenterSquare,
                 spriteGrid1.GridTypeUsed) == DialogResult.OK)
             {
@@ -202,12 +205,13 @@ namespace SMWControlibControls.GraphicsControls
                     SpriteGridSettings.SelectionRectangleColor;
                 spriteGrid1.SelectionBorderColor =
                     SpriteGridSettings.SelectedTilesColor;
+                spriteGrid1.BackgroundColor = SpriteGridSettings.BackgroundColor;
                 spriteGrid1.ActivateCenterSquare =
                     SpriteGridSettings.EnableCenterSquare;
                 spriteGrid1.GridTypeUsed = (int)SpriteGridSettings.Type;
 
                 SpriteGridSettingsContainer ser =
-                    new SpriteGridSettingsContainer()
+                    new SpriteGridSettingsContainer
                     {
                         GridColorR =
                         SpriteGridSettings.GridColor.R,
@@ -233,6 +237,12 @@ namespace SMWControlibControls.GraphicsControls
                         SpriteGridSettings.SelectedTilesColor.G,
                         SelectedTilesColorB =
                         SpriteGridSettings.SelectedTilesColor.B,
+                        BackgroundColorR =
+                        SpriteGridSettings.BackgroundColor.R,
+                        BackgroundColorG =
+                        SpriteGridSettings.BackgroundColor.G,
+                        BackgroundColorB =
+                        SpriteGridSettings.BackgroundColor.B,
                         EnableCenterSquare =
                         SpriteGridSettings.EnableCenterSquare,
                         GridType = (int)SpriteGridSettings.Type

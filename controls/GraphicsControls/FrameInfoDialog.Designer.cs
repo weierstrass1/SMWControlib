@@ -56,26 +56,33 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.Size = new System.Drawing.Size(50, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "Name:";
             // 
             // name
             // 
-            this.name.Location = new System.Drawing.Point(56, 6);
+            this.name.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(232)))), ((int)(((byte)(248)))));
+            this.name.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.name.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(32)))), ((int)(((byte)(176)))));
+            this.name.Location = new System.Drawing.Point(68, 7);
             this.name.Name = "name";
-            this.name.Size = new System.Drawing.Size(366, 20);
+            this.name.Size = new System.Drawing.Size(354, 21);
             this.name.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.label2.Location = new System.Drawing.Point(12, 29);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
-            this.label2.Size = new System.Drawing.Size(86, 25);
+            this.label2.Size = new System.Drawing.Size(117, 27);
             this.label2.TabIndex = 2;
             this.label2.Text = "X Displacements";
             // 
@@ -89,7 +96,9 @@
             // 
             // xdisp
             // 
-            this.xdisp.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xdisp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(232)))), ((int)(((byte)(248)))));
+            this.xdisp.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xdisp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(32)))), ((int)(((byte)(176)))));
             this.xdisp.Location = new System.Drawing.Point(0, 0);
             this.xdisp.Margin = new System.Windows.Forms.Padding(0);
             this.xdisp.Multiline = true;
@@ -111,7 +120,9 @@
             // 
             // ydisp
             // 
-            this.ydisp.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ydisp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(232)))), ((int)(((byte)(248)))));
+            this.ydisp.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ydisp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(32)))), ((int)(((byte)(176)))));
             this.ydisp.Location = new System.Drawing.Point(0, 0);
             this.ydisp.Margin = new System.Windows.Forms.Padding(0);
             this.ydisp.Multiline = true;
@@ -124,10 +135,12 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.label3.Location = new System.Drawing.Point(12, 120);
             this.label3.Name = "label3";
             this.label3.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
-            this.label3.Size = new System.Drawing.Size(86, 25);
+            this.label3.Size = new System.Drawing.Size(116, 27);
             this.label3.TabIndex = 5;
             this.label3.Text = "Y Displacements";
             // 
@@ -141,7 +154,9 @@
             // 
             // props
             // 
-            this.props.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.props.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(232)))), ((int)(((byte)(248)))));
+            this.props.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.props.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(32)))), ((int)(((byte)(176)))));
             this.props.Location = new System.Drawing.Point(0, 0);
             this.props.Margin = new System.Windows.Forms.Padding(0);
             this.props.Multiline = true;
@@ -154,10 +169,12 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.label4.Location = new System.Drawing.Point(428, 29);
             this.label4.Name = "label4";
             this.label4.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
-            this.label4.Size = new System.Drawing.Size(54, 25);
+            this.label4.Size = new System.Drawing.Size(75, 27);
             this.label4.TabIndex = 7;
             this.label4.Text = "Properties";
             // 
@@ -171,7 +188,9 @@
             // 
             // tiles
             // 
-            this.tiles.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(232)))), ((int)(((byte)(248)))));
+            this.tiles.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiles.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(32)))), ((int)(((byte)(176)))));
             this.tiles.Location = new System.Drawing.Point(0, 0);
             this.tiles.Margin = new System.Windows.Forms.Padding(0);
             this.tiles.Multiline = true;
@@ -184,10 +203,12 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.label5.Location = new System.Drawing.Point(428, 120);
             this.label5.Name = "label5";
             this.label5.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
-            this.label5.Size = new System.Drawing.Size(29, 25);
+            this.label5.Size = new System.Drawing.Size(38, 27);
             this.label5.TabIndex = 9;
             this.label5.Text = "Tiles";
             // 
@@ -201,7 +222,9 @@
             // 
             // sizes
             // 
-            this.sizes.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sizes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(232)))), ((int)(((byte)(248)))));
+            this.sizes.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sizes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(32)))), ((int)(((byte)(176)))));
             this.sizes.Location = new System.Drawing.Point(0, 0);
             this.sizes.Margin = new System.Windows.Forms.Padding(0);
             this.sizes.Multiline = true;
@@ -214,26 +237,35 @@
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.label6.Location = new System.Drawing.Point(227, 211);
             this.label6.Name = "label6";
             this.label6.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
-            this.label6.Size = new System.Drawing.Size(32, 25);
+            this.label6.Size = new System.Drawing.Size(42, 27);
             this.label6.TabIndex = 11;
             this.label6.Text = "Sizes";
             // 
             // accept
             // 
+            this.accept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.accept.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
+            this.accept.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
+            this.accept.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.accept.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.accept.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.accept.Location = new System.Drawing.Point(399, 305);
             this.accept.Name = "accept";
             this.accept.Size = new System.Drawing.Size(75, 23);
             this.accept.TabIndex = 13;
-            this.accept.Text = "Accept";
-            this.accept.UseVisualStyleBackColor = true;
+            this.accept.Text = "OK";
+            this.accept.UseVisualStyleBackColor = false;
             // 
             // FrameInfoDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.ClientSize = new System.Drawing.Size(851, 343);
             this.Controls.Add(this.accept);
             this.Controls.Add(this.panel5);
@@ -248,6 +280,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.name);
             this.Controls.Add(this.label1);
+            this.Font = new System.Drawing.Font("MS Reference Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrameInfoDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

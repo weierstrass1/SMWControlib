@@ -76,6 +76,7 @@ namespace SMWControlibControls.InteractionControls
             borderC.DoubleClick += borderCDoubleClick;
             fillC.DoubleClick += fillCDoubleClick;
             ipColor.DoubleClick += ipColorDoubleClick;
+            
             zoom.SelectedIndexChanged += zoomSelectedIndexChanged;
             cellSize.SelectedIndexChanged += cellSizeSelectedIndexChanged;
             ipType.SelectedIndex = 1;

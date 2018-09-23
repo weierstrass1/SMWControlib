@@ -37,6 +37,7 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
@@ -60,18 +61,24 @@
             // 
             // accept
             // 
+            this.accept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.accept.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
+            this.accept.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
+            this.accept.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.accept.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.accept.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.accept.Location = new System.Drawing.Point(210, 284);
             this.accept.Name = "accept";
             this.accept.Size = new System.Drawing.Size(75, 23);
-            this.accept.TabIndex = 1;
-            this.accept.Text = "Accept";
-            this.accept.UseVisualStyleBackColor = true;
+            this.accept.TabIndex = 14;
+            this.accept.Text = "OK";
+            this.accept.UseVisualStyleBackColor = false;
             // 
             // FramesSettingsDialog
             // 
-            this.AcceptButton = this.accept;
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.ClientSize = new System.Drawing.Size(485, 319);
             this.Controls.Add(this.accept);
             this.Controls.Add(this.panel1);

@@ -201,7 +201,7 @@ FramesLength:
 ;To use a flipped version of the frames.
 ;@ValuesSize: 16
 FramesFlippers:
-    dw @ffps
+    dw @ffps.
 ;@EndTable
 
 ;@Table: FramesStartPosition
@@ -222,35 +222,35 @@ FramesEndPosition:
 ;@Description: Tiles codes of each tile of each frame
 ;@ValuesSize: 8
 Tiles:
-    db @tiles
+    db @tiles.
 ;@EndTable
 
 ;@Table: Properties
 ;@Description: Properties of each tile of each frame
 ;@ValuesSize: 8
 Properties:
-    db @props
+    db @props.
 ;@EndTable
 
 ;@Table: XDisplacements
 ;@Description: X Displacement of each tile of each frame
 ;@ValuesSize: 8
 XDisplacements:
-    db @xdisps
+    db @xdisps.
 ;@EndTable
 
 ;@Table: YDisplacements
 ;@Description: Y Displacement of each tile of each frame
 ;@ValuesSize: 8
 YDisplacements:
-    db @ydisps
+    db @ydisps.
 ;@EndTable
 
-;@Table: Sizes
+;@Table: Sizes.
 ;@Description: size of each tile of each frame
 ;@ValuesSize: 8
 Sizes:
-    db @sizes
+    db @sizes.
 ;@EndTable
 
 

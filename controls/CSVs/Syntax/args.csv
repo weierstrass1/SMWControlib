@@ -34,3 +34,17 @@ label,y;;,y;var;string;Arg Label
 label+,y;+;,y;var;fixed;Arg Label
 label-,y;-;,y;var;fixed;Arg Label
 sublabel,y;.;,y;var;string;Arg Label
+@aind.;@aind.;;0;fixed;Dyzen Args
+@frames.;@frames.;;0;fixed;Dyzen Args
+@nframes.;@nframes.;;0;fixed;Dyzen Args
+@times.;@times.;;0;fixed;Dyzen Args
+@flips.;@flips.;;0;fixed;Dyzen Args
+@fls.;@fls.;;0;fixed;Dyzen Args
+@ffps.;@ffps.;;0;fixed;Dyzen Args
+@fsp.;@fsp.;;0;fixed;Dyzen Args
+@fep.;@fep.;;0;fixed;Dyzen Args
+@tiles.;@tiles.;;0;fixed;Dyzen Args
+@props.;@props.;;0;fixed;Dyzen Args
+@xdisps.;@xdisps.;;0;fixed;Dyzen Args
+@ydisps.;@ydisps.;;0;fixed;Dyzen Args
+@sizes.;@sizes.;;0;fixed;Dyzen Args

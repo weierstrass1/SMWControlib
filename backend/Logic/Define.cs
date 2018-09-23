@@ -21,10 +21,16 @@ namespace SMWControlibBackend.Logic
             OthersPositions = new List<Tuple<int, int, string>>();
         }
 
+        public static Error PossibleError = null;
         public static Define GetDefine(Dictionary<string, Define> Defines,
             string define, int line, int startIndex)
         {
-            if (!SignatureIsCorrect(define)) return null;
+            if (!SignatureIsCorrect(define))
+            {
+                PossibleError = new Error(line, startIndex, define,
+                    ErrorCode.InvalidDefineSignature, define);
+                return null;
+            }
 
             Match m = Regex.Match(define, startPattern);
 
@@ -32,11 +38,13 @@ namespace SMWControlibBackend.Logic
 
             string name = m.ToString();
 
-            m = Regex.Match(define, midPattern);
+            m = Regex.Match(define, MidPattern);
             define = define.Substring(m.ToString().Length);
+            string prev = define;
 
             define = TryReplace(Defines, define, line, startIndex);
             if (define == "") return null;
+            if (define == null) define = prev;
 
             if (Defines.ContainsKey(name)) 
             {
@@ -59,6 +67,10 @@ namespace SMWControlibBackend.Logic
         public static string TryReplace(Dictionary<string, Define> Defines,
             string define, int line, int startIndex)
         {
+            if(!Regex.Match(define, @"\!").Success)
+            {
+                return null;
+            }
             int i = 0;
             string newDef;
 
@@ -66,11 +78,22 @@ namespace SMWControlibBackend.Logic
                 i < MAX_ITERATION_COUNTER)
             {
                 newDef = Replace(Defines, define, line, startIndex);
-                if (newDef == "") return "";
+                if (newDef == "")
+                {
+                    if (PossibleError.Code != ErrorCode.DefineNotFound)
+                    {
+                        PossibleError = new Error(line, startIndex, define,
+                            ErrorCode.InvalidDefine, define);
+                    }
+                    return "";
+                }
                 define = newDef;
             }
 
-            if (Regex.Match(define, @"\!").Success) return "";
+            if (Regex.Match(define, @"\!").Success)
+            {
+                return "";
+            }
 
             return define;
         }
@@ -78,6 +101,7 @@ namespace SMWControlibBackend.Logic
         public static string Replace(Dictionary<string, Define> Defines,
             string define, int line, int startIndex)
         {
+            PossibleError = null;
             MatchCollection ms = Regex.Matches(define, startPattern1);
             if (ms.Count <= 0) return "";
             List<Define> defines = new List<Define>();
@@ -91,6 +115,8 @@ namespace SMWControlibBackend.Logic
                 }
                 else
                 {
+                    PossibleError = new Error(line, startIndex, define,
+                        ErrorCode.DefineNotFound, m.ToString());
                     return "";
                 }
             }
@@ -156,10 +182,10 @@ namespace SMWControlibBackend.Logic
 
         const string startPattern1 = @"\![\da-zA-Z_]*";
         const string startPattern = @"^\![\da-zA-Z_]*";
-        const string midPattern = @"(\t|\ )+(\+|\:|\#|\?)?\=(\t|\ )+";
+        public const string MidPattern = @"(\t|\ )+(\+|\:|\#|\?)?\=(\t|\ )+";
         static string endPattern = @"(\S+|\" + '"' + @"(\S+(\t|\ )*)*\" +
             '"' + @")(\t|\ )*$";
-        static string completePattern = startPattern + midPattern + endPattern;
+        static string completePattern = startPattern + MidPattern + endPattern;
         public static bool SignatureIsCorrect(string define)
         {
             Match m = Regex.Match(define, completePattern);

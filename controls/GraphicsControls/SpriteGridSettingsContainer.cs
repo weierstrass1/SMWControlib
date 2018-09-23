@@ -9,6 +9,7 @@ namespace SMWControlibControls.GraphicsControls
         public int CenterSquareColorR, CenterSquareColorG, CenterSquareColorB;
         public int SelectionRectangleColorR, SelectionRectangleColorG, SelectionRectangleColorB;
         public int SelectedTilesColorR, SelectedTilesColorG, SelectedTilesColorB;
+        public int BackgroundColorR, BackgroundColorG, BackgroundColorB;
         public bool EnableCenterSquare;
         public int GridType;
         public SpriteGridSettingsContainer()

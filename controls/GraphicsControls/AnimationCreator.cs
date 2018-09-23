@@ -34,6 +34,14 @@ namespace SMWControlibControls.GraphicsControls
             private set
             {
                 selectedAnimation = value;
+                if(selectedAnimation.PlayType == PlayType.Continuous)
+                {
+                    continuous.Checked = true;
+                }
+                else
+                {
+                    onlyOnce.Checked = true;
+                }
                 SelectionChanged?.Invoke();
             }
         }
@@ -67,7 +75,7 @@ namespace SMWControlibControls.GraphicsControls
 
         private void continuousCheckedChanged(object sender, EventArgs e)
         {
-            if (SelectedAnimation == null || anims != null || anims.Count <= 0)
+            if (SelectedAnimation == null || anims == null || anims.Count <= 0)
                 return;
             if (continuous.Checked)
                 SelectedAnimation.PlayType = PlayType.Continuous;
@@ -75,7 +83,7 @@ namespace SMWControlibControls.GraphicsControls
 
         private void onlyOnceCheckedChanged(object sender, EventArgs e)
         {
-            if (SelectedAnimation == null || anims != null || anims.Count <= 0)
+            if (SelectedAnimation == null || anims == null || anims.Count <= 0)
                 return;
             if (onlyOnce.Checked)
                 SelectedAnimation.PlayType = PlayType.OnlyOnce;

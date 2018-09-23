@@ -39,6 +39,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -208,6 +209,12 @@
     <Compile Include="InteractionControls\ResizeableInteractionGrid.Designer.cs">
       <DependentUpon>ResizeableInteractionGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="LogicControls\CodeEditorController.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LogicControls\CodeEditorController.Designer.cs">
+      <DependentUpon>CodeEditorController.cs</DependentUpon>
+    </Compile>
     <Compile Include="LogicControls\TextEditor.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -298,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InteractionControls\ResizeableInteractionGrid.resx">
       <DependentUpon>ResizeableInteractionGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogicControls\CodeEditorController.resx">
+      <DependentUpon>CodeEditorController.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogicControls\TextEditor.resx">
       <DependentUpon>TextEditor.cs</DependentUpon>

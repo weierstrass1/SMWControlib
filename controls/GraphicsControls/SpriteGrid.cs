@@ -89,6 +89,19 @@ namespace SMWControlibControls.GraphicsControls
             }
         }
 
+        private Color backgroundColor = Color.FromArgb(232, 232, 255);
+        public Color BackgroundColor
+        {
+            get
+            {
+                return backgroundColor;
+            }
+            set
+            {
+                backgroundColor = value;
+                ReDraw();
+            }
+        }
         private Color gridColor = SystemColors.ControlLightLight;
         public Color GridColor
         {
@@ -1010,7 +1023,7 @@ namespace SMWControlibControls.GraphicsControls
             {
                 using (Graphics g = Graphics.FromImage(baseImage.Image))
                 {
-                    Brush br = new SolidBrush(ColorPalette.GetGlobalColor(0));
+                    Brush br = new SolidBrush(BackgroundColor);
                     g.FillRectangle(br, 0, 0, Width, Height);
                 }
             }

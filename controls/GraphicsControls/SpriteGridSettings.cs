@@ -10,6 +10,7 @@ namespace SMWControlibControls.GraphicsControls
         public static Color CenterSquareColor { get; private set; }
         public static Color SelectionRectangleColor { get; private set; }
         public static Color SelectedTilesColor { get; private set; }
+        public static Color BackgroundColor { get; private set; }
         public static bool EnableCenterSquare { get; private set; }
         public static GridType Type { get; private set; }
 
@@ -21,6 +22,7 @@ namespace SMWControlibControls.GraphicsControls
             pictureBox2.DoubleClick += doubleClick;
             pictureBox3.DoubleClick += doubleClick;
             pictureBox4.DoubleClick += doubleClick;
+            pictureBox5.DoubleClick += doubleClick;
             checkBox1.CheckedChanged += checkedChanged;
             line.CheckedChanged += rButtonCheckedChanged;
             dot.CheckedChanged += rButtonCheckedChanged;
@@ -42,16 +44,19 @@ namespace SMWControlibControls.GraphicsControls
         private void doubleClick(object sender, EventArgs e)
         {
             PictureBox pb = (PictureBox)sender;
+            colorDialog1.Color = pb.BackColor;
             if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
                 if (pb == pictureBox1)
                     setGridColor(colorDialog1.Color);
-                else if(pb == pictureBox2)
+                else if (pb == pictureBox2)
                     setCenterSquareColor(colorDialog1.Color);
-                else if(pb == pictureBox3)
+                else if (pb == pictureBox3)
                     setSelectionRectangleColor(colorDialog1.Color);
-                else
+                else if (pb == pictureBox4)
                     setSelectedTilesColor(colorDialog1.Color);
+                else
+                    setSelectedBackgroundColor(colorDialog1.Color);
             }
         }
 
@@ -64,7 +69,7 @@ namespace SMWControlibControls.GraphicsControls
         public static DialogResult Show(IWin32Window Owner,
             Color GridColor,
             Color CenterSquareColor, Color SelectionRectangleColor,
-            Color SelectedTilesColor, bool EnableCenterSquare,
+            Color SelectedTilesColor, Color BackgroundColor, bool EnableCenterSquare,
             int Type)
         {
             SpriteGridSettings settings = new SpriteGridSettings();
@@ -74,6 +79,7 @@ namespace SMWControlibControls.GraphicsControls
             settings.setSelectionRectangleColor(SelectionRectangleColor);
             settings.setSelectedTilesColor(SelectedTilesColor);
             settings.setEnableCenterSquare(EnableCenterSquare);
+            settings.setSelectedBackgroundColor(BackgroundColor);
             settings.checkBox1.Checked = EnableCenterSquare;
             settings.setType(Type);
 
@@ -83,52 +89,32 @@ namespace SMWControlibControls.GraphicsControls
         private void setGridColor(Color C)
         {
             GridColor = C;
-            pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            using (Graphics g = Graphics.FromImage(pictureBox1.Image))
-            {
-                Brush brush = new SolidBrush(C);
-                g.FillRectangle(brush, 0, 0, pictureBox1.Width, pictureBox1.Height);
-            }
-            pictureBox1.Refresh();
+            pictureBox1.BackColor = C;
         }
         private void setCenterSquareColor(Color C)
         {
             CenterSquareColor = C;
-            pictureBox2.Image = new Bitmap(pictureBox2.Width, pictureBox2.Height);
-            using (Graphics g = Graphics.FromImage(pictureBox2.Image))
-            {
-                Brush brush = new SolidBrush(C);
-                g.FillRectangle(brush, 0, 0, pictureBox2.Width, pictureBox2.Height);
-            }
-            pictureBox2.Refresh();
+            pictureBox2.BackColor = C;
         }
         private void setSelectionRectangleColor(Color C)
         {
             SelectionRectangleColor = C;
-            pictureBox3.Image = new Bitmap(pictureBox3.Width, pictureBox3.Height);
-            using (Graphics g = Graphics.FromImage(pictureBox3.Image))
-            {
-                Brush brush = new SolidBrush(C);
-                g.FillRectangle(brush, 0, 0, pictureBox3.Width, pictureBox3.Height);
-            }
-            pictureBox3.Refresh();
+            pictureBox3.BackColor = C;
         }
         private void setSelectedTilesColor(Color C)
         {
             SelectedTilesColor = C;
-            pictureBox4.Image = new Bitmap(pictureBox4.Width, pictureBox4.Height);
-            using (Graphics g = Graphics.FromImage(pictureBox4.Image))
-            {
-                Brush brush = new SolidBrush(C);
-                g.FillRectangle(brush, 0, 0, pictureBox4.Width, pictureBox4.Height);
-            }
-            pictureBox4.Refresh();
+            pictureBox4.BackColor = C;
+        }
+        private void setSelectedBackgroundColor(Color C)
+        {
+            BackgroundColor = C;
+            pictureBox5.BackColor = C;
         }
         private void setEnableCenterSquare(bool B)
         {
             EnableCenterSquare = B;
         }
-
         private void setType(int type)
         {
             switch(type)

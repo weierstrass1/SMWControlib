@@ -60,7 +60,7 @@
             this.interactionGrid1 = new SMWControlibControls.InteractionControls.ResizeableInteractionGrid();
             this.interactionMenu1 = new SMWControlibControls.InteractionControls.InteractionMenu();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.textEditor1 = new SMWControlibControls.LogicControls.TextEditor();
+            this.codeEditorController1 = new SMWControlibControls.LogicControls.CodeEditorController();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -280,7 +280,7 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.tabPage4.Controls.Add(this.spriteGFXBox2);
             this.tabPage4.Controls.Add(this.gfxButton3);
             this.tabPage4.Controls.Add(this.gfxButton4);
@@ -298,7 +298,8 @@
             this.spriteGFXBox2.Image = ((System.Drawing.Image)(resources.GetObject("spriteGFXBox2.Image")));
             this.spriteGFXBox2.ImageHeigth = 128;
             this.spriteGFXBox2.ImageWidth = 128;
-            this.spriteGFXBox2.Location = new System.Drawing.Point(0, 0);
+            this.spriteGFXBox2.Location = new System.Drawing.Point(6, 9);
+            this.spriteGFXBox2.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
             this.spriteGFXBox2.Name = "spriteGFXBox2";
             this.spriteGFXBox2.Selection = new System.Drawing.Rectangle(0, 0, 16, 16);
             this.spriteGFXBox2.SelectionAccuracy = 8;
@@ -313,31 +314,41 @@
             // 
             // gfxButton3
             // 
+            this.gfxButton3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
             this.gfxButton3.BaseTile = 8;
-            this.gfxButton3.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.gfxButton3.Location = new System.Drawing.Point(87, 263);
+            this.gfxButton3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
+            this.gfxButton3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
+            this.gfxButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.gfxButton3.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gfxButton3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+            this.gfxButton3.Location = new System.Drawing.Point(112, 275);
             this.gfxButton3.Name = "gfxButton3";
             this.gfxButton3.Position = 64;
-            this.gfxButton3.Size = new System.Drawing.Size(75, 23);
+            this.gfxButton3.Size = new System.Drawing.Size(100, 23);
             this.gfxButton3.StartFolder = "";
             this.gfxButton3.TabIndex = 5;
             this.gfxButton3.Text = "Load Bottom";
             this.gfxButton3.Tilesize = 16;
-            this.gfxButton3.UseVisualStyleBackColor = true;
+            this.gfxButton3.UseVisualStyleBackColor = false;
             // 
             // gfxButton4
             // 
+            this.gfxButton4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
             this.gfxButton4.BaseTile = 0;
-            this.gfxButton4.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.gfxButton4.Location = new System.Drawing.Point(6, 263);
+            this.gfxButton4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
+            this.gfxButton4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
+            this.gfxButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.gfxButton4.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gfxButton4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+            this.gfxButton4.Location = new System.Drawing.Point(6, 275);
             this.gfxButton4.Name = "gfxButton4";
             this.gfxButton4.Position = 0;
-            this.gfxButton4.Size = new System.Drawing.Size(75, 23);
+            this.gfxButton4.Size = new System.Drawing.Size(100, 23);
             this.gfxButton4.StartFolder = "";
             this.gfxButton4.TabIndex = 4;
             this.gfxButton4.Text = "Load Top";
             this.gfxButton4.Tilesize = 16;
-            this.gfxButton4.UseVisualStyleBackColor = true;
+            this.gfxButton4.UseVisualStyleBackColor = false;
             // 
             // tabPage2
             // 
@@ -493,7 +504,7 @@
             // tabPage6
             // 
             this.tabPage6.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage6.Controls.Add(this.textEditor1);
+            this.tabPage6.Controls.Add(this.codeEditorController1);
             this.tabPage6.Location = new System.Drawing.Point(4, 24);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
@@ -501,17 +512,17 @@
             this.tabPage6.TabIndex = 3;
             this.tabPage6.Text = "Logic";
             // 
-            // textEditor1
+            // codeEditorController1
             // 
-            this.textEditor1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
-            this.textEditor1.CaretForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(16)))), ((int)(((byte)(24)))));
-            this.textEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textEditor1.EdgeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.textEditor1.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textEditor1.Location = new System.Drawing.Point(3, 3);
-            this.textEditor1.Name = "textEditor1";
-            this.textEditor1.Size = new System.Drawing.Size(1102, 584);
-            this.textEditor1.TabIndex = 0;
+            this.codeEditorController1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.codeEditorController1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.codeEditorController1.Font = new System.Drawing.Font("MS Reference Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.codeEditorController1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
+            this.codeEditorController1.Location = new System.Drawing.Point(3, 3);
+            this.codeEditorController1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.codeEditorController1.Name = "codeEditorController1";
+            this.codeEditorController1.Size = new System.Drawing.Size(1102, 584);
+            this.codeEditorController1.TabIndex = 0;
             // 
             // menuStrip1
             // 
@@ -779,6 +790,6 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem versionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem creditsToolStripMenuItem;
-        private SMWControlibControls.LogicControls.TextEditor textEditor1;
+        private SMWControlibControls.LogicControls.CodeEditorController codeEditorController1;
     }
 }

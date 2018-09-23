@@ -39,5 +39,6 @@ Macro Arg;Used for macro imputs.
 Asar;Used for asar commands.
 Comment;Used for comments.
 Tag;Used for Super Scriptnes Tags.
+Dyzen Args;Used for Dyzen arguments.
 Error; Used for errors.
 Warning; Used for warnings.

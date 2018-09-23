@@ -35,6 +35,8 @@
             this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.spriteGrid1 = new SMWControlibControls.GraphicsControls.SpriteGrid();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.cellSize = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
+            this.zoom = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.settings = new System.Windows.Forms.Button();
@@ -51,8 +53,6 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.zoom = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
-            this.cellSize = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
@@ -138,11 +138,50 @@
             this.panel2.Size = new System.Drawing.Size(748, 34);
             this.panel2.TabIndex = 2;
             // 
+            // cellSize
+            // 
+            this.cellSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.cellSize.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
+            this.cellSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cellSize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cellSize.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.cellSize.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
+            this.cellSize.FormattingEnabled = true;
+            this.cellSize.Items.AddRange(new object[] {
+            "1x1",
+            "2x2",
+            "4x4",
+            "8x8",
+            "16x16"});
+            this.cellSize.Location = new System.Drawing.Point(405, 7);
+            this.cellSize.Name = "cellSize";
+            this.cellSize.Size = new System.Drawing.Size(66, 20);
+            this.cellSize.TabIndex = 20;
+            // 
+            // zoom
+            // 
+            this.zoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.zoom.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
+            this.zoom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.zoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.zoom.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.zoom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
+            this.zoom.FormattingEnabled = true;
+            this.zoom.Items.AddRange(new object[] {
+            "X1",
+            "X2",
+            "X3",
+            "X4"});
+            this.zoom.Location = new System.Drawing.Point(243, 7);
+            this.zoom.Name = "zoom";
+            this.zoom.Size = new System.Drawing.Size(66, 20);
+            this.zoom.TabIndex = 19;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
             this.label3.Location = new System.Drawing.Point(33, 5);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 5, 8, 5);
             this.label3.Name = "label3";
@@ -156,7 +195,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
             this.label2.Location = new System.Drawing.Point(320, 5);
             this.label2.Margin = new System.Windows.Forms.Padding(8, 5, 8, 5);
             this.label2.Name = "label2";
@@ -202,7 +241,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
             this.label1.Location = new System.Drawing.Point(179, 5);
             this.label1.Margin = new System.Windows.Forms.Padding(8, 5, 8, 5);
             this.label1.Name = "label1";
@@ -428,45 +467,6 @@
             this.toolTip1.ReshowDelay = 1500;
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Info";
-            // 
-            // zoom
-            // 
-            this.zoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.zoom.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
-            this.zoom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.zoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.zoom.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.zoom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.zoom.FormattingEnabled = true;
-            this.zoom.Items.AddRange(new object[] {
-            "X1",
-            "X2",
-            "X3",
-            "X4"});
-            this.zoom.Location = new System.Drawing.Point(243, 7);
-            this.zoom.Name = "zoom";
-            this.zoom.Size = new System.Drawing.Size(66, 20);
-            this.zoom.TabIndex = 19;
-            // 
-            // cellSize
-            // 
-            this.cellSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.cellSize.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
-            this.cellSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cellSize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cellSize.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.cellSize.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.cellSize.FormattingEnabled = true;
-            this.cellSize.Items.AddRange(new object[] {
-            "1x1",
-            "2x2",
-            "4x4",
-            "8x8",
-            "16x16"});
-            this.cellSize.Location = new System.Drawing.Point(405, 7);
-            this.cellSize.Name = "cellSize";
-            this.cellSize.Size = new System.Drawing.Size(66, 20);
-            this.cellSize.TabIndex = 20;
             // 
             // SpriteGridController
             // 

@@ -10,11 +10,17 @@ namespace SMWControlibBackend.Logic
 {
     public class Group
     {
+        public static readonly Group Default = new Group
+        {
+            Name = "Default",
+            Description = "Used for normal text.",
+            Style = 0
+        };
         public string Name { get; private set; }
         public string Description { get; private set; }
         public int Style;
 
-        private Group()
+        public Group()
         {
 
         }

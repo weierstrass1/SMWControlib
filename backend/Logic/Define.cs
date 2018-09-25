@@ -14,97 +14,23 @@ namespace SMWControlibBackend.Logic
         public string Name;
         public List<Tuple<int, int, string>> OthersPositions;
         public Group Group;
-        public const int MAX_ITERATION_COUNTER = 30;
 
         public Define()
         {
             OthersPositions = new List<Tuple<int, int, string>>();
         }
 
-        public static Error PossibleError = null;
-        public static Define GetDefine(Dictionary<string, Define> Defines,
-            string define, int line, int startIndex)
-        {
-            if (!SignatureIsCorrect(define))
-            {
-                PossibleError = new Error(line, startIndex, define,
-                    ErrorCode.InvalidDefineSignature, define);
-                return null;
-            }
-
-            Match m = Regex.Match(define, startPattern);
-
-            define = define.Substring(m.ToString().Length);
-
-            string name = m.ToString();
-
-            m = Regex.Match(define, MidPattern);
-            define = define.Substring(m.ToString().Length);
-            string prev = define;
-
-            define = TryReplace(Defines, define, line, startIndex);
-            if (define == "") return null;
-            if (define == null) define = prev;
-
-            if (Defines.ContainsKey(name)) 
-            {
-                Defines[name].OthersPositions.Add(
-                    new Tuple<int, int, string>(line, startIndex, define));
-                return Default;
-            }
-
-            Define def = new Define
-            {
-                Name = name
-            };
-
-            def.OthersPositions.Add(
-                new Tuple<int, int, string>(line, startIndex, define));
-
-            return def;
-        }
-
-        public static string TryReplace(Dictionary<string, Define> Defines,
-            string define, int line, int startIndex)
-        {
-            if(!Regex.Match(define, @"\!").Success)
-            {
-                return null;
-            }
-            int i = 0;
-            string newDef;
-
-            while (Regex.Match(define, @"\!").Success &&
-                i < MAX_ITERATION_COUNTER)
-            {
-                newDef = Replace(Defines, define, line, startIndex);
-                if (newDef == "")
-                {
-                    if (PossibleError.Code != ErrorCode.DefineNotFound)
-                    {
-                        PossibleError = new Error(line, startIndex, define,
-                            ErrorCode.InvalidDefine, define);
-                    }
-                    return "";
-                }
-                define = newDef;
-            }
-
-            if (Regex.Match(define, @"\!").Success)
-            {
-                return "";
-            }
-
-            return define;
-        }
-
+        internal static List<CodePointer> definesFounded;
+        internal static List<CodePointer> replaced;
         public static string Replace(Dictionary<string, Define> Defines,
             string define, int line, int startIndex)
         {
-            PossibleError = null;
+            definesFounded = new List<CodePointer>();
+            replaced = new List<CodePointer>();
             MatchCollection ms = Regex.Matches(define, startPattern1);
-            if (ms.Count <= 0) return "";
+            if (ms.Count <= 0) return define;
             List<Define> defines = new List<Define>();
+            CodePointer cp;
             string s;
             foreach (Match m in ms)
             {
@@ -112,17 +38,17 @@ namespace SMWControlibBackend.Logic
                 if (Defines.ContainsKey(s))
                 {
                     defines.Add(Defines[s]);
-                }
-                else
-                {
-                    PossibleError = new Error(line, startIndex, define,
-                        ErrorCode.DefineNotFound, m.ToString());
-                    return "";
+                    cp = new CodePointer
+                    {
+                        Start = startIndex + m.Index,
+                        End = startIndex + m.Index + m.Length - 1,
+                        Code = m.ToString()
+                    };
+                    definesFounded.Add(cp);
                 }
             }
 
             List<string> SplitedDef = new List<string>();
-
             int st = 0;
             int len = 0;
             foreach(Match m in ms)
@@ -142,16 +68,38 @@ namespace SMWControlibBackend.Logic
                 }
                 st += m.Length;
             }
+            int lenn = define.Length - st;
+            if (lenn > 0)
+                SplitedDef.Add(define.Substring(st , lenn));
 
             Define[] defarr = defines.ToArray();
+            if (defarr.Length <= 0) return define;
             int q = 0;
             StringBuilder sb = new StringBuilder();
+            string newm;
+            Tuple<int, int, string> tup;
 
             foreach (string str in SplitedDef) 
             {
-                if (defarr[q].Name == str)
+                if (q < defarr.Length && defarr[q].Name == str)
                 {
-                    sb.Append(defarr[q].NearestPosition(line, startIndex).Item3);
+                    tup = defarr[q].NearestPosition(line, startIndex);
+                    if(tup==null)
+                    {
+                        sb.Append(str);
+                    }
+                    else
+                    {
+                        newm = tup.Item3;
+                        cp = new CodePointer
+                        {
+                            Start = startIndex + sb.Length,
+                            End = startIndex + sb.Length + newm.Length - 1,
+                            Code = newm
+                        };
+                        replaced.Add(cp);
+                        sb.Append(newm);
+                    }
                     q++;
                 }
                 else
@@ -197,26 +145,72 @@ namespace SMWControlibBackend.Logic
             return (newdef.Length == define.Length - 2) || (newdef.Length == define.Length);
         }
 
-        public static List<CodePointer> DefinesPositions(string define)
+        public static List<CodePointer> GetPointers(string define, int startIndex)
         {
-            MatchCollection ms = Regex.Matches(define, startPattern1);
-            if (ms.Count <= 0) return null;
-
             List<CodePointer> pointers = new List<CodePointer>();
-            CodePointer cp;
+            Match m = Regex.Match(define, startPattern);
+            string name = m.ToString();
 
-            foreach(Match m in ms)
+            CodePointer cp = new CodePointer
             {
-                cp = new CodePointer
-                {
-                    Start = m.Index,
-                    End = m.Index + m.Length - 1,
-                    Code = m.ToString()
-                };
-                pointers.Add(cp);
-            }
+                Start = m.Index + startIndex,
+                End = m.Index + startIndex + name.Length - 1,
+                Code = name
+            };
+
+            pointers.Add(cp);
+
+            define = define.Substring(m.Length);
+
+            m = Regex.Match(define, MidPattern);
+
+            define = define.Substring(m.Length);
+
+            int st = cp.End + m.Length;
+            int en = define.Length - 1 + startIndex;
+
+            cp = new CodePointer
+            {
+                Start = st + 1,
+                End = en,
+                Code = define
+            };
+
+            pointers.Add(cp);
 
             return pointers;
+        }
+
+        internal static Error possibleError;
+        public static Define GetDefine(Dictionary<string, Define> Defines,
+            string define, int line, int startIndex)
+        {
+            possibleError = null;
+            Match m = Regex.Match(define, startPattern);
+            string name = m.ToString();
+
+            define = define.Substring(name.Length);
+
+            m = Regex.Match(define, "^" + MidPattern);
+
+            define = define.Substring(m.Length);
+            int stind = startIndex + name.Length + m.Length;
+            string value = Replace(Defines, define, line, stind);
+
+            m = Regex.Match(value, startPattern1);
+            if(m.Success)
+            {
+                possibleError = new Error(line, stind + m.Index, m.ToString(),
+                    ErrorCode.DefineNotFound, m.ToString());
+            }
+
+            Define def = new Define
+            {
+                Name = name
+            };
+            def.OthersPositions.Add(new Tuple<int, int, string>(line, startIndex, value));
+
+            return def;
         }
     }
 }

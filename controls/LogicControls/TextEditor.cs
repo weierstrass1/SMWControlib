@@ -14,88 +14,79 @@ namespace SMWControlibControls.LogicControls
 {
     public partial class TextEditor : Scintilla
     {
-        private static ArgsTypes[] argTypes;
-        private static Dictionary<string, SMWControlibBackend.Logic.Command[]> commands;
-        private static SMWControlibBackend.Logic.Label[] labels;
-        private static SMWControlibBackend.Logic.Group[] groups;
-        private static SMWControlibBackend.Logic.Group errorGroup, commentGroup,
-            defineGroup, defineArgsGroup;
-        private Dictionary<string, Define> defines;
-        private Dictionary<int, List<Error>> errors;
         private UndoRedoDynamicArray<UndoRedoStruct> undoRedoList;
+        private Code code;
         public bool CanUndoRedo = false;
-        public event Action<Dictionary<int, List<Error>>> ErrorsAdded;
+        public event Action<Dictionary<int, List<Error>>> ErrorsAdded
+        {
+            add
+            {
+                code.ErrorsAdded += value;
+            }
+            remove
+            {
+                code.ErrorsAdded -= value;
+            }
+        }
 
         private const int bookmarkMargin = 1; // Conventionally the symbol margin
         private const int bookmarkMarker = 3;
 
-        const string font = "Consolas";
-        const int size = 12;
-        Color backColor = Color.FromArgb(232, 232, 248);
         AutocompleteMenu autocom;
         public TextEditor()
         {
             InitializeComponent();
             undoRedoList = new UndoRedoDynamicArray<UndoRedoStruct>(20, 20);
-            errors = new Dictionary<int, List<Error>>();
-            defines = new Dictionary<string, Define>();
             CaretForeColor = Color.White;
-            Styles[Style.Default].Font = font;
-            Styles[Style.Default].ForeColor = Color.FromArgb(224, 224, 248);
-            Styles[Style.Default].Bold = true;
-            Styles[Style.Default].BackColor = backColor;
-            Styles[Style.Default].Size = size;
-            StyleClearAll();
-            try
-            {
-                autocom = new AutocompleteMenu
-                {
-                    SearchPattern = @"\!",
-                    TargetControlWrapper = new ScintillaWrapper(this),
-                    AutoPopup = true,
-                    LeftPadding = 0,
-                };               
-                
-                groups = SMWControlibBackend.Logic.Group.GetGroups(@".\CSVs\Syntax\groups.csv");
-                argTypes = ArgsTypes.GetArgsTypes(@".\CSVs\Syntax\args.csv", groups);
-                commands = SMWControlibBackend.Logic.Command.GetCommands(@".\CSVs\Syntax\commands.csv", argTypes, groups);
-                foreach (SMWControlibBackend.Logic.Command[] val in commands.Values)
-                {
-                    foreach(SMWControlibBackend.Logic.Command v in val)
-                    {
-                        Styles[v.Group.Style].ForeColor = Color.FromArgb(16, 32, 176);
-                        Styles[v.Group.Style].BackColor = backColor;
-                    }
-                }
-                foreach(ArgsTypes v in argTypes)
-                {
-                    Styles[v.Group.Style].ForeColor = Color.FromArgb(128,128,144);//(224, 200, 48);
-                }
-                labels = new SMWControlibBackend.Logic.Label[4];
-                labels[0] = new NormalLabel(groups, "Label");
-                Styles[labels[0].Group.Style].ForeColor = Color.FromArgb(35, 25, 75);
-                labels[1] = new SubLabel(groups, "Special Label");
-                Styles[labels[1].Group.Style].ForeColor = Color.FromArgb(70, 50, 150);
-                labels[2] = new PlusLabel(groups, "Special Label");
-                labels[3] = new MinusLabel(groups, "Special Label");
-                errorGroup = SMWControlibBackend.Logic.Group.FindGroup(groups, "Error");
-                Styles[errorGroup.Style].ForeColor = Color.FromArgb(176,16, 32);
-                commentGroup = SMWControlibBackend.Logic.Group.FindGroup(groups, "Comment");
-                Styles[commentGroup.Style].ForeColor = Color.FromArgb(16, 102, 64);
-                Styles[commentGroup.Style].BackColor = backColor;
-                defineGroup = SMWControlibBackend.Logic.Group.FindGroup(groups, "Define");
-                Styles[defineGroup.Style].ForeColor = Color.FromArgb(70, 50, 150);
-                Styles[defineGroup.Style].BackColor = backColor;
-                defineArgsGroup = SMWControlibBackend.Logic.Group.FindGroup(groups, "Define Arg");
-                Styles[defineArgsGroup.Style].ForeColor = Color.FromArgb(224, 200, 48);
-                Styles[defineArgsGroup.Style].BackColor = backColor;
 
-                importDefines();
-                CanUndoRedo = true;
-            }
-            catch
+            StylesContainer sc = StylesContainer.Deserialize(@"Settings/ScriptnesStyles.set");
+            sc.MarginBackColorRed = 96;
+            sc.MarginBackColorGreen = 96;
+            sc.MarginBackColorBlue = 112;
+
+
+            Styles[Style.Default].Font = sc.Font;
+            Styles[Style.Default].ForeColor = 
+                Color.FromArgb(sc.ForeColorRed[0], 
+                sc.ForeColorGreen[0],
+                sc.ForeColorBlue[0]);
+            Styles[Style.Default].Bold = sc.Bold;
+            Styles[Style.Default].BackColor =
+                Color.FromArgb(sc.BackColorRed,
+                sc.BackColorGreen,
+                sc.BackColorBlue);
+            Styles[Style.Default].Size = sc.Size;
+            StyleClearAll();
+
+            for (int i = 0; i < 256; i++)
             {
+                Styles[i].ForeColor =
+                    Color.FromArgb(sc.ForeColorRed[i],
+                    sc.ForeColorGreen[i],
+                    sc.ForeColorBlue[i]);
+                Styles[i].BackColor =
+                    Color.FromArgb(sc.BackColorRed,
+                    sc.BackColorGreen,
+                    sc.BackColorBlue);
             }
+            Styles[255].BackColor =
+                Color.FromArgb(sc.MarginBackColorRed,
+                sc.MarginBackColorGreen,
+                sc.MarginBackColorBlue);
+            sc.Serialize(@"Settings/ScriptnesStyles.set");
+
+            code = new Code(@"CSVs\Syntax\args.csv", @"CSVs\Syntax\commands.csv",
+    @"CSVs\Syntax\groups.csv");
+            code.ImportDefines(@".\ASM\Defines.asm");
+            autocom = new AutocompleteMenu
+            {
+                SearchPattern = @"\!",
+                TargetControlWrapper = new ScintillaWrapper(this),
+                AutoPopup = true,
+                LeftPadding = 0,
+            };
+
+            CanUndoRedo = true;
 
             BeforeInsert += beforeInsert;
             Insert += insert;
@@ -136,8 +127,28 @@ namespace SMWControlibControls.LogicControls
             Margins[0].Type = MarginType.RightText;
             Margins[0].Width = 35;
 
-            Styles[255].ForeColor = Color.FromArgb(224, 224, 248);
-            Styles[255].BackColor = Color.FromArgb(80, 80, 128);
+            /*StylesContainer sc = new StylesContainer
+            {
+                Font = font,
+                Size = size,
+                BackColorRed = backColor.R,
+                BackColorGreen = backColor.G,
+                BackColorBlue = backColor.B,
+                Bold = bold
+            };
+
+
+            sc.ForeColorRed = new int[256];
+            sc.ForeColorGreen = new int[256];
+            sc.ForeColorBlue = new int[256];
+            for (int r = 0; r < 256; r++)
+            {
+                sc.ForeColorRed[r] = Styles[r].ForeColor.R;
+                sc.ForeColorGreen[r] = Styles[r].ForeColor.G;
+                sc.ForeColorBlue[r] = Styles[r].ForeColor.B;
+            }
+            sc.Serialize(@"Settings/ScriptnesStyles.set");*/
+
 
             Marker marker = Markers[bookmarkMarker];
             marker.Symbol = MarkerSymbol.SmallRect;
@@ -184,113 +195,20 @@ namespace SMWControlibControls.LogicControls
             int linel = line.Length;
             int lineN = LineFromPosition(lineInd);
 
-            if (deltaLines > 0)
+            code.ClearFlags();
+            code.DeleteLinesAt(lineN, lineInd, e.Position, deltaLines, line);
+
+            highlightLine(line, CurrentLine);
+
+            List<int> anLines = code.EndAnalysis();
+
+            foreach (int tl in anLines)
             {
-                for (int i = lineN; i <= lineN + deltaLines; i++)
-                {
-                    removeDefinesAtPosition(i);
-                    removeErrorsAtPosition(i);
-                }
-                List<Tuple<int, int, string>> removeList, news;
-
-                foreach (Define d in defines.Values)
-                {
-                    removeList =
-                        new List<Tuple<int, int, string>>();
-                    news =
-                        new List<Tuple<int, int, string>>();
-                    foreach (Tuple<int, int, string> t in d.OthersPositions)
-                    {
-                        if (t.Item1 > lineN)
-                        {
-                            removeList.Add(t);
-                            news.Add(new Tuple<int, int, string>(
-                                t.Item1 - deltaLines,
-                                t.Item2,
-                                t.Item3));
-                        }
-                    }
-                    foreach (Tuple<int, int, string> t in removeList)
-                    {
-                        d.OthersPositions.Remove(t);
-                    }
-                    foreach (Tuple<int, int, string> t in news)
-                    {
-                        d.OthersPositions.Add(t);
-                    }
-                }
-
-                List<int> removeList2 = new List<int>();
-                List<KeyValuePair<int, List<Error>>> news2 =
-                    new List<KeyValuePair<int, List<Error>>>();
-                newErrors = false;
-
-                foreach (KeyValuePair<int, List<Error>> kvp in errors)
-                {
-                    if (kvp.Key > lineN)
-                    {
-                        foreach (Error err in kvp.Value)
-                        {
-                            err.Line -= deltaLines;
-                        }
-                        removeList2.Add(kvp.Key);
-                        news2.Add(
-                            new KeyValuePair<int, List<Error>>
-                            (kvp.Key - deltaLines, kvp.Value));
-                        newErrors = true;
-                    }
-                }
-                foreach (int k in removeList2)
-                {
-                    errors.Remove(k);
-                }
-
-                foreach (KeyValuePair<int, List<Error>> kvvp in news2)
-                {
-                    errors.Add(kvvp.Key, kvvp.Value);
-                }
-            }
-
-            newError = false;
-            definesDetected = false;
-            highlightLine(line, lineInd, linel);
-
-            definePossibleFix();
-            if (newError || newErrors)
-            {
-                ErrorsAdded?.Invoke(errors);
-            }
-        }
-
-        private void definePossibleFix()
-        {
-            if (definesDetected)
-            {
-                List<int> testList = new List<int>();
-                foreach (KeyValuePair<int, List<Error>> kvp1 in errors)
-                {
-                    foreach (Error errr in kvp1.Value)
-                    {
-                        if (errr.Code == ErrorCode.DefineNotFound)
-                        {
-                            newErrors = true;
-                            testList.Add(kvp1.Key);
-                            break;
-                        }
-                    }
-                }
-                Line curL;
-                string line;
-                int lineInd;
-                int linel;
-                foreach (int tl in testList)
-                {
-                    curL = Lines[tl];
-                    line = curL.Text;
-                    lineInd = curL.Position;
-                    linel = line.Length;
-                    highlightLine(line, lineInd, linel);
-                }
+                curL = Lines[tl];
+                line = curL.Text;
+                lineInd = curL.Position;
+                linel = line.Length;
+                highlightLine(line, tl);
             }
         }
 
@@ -336,9 +254,11 @@ namespace SMWControlibControls.LogicControls
 
         public void OpenTab()
         {
+            if (code.AutoCompleteTexts == null) return;
+
             List<AutocompleteItem> items = new List<AutocompleteItem>();
 
-            foreach (string def in defines.Keys)
+            foreach (string def in code.AutoCompleteTexts)
             {
                 items.Add(new SnippetAutocompleteItem(def));
             }
@@ -372,10 +292,11 @@ namespace SMWControlibControls.LogicControls
             autocom.SearchPattern = sb.ToString();
             List<AutocompleteItem> items = new List<AutocompleteItem>();
 
-            foreach (string def in defines.Keys)
+            List<string> s = code.FilterAutocompleteWords(autocom.SearchPattern);
+
+            foreach (string def in s)
             {
-                if (Regex.Match(def, autocom.SearchPattern).Success)
-                    items.Add(new SnippetAutocompleteItem(def));
+                items.Add(new SnippetAutocompleteItem(def));
             }
             autocom.SetAutocompleteItems(items);
             autocom.CaptureFocus = false;
@@ -399,10 +320,11 @@ namespace SMWControlibControls.LogicControls
                     autocom.SearchPattern = sb.ToString();
                     List<AutocompleteItem> items = new List<AutocompleteItem>();
 
-                    foreach (string def in defines.Keys)
+                    List<string> s = code.FilterAutocompleteWords(autocom.SearchPattern);
+
+                    foreach (string def in s)
                     {
-                        if (Regex.Match(def, autocom.SearchPattern).Success)
-                            items.Add(new SnippetAutocompleteItem(def));
+                        items.Add(new SnippetAutocompleteItem(def));
                     }
                     curpos = CurrentPosition;
                     autocom.SetAutocompleteItems(items);
@@ -433,25 +355,28 @@ namespace SMWControlibControls.LogicControls
             string line;
             int lineInd;
             int linel;
-            newError = false;
-            definesDetected = false;
+
             for (int i = linePos; i < linePos + newLines.Length; i++)
             {
                 curL = Lines[i];
                 line = curL.Text;
                 lineInd = curL.Position;
                 linel = line.Length;
-                highlightLine(line, lineInd, linel);
+                highlightLine(line, i);
             }
-            definePossibleFix();
 
-            if (newError || newErrors)
+            List<int> anLines = code.EndAnalysis();
+
+            foreach (int tl in anLines)
             {
-                ErrorsAdded?.Invoke(errors);
+                curL = Lines[tl];
+                line = curL.Text;
+                lineInd = curL.Position;
+                linel = line.Length;
+                highlightLine(line, tl);
             }
         }
 
-        bool newErrors = false;
         private void beforeInsert(object sender, BeforeModificationEventArgs e)
         {
             if (CanUndoRedo)
@@ -459,479 +384,29 @@ namespace SMWControlibControls.LogicControls
                 UndoRedoStruct ne = new UndoRedoStruct(e, UndoRedoAction.Insert);
                 undoRedoList.Add(ne);
             }
-            string[] newLines = e.Text.Replace("\r\n", "\n").Split('\n');
-            int linelen = newLines.Length;
-            if (e.Text == "\r\n" || e.Text == "\n")
-            {
-                linelen = 1;
-            }
-            int linePos = LineFromPosition(e.Position);
-            int pos = Lines[linePos].Position;
-
-            Match m = Regex.Match(e.Text, @"\n");
-
-            List<Tuple<int, int, string>> removeList;
-            List<Tuple<int, int, string>> news;
-            List<int> removeList2 = new List<int>();
-            List<KeyValuePair<int, List<Error>>> news2 =
-                new List<KeyValuePair<int, List<Error>>>();
-            bool mustRemove = false;
-            newErrors = false;
-            if (m.Success)
-            {
-
-                foreach (Define d in defines.Values)
-                {
-                    removeList =
-                        new List<Tuple<int, int, string>>();
-                    news =
-                        new List<Tuple<int, int, string>>();
-                    foreach (Tuple<int, int, string> t in d.OthersPositions)
-                    {
-                        if (t.Item1 > linePos)
-                        {
-                            removeList.Add(t);
-                            news.Add(new Tuple<int, int, string>(
-                                t.Item1 + linelen,
-                                t.Item2,
-                                t.Item3));
-                        }
-                        else if (t.Item1 == linePos && t.Item2 >= e.Position - pos)
-                        {
-                            removeList.Add(t);
-                            news.Add(new Tuple<int, int, string>(
-                                t.Item1 + linelen,
-                                t.Item2 - (e.Position - pos),
-                                t.Item3));
-                        }
-                    }
-                    foreach (Tuple<int, int, string> t in removeList)
-                    {
-                        d.OthersPositions.Remove(t);
-                    }
-                    foreach (Tuple<int, int, string> t in news)
-                    {
-                        d.OthersPositions.Add(t);
-                    }
-                }
-                
-                foreach (KeyValuePair<int, List<Error>> kvp in errors)
-                {
-                    if (kvp.Key > linePos)
-                    {
-                        foreach(Error err in kvp.Value)
-                        {
-                            err.Line += linelen;
-                        }
-                        removeList2.Add(kvp.Key);
-                        news2.Add(
-                            new KeyValuePair<int, List<Error>>
-                            (kvp.Key + linelen, kvp.Value));
-                        newErrors = true;
-                    }
-                    else if (kvp.Key == linePos)
-                    {
-                        mustRemove = false;
-                        foreach (Error err in kvp.Value)
-                        {
-                            if(err.Start >= e.Position - pos)
-                            {
-                                mustRemove = true;
-                                err.Line += linelen;
-                                err.Start -= (e.Position - pos);
-                            }
-                        }
-                        if(mustRemove)
-                        {
-                            newErrors = true;
-                            removeList2.Add(kvp.Key);
-                            news2.Add(
-                                new KeyValuePair<int, List<Error>>
-                                (kvp.Key + linelen, kvp.Value));
-                        }
-                    }
-                }
-                foreach (int k in removeList2)
-                {
-                    errors.Remove(k);
-                }
-
-                foreach (KeyValuePair<int, List<Error>> kvvp in news2)
-                {
-                    errors.Add(kvvp.Key, kvvp.Value);
-                }
-            }
-            else
-            {
-                foreach (Define d in defines.Values)
-                {
-                    removeList =
-                        new List<Tuple<int, int, string>>();
-                    news =
-                        new List<Tuple<int, int, string>>();
-                    foreach (Tuple<int, int, string> t in d.OthersPositions)
-                    {
-                        if (t.Item1 == linePos && t.Item2 >= e.Position - pos)
-                        {
-                            removeList.Add(t);
-                            news.Add(new Tuple<int, int, string>(
-                                t.Item1,
-                                t.Item2 + e.Text.Length,
-                                t.Item3));
-                        }
-                    }
-                    foreach (Tuple<int, int, string> t in removeList)
-                    {
-                        d.OthersPositions.Remove(t);
-                    }
-                    foreach (Tuple<int, int, string> t in news)
-                    {
-                        d.OthersPositions.Add(t);
-                    }
-                }
-
-                foreach (KeyValuePair<int, List<Error>> kvp in errors)
-                {
-                    if (kvp.Key == linePos)
-                    {
-                        foreach (Error err in kvp.Value)
-                        {
-                            if (err.Start >= e.Position - pos)
-                            {
-                                err.Start += e.Text.Length;
-                                newErrors = true;
-                            }
-                        }
-                    }
-                }
-            }
+            int lineIndex = LineFromPosition(e.Position);
+            Line Curl = Lines[lineIndex];
+            int linePos = Curl.Position;
+            code.ClearFlags();
+            code.AddLinesAt(lineIndex, linePos, e.Position, e.Text);
         }
 
-        const string startSpacesPattern = @"^(\ |\t)*";
-        const string endSpacesPattern = @"(\ |\t)*$";
-        const string separatorPattern = @"(\ |\t)+:(\ |\t)+";
-
-        private void importDefines()
+        private void highlightLine(string line, int lineInd)
         {
-            string s = File.ReadAllText(@".\ASM\Defines.asm");
-            AppendTextWithHighlight(s);
-            errors.Clear();
-            List<Tuple<int, int, string>> newsPos = new List<Tuple<int, int, string>>();
-            foreach (Define d in defines.Values)
-            {
-                newsPos = new List<Tuple<int, int, string>>();
-                foreach (Tuple<int, int, string> t in d.OthersPositions)
-                {
-                    newsPos.Add(new Tuple<int, int, string>(t.Item1 - Lines.Count - 1,
-                        t.Item2, t.Item3));
-                }
-                d.OthersPositions.Clear();
-                foreach (Tuple<int, int, string> t in newsPos)
-                {
-                    d.OthersPositions.Add(t);
-                }
-            }
-            Text = "";
-        }
-
-        public void AppendTextWithHighlight(string text)
-        {
-            int lastLine = Lines.Count - 1;
-            if (lastLine < 0) lastLine = 0;
-            AppendText(text);
-
-            string[] lines = text.Split('\n');
-
-            int endL = Lines.Count - 1;
-            if (endL < 0) return;
-
-            Line curL;
-            string line;
-            int lineInd;
-            int linel;
-
-            for (int i = lastLine; i <= endL; i++)
-            {
-                curL = Lines[i];
-                line = curL.Text;
-                lineInd = curL.Position;
-                linel = line.Length;
-                highlightLine(line, lineInd, linel);
-            }
-        }
-
-        private CodePointer[] separateLine(string line)
-        {
-            return CodePointer.Split(line, separatorPattern);
-        }
-
-        private List<CodePointer> labelHighlight(string line, CodePointer label)
-        {
-            List<CodePointer> pointers = new List<CodePointer>();
-            if (labels == null) return pointers;
-            for (int j = 0; j < labels.Length; j++)
-            {
-                if (label.End + 1 < line.Length &&
-                    line[label.End + 1] == ':' &&
-                    labels[j].SyntaxIsCorrect(label.Code.TrimStart(' ')
-                    .TrimStart('\t') + line[label.End + 1]))
-                {
-                    label.Append("" + line[label.End + 1]);
-                    label.Group = labels[j].Group;
-                    pointers.Add(label);
-                    break;
-                }
-                if (labels[j].SyntaxIsCorrect(label.Code.Trim(' ').Trim('\t')))
-                {
-                    label.Group = labels[j].Group;
-                    pointers.Add(label);
-                    break;
-                }
-            }
-            return pointers;
-        }
-        Error posError = null;
-        int errPos = 0;
-        private List<CodePointer> commandHighlight(CodePointer cmd, int lineInd)
-        {
-            List<CodePointer> pointers = new List<CodePointer>();
-            if (commands == null) return pointers;
-            string tryname;
-            SMWControlibBackend.Logic.Command[] names;
-            CodePointer[] cpauxs;
-            int minBytes = int.MaxValue;
-            tryname = cmd.Code.Replace('\t', ' ').Split(' ')[0].ToLower();
-            posError = new Error(lineInd, errPos, cmd.Code,
-                ErrorCode.InvalidCommand, tryname);
-            if (commands.ContainsKey(tryname))
-            {
-                posError = new Error(lineInd, errPos, cmd.Code,
-                    ErrorCode.InvalidCommandArgument, tryname);
-                names = commands[tryname];
-                minBytes = int.MaxValue;
-                for (int j = 0; j < names.Length; j++)
-                {
-                    if (names[j].IsCorrect(defines, cmd.Code, lineInd, cmd.Start))
-                    {
-                        minBytes = j;
-                    }
-                    else
-                    {
-                        posError = names[j].PossibleError;
-                    }
-                }
-                if (minBytes != int.MaxValue)
-                {
-                    cpauxs =
-                        names[minBytes].GetPointers(defines, cmd.Start,
-                        cmd.Code, lineInd, cmd.Start);
-                    foreach (CodePointer cpx in cpauxs)
-                    {
-                        pointers.Add(cpx);
-                    }
-                }
-            }
-            return pointers;
-        }
-
-        bool newError = false;
-        private void highlightLine(string line, int lineInd, int linel)
-        {
-            string[] comments = line.Split(';');
-            if (comments == null || comments.Length <= 0) return;
-
-            int lineN = LineFromPosition(lineInd);
-
-            try
-            {
-                StartStyling(lineInd);
-                SetStyling(linel, commentGroup.Style);
-            }
-            catch
-            {
-
-            }
-
-            List<CodePointer> pointers = new List<CodePointer>();
-            List<CodePointer> ps;
-
-            Match m = Regex.Match(comments[0], startPattern);
-            if (m.Success)
-            {
-                CodePointer cp = new CodePointer
-                {
-                    Start = m.Index,
-                    End = m.Index + m.Length - 1,
-                    Code = m.ToString(),
-                    Group = errorGroup
-                };
-                pointers.Add(cp);
-                paintPointers(lineInd, pointers);
-                pointers.Clear();
-            }
-
-            string shortercmds = comments[0].Substring(m.Length).Replace('\r', '\n').Replace("\n", "");
-
-            CodePointer[] cmds = CodePointer.Split(shortercmds, separatorPattern);
-
-            if (cmds == null)
-            {
-                return;
-            }
-            removeDefinesAtPosition(lineN);
-            removeErrorsAtPosition(lineN);
-            for (int j = 0; j < cmds.Length; j++)
-            {
-                ps = highlightMiniLine(cmds[j].Code, lineN, +m.Length
-                    + cmds[j].Start);
-                foreach (CodePointer cp in ps)
-                {
-                    pointers.Add(cp);
-                }
-                paintPointers(lineInd + m.Length
-                    + cmds[j].Start, pointers);
-            }
-
-            m = Regex.Match(comments[0], endPattern);
-            if (m.Success)
-            {
-                pointers.Clear();
-                CodePointer cp = new CodePointer
-                {
-                    Start = m.Index,
-                    End = m.Index + m.Length - 1,
-                    Code = m.ToString(),
-                    Group = errorGroup
-                };
-                pointers.Add(cp);
-                paintPointers(lineInd, pointers);
-            }
-        }
-
-        private void removeErrorsAtPosition(int lineInd)
-        {
-            if (errors.ContainsKey(lineInd))
-            {
-                errors.Remove(lineInd);
-                newErrors = true;
-            }
-        }
-
-        private void removeDefinesAtPosition(int lineInd)
-        {
-            List<Tuple<int, int, string>> removeList;
-            List<string> removeList2 = new List<string>();
-            foreach (KeyValuePair<string, Define> kvp in defines)
-            {
-                removeList = new List<Tuple<int, int, string>>();
-                foreach (Tuple<int, int, string> t in kvp.Value.OthersPositions)
-                {
-                    if (t.Item1 == lineInd)
-                    {
-                        removeList.Add(t);
-                    }
-                }
-                foreach (Tuple<int, int, string> t in removeList)
-                {
-                    kvp.Value.OthersPositions.Remove(t);
-                }
-                if (kvp.Value.OthersPositions.Count <= 0)
-                {
-                    removeList2.Add(kvp.Key);
-                }
-            }
-            foreach (string saux in removeList2)
-            {
-                defines.Remove(saux);
-            }
-        }
-
-        const string startPattern = @"^(\ |\t)*(:(\ |\t)*)*";
-        const string endPattern = @"(\ |\t)+(:(\ |\t)*)*$";
-        bool definesDetected = false;
-        private List<CodePointer> highlightMiniLine(string line, int lineInd, int startIndex)
-        {
-            CodePointer[] labs = CodePointer.Split(line, @":(\ |\t)*");
-            List<CodePointer> pointers = new List<CodePointer>();
-            if (commands == null) return pointers;
-            List<CodePointer> tmp;
-            Define def;
-
-            for (int i = 0; i < labs.Length; i++)
-            {
-                tmp = labelHighlight(line, labs[i]);
-
-                errPos = labs[i].Start + startIndex;
-                if (tmp.Count <= 0) tmp = commandHighlight(labs[i], lineInd);
-
-                if (tmp.Count <= 0)
-                {
-                    def = Define.GetDefine(defines, labs[i].Code, lineInd, labs[i].Start + startIndex);
-                    
-                    if(def != Define.Default && def != null)
-                    {
-                        defines.Add(def.Name, def);
-                    }
-                    if (def != null)
-                    {
-                        addBookMark(lineInd);
-                        labs[i].Group = defineGroup;
-                        tmp = new List<CodePointer>
-                        {
-                            labs[i]
-                        };
-                    }
-                    definesDetected = true;
-                }
-
-                if (tmp.Count <= 0)
-                {
-                    if (posError == null) posError = new Error(lineInd, startIndex, "", ErrorCode.Unknown);
-                    if(Define.PossibleError!=null)
-                    {
-                        if (posError.Code == ErrorCode.InvalidCommand
-                            && Define.PossibleError.Code == ErrorCode.DefineNotFound)
-                        {
-                            posError = Define.PossibleError;
-                        }
-                        else if (posError.Code == ErrorCode.InvalidCommand
-                            && Define.PossibleError.Code == ErrorCode.InvalidDefineSignature
-                            && Regex.IsMatch(labs[i].Code, Define.MidPattern))
-                        {
-                            posError = Define.PossibleError;
-                        }
-                    }
-                    if (!errors.ContainsKey(posError.Line))
-                    {
-                        errors.Add(posError.Line, new List<Error>());
-                    }
-                    newError = true;
-                    errors[posError.Line].Add(posError);
-                    labs[i].Group = errorGroup;
-                    pointers.Add(labs[i]);
-                }
-                else
-                {
-                    foreach(CodePointer cp in tmp)
-                    {
-                        pointers.Add(cp);
-                    }
-                }
-            }
-
-            return pointers;
+            List<CodePointer> pointers = code.GetPointersFromLine(lineInd, line);
+            paintPointers(lineInd, pointers);
         }
 
         private void paintPointers(int ind, List<CodePointer> pointers)
         {
             try
             {
-                int offset = 0;
+                int st = Lines[ind].Position;
+
                 foreach (CodePointer pointer in pointers)
                 {
-                    StartStyling(ind + pointer.Start);
+                    StartStyling(st + pointer.Start);
                     SetStyling(pointer.Code.Length, pointer.Group.Style);
-                    offset += pointer.Code.Length;
                 }
             }
             catch

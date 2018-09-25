@@ -215,6 +215,13 @@
     <Compile Include="LogicControls\CodeEditorController.Designer.cs">
       <DependentUpon>CodeEditorController.cs</DependentUpon>
     </Compile>
+    <Compile Include="LogicControls\GroupControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LogicControls\GroupControl.Designer.cs">
+      <DependentUpon>GroupControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LogicControls\StylesContainer.cs" />
     <Compile Include="LogicControls\TextEditor.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -308,6 +315,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LogicControls\CodeEditorController.resx">
       <DependentUpon>CodeEditorController.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogicControls\GroupControl.resx">
+      <DependentUpon>GroupControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogicControls\TextEditor.resx">
       <DependentUpon>TextEditor.cs</DependentUpon>

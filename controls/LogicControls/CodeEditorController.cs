@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SMWControlibBackend.Logic;
+using System.Threading;
 
 namespace SMWControlibControls.LogicControls
 {
@@ -17,6 +18,7 @@ namespace SMWControlibControls.LogicControls
         Color tabBack1 = Color.FromArgb(200,200,224);
         Color tabBack2 = Color.FromArgb(216, 216, 232);
         Color fore = Color.FromArgb(80, 80, 96);
+
         public TextEditor CodeEditor
         {
             get
@@ -40,14 +42,19 @@ namespace SMWControlibControls.LogicControls
             errorMatrix.RowStyles.Clear();
         }
 
+
+        private void updateErrors()
+        {
+        }
+
         private void mouseEnter(object sender, EventArgs e)
         {
             ((Control)sender).Focus();
         }
 
+        string[,] newTexts;
         private void errorsAdded(Dictionary<int, List<Error>> obj)
         {
-            lastClicked = -1;
             List<Error> ers = new List<Error>();
 
             foreach (List<Error> k in obj.Values)
@@ -66,10 +73,13 @@ namespace SMWControlibControls.LogicControls
 
             int i = 0;
             System.Windows.Forms.Label l;
+            Color b;
 
             for (i = rowc; i < ers.Count; i++)
             {
                 errorMatrix.RowStyles.Add(new RowStyle(SizeType.Absolute, 20));
+                if (i % 2 == 0) b = tabBack1;
+                else b = tabBack2;
 
                 l = new System.Windows.Forms.Label
                 {
@@ -77,12 +87,14 @@ namespace SMWControlibControls.LogicControls
                     ForeColor = fore,
                     Dock = DockStyle.Fill,
                     TextAlign = ContentAlignment.MiddleCenter,
-                    Margin = new Padding(0, 0, 1, 0)
+                    Margin = new Padding(0, 0, 1, 0),
+                    BackColor = b
                 };
 
                 l.MouseEnter += mouseEnter;
                 l.Click += click;
                 l.DoubleClick += doubleClick;
+                l.Paint += paint;
                 errorMatrix.Controls.Add(l, 0, i);
 
                 l = new System.Windows.Forms.Label
@@ -91,12 +103,14 @@ namespace SMWControlibControls.LogicControls
                     ForeColor = fore,
                     Dock = DockStyle.Fill,
                     TextAlign = ContentAlignment.MiddleCenter,
-                    Margin = new Padding(1, 0, 1, 0)
+                    Margin = new Padding(1, 0, 1, 0),
+                    BackColor = b
                 };
 
                 l.MouseEnter += mouseEnter;
                 l.Click += click;
                 l.DoubleClick += doubleClick;
+                l.Paint += paint;
                 errorMatrix.Controls.Add(l, 1, i);
 
                 l = new System.Windows.Forms.Label
@@ -105,12 +119,14 @@ namespace SMWControlibControls.LogicControls
                     ForeColor = fore,
                     Dock = DockStyle.Fill,
                     TextAlign = ContentAlignment.MiddleCenter,
-                    Margin = new Padding(1, 0, 1, 0)
+                    Margin = new Padding(1, 0, 1, 0),
+                    BackColor = b
                 };
 
                 l.MouseEnter += mouseEnter;
                 l.Click += click;
                 l.DoubleClick += doubleClick;
+                l.Paint += paint;
                 errorMatrix.Controls.Add(l, 2, i);
 
                 l = new System.Windows.Forms.Label
@@ -119,12 +135,14 @@ namespace SMWControlibControls.LogicControls
                     ForeColor = fore,
                     Dock = DockStyle.Fill,
                     TextAlign = ContentAlignment.MiddleCenter,
-                    Margin = new Padding(1, 0, 1, 0)
+                    Margin = new Padding(1, 0, 1, 0),
+                    BackColor = b
                 };
 
                 l.MouseEnter += mouseEnter;
                 l.Click += click;
                 l.DoubleClick += doubleClick;
+                l.Paint += paint;
                 errorMatrix.Controls.Add(l, 3, i);
 
                 l = new System.Windows.Forms.Label
@@ -133,48 +151,54 @@ namespace SMWControlibControls.LogicControls
                     ForeColor = fore,
                     Dock = DockStyle.Fill,
                     TextAlign = ContentAlignment.MiddleCenter,
-                    Margin = new Padding(1, 0, 1, 0)
+                    Margin = new Padding(1, 0, 1, 0),
+                    BackColor = b
                 };
 
                 l.MouseEnter += mouseEnter;
                 l.Click += click;
                 l.DoubleClick += doubleClick;
+                l.Paint += paint;
                 errorMatrix.Controls.Add(l, 4, i);
             }
 
-            Color b;
             i = 0;
+            newTexts = new string[5, ers.Count];
+            string newT;
             foreach (Error e in ers)
             {
-                if (i % 2 == 0) b = tabBack1;
-                else b = tabBack2;
+                newT = e.Code.Code.ToString("X");
+                newTexts[0, i] = newT;
 
-                l = (System.Windows.Forms.Label)errorMatrix.
-                    GetControlFromPosition(0, i);
-                l.Text = e.Code.Code.ToString("X");
-                l.BackColor = b;
+                newT = e.Code.ToString();
+                newTexts[1, i] = newT;
 
-                l = (System.Windows.Forms.Label)errorMatrix.
-                    GetControlFromPosition(1, i);
-                l.Text = e.Code.ToString();
-                l.BackColor = b;
+                newT = "" + e.Line;
+                newTexts[2, i] = newT;
 
-                l = (System.Windows.Forms.Label)errorMatrix.
-                    GetControlFromPosition(2, i);
-                l.Text = "" + e.Line;
-                l.BackColor = b;
+                newT = "" + e.Start;
+                newTexts[3, i] = newT;
 
-                l = (System.Windows.Forms.Label)errorMatrix.
-                    GetControlFromPosition(3, i);
-                l.Text = "" + e.Start;
-                l.BackColor = b;
-
-                l = (System.Windows.Forms.Label)errorMatrix.
-                    GetControlFromPosition(4, i);
-                l.Text = e.Message;
-                l.BackColor = b;
+                newT = e.Message;
+                newTexts[4, i] = newT;
 
                 i++;
+            }
+        }
+
+        private void paint(object sender, PaintEventArgs e)
+        {
+            if (newTexts == null) return;
+
+            System.Windows.Forms.Label l = (System.Windows.Forms.Label)sender;
+            int row = errorMatrix.GetRow(l);
+            int col = errorMatrix.GetColumn(l);
+
+            if (newTexts.GetLength(1) <= row) return;
+
+            if (l.Text != newTexts[col, row])
+            {
+                l.Text = newTexts[col, row];
             }
         }
 

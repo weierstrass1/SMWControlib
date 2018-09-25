@@ -20,6 +20,12 @@ namespace SMWControlibBackend.Logic
         {
         }
 
+        public void Move(int pos)
+        {
+            Start += pos;
+            End += pos;
+        }
+
         public void Append(string s)
         {
             Code = Code + s;

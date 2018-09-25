@@ -23,28 +23,21 @@ namespace SMWControlibBackend.Logic
         {
         }
 
-        string spliter = @"((\*\*|\~|\%|\<\<|\>\>|\+|\-|\/|\&|\||\*|\^)(\%[0-1]+|\$[\da-fA-F]+|\d+))+";
+        //string spliter = @"((\*\*|\~|\%|\<\<|\>\>|\+|\-|\/|\&|\||\*|\^)(\%[0-1]+|\$[\da-fA-F]+|\d+))+";
         public CodePointer[] GetPointers(int offset, string arg)
         {
             if (arg == null || arg == "" || arg.Length <= 0) return null;
-            MatchCollection ms = Regex.Matches(arg, spliter);
-
             List<CodePointer> pointers = new List<CodePointer>();
-            CodePointer cp;
-            if (ms == null || ms.Count <= 0) 
-            {
-                cp = new CodePointer
-                {
-                    Start = offset,
-                    End = offset + arg.Length - 1,
-                    Code = arg,
-                    Group = Group
-                };
-                pointers.Add(cp);
-                return pointers.ToArray();
-            }
 
-            
+            CodePointer cp;
+            cp = new CodePointer
+            {
+                Start = offset,
+                End = offset + arg.Length - 1,
+                Code = arg,
+                Group = Group
+            };
+            pointers.Add(cp);
 
             return pointers.ToArray();
         }

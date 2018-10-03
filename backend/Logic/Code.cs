@@ -68,6 +68,13 @@ namespace SMWControlibBackend.Logic
             }
         }
         private Group[] groups;
+        public Group[] Groups
+        {
+            get
+            {
+                return groups.ToList().ToArray();
+            }
+        }
         public Group ErrorGroup, CommentGroup, DefineGroup, DefineArgsGroup, DefaultGroup;
         private Dictionary<string, Define> defines;
         private Dictionary<int, List<Error>> errors;

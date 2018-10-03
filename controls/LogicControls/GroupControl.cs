@@ -21,16 +21,26 @@ namespace SMWControlibControls.LogicControls
                 return color.BackColor;
             }
         }
-        public GroupControl(Group group)
+        public GroupControl(Group group, Color startColor)
         {
             InitializeComponent();
             Group = group;
             name.Text = Group.Name;
             description.Text = Group.Description;
             color.DoubleClick += doubleClick;
+            color.BackColor = startColor;
+            red.Value = color.BackColor.R;
+            green.Value = color.BackColor.G;
+            blue.Value = color.BackColor.B;
             red.ValueChanged += valueChanged;
             green.ValueChanged += valueChanged;
             blue.ValueChanged += valueChanged;
+            MouseMove += mouseMove;
+        }
+
+        private void mouseMove(object sender, MouseEventArgs e)
+        {
+            Parent.Focus();
         }
 
         private void valueChanged(object sender, EventArgs e)

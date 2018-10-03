@@ -35,6 +35,7 @@ namespace SMWControlibControls.LogicControls
         public CodeEditorController()
         {
             InitializeComponent();
+            button1.Click += Button1_Click;
             CodeEditor.ErrorsAdded += errorsAdded;
             CodeEditor.MouseEnter += mouseEnter;
             errorMatrix.MouseEnter += mouseEnter;
@@ -42,6 +43,11 @@ namespace SMWControlibControls.LogicControls
             errorMatrix.RowStyles.Clear();
         }
 
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            CodeEditorSettings.ShowDialog(ParentForm, CodeEditor.StylesContainer,
+                CodeEditor.Groups);
+        }
 
         private void updateErrors()
         {

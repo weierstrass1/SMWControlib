@@ -61,6 +61,9 @@
     <Compile Include="Logic\Define.cs" />
     <Compile Include="Logic\Error.cs" />
     <Compile Include="Logic\Group.cs" />
+    <Compile Include="Logic\HDMA\Effect.cs" />
+    <Compile Include="Logic\HDMA\HDMA.cs" />
+    <Compile Include="Logic\HDMA\HDMALine.cs" />
     <Compile Include="Logic\Label.cs" />
     <Compile Include="Logic\MinusLabel.cs" />
     <Compile Include="Logic\NormalLabel.cs" />

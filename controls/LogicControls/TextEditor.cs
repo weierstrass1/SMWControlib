@@ -7,7 +7,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace SMWControlibControls.LogicControls
@@ -28,9 +27,17 @@ namespace SMWControlibControls.LogicControls
                 code.ErrorsAdded -= value;
             }
         }
+        public Group[] Groups
+        {
+            get
+            {
+                return code.Groups;
+            }
+        }
 
         private const int bookmarkMargin = 1; // Conventionally the symbol margin
         private const int bookmarkMarker = 3;
+        public StylesContainer StylesContainer { get; private set; }
 
         AutocompleteMenu autocom;
         public TextEditor()
@@ -39,45 +46,52 @@ namespace SMWControlibControls.LogicControls
             undoRedoList = new UndoRedoDynamicArray<UndoRedoStruct>(20, 20);
             CaretForeColor = Color.White;
 
-            StylesContainer sc = StylesContainer.Deserialize(@"Settings/ScriptnesStyles.set");
-            sc.MarginBackColorRed = 96;
-            sc.MarginBackColorGreen = 96;
-            sc.MarginBackColorBlue = 112;
-
-
-            Styles[Style.Default].Font = sc.Font;
-            Styles[Style.Default].ForeColor = 
-                Color.FromArgb(sc.ForeColorRed[0], 
-                sc.ForeColorGreen[0],
-                sc.ForeColorBlue[0]);
-            Styles[Style.Default].Bold = sc.Bold;
-            Styles[Style.Default].BackColor =
-                Color.FromArgb(sc.BackColorRed,
-                sc.BackColorGreen,
-                sc.BackColorBlue);
-            Styles[Style.Default].Size = sc.Size;
-            StyleClearAll();
-
-            for (int i = 0; i < 256; i++)
+            try
             {
-                Styles[i].ForeColor =
-                    Color.FromArgb(sc.ForeColorRed[i],
-                    sc.ForeColorGreen[i],
-                    sc.ForeColorBlue[i]);
-                Styles[i].BackColor =
-                    Color.FromArgb(sc.BackColorRed,
-                    sc.BackColorGreen,
-                    sc.BackColorBlue);
-            }
-            Styles[255].BackColor =
-                Color.FromArgb(sc.MarginBackColorRed,
-                sc.MarginBackColorGreen,
-                sc.MarginBackColorBlue);
-            sc.Serialize(@"Settings/ScriptnesStyles.set");
+                StylesContainer = StylesContainer.Deserialize(@"Settings/ScriptnesStyles.set");
+                StylesContainer.MarginBackColorRed = 96;
+                StylesContainer.MarginBackColorGreen = 96;
+                StylesContainer.MarginBackColorBlue = 112;
 
-            code = new Code(@"CSVs\Syntax\args.csv", @"CSVs\Syntax\commands.csv",
-    @"CSVs\Syntax\groups.csv");
-            code.ImportDefines(@".\ASM\Defines.asm");
+
+                Styles[Style.Default].Font = StylesContainer.Font;
+                Styles[Style.Default].ForeColor =
+                    Color.FromArgb(StylesContainer.ForeColorRed[0],
+                    StylesContainer.ForeColorGreen[0],
+                    StylesContainer.ForeColorBlue[0]);
+                Styles[Style.Default].Bold = StylesContainer.Bold;
+                Styles[Style.Default].BackColor =
+                    Color.FromArgb(StylesContainer.BackColorRed,
+                    StylesContainer.BackColorGreen,
+                    StylesContainer.BackColorBlue);
+                Styles[Style.Default].Size = StylesContainer.Size;
+                StyleClearAll();
+
+                for (int i = 0; i < 256; i++)
+                {
+                    Styles[i].ForeColor =
+                        Color.FromArgb(StylesContainer.ForeColorRed[i],
+                        StylesContainer.ForeColorGreen[i],
+                        StylesContainer.ForeColorBlue[i]);
+                    Styles[i].BackColor =
+                        Color.FromArgb(StylesContainer.BackColorRed,
+                        StylesContainer.BackColorGreen,
+                        StylesContainer.BackColorBlue);
+                }
+                Styles[255].BackColor =
+                    Color.FromArgb(StylesContainer.MarginBackColorRed,
+                    StylesContainer.MarginBackColorGreen,
+                    StylesContainer.MarginBackColorBlue);
+                StylesContainer.Serialize(@"Settings/ScriptnesStyles.set");
+
+                code = new Code(@"CSVs\Syntax\args.csv", @"CSVs\Syntax\commands.csv",
+                    @"CSVs\Syntax\groups.csv");
+                code.ImportDefines(@".\ASM\Defines.asm");
+            }
+            catch
+            {
+
+            }
             autocom = new AutocompleteMenu
             {
                 SearchPattern = @"\!",

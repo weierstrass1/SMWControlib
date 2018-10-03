@@ -66,7 +66,7 @@
             this.description.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.description.Name = "description";
             this.description.Padding = new System.Windows.Forms.Padding(16, 3, 6, 3);
-            this.description.Size = new System.Drawing.Size(351, 66);
+            this.description.Size = new System.Drawing.Size(351, 37);
             this.description.TabIndex = 30;
             this.description.Text = "Description Description Description Description Description Description Descripti" +
     "on Description Description Description Description Description Description";
@@ -75,7 +75,7 @@
             // 
             this.colort.AutoSize = true;
             this.colort.Font = new System.Drawing.Font("MS Reference Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.colort.Location = new System.Drawing.Point(42, 103);
+            this.colort.Location = new System.Drawing.Point(42, 74);
             this.colort.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.colort.Name = "colort";
             this.colort.Size = new System.Drawing.Size(43, 15);
@@ -87,7 +87,7 @@
             this.red.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
             this.red.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.red.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(25)))), ((int)(((byte)(75)))));
-            this.red.Location = new System.Drawing.Point(20, 127);
+            this.red.Location = new System.Drawing.Point(20, 98);
             this.red.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
             this.red.Maximum = new decimal(new int[] {
             255,
@@ -107,7 +107,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS Reference Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(71, 127);
+            this.label1.Location = new System.Drawing.Point(71, 98);
             this.label1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(32, 15);
@@ -118,7 +118,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS Reference Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(160, 127);
+            this.label2.Location = new System.Drawing.Point(160, 98);
             this.label2.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 15);
@@ -130,7 +130,7 @@
             this.green.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
             this.green.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.green.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(25)))), ((int)(((byte)(75)))));
-            this.green.Location = new System.Drawing.Point(109, 127);
+            this.green.Location = new System.Drawing.Point(109, 98);
             this.green.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
             this.green.Maximum = new decimal(new int[] {
             255,
@@ -150,7 +150,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("MS Reference Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(264, 127);
+            this.label3.Location = new System.Drawing.Point(264, 98);
             this.label3.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(36, 15);
@@ -162,7 +162,7 @@
             this.blue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
             this.blue.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.blue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(25)))), ((int)(((byte)(75)))));
-            this.blue.Location = new System.Drawing.Point(213, 127);
+            this.blue.Location = new System.Drawing.Point(213, 98);
             this.blue.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
             this.blue.Maximum = new decimal(new int[] {
             255,
@@ -185,7 +185,7 @@
             // color
             // 
             this.color.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.color.Location = new System.Drawing.Point(20, 102);
+            this.color.Location = new System.Drawing.Point(20, 73);
             this.color.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
             this.color.Name = "color";
             this.color.Size = new System.Drawing.Size(16, 16);
@@ -211,7 +211,7 @@
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "GroupControl";
-            this.Size = new System.Drawing.Size(351, 159);
+            this.Size = new System.Drawing.Size(351, 128);
             ((System.ComponentModel.ISupportInitialize)(this.red)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.green)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.blue)).EndInit();

@@ -41,8 +41,14 @@ namespace SMWControlibControls.LogicControls
             errorMatrix.MouseEnter += mouseEnter;
             errorMatrix.RowCount = 0;
             errorMatrix.RowStyles.Clear();
+            treeView1.NodeMouseDoubleClick += nodeMouseDoubleClick;
         }
 
+        private void nodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if(e.Node.Name == "hdma")
+                NewHDMADialog.Show(ParentForm);
+        }
         private void Button1_Click(object sender, EventArgs e)
         {
             CodeEditorSettings.ShowDialog(ParentForm, CodeEditor.StylesContainer,

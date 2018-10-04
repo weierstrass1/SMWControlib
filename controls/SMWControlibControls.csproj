@@ -251,6 +251,12 @@
     <Compile Include="LogicControls\HDMAWindow.Designer.cs">
       <DependentUpon>HDMAWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="LogicControls\NewHDMADialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogicControls\NewHDMADialog.Designer.cs">
+      <DependentUpon>NewHDMADialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="LogicControls\StylesContainer.cs" />
     <Compile Include="LogicControls\TextEditor.cs">
       <SubType>Component</SubType>
@@ -352,8 +358,14 @@
     <EmbeddedResource Include="LogicControls\GroupControl.resx">
       <DependentUpon>GroupControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LogicControls\HDMAAnimationControl.resx">
+      <DependentUpon>HDMAAnimationControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LogicControls\HDMAControl.resx">
       <DependentUpon>HDMAControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogicControls\NewHDMADialog.resx">
+      <DependentUpon>NewHDMADialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogicControls\TextEditor.resx">
       <DependentUpon>TextEditor.cs</DependentUpon>

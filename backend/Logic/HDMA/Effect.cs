@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SMWControlibBackend.Logic.HDMA
 {
-    public enum ValueType { Numeric = 0, Boolean = 1, Option = 2, Bright = 3, OneColor = 4, TwoColors = 5, ThreeColors = 6}
+    public enum ValueType { Numeric = 0, Boolean = 1, Option = 2, Bright = 3, OneColor = 4, TwoColors = 5, ThreeColors = 6, Red = 7, Green = 8, Blue = 9}
     public class EffectOptions
     {
         public int EffectOptionsID { get; private set; }
@@ -65,6 +65,11 @@ namespace SMWControlibBackend.Logic.HDMA
         public static implicit operator int(EffectOptions c)
         {
             return c.EffectOptionsID;
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
     public class EffectType
@@ -147,7 +152,7 @@ namespace SMWControlibBackend.Logic.HDMA
             }
         }
         private static readonly EffectType layer1HScroll = new EffectType(
-            "Layer 1 Horizontal Scroll.",
+            "Layer 1 H. Scroll.",
             "Can be used for different layer 1 horizontal scroll per line. Examples: Parallax Scroll and Wave Effect.",
             "0D#2");
         public static EffectType Layer1HScroll
@@ -176,7 +181,7 @@ namespace SMWControlibBackend.Logic.HDMA
             }
         }
         private static readonly EffectType layer1VScroll = new EffectType(
-            "Layer 1 Vertical Scroll.",
+            "Layer 1 V. Scroll.",
             "Can be used for different layer 1 vertical scroll per line. Examples: Wave Effect.",
             "0E#2");
         public static EffectType Layer1VScroll
@@ -205,7 +210,7 @@ namespace SMWControlibBackend.Logic.HDMA
             }
         }
         private static readonly EffectType layer1HVScroll = new EffectType(
-            "Layer 1 Horizontal and Vertical Scroll.",
+            "Layer 1 H. and V. Scroll.",
             "Can be used for different layer 1 horizontal and vertical scroll per line. Examples: Wave Effect.",
             "0D#3");
         public static EffectType Layer1HVScroll
@@ -239,9 +244,9 @@ namespace SMWControlibBackend.Logic.HDMA
             }
         }
         private static readonly EffectType layer2HScroll = new EffectType(
-            "Layer 2 Horizontal Scroll.",
+            "Layer 2 H. Scroll.",
             "Can be used for different layer 2 horizontal scroll per line. Examples: Parallax Scroll and Wave Effect.",
-    "0D#2");
+            "0F#2");
         public static EffectType Layer2HScroll
         {
             get
@@ -268,9 +273,9 @@ namespace SMWControlibBackend.Logic.HDMA
             }
         }
         private static readonly EffectType layer2VScroll = new EffectType(
-            "Layer 2 Vertical Scroll.",
+            "Layer 2 V. Scroll.",
             "Can be used for different layer 2 vertical scroll per line. Examples: Wave Effect.",
-            "0E#2");
+            "10#2");
         public static EffectType Layer2VScroll
         {
             get
@@ -297,9 +302,9 @@ namespace SMWControlibBackend.Logic.HDMA
             }
         }
         private static readonly EffectType layer2HVScroll = new EffectType(
-            "Layer 2 Horizontal and Vertical Scroll.",
+            "Layer 2 H. and V. Scroll.",
             "Can be used for different layer 2 horizontal and vertical scroll per line. Examples: Wave Effect.",
-            "0D#3");
+            "0F#3");
         public static EffectType Layer2HVScroll
         {
             get
@@ -331,9 +336,9 @@ namespace SMWControlibBackend.Logic.HDMA
             }
         }
         private static readonly EffectType layer3HScroll = new EffectType(
-            "Layer 3 Horizontal Scroll.",
+            "Layer 3 H. Scroll.",
             "Can be used for different layer 3 horizontal scroll per line. Examples: Parallax Scroll and Wave Effect.",
-    "0D#2");
+            "11#2");
         public static EffectType Layer3HScroll
         {
             get
@@ -360,9 +365,9 @@ namespace SMWControlibBackend.Logic.HDMA
             }
         }
         private static readonly EffectType layer3VScroll = new EffectType(
-            "Layer 3 Vertical Scroll.",
+            "Layer 3 V. Scroll.",
             "Can be used for different layer 3 vertical scroll per line. Examples: Wave Effect.",
-            "0E#2");
+            "12#2");
         public static EffectType Layer3VScroll
         {
             get
@@ -389,9 +394,9 @@ namespace SMWControlibBackend.Logic.HDMA
             }
         }
         private static readonly EffectType layer3HVScroll = new EffectType(
-            "Layer 3 Horizontal and Vertical Scroll.",
+            "Layer 3 H. and V. Scroll.",
             "Can be used for different layer 3 horizontal and vertical scroll per line. Examples: Wave Effect.",
-            "0D#3");
+            "11#3");
         public static EffectType Layer3HVScroll
         {
             get
@@ -424,9 +429,9 @@ namespace SMWControlibBackend.Logic.HDMA
         }
 
         private static readonly EffectType layer4HScroll = new EffectType(
-            "Layer 4 Horizontal Scroll.",
+            "Layer 4 H. Scroll.",
             "Can be used for different layer 4 horizontal scroll per line. Examples: Parallax Scroll and Wave Effect.",
-            "0D#2");
+            "13#2");
         public static EffectType Layer4HScroll
         {
             get
@@ -453,9 +458,9 @@ namespace SMWControlibBackend.Logic.HDMA
             }
         }
         private static readonly EffectType layer4VScroll = new EffectType(
-            "Layer 4 Vertical Scroll.",
+            "Layer 4 V. Scroll.",
             "Can be used for different layer 4 vertical scroll per line. Examples: Wave Effect.",
-            "0E#2");
+            "14#2");
         public static EffectType Layer4VScroll
         {
             get
@@ -482,9 +487,9 @@ namespace SMWControlibBackend.Logic.HDMA
             }
         }
         private static readonly EffectType layer4HVScroll = new EffectType(
-            "Layer 4 Horizontal and Vertical Scroll.",
+            "Layer 4 H. and V. Scroll.",
             "Can be used for different layer 4 horizontal and vertical scroll per line. Examples: Wave Effect.",
-            "0D#3");
+            "13#3");
         public static EffectType Layer4HVScroll
         {
             get
@@ -515,32 +520,66 @@ namespace SMWControlibBackend.Logic.HDMA
                 return layer4HVScroll;
             }
         }
-        private static readonly EffectType Palette = new EffectType("Palette", 
+        private static readonly EffectType palette = new EffectType("Palette", 
             "Can be used to change 1 color of the palette per line.",
             "21#3");
+        public static EffectType Palette
+        {
+            get
+            {
+                if (palette.setups == null)
+                {
+                    palette.setups =
+                        new Dictionary<string, Tuple<string, ValueType, string, int, int>[]>();
+                }
+                if (palette.values == null)
+                {
+                    palette.values =
+                        new Dictionary<int, Tuple<string, ValueType, string, int, int>[]>();
+                    Tuple<string, ValueType, string, int, int>[] t;
 
+                    t = new Tuple<string, ValueType, string, int, int>[1];
+
+                    t[0] = new Tuple<string, ValueType, string, int, int>
+                        ("Color Index", ValueType.Numeric, "01234567", 0, 255);
+
+                    palette.values.Add(1, t);
+
+                    t = new Tuple<string, ValueType, string, int, int>[3];
+
+                    t[0] = new Tuple<string, ValueType, string, int, int>
+                        ("Red", ValueType.Red, "BCDEF", 0, 31);
+                    t[1] = new Tuple<string, ValueType, string, int, int>
+                        ("Green", ValueType.Green, "6789A", 0, 31);
+                    t[2] = new Tuple<string, ValueType, string, int, int>
+                        ("Blue", ValueType.Blue, "12345", 0, 31);
+                    palette.values.Add(2, t);
+                }
+                return palette;
+            }
+        }
         private static readonly EffectType Windowing1Window = new EffectType(
-            "Windowing effect for 1 window",
+            "Windowing for 1 window",
             "Can be used for layer and color windowing at the same time.",
             "26#1");
         private static readonly EffectType Windowing2Windows = new EffectType(
-            "Windowing effect for 2 windows",
+            "Windowing for 2 windows",
             "Can be used for layer and color windowing at the same time.",
             "26#4");
         private static readonly EffectType LayerWindowing1Window = new EffectType(
-            "Layer Windowing effect for 1 window",
+            "Layer Windowing for 1 window",
             "Can be used for layer windowing.",
             "26#1");
         private static readonly EffectType LayerWindowing2Windows = new EffectType(
-            "Layer Windowing effect for 2 windows",
+            "Layer Windowing for 2 windows",
             "Can be used for layer windowing.",
             "26#4");
         private static readonly EffectType ColorWindowing1Window = new EffectType(
-            "Color Windowing effect for 1 window",
+            "Color Windowing for 1 window",
             "Can be used for color windowing.",
             "26#1");
         private static readonly EffectType ColorWindowing2Windows2 = new EffectType(
-            "Color Windowing effect for 2 windows",
+            "Color Windowing for 2 windows",
             "Can be used for color windowing.",
             "26#4");
         private static readonly EffectType ColorGradient1Color = new EffectType(
@@ -568,24 +607,24 @@ namespace SMWControlibBackend.Logic.HDMA
                     effectTypes[1] = ColorGradient1Color;
                     effectTypes[2] = ColorGradient2Colors;
                     effectTypes[3] = ColorGradient3Colors;
-                    effectTypes[4] = ColorWindowing1Window;
-                    effectTypes[5] = ColorWindowing2Windows2;
-                    effectTypes[6] = Layer1HScroll;
+                    effectTypes[4] = Palette;
+                    effectTypes[5] = Layer1HScroll;
+                    effectTypes[6] = Layer1VScroll;
                     effectTypes[7] = Layer1HVScroll;
-                    effectTypes[8] = Layer1VScroll;
-                    effectTypes[9] = Layer2HScroll;
+                    effectTypes[8] = Layer2HScroll;
+                    effectTypes[9] = Layer2VScroll;
                     effectTypes[10] = Layer2HVScroll;
-                    effectTypes[11] = Layer2VScroll;
-                    effectTypes[12] = Layer3HScroll;
+                    effectTypes[11] = Layer3HScroll;
+                    effectTypes[12] = Layer3VScroll;
                     effectTypes[13] = Layer3HVScroll;
-                    effectTypes[14] = Layer3VScroll;
-                    effectTypes[15] = Layer4HScroll;
+                    effectTypes[14] = Layer4HScroll;
+                    effectTypes[15] = Layer4VScroll;
                     effectTypes[16] = Layer4HVScroll;
-                    effectTypes[17] = Layer4VScroll;
-                    effectTypes[18] = LayerWindowing1Window;
-                    effectTypes[19] = LayerWindowing2Windows;
-                    effectTypes[20] = Palette;
-                    effectTypes[21] = Pixelation;
+                    effectTypes[17] = Pixelation;
+                    effectTypes[18] = ColorWindowing1Window;
+                    effectTypes[19] = ColorWindowing2Windows2;
+                    effectTypes[20] = LayerWindowing1Window;
+                    effectTypes[21] = LayerWindowing2Windows;
                     effectTypes[22] = Windowing1Window;
                     effectTypes[23] = Windowing2Windows;
                 }
@@ -616,6 +655,18 @@ namespace SMWControlibBackend.Logic.HDMA
         {
             if (id >= ChannelsLength) id = (uint)(ChannelsLength - 1);
             return transferModes[id];
+        }
+
+        public override string ToString()
+        {
+            string s = "";
+            for (int i = 0; i < registers.Length; i++)
+            {
+                s += registers[i] + "-" + (+transferModes[i]);
+                if (i < registers.Length - 1) s += ",";
+            }
+            s += ":" + Name;
+            return s;
         }
     }
     public class Effect

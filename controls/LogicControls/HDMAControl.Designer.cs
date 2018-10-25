@@ -28,11 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Height");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Line 1", new System.Windows.Forms.TreeNode[] {
-            treeNode1});
             this.leftSection = new System.Windows.Forms.Panel();
             this.center = new System.Windows.Forms.Panel();
+            this.hdmaWindow1 = new SMWControlibControls.LogicControls.HDMAWindow(hdma);
             this.right = new System.Windows.Forms.Panel();
             this.left = new System.Windows.Forms.Panel();
             this.bottom = new System.Windows.Forms.Panel();
@@ -44,34 +42,34 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.add = new SMWControlibControls.GraphicsControls.GFXButton();
+            this.remove = new SMWControlibControls.GraphicsControls.GFXButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.gfxButton6 = new SMWControlibControls.GraphicsControls.GFXButton();
+            this.gfxButton5 = new SMWControlibControls.GraphicsControls.GFXButton();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.hdmaWindow1 = new SMWControlibControls.LogicControls.HDMAWindow();
-            this.gfxButton7 = new SMWControlibControls.GraphicsControls.GFXButton();
-            this.gfxButton8 = new SMWControlibControls.GraphicsControls.GFXButton();
-            this.gfxButton6 = new SMWControlibControls.GraphicsControls.GFXButton();
-            this.gfxButton5 = new SMWControlibControls.GraphicsControls.GFXButton();
             this.gfxButton1 = new SMWControlibControls.GraphicsControls.GFXButton();
             this.gfxButton2 = new SMWControlibControls.GraphicsControls.GFXButton();
             this.gfxButton3 = new SMWControlibControls.GraphicsControls.GFXButton();
             this.gfxButton4 = new SMWControlibControls.GraphicsControls.GFXButton();
             this.coloreableBorderComboBox2 = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.leftSection.SuspendLayout();
             this.center.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hdmaWindow1)).BeginInit();
             this.panel2.SuspendLayout();
             this.options.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -79,15 +77,14 @@
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel4.SuspendLayout();
             this.panel6.SuspendLayout();
-            this.panel9.SuspendLayout();
-            this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hdmaWindow1)).BeginInit();
-            this.panel5.SuspendLayout();
             this.panel10.SuspendLayout();
             this.panel12.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // leftSection
@@ -115,6 +112,14 @@
             this.center.Name = "center";
             this.center.Size = new System.Drawing.Size(261, 228);
             this.center.TabIndex = 4;
+            // 
+            // hdmaWindow1
+            // 
+            this.hdmaWindow1.Location = new System.Drawing.Point(0, 0);
+            this.hdmaWindow1.Name = "hdmaWindow1";
+            this.hdmaWindow1.Size = new System.Drawing.Size(256, 224);
+            this.hdmaWindow1.TabIndex = 0;
+            this.hdmaWindow1.TabStop = false;
             // 
             // right
             // 
@@ -212,24 +217,58 @@
             this.treeView1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.treeView1.Location = new System.Drawing.Point(3, 35);
             this.treeView1.Name = "treeView1";
-            treeNode1.Name = "Nodo1";
-            treeNode1.Text = "Height";
-            treeNode2.Name = "Nodo0";
-            treeNode2.Text = "Line 1";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
             this.treeView1.Size = new System.Drawing.Size(211, 388);
             this.treeView1.TabIndex = 0;
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.gfxButton7);
-            this.panel1.Controls.Add(this.gfxButton8);
+            this.panel1.Controls.Add(this.add);
+            this.panel1.Controls.Add(this.remove);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(211, 32);
             this.panel1.TabIndex = 34;
+            // 
+            // add
+            // 
+            this.add.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.add.BaseTile = 8;
+            this.add.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
+            this.add.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
+            this.add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.add.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.add.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+            this.add.Location = new System.Drawing.Point(7, 3);
+            this.add.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
+            this.add.Name = "add";
+            this.add.Position = 64;
+            this.add.Size = new System.Drawing.Size(95, 23);
+            this.add.StartFolder = "";
+            this.add.TabIndex = 32;
+            this.add.Text = "Add Line";
+            this.add.Tilesize = 16;
+            this.add.UseVisualStyleBackColor = false;
+            // 
+            // remove
+            // 
+            this.remove.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.remove.BaseTile = 8;
+            this.remove.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
+            this.remove.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
+            this.remove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.remove.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.remove.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+            this.remove.Location = new System.Drawing.Point(109, 3);
+            this.remove.Margin = new System.Windows.Forms.Padding(4, 3, 3, 3);
+            this.remove.Name = "remove";
+            this.remove.Position = 64;
+            this.remove.Size = new System.Drawing.Size(95, 23);
+            this.remove.StartFolder = "";
+            this.remove.TabIndex = 33;
+            this.remove.Text = "Remove Line";
+            this.remove.Tilesize = 16;
+            this.remove.UseVisualStyleBackColor = false;
             // 
             // tabPage2
             // 
@@ -243,6 +282,55 @@
             this.tabPage2.Size = new System.Drawing.Size(217, 426);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "From Image";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(43, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(131, 115);
+            this.pictureBox1.TabIndex = 32;
+            this.pictureBox1.TabStop = false;
+            // 
+            // gfxButton6
+            // 
+            this.gfxButton6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.gfxButton6.BaseTile = 8;
+            this.gfxButton6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
+            this.gfxButton6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
+            this.gfxButton6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.gfxButton6.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gfxButton6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+            this.gfxButton6.Location = new System.Drawing.Point(112, 127);
+            this.gfxButton6.Margin = new System.Windows.Forms.Padding(4, 3, 3, 3);
+            this.gfxButton6.Name = "gfxButton6";
+            this.gfxButton6.Position = 64;
+            this.gfxButton6.Size = new System.Drawing.Size(95, 23);
+            this.gfxButton6.StartFolder = "";
+            this.gfxButton6.TabIndex = 31;
+            this.gfxButton6.Text = "Draw";
+            this.gfxButton6.Tilesize = 16;
+            this.gfxButton6.UseVisualStyleBackColor = false;
+            // 
+            // gfxButton5
+            // 
+            this.gfxButton5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.gfxButton5.BaseTile = 8;
+            this.gfxButton5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
+            this.gfxButton5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
+            this.gfxButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.gfxButton5.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gfxButton5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+            this.gfxButton5.Location = new System.Drawing.Point(10, 127);
+            this.gfxButton5.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
+            this.gfxButton5.Name = "gfxButton5";
+            this.gfxButton5.Position = 64;
+            this.gfxButton5.Size = new System.Drawing.Size(95, 23);
+            this.gfxButton5.StartFolder = "";
+            this.gfxButton5.TabIndex = 31;
+            this.gfxButton5.Text = "Load Image";
+            this.gfxButton5.Tilesize = 16;
+            this.gfxButton5.UseVisualStyleBackColor = false;
             // 
             // panel4
             // 
@@ -275,6 +363,56 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(233, 496);
             this.panel6.TabIndex = 0;
+            // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.panel11);
+            this.panel10.Controls.Add(this.panel12);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel10.Location = new System.Drawing.Point(0, 226);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(229, 266);
+            this.panel10.TabIndex = 38;
+            // 
+            // panel11
+            // 
+            this.panel11.AutoScroll = true;
+            this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel11.Location = new System.Drawing.Point(0, 38);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(229, 228);
+            this.panel11.TabIndex = 37;
+            // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.label2);
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel12.Location = new System.Drawing.Point(0, 0);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(229, 38);
+            this.panel12.TabIndex = 36;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.label2.Location = new System.Drawing.Point(4, 9);
+            this.label2.Margin = new System.Windows.Forms.Padding(3, 6, 6, 6);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(148, 20);
+            this.label2.TabIndex = 31;
+            this.label2.Text = "Set Up Options";
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.panel8);
+            this.panel5.Controls.Add(this.panel9);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(0, 126);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(229, 100);
+            this.panel5.TabIndex = 35;
             // 
             // panel8
             // 
@@ -320,127 +458,6 @@
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(229, 126);
             this.panel7.TabIndex = 35;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("MS Reference Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(7, 35);
-            this.label4.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
-            this.label4.Name = "label4";
-            this.label4.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
-            this.label4.Size = new System.Drawing.Size(49, 27);
-            this.label4.TabIndex = 23;
-            this.label4.Text = "Zoom";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.label5.Location = new System.Drawing.Point(4, 6);
-            this.label5.Margin = new System.Windows.Forms.Padding(3, 6, 6, 6);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(158, 20);
-            this.label5.TabIndex = 22;
-            this.label5.Text = "Window Options";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(43, 6);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(131, 115);
-            this.pictureBox1.TabIndex = 32;
-            this.pictureBox1.TabStop = false;
-            // 
-            // hdmaWindow1
-            // 
-            this.hdmaWindow1.Location = new System.Drawing.Point(0, 0);
-            this.hdmaWindow1.Name = "hdmaWindow1";
-            this.hdmaWindow1.Size = new System.Drawing.Size(256, 224);
-            this.hdmaWindow1.TabIndex = 0;
-            this.hdmaWindow1.TabStop = false;
-            // 
-            // gfxButton7
-            // 
-            this.gfxButton7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
-            this.gfxButton7.BaseTile = 8;
-            this.gfxButton7.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
-            this.gfxButton7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
-            this.gfxButton7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.gfxButton7.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gfxButton7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-            this.gfxButton7.Location = new System.Drawing.Point(7, 3);
-            this.gfxButton7.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
-            this.gfxButton7.Name = "gfxButton7";
-            this.gfxButton7.Position = 64;
-            this.gfxButton7.Size = new System.Drawing.Size(95, 23);
-            this.gfxButton7.StartFolder = "";
-            this.gfxButton7.TabIndex = 32;
-            this.gfxButton7.Text = "Add Line";
-            this.gfxButton7.Tilesize = 16;
-            this.gfxButton7.UseVisualStyleBackColor = false;
-            // 
-            // gfxButton8
-            // 
-            this.gfxButton8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
-            this.gfxButton8.BaseTile = 8;
-            this.gfxButton8.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
-            this.gfxButton8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
-            this.gfxButton8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.gfxButton8.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gfxButton8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-            this.gfxButton8.Location = new System.Drawing.Point(109, 3);
-            this.gfxButton8.Margin = new System.Windows.Forms.Padding(4, 3, 3, 3);
-            this.gfxButton8.Name = "gfxButton8";
-            this.gfxButton8.Position = 64;
-            this.gfxButton8.Size = new System.Drawing.Size(95, 23);
-            this.gfxButton8.StartFolder = "";
-            this.gfxButton8.TabIndex = 33;
-            this.gfxButton8.Text = "Remove Line";
-            this.gfxButton8.Tilesize = 16;
-            this.gfxButton8.UseVisualStyleBackColor = false;
-            // 
-            // gfxButton6
-            // 
-            this.gfxButton6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
-            this.gfxButton6.BaseTile = 8;
-            this.gfxButton6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
-            this.gfxButton6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
-            this.gfxButton6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.gfxButton6.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gfxButton6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-            this.gfxButton6.Location = new System.Drawing.Point(112, 127);
-            this.gfxButton6.Margin = new System.Windows.Forms.Padding(4, 3, 3, 3);
-            this.gfxButton6.Name = "gfxButton6";
-            this.gfxButton6.Position = 64;
-            this.gfxButton6.Size = new System.Drawing.Size(95, 23);
-            this.gfxButton6.StartFolder = "";
-            this.gfxButton6.TabIndex = 31;
-            this.gfxButton6.Text = "Draw";
-            this.gfxButton6.Tilesize = 16;
-            this.gfxButton6.UseVisualStyleBackColor = false;
-            // 
-            // gfxButton5
-            // 
-            this.gfxButton5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
-            this.gfxButton5.BaseTile = 8;
-            this.gfxButton5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
-            this.gfxButton5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
-            this.gfxButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.gfxButton5.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gfxButton5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-            this.gfxButton5.Location = new System.Drawing.Point(10, 127);
-            this.gfxButton5.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
-            this.gfxButton5.Name = "gfxButton5";
-            this.gfxButton5.Position = 64;
-            this.gfxButton5.Size = new System.Drawing.Size(95, 23);
-            this.gfxButton5.StartFolder = "";
-            this.gfxButton5.TabIndex = 31;
-            this.gfxButton5.Text = "Load Image";
-            this.gfxButton5.Tilesize = 16;
-            this.gfxButton5.UseVisualStyleBackColor = false;
             // 
             // gfxButton1
             // 
@@ -543,55 +560,29 @@
             this.coloreableBorderComboBox2.Size = new System.Drawing.Size(120, 20);
             this.coloreableBorderComboBox2.TabIndex = 25;
             // 
-            // panel5
+            // label4
             // 
-            this.panel5.Controls.Add(this.panel8);
-            this.panel5.Controls.Add(this.panel9);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(0, 126);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(229, 100);
-            this.panel5.TabIndex = 35;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("MS Reference Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(7, 35);
+            this.label4.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
+            this.label4.Name = "label4";
+            this.label4.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
+            this.label4.Size = new System.Drawing.Size(49, 27);
+            this.label4.TabIndex = 23;
+            this.label4.Text = "Zoom";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // panel10
+            // label5
             // 
-            this.panel10.Controls.Add(this.panel11);
-            this.panel10.Controls.Add(this.panel12);
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel10.Location = new System.Drawing.Point(0, 226);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(229, 266);
-            this.panel10.TabIndex = 38;
-            // 
-            // panel11
-            // 
-            this.panel11.AutoScroll = true;
-            this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel11.Location = new System.Drawing.Point(0, 38);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(229, 228);
-            this.panel11.TabIndex = 37;
-            // 
-            // panel12
-            // 
-            this.panel12.Controls.Add(this.label2);
-            this.panel12.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel12.Location = new System.Drawing.Point(0, 0);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(229, 38);
-            this.panel12.TabIndex = 36;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(4, 9);
-            this.label2.Margin = new System.Windows.Forms.Padding(3, 6, 6, 6);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(148, 20);
-            this.label2.TabIndex = 31;
-            this.label2.Text = "Set Up Options";
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.label5.Location = new System.Drawing.Point(4, 6);
+            this.label5.Margin = new System.Windows.Forms.Padding(3, 6, 6, 6);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(158, 20);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Window Options";
             // 
             // HDMAControl
             // 
@@ -606,6 +597,7 @@
             this.Size = new System.Drawing.Size(891, 500);
             this.leftSection.ResumeLayout(false);
             this.center.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.hdmaWindow1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.options.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
@@ -613,19 +605,18 @@
             this.tabPage1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel6.ResumeLayout(false);
+            this.panel10.ResumeLayout(false);
+            this.panel12.ResumeLayout(false);
+            this.panel12.PerformLayout();
+            this.panel5.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hdmaWindow1)).EndInit();
-            this.panel5.ResumeLayout(false);
-            this.panel10.ResumeLayout(false);
-            this.panel12.ResumeLayout(false);
-            this.panel12.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -662,8 +653,8 @@
         private GraphicsControls.GFXButton gfxButton6;
         private GraphicsControls.GFXButton gfxButton5;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private GraphicsControls.GFXButton gfxButton8;
-        private GraphicsControls.GFXButton gfxButton7;
+        private GraphicsControls.GFXButton remove;
+        private GraphicsControls.GFXButton add;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel10;

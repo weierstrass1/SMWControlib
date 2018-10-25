@@ -1,4 +1,6 @@
-﻿namespace SMWControlibControls.LogicControls
+﻿using SMWControlibBackend.Logic.HDMA;
+
+namespace SMWControlibControls.LogicControls
 {
     partial class CodeEditorController
     {
@@ -72,7 +74,7 @@
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.codeEd0 = new SMWControlibControls.LogicControls.TextEditor();
-            this.hdmaControl1 = new SMWControlibControls.LogicControls.HDMAControl();
+            this.hdmaControl1 = new HDMAControl(new HDMA(new Effect(EffectType.Brightness,EffectOptions.Option0Static)));
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();

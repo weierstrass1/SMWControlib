@@ -37,5 +37,21 @@ namespace SMWControlibControls.LogicControls
             InitializeComponent();
             Type = SMWControlibBackend.Logic.HDMA.ValueType.Numeric;
         }
+
+        public override int GetValue(int valueId, int regId)
+        {
+            if (ValueID != valueId) return 0;
+            if (RegID != regId) return 0;
+
+            int v = (int)value.Value;
+
+            int bas = 7;
+
+            if (MaxBit >= 8) bas = 15;
+
+            int disp = bas - MaxBit;
+
+            return v << disp;
+        }
     }
 }

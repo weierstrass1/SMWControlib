@@ -7,15 +7,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SMWControlibBackend.Logic.HDMA;
 
 namespace SMWControlibControls.LogicControls
 {
     public partial class HDMAControl : UserControl
     {
-        public HDMAControl()
+        HDMA hdma;
+        public HDMAControl(HDMA HDMA)
         {
+            hdma = HDMA;
             InitializeComponent();
             Resize += resize;
+            add.Click += addClick;
+        }
+
+        private void addClick(object sender, EventArgs e)
+        {
+            if (LineOptionsDialog.Show(ParentForm, hdma) == DialogResult.OK) 
+            {
+                hdmaWindow1.UpdateLayers();
+            }
         }
 
         private void resize(object sender, EventArgs e)

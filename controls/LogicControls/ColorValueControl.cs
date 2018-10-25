@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace SMWControlibControls.LogicControls
 {
-    public partial class ColorValueControl : SMWControlibControls.LogicControls.NumericValueDialog
+    public partial class ColorValueControl : NumericValueDialog
     {
         public ColorValueControl()
         {

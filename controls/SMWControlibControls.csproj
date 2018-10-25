@@ -215,6 +215,12 @@
     <Compile Include="LogicControls\BooleanValueControl.Designer.cs">
       <DependentUpon>BooleanValueControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="LogicControls\BrightValueControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LogicControls\BrightValueControl.Designer.cs">
+      <DependentUpon>BrightValueControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="LogicControls\ColorValueControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -400,6 +406,9 @@
     <EmbeddedResource Include="LogicControls\BooleanValueControl.resx">
       <DependentUpon>BooleanValueControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LogicControls\BrightValueControl.resx">
+      <DependentUpon>BrightValueControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LogicControls\ColorValueControl.resx">
       <DependentUpon>ColorValueControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -538,6 +547,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ASM\Main.asm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Layer1\0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Layer2\0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Layer3\0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\0.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

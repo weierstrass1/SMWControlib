@@ -140,7 +140,7 @@ namespace SMWControlibBackend.Logic.HDMA
             lines.Remove(line);
         }
 
-        public void AddLine()
+        public HDMALine AddLine()
         {
             int max = 0;
             int cur;
@@ -153,6 +153,24 @@ namespace SMWControlibBackend.Logic.HDMA
             {
                 Height = 1
             };
+
+            lines.Add(l);
+
+            return l;
+        }
+
+        public HDMALine this[int key]
+        {
+            get
+            {
+                int counter = 0;
+                foreach(HDMALine hl in lines)
+                {
+                    if (key <= hl.Height + counter) return hl;
+                    counter += hl.Height;
+                }
+                return null;
+            }
         }
     }
 }

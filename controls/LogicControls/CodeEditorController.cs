@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SMWControlibBackend.Logic;
+using SMWControlibBackend.Logic.HDMA;
 using System.Threading;
 
 namespace SMWControlibControls.LogicControls
@@ -35,13 +36,17 @@ namespace SMWControlibControls.LogicControls
         public CodeEditorController()
         {
             InitializeComponent();
-            button1.Click += Button1_Click;
-            CodeEditor.ErrorsAdded += errorsAdded;
-            CodeEditor.MouseEnter += mouseEnter;
-            errorMatrix.MouseEnter += mouseEnter;
-            errorMatrix.RowCount = 0;
-            errorMatrix.RowStyles.Clear();
-            treeView1.NodeMouseDoubleClick += nodeMouseDoubleClick;
+            try
+            {
+                button1.Click += Button1_Click;
+                CodeEditor.ErrorsAdded += errorsAdded;
+                CodeEditor.MouseEnter += mouseEnter;
+                errorMatrix.MouseEnter += mouseEnter;
+                errorMatrix.RowCount = 0;
+                errorMatrix.RowStyles.Clear();
+                treeView1.NodeMouseDoubleClick += nodeMouseDoubleClick;
+            }
+            catch { }
         }
 
         private void nodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)

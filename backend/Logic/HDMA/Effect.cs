@@ -80,7 +80,8 @@ namespace SMWControlibBackend.Logic.HDMA
         private string[] registers { get; set; }
         private DMATransferMode[] transferModes { get; set; }
         private Dictionary<string, Tuple<string, ValueType, string, int, int>[]> setups;
-        private Dictionary<int, Tuple<string, ValueType, string, int, int>[]> values;
+
+        public Dictionary<int, HDMAValue[]> Values { get; private set; }
 
         private static EffectType brightness = new EffectType(
             "Brightness",
@@ -96,20 +97,23 @@ namespace SMWControlibBackend.Logic.HDMA
                     brightness.setups = 
                         new Dictionary<string, Tuple<string, ValueType, string, int, int>[]>();
                 }
-                if (brightness.values == null)
+                if (brightness.Values == null)
                 {
-                    brightness.values =
-                        new Dictionary<int, Tuple<string, ValueType, string, int, int>[]>();
-                    Tuple<string, ValueType, string, int, int>[] t;
+                    brightness.Values =
+                        new Dictionary<int, HDMAValue[]>();
+                    HDMAValue[] t;
 
-                    t = new Tuple<string, ValueType, string, int, int>[2];
+                    t = new HDMAValue[2];
 
-                    t[0] = new Tuple<string, ValueType, string, int, int>
-                        ("Disable", ValueType.Boolean, "0", 0, 1);
-                    t[1] = new Tuple<string, ValueType, string, int, int>
-                        ("Bright Level", ValueType.Bright, "4567", 0, 7);
+                    t[0] = new HDMAValue(0, 0, "Disable",
+                        "When a line is disabled, the game will have more time during NMI, disabled lines are black.",
+                        ValueType.Boolean, "0", 0, 1);
 
-                    brightness.values.Add(0, t);
+                    t[1] = new HDMAValue(0, 0, "Brightness Level",
+                        "Controls how bright the colors are.",
+                        ValueType.Bright, "4567", 0, 15);
+
+                    brightness.Values.Add(0, t);
                 }
                 return brightness;
             }
@@ -127,26 +131,31 @@ namespace SMWControlibBackend.Logic.HDMA
                     pixelation.setups =
                         new Dictionary<string, Tuple<string, ValueType, string, int, int>[]>();
                 }
-                if (pixelation.values == null)
+                if (pixelation.Values == null)
                 {
-                    pixelation.values =
-                        new Dictionary<int, Tuple<string, ValueType, string, int, int>[]>();
-                    Tuple<string, ValueType, string, int, int>[] t;
+                    pixelation.Values =
+                        new Dictionary<int, HDMAValue[]>();
+                    HDMAValue[] t;
 
-                    t = new Tuple<string, ValueType, string, int, int>[5];
+                    t = new HDMAValue[5];
 
-                    t[0] = new Tuple<string, ValueType, string, int, int>
-                        ("Layer 1", ValueType.Boolean, "4", 0, 1);
-                    t[1] = new Tuple<string, ValueType, string, int, int>
-                        ("Layer 2", ValueType.Boolean, "5", 0, 1);
-                    t[2] = new Tuple<string, ValueType, string, int, int>
-                        ("Layer 3", ValueType.Boolean, "6", 0, 1);
-                    t[3] = new Tuple<string, ValueType, string, int, int>
-                        ("Layer 4", ValueType.Boolean, "7", 0, 1);
-                    t[4] = new Tuple<string, ValueType, string, int, int>
-                        ("Pixel Size", ValueType.Numeric, "0123", 0, 7);
+                    t[0] = new HDMAValue(0, 0, "Layer 1",
+                        "Allow pixelation for Layer 1.",
+                        ValueType.Boolean, "4", 0, 1);
+                    t[1] = new HDMAValue(0, 0, "Layer 2",
+                        "Allow pixelation for Layer 2.",
+                        ValueType.Boolean, "5", 0, 1);
+                    t[2] = new HDMAValue(0, 0, "Layer 3",
+                        "Allow pixelation for Layer 3.",
+                        ValueType.Boolean, "6", 0, 1);
+                    t[3] = new HDMAValue(0, 0, "Layer 4",
+                        "Allow pixelation for Layer 4.",
+                        ValueType.Boolean, "7", 0, 1);
+                    t[4] = new HDMAValue(0,0, "Pixel Size",
+                        "controls how pixelated the layer becomes.",
+                          ValueType.Numeric, "0123", 0, 7);
 
-                    pixelation.values.Add(0, t);
+                    pixelation.Values.Add(0, t);
                 }
                 return pixelation;
             }
@@ -164,18 +173,19 @@ namespace SMWControlibBackend.Logic.HDMA
                     layer1HScroll.setups =
                         new Dictionary<string, Tuple<string, ValueType, string, int, int>[]>();
                 }
-                if (layer1HScroll.values == null)
+                if (layer1HScroll.Values == null)
                 {
-                    layer1HScroll.values =
-                        new Dictionary<int, Tuple<string, ValueType, string, int, int>[]>();
-                    Tuple<string, ValueType, string, int, int>[] t;
+                    layer1HScroll.Values =
+                        new Dictionary<int, HDMAValue[]>();
+                    HDMAValue[] t;
 
-                    t = new Tuple<string, ValueType, string, int, int>[1];
+                    t = new HDMAValue[1];
 
-                    t[0] = new Tuple<string, ValueType, string, int, int>
-                        ("Scroll", ValueType.Numeric, "6789ABCDF", 0, 1023);
+                    t[0] = new HDMAValue(0,0, "Scroll",
+                        "Controls the position of the scroll.",
+                        ValueType.Numeric, "6789ABCDF", 0, 1023);
 
-                    layer1HScroll.values.Add(0, t);
+                    layer1HScroll.Values.Add(0, t);
                 }
                 return layer1HScroll;
             }
@@ -193,18 +203,19 @@ namespace SMWControlibBackend.Logic.HDMA
                     layer1VScroll.setups =
                         new Dictionary<string, Tuple<string, ValueType, string, int, int>[]>();
                 }
-                if (layer1VScroll.values == null)
+                if (layer1VScroll.Values == null)
                 {
-                    layer1VScroll.values =
-                        new Dictionary<int, Tuple<string, ValueType, string, int, int>[]>();
-                    Tuple<string, ValueType, string, int, int>[] t;
+                    layer1VScroll.Values =
+                        new Dictionary<int, HDMAValue[]>();
+                    HDMAValue[] t;
 
-                    t = new Tuple<string, ValueType, string, int, int>[1];
+                    t = new HDMAValue[1];
 
-                    t[0] = new Tuple<string, ValueType, string, int, int>
-                        ("Scroll", ValueType.Numeric, "6789ABCDF", 0, 1023);
+                    t[0] = new HDMAValue(0, 0, "Scroll",
+                        "Controls the position of the scroll.",
+                        ValueType.Numeric, "6789ABCDF", 0, 1023);
 
-                    layer1VScroll.values.Add(0, t);
+                    layer1VScroll.Values.Add(0, t);
                 }
                 return layer1VScroll;
             }
@@ -222,31 +233,34 @@ namespace SMWControlibBackend.Logic.HDMA
                     layer1HVScroll.setups =
                         new Dictionary<string, Tuple<string, ValueType, string, int, int>[]>();
                 }
-                if (layer1HVScroll.values == null)
+                if (layer1HVScroll.Values == null)
                 {
-                    layer1HVScroll.values =
-                        new Dictionary<int, Tuple<string, ValueType, string, int, int>[]>();
-                    Tuple<string, ValueType, string, int, int>[] t;
+                    layer1HVScroll.Values =
+                        new Dictionary<int, HDMAValue[]>();
+                    HDMAValue[] t;
 
-                    t = new Tuple<string, ValueType, string, int, int>[1];
+                    t = new HDMAValue[1];
 
-                    t[0] = new Tuple<string, ValueType, string, int, int>
-                        ("H. Scroll", ValueType.Numeric, "6789ABCDF", 0, 1023);
-                    layer1HVScroll.values.Add(0, t);
+                    t[0] = new HDMAValue(0, 0, "Horizontal Scroll",
+                        "Controls the position of the horizontal scroll.",
+                        ValueType.Numeric, "6789ABCDF", 0, 1023);
+                    layer1HVScroll.Values.Add(0, t);
 
-                    t = new Tuple<string, ValueType, string, int, int>[1];
+                    t = new HDMAValue[1];
 
-                    t[0] = new Tuple<string, ValueType, string, int, int>
-                        ("V. Scroll", ValueType.Numeric, "6789ABCDF", 0, 1023);
-                    layer1HVScroll.values.Add(1, t);
+                    t[0] = new HDMAValue(1, 0, "Vertical Scroll",
+                        "Controls the position of the vertical scroll.",
+                        ValueType.Numeric, "6789ABCDF", 0, 1023);
+                    layer1HVScroll.Values.Add(1, t);
                 }
                 return layer1HVScroll;
             }
         }
+
         private static readonly EffectType layer2HScroll = new EffectType(
-            "Layer 2 H. Scroll.",
-            "Can be used for different layer 2 horizontal scroll per line. Examples: Parallax Scroll and Wave Effect.",
-            "0F#2");
+    "Layer 2 H. Scroll.",
+    "Can be used for different layer 2 horizontal scroll per line. Examples: Parallax Scroll and Wave Effect.",
+    "0F#2");
         public static EffectType Layer2HScroll
         {
             get
@@ -256,18 +270,19 @@ namespace SMWControlibBackend.Logic.HDMA
                     layer2HScroll.setups =
                         new Dictionary<string, Tuple<string, ValueType, string, int, int>[]>();
                 }
-                if (layer2HScroll.values == null)
+                if (layer2HScroll.Values == null)
                 {
-                    layer2HScroll.values =
-                        new Dictionary<int, Tuple<string, ValueType, string, int, int>[]>();
-                    Tuple<string, ValueType, string, int, int>[] t;
+                    layer2HScroll.Values =
+                        new Dictionary<int, HDMAValue[]>();
+                    HDMAValue[] t;
 
-                    t = new Tuple<string, ValueType, string, int, int>[1];
+                    t = new HDMAValue[1];
 
-                    t[0] = new Tuple<string, ValueType, string, int, int>
-                        ("Scroll", ValueType.Numeric, "6789ABCDF", 0, 1023);
+                    t[0] = new HDMAValue(0, 0, "Scroll",
+                        "Controls the position of the scroll.",
+                        ValueType.Numeric, "6789ABCDF", 0, 1023);
 
-                    layer2HScroll.values.Add(0, t);
+                    layer2HScroll.Values.Add(0, t);
                 }
                 return layer2HScroll;
             }
@@ -285,18 +300,19 @@ namespace SMWControlibBackend.Logic.HDMA
                     layer2VScroll.setups =
                         new Dictionary<string, Tuple<string, ValueType, string, int, int>[]>();
                 }
-                if (layer2VScroll.values == null)
+                if (layer2VScroll.Values == null)
                 {
-                    layer2VScroll.values =
-                        new Dictionary<int, Tuple<string, ValueType, string, int, int>[]>();
-                    Tuple<string, ValueType, string, int, int>[] t;
+                    layer2VScroll.Values =
+                        new Dictionary<int, HDMAValue[]>();
+                    HDMAValue[] t;
 
-                    t = new Tuple<string, ValueType, string, int, int>[1];
+                    t = new HDMAValue[1];
 
-                    t[0] = new Tuple<string, ValueType, string, int, int>
-                        ("Scroll", ValueType.Numeric, "6789ABCDF", 0, 1023);
+                    t[0] = new HDMAValue(0, 0, "Scroll",
+                        "Controls the position of the scroll.",
+                        ValueType.Numeric, "6789ABCDF", 0, 1023);
 
-                    layer2VScroll.values.Add(0, t);
+                    layer2VScroll.Values.Add(0, t);
                 }
                 return layer2VScroll;
             }
@@ -314,31 +330,34 @@ namespace SMWControlibBackend.Logic.HDMA
                     layer2HVScroll.setups =
                         new Dictionary<string, Tuple<string, ValueType, string, int, int>[]>();
                 }
-                if (layer2HVScroll.values == null)
+                if (layer2HVScroll.Values == null)
                 {
-                    layer2HVScroll.values =
-                        new Dictionary<int, Tuple<string, ValueType, string, int, int>[]>();
-                    Tuple<string, ValueType, string, int, int>[] t;
+                    layer2HVScroll.Values =
+                        new Dictionary<int, HDMAValue[]>();
+                    HDMAValue[] t;
 
-                    t = new Tuple<string, ValueType, string, int, int>[1];
+                    t = new HDMAValue[1];
 
-                    t[0] = new Tuple<string, ValueType, string, int, int>
-                        ("H. Scroll", ValueType.Numeric, "6789ABCDF", 0, 1023);
-                    layer2HVScroll.values.Add(0, t);
+                    t[0] = new HDMAValue(0, 0, "Horizontal Scroll",
+                        "Controls the position of the horizontal scroll.",
+                        ValueType.Numeric, "6789ABCDF", 0, 1023);
+                    layer2HVScroll.Values.Add(0, t);
 
-                    t = new Tuple<string, ValueType, string, int, int>[1];
+                    t = new HDMAValue[1];
 
-                    t[0] = new Tuple<string, ValueType, string, int, int>
-                        ("V. Scroll", ValueType.Numeric, "6789ABCDF", 0, 1023);
-                    layer2HVScroll.values.Add(1, t);
+                    t[0] = new HDMAValue(1, 0, "Vertical Scroll",
+                        "Controls the position of the vertical scroll.",
+                        ValueType.Numeric, "6789ABCDF", 0, 1023);
+                    layer2HVScroll.Values.Add(1, t);
                 }
                 return layer2HVScroll;
             }
         }
+
         private static readonly EffectType layer3HScroll = new EffectType(
-            "Layer 3 H. Scroll.",
-            "Can be used for different layer 3 horizontal scroll per line. Examples: Parallax Scroll and Wave Effect.",
-            "11#2");
+    "Layer 3 H. Scroll.",
+    "Can be used for different layer 3 horizontal scroll per line. Examples: Parallax Scroll and Wave Effect.",
+    "11#2");
         public static EffectType Layer3HScroll
         {
             get
@@ -348,18 +367,19 @@ namespace SMWControlibBackend.Logic.HDMA
                     layer3HScroll.setups =
                         new Dictionary<string, Tuple<string, ValueType, string, int, int>[]>();
                 }
-                if (layer3HScroll.values == null)
+                if (layer3HScroll.Values == null)
                 {
-                    layer3HScroll.values =
-                        new Dictionary<int, Tuple<string, ValueType, string, int, int>[]>();
-                    Tuple<string, ValueType, string, int, int>[] t;
+                    layer3HScroll.Values =
+                        new Dictionary<int, HDMAValue[]>();
+                    HDMAValue[] t;
 
-                    t = new Tuple<string, ValueType, string, int, int>[1];
+                    t = new HDMAValue[1];
 
-                    t[0] = new Tuple<string, ValueType, string, int, int>
-                        ("Scroll", ValueType.Numeric, "6789ABCDF", 0, 1023);
+                    t[0] = new HDMAValue(0, 0, "Scroll",
+                        "Controls the position of the scroll.",
+                        ValueType.Numeric, "6789ABCDF", 0, 1023);
 
-                    layer3HScroll.values.Add(0, t);
+                    layer3HScroll.Values.Add(0, t);
                 }
                 return layer3HScroll;
             }
@@ -377,18 +397,19 @@ namespace SMWControlibBackend.Logic.HDMA
                     layer3VScroll.setups =
                         new Dictionary<string, Tuple<string, ValueType, string, int, int>[]>();
                 }
-                if (layer3VScroll.values == null)
+                if (layer3VScroll.Values == null)
                 {
-                    layer3VScroll.values =
-                        new Dictionary<int, Tuple<string, ValueType, string, int, int>[]>();
-                    Tuple<string, ValueType, string, int, int>[] t;
+                    layer3VScroll.Values =
+                        new Dictionary<int, HDMAValue[]>();
+                    HDMAValue[] t;
 
-                    t = new Tuple<string, ValueType, string, int, int>[1];
+                    t = new HDMAValue[1];
 
-                    t[0] = new Tuple<string, ValueType, string, int, int>
-                        ("Scroll", ValueType.Numeric, "6789ABCDF", 0, 1023);
+                    t[0] = new HDMAValue(0, 0, "Scroll",
+                        "Controls the position of the scroll.",
+                        ValueType.Numeric, "6789ABCDF", 0, 1023);
 
-                    layer3VScroll.values.Add(0, t);
+                    layer3VScroll.Values.Add(0, t);
                 }
                 return layer3VScroll;
             }
@@ -406,32 +427,34 @@ namespace SMWControlibBackend.Logic.HDMA
                     layer3HVScroll.setups =
                         new Dictionary<string, Tuple<string, ValueType, string, int, int>[]>();
                 }
-                if (layer3HVScroll.values == null)
+                if (layer3HVScroll.Values == null)
                 {
-                    layer3HVScroll.values =
-                        new Dictionary<int, Tuple<string, ValueType, string, int, int>[]>();
-                    Tuple<string, ValueType, string, int, int>[] t;
+                    layer3HVScroll.Values =
+                        new Dictionary<int, HDMAValue[]>();
+                    HDMAValue[] t;
 
-                    t = new Tuple<string, ValueType, string, int, int>[1];
+                    t = new HDMAValue[1];
 
-                    t[0] = new Tuple<string, ValueType, string, int, int>
-                        ("H. Scroll", ValueType.Numeric, "6789ABCDF", 0, 1023);
-                    layer3HVScroll.values.Add(0, t);
+                    t[0] = new HDMAValue(0, 0, "Horizontal Scroll",
+                        "Controls the position of the horizontal scroll.",
+                        ValueType.Numeric, "6789ABCDF", 0, 1023);
+                    layer3HVScroll.Values.Add(0, t);
 
-                    t = new Tuple<string, ValueType, string, int, int>[1];
+                    t = new HDMAValue[1];
 
-                    t[0] = new Tuple<string, ValueType, string, int, int>
-                        ("V. Scroll", ValueType.Numeric, "6789ABCDF", 0, 1023);
-                    layer3HVScroll.values.Add(1, t);
+                    t[0] = new HDMAValue(1, 0, "Vertical Scroll",
+                        "Controls the position of the vertical scroll.",
+                        ValueType.Numeric, "6789ABCDF", 0, 1023);
+                    layer3HVScroll.Values.Add(1, t);
                 }
                 return layer3HVScroll;
             }
         }
 
         private static readonly EffectType layer4HScroll = new EffectType(
-            "Layer 4 H. Scroll.",
-            "Can be used for different layer 4 horizontal scroll per line. Examples: Parallax Scroll and Wave Effect.",
-            "13#2");
+    "Layer 4 H. Scroll.",
+    "Can be used for different layer 4 horizontal scroll per line. Examples: Parallax Scroll and Wave Effect.",
+    "13#2");
         public static EffectType Layer4HScroll
         {
             get
@@ -441,18 +464,19 @@ namespace SMWControlibBackend.Logic.HDMA
                     layer4HScroll.setups =
                         new Dictionary<string, Tuple<string, ValueType, string, int, int>[]>();
                 }
-                if (layer4HScroll.values == null)
+                if (layer4HScroll.Values == null)
                 {
-                    layer4HScroll.values =
-                        new Dictionary<int, Tuple<string, ValueType, string, int, int>[]>();
-                    Tuple<string, ValueType, string, int, int>[] t;
+                    layer4HScroll.Values =
+                        new Dictionary<int, HDMAValue[]>();
+                    HDMAValue[] t;
 
-                    t = new Tuple<string, ValueType, string, int, int>[1];
+                    t = new HDMAValue[1];
 
-                    t[0] = new Tuple<string, ValueType, string, int, int>
-                        ("Scroll", ValueType.Numeric, "6789ABCDF", 0, 1023);
+                    t[0] = new HDMAValue(0, 0, "Scroll",
+                        "Controls the position of the scroll.",
+                        ValueType.Numeric, "6789ABCDF", 0, 1023);
 
-                    layer4HScroll.values.Add(0, t);
+                    layer4HScroll.Values.Add(0, t);
                 }
                 return layer4HScroll;
             }
@@ -470,18 +494,19 @@ namespace SMWControlibBackend.Logic.HDMA
                     layer4VScroll.setups =
                         new Dictionary<string, Tuple<string, ValueType, string, int, int>[]>();
                 }
-                if (layer4VScroll.values == null)
+                if (layer4VScroll.Values == null)
                 {
-                    layer4VScroll.values =
-                        new Dictionary<int, Tuple<string, ValueType, string, int, int>[]>();
-                    Tuple<string, ValueType, string, int, int>[] t;
+                    layer4VScroll.Values =
+                        new Dictionary<int, HDMAValue[]>();
+                    HDMAValue[] t;
 
-                    t = new Tuple<string, ValueType, string, int, int>[1];
+                    t = new HDMAValue[1];
 
-                    t[0] = new Tuple<string, ValueType, string, int, int>
-                        ("Scroll", ValueType.Numeric, "6789ABCDF", 0, 1023);
+                    t[0] = new HDMAValue(0, 0, "Scroll",
+                        "Controls the position of the scroll.",
+                        ValueType.Numeric, "6789ABCDF", 0, 1023);
 
-                    layer4VScroll.values.Add(0, t);
+                    layer4VScroll.Values.Add(0, t);
                 }
                 return layer4VScroll;
             }
@@ -499,27 +524,30 @@ namespace SMWControlibBackend.Logic.HDMA
                     layer4HVScroll.setups =
                         new Dictionary<string, Tuple<string, ValueType, string, int, int>[]>();
                 }
-                if (layer4HVScroll.values == null)
+                if (layer4HVScroll.Values == null)
                 {
-                    layer4HVScroll.values =
-                        new Dictionary<int, Tuple<string, ValueType, string, int, int>[]>();
-                    Tuple<string, ValueType, string, int, int>[] t;
+                    layer4HVScroll.Values =
+                        new Dictionary<int, HDMAValue[]>();
+                    HDMAValue[] t;
 
-                    t = new Tuple<string, ValueType, string, int, int>[1];
+                    t = new HDMAValue[1];
 
-                    t[0] = new Tuple<string, ValueType, string, int, int>
-                        ("H. Scroll", ValueType.Numeric, "6789ABCDF", 0, 1023);
-                    layer4HVScroll.values.Add(0, t);
+                    t[0] = new HDMAValue(0, 0, "Horizontal Scroll",
+                        "Controls the position of the horizontal scroll.",
+                        ValueType.Numeric, "6789ABCDF", 0, 1023);
+                    layer4HVScroll.Values.Add(0, t);
 
-                    t = new Tuple<string, ValueType, string, int, int>[1];
+                    t = new HDMAValue[1];
 
-                    t[0] = new Tuple<string, ValueType, string, int, int>
-                        ("V. Scroll", ValueType.Numeric, "6789ABCDF", 0, 1023);
-                    layer4HVScroll.values.Add(1, t);
+                    t[0] = new HDMAValue(1, 0, "Vertical Scroll",
+                        "Controls the position of the vertical scroll.",
+                        ValueType.Numeric, "6789ABCDF", 0, 1023);
+                    layer4HVScroll.Values.Add(1, t);
                 }
                 return layer4HVScroll;
             }
         }
+
         private static readonly EffectType palette = new EffectType("Palette", 
             "Can be used to change 1 color of the palette per line.",
             "21#3");
@@ -532,28 +560,26 @@ namespace SMWControlibBackend.Logic.HDMA
                     palette.setups =
                         new Dictionary<string, Tuple<string, ValueType, string, int, int>[]>();
                 }
-                if (palette.values == null)
+                if (palette.Values == null)
                 {
-                    palette.values =
-                        new Dictionary<int, Tuple<string, ValueType, string, int, int>[]>();
-                    Tuple<string, ValueType, string, int, int>[] t;
+                    palette.Values =
+                        new Dictionary<int, HDMAValue[]>();
+                    HDMAValue[] t;
 
-                    t = new Tuple<string, ValueType, string, int, int>[1];
+                    t = new HDMAValue[1];
 
-                    t[0] = new Tuple<string, ValueType, string, int, int>
-                        ("Color Index", ValueType.Numeric, "01234567", 0, 255);
+                    t[0] = new HDMAValue(1,0, "Color Index",
+                        "Indicate the index of the color on the palette.",
+                        ValueType.Numeric, "01234567", 0, 255);
 
-                    palette.values.Add(1, t);
+                    palette.Values.Add(1, t);
 
-                    t = new Tuple<string, ValueType, string, int, int>[3];
+                    t = new HDMAValue[1];
 
-                    t[0] = new Tuple<string, ValueType, string, int, int>
-                        ("Red", ValueType.Red, "BCDEF", 0, 31);
-                    t[1] = new Tuple<string, ValueType, string, int, int>
-                        ("Green", ValueType.Green, "6789A", 0, 31);
-                    t[2] = new Tuple<string, ValueType, string, int, int>
-                        ("Blue", ValueType.Blue, "12345", 0, 31);
-                    palette.values.Add(2, t);
+                    t[0] = new HDMAValue(2,0, "Color",
+                        "Controls the color of the palette.",
+                        ValueType.ThreeColors, "123456789ABCDEF", 0, 127);
+                    palette.Values.Add(2, t);
                 }
                 return palette;
             }

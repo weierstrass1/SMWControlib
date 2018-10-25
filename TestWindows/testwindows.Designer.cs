@@ -708,6 +708,7 @@
             this.ClientSize = new System.Drawing.Size(1116, 642);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(691, 333);
             this.Name = "testwindows";

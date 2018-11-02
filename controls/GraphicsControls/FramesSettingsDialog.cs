@@ -75,16 +75,19 @@ namespace SMWControlibControls.GraphicsControls
                 tableLayoutPanel1.Controls.Add(lb, 0, i);
                 ibtn = new ImageButton();
                 if (i == 0) ibtn.Enabled = false;
-                //initImageButton(ibtn, Properties.Resources.upArrow);
+                initImageButton(ibtn, Properties.Resources.boton_morado_claro,
+                    Properties.Resources.goUp);
                 ibtn.Click += clickUp;
                 tableLayoutPanel1.Controls.Add(ibtn, 1, i);
                 ibtn = new ImageButton();
                 if (i == frames.Length - 1) ibtn.Enabled = false;
-                //initImageButton(ibtn, Properties.Resources.downArrow);
+                initImageButton(ibtn, Properties.Resources.boton_morado_claro,
+                    Properties.Resources.goDown);
                 ibtn.Click += clickDown;
                 tableLayoutPanel1.Controls.Add(ibtn, 2, i);
                 ibtn = new ImageButton();
-                //initImageButton(ibtn, Properties.Resources.questionBlock);
+                initImageButton(ibtn, Properties.Resources.boton_morado,
+                    Properties.Resources.info);
                 ibtn.Click += questionClick;
                 tableLayoutPanel1.Controls.Add(ibtn, 3, i);
             }
@@ -141,7 +144,7 @@ namespace SMWControlibControls.GraphicsControls
             tableLayoutPanel1.Controls.Add(c2, 0, row);
         }
 
-        private void initImageButton(ImageButton b,Image img)
+        private void initImageButton(ImageButton b,Image bimg, Image border)
         {
             b.BackgroundImageLayout = ImageLayout.Center;
             b.FlatAppearance.BorderColor = SystemColors.Control;
@@ -149,11 +152,12 @@ namespace SMWControlibControls.GraphicsControls
             b.FlatAppearance.MouseDownBackColor = SystemColors.Control;
             b.FlatAppearance.MouseOverBackColor = SystemColors.Control;
             b.FlatStyle = FlatStyle.Flat;
-            b.OffSetX1 = 1;
-            b.OffSetX2 = 4;
-            b.OffSetY1 = 1;
-            b.OffSetY2 = 4;
-            b.Source = img;
+            b.OffSetX1 = 2;
+            b.OffSetX2 = 7;
+            b.OffSetY1 = 2;
+            b.OffSetY2 = 7;
+            b.BackgroundImage = bimg;
+            b.Border = border;
             b.TabIndex = 1;
             b.Text = "";
             b.UseVisualStyleBackColor = true;

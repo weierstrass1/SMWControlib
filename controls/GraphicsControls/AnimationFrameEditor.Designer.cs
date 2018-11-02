@@ -123,9 +123,9 @@
             this.imageButton3.Location = new System.Drawing.Point(137, 79);
             this.imageButton3.Name = "imageButton3";
             this.imageButton3.OffSetX1 = 2;
-            this.imageButton3.OffSetX2 = 8;
+            this.imageButton3.OffSetX2 = 7;
             this.imageButton3.OffSetY1 = 2;
-            this.imageButton3.OffSetY2 = 8;
+            this.imageButton3.OffSetY2 = 7;
             this.imageButton3.Size = new System.Drawing.Size(32, 32);
             this.imageButton3.Source = ((System.Drawing.Image)(resources.GetObject("imageButton3.Source")));
             this.imageButton3.TabIndex = 4;

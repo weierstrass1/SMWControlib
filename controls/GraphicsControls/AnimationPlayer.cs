@@ -80,15 +80,15 @@ namespace SMWControlibControls.GraphicsControls
                 if (playing)
                 {
                     previus.Enabled = false;
-                    play.Border = Properties.Resources.snesPauseBorder;
-                    next.Border = Properties.Resources.snesStopBorder;
+                    play.Border = Properties.Resources.pause;
+                    next.Border = Properties.Resources.stop;
                     timer1.Start();
                 }
                 else
                 {
                     previus.Enabled = true;
-                    play.Border = Properties.Resources.snesPlayBorder;
-                    next.Border = Properties.Resources.snesRightBorder;
+                    play.Border = Properties.Resources.play;
+                    next.Border = Properties.Resources.Right;
                 }
                     
             }

@@ -561,7 +561,15 @@
     <Content Include="Images\Sprites\0.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Right.png" />
+    <None Include="Resources\stop.png" />
+    <None Include="Resources\play.png" />
+    <None Include="Resources\pause.png" />
     <None Include="Resources\boton_morado_claro.png" />
+    <None Include="Resources\boton_morado.png" />
+    <None Include="Resources\info.png" />
+    <None Include="Resources\goUp.png" />
+    <None Include="Resources\goDown.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

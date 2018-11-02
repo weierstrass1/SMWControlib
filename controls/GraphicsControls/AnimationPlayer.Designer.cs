@@ -43,10 +43,10 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.player = new System.Windows.Forms.PictureBox();
             this.bottom = new System.Windows.Forms.Panel();
-            this.speedBox = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
-            this.zoomBox = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.speedBox = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
+            this.zoomBox = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
             this.previus = new SMWControlibControls.GraphicsControls.ImageButton();
             this.next = new SMWControlibControls.GraphicsControls.ImageButton();
             this.play = new SMWControlibControls.GraphicsControls.ImageButton();
@@ -177,53 +177,6 @@
             this.bottom.Size = new System.Drawing.Size(414, 52);
             this.bottom.TabIndex = 2;
             // 
-            // speedBox
-            // 
-            this.speedBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.speedBox.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
-            this.speedBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.speedBox.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.speedBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.speedBox.FormattingEnabled = true;
-            this.speedBox.Items.AddRange(new object[] {
-            "X0.125",
-            "X0.25",
-            "X0.5",
-            "X0.75",
-            "X1",
-            "X1.5",
-            "X2",
-            "X2.5",
-            "X3",
-            "X3.5",
-            "X4"});
-            this.speedBox.Location = new System.Drawing.Point(326, 18);
-            this.speedBox.Name = "speedBox";
-            this.speedBox.Size = new System.Drawing.Size(71, 20);
-            this.speedBox.TabIndex = 11;
-            // 
-            // zoomBox
-            // 
-            this.zoomBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.zoomBox.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
-            this.zoomBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.zoomBox.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.zoomBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.zoomBox.FormattingEnabled = true;
-            this.zoomBox.Items.AddRange(new object[] {
-            "X1",
-            "X2",
-            "X3",
-            "X4",
-            "X5",
-            "X6",
-            "X7",
-            "X8"});
-            this.zoomBox.Location = new System.Drawing.Point(70, 17);
-            this.zoomBox.Name = "zoomBox";
-            this.zoomBox.Size = new System.Drawing.Size(71, 20);
-            this.zoomBox.TabIndex = 10;
-            // 
             // label2
             // 
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
@@ -251,6 +204,55 @@
             this.label1.Text = "Speed";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // speedBox
+            // 
+            this.speedBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.speedBox.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
+            this.speedBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.speedBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.speedBox.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.speedBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
+            this.speedBox.FormattingEnabled = true;
+            this.speedBox.Items.AddRange(new object[] {
+            "X0.125",
+            "X0.25",
+            "X0.5",
+            "X0.75",
+            "X1",
+            "X1.5",
+            "X2",
+            "X2.5",
+            "X3",
+            "X3.5",
+            "X4"});
+            this.speedBox.Location = new System.Drawing.Point(326, 18);
+            this.speedBox.Name = "speedBox";
+            this.speedBox.Size = new System.Drawing.Size(71, 20);
+            this.speedBox.TabIndex = 11;
+            // 
+            // zoomBox
+            // 
+            this.zoomBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.zoomBox.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
+            this.zoomBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.zoomBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.zoomBox.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.zoomBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
+            this.zoomBox.FormattingEnabled = true;
+            this.zoomBox.Items.AddRange(new object[] {
+            "X1",
+            "X2",
+            "X3",
+            "X4",
+            "X5",
+            "X6",
+            "X7",
+            "X8"});
+            this.zoomBox.Location = new System.Drawing.Point(70, 17);
+            this.zoomBox.Name = "zoomBox";
+            this.zoomBox.Size = new System.Drawing.Size(71, 20);
+            this.zoomBox.TabIndex = 10;
+            // 
             // previus
             // 
             this.previus.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("previus.BackgroundImage")));
@@ -267,9 +269,9 @@
             this.previus.Location = new System.Drawing.Point(150, 11);
             this.previus.Name = "previus";
             this.previus.OffSetX1 = 2;
-            this.previus.OffSetX2 = 8;
+            this.previus.OffSetX2 = 7;
             this.previus.OffSetY1 = 2;
-            this.previus.OffSetY2 = 8;
+            this.previus.OffSetY2 = 7;
             this.previus.Size = new System.Drawing.Size(32, 32);
             this.previus.Source = ((System.Drawing.Image)(resources.GetObject("previus.Source")));
             this.previus.TabIndex = 5;
@@ -292,9 +294,9 @@
             this.next.Location = new System.Drawing.Point(226, 11);
             this.next.Name = "next";
             this.next.OffSetX1 = 2;
-            this.next.OffSetX2 = 8;
+            this.next.OffSetX2 = 7;
             this.next.OffSetY1 = 2;
-            this.next.OffSetY2 = 8;
+            this.next.OffSetY2 = 7;
             this.next.Size = new System.Drawing.Size(32, 32);
             this.next.Source = ((System.Drawing.Image)(resources.GetObject("next.Source")));
             this.next.TabIndex = 4;
@@ -317,9 +319,9 @@
             this.play.Location = new System.Drawing.Point(188, 11);
             this.play.Name = "play";
             this.play.OffSetX1 = 2;
-            this.play.OffSetX2 = 8;
+            this.play.OffSetX2 = 7;
             this.play.OffSetY1 = 2;
-            this.play.OffSetY2 = 8;
+            this.play.OffSetY2 = 7;
             this.play.Size = new System.Drawing.Size(32, 32);
             this.play.Source = ((System.Drawing.Image)(resources.GetObject("play.Source")));
             this.play.TabIndex = 3;

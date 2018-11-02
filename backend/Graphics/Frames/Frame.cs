@@ -1,6 +1,8 @@
 ﻿using SMWControlibBackend.Interaction;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Text;
+using SMWControlibBackend.Graphics;
 
 namespace SMWControlibBackend.Graphics.Frames
 {
@@ -55,6 +57,1010 @@ namespace SMWControlibBackend.Graphics.Frames
             return bp;
         }
 
+        public static string GetFramesLengthFromFrameList(Frame[] frames, bool FlipX, bool FlipY)
+        {
+            StringBuilder sb = new StringBuilder();
+            int cur = 0;
+            StringBuilder sb1;
+
+            sb1 = new StringBuilder();
+            for (int i = 0; i < frames.Length; i++)
+            {
+                cur = frames[i].Tiles.Count;
+
+                if (i % 16 == 0)
+                {
+                    if (sb1.Length > 0)
+                    {
+                        sb1.Remove(sb1.Length - 1, 1);
+                        sb1.Append("\n\t");
+                    }
+
+                    sb1.Append("dw ");
+                }
+                if (frames[i].Tiles.Count > 0)
+                    sb1.Append("$" + (cur - 1).ToString("X4") + ",");
+                else sb1.Append("$FFFF,");
+            }
+            if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                sb1.Remove(sb1.Length - 1, 1);
+
+            sb.Append(sb1 + "\n\t");
+
+            if (FlipX)
+            {
+                sb1 = new StringBuilder();
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    cur = frames[i].Tiles.Count;
+
+                    if (i % 16 == 0)
+                    {
+                        if (sb1.Length > 0)
+                        {
+                            sb1.Remove(sb1.Length - 1, 1);
+                            sb1.Append("\n\t");
+                        }
+
+                        sb1.Append("dw ");
+                    }
+                    if (frames[i].Tiles.Count > 0)
+                        sb1.Append("$" + (cur - 1).ToString("X4") + ",");
+                    else sb1.Append("$FFFF,");
+                }
+                if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                    sb1.Remove(sb1.Length - 1, 1);
+
+                sb.Append(sb1 + "\n\t");
+            }
+
+            if (FlipY)
+            {
+                sb1 = new StringBuilder();
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    cur = frames[i].Tiles.Count;
+
+                    if (i % 16 == 0)
+                    {
+                        if (sb1.Length > 0)
+                        {
+                            sb1.Remove(sb1.Length - 1, 1);
+                            sb1.Append("\n\t");
+                        }
+
+                        sb1.Append("dw ");
+                    }
+                    if (frames[i].Tiles.Count > 0)
+                        sb1.Append("$" + (cur - 1).ToString("X4") + ",");
+                    else sb1.Append("$FFFF,");
+                }
+                if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                    sb1.Remove(sb1.Length - 1, 1);
+
+                sb.Append(sb1 + "\n\t");
+            }
+
+            if (FlipX && FlipY)
+            {
+                sb1 = new StringBuilder();
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    cur = frames[i].Tiles.Count;
+
+                    if (i % 16 == 0)
+                    {
+                        if (sb1.Length > 0)
+                        {
+                            sb1.Remove(sb1.Length - 1, 1);
+                            sb1.Append("\n\t");
+                        }
+
+                        sb1.Append("dw ");
+                    }
+                    if (frames[i].Tiles.Count > 0)
+                        sb1.Append("$" + (cur - 1).ToString("X4") + ",");
+                    else sb1.Append("$FFFF,");
+                }
+                if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                    sb1.Remove(sb1.Length - 1, 1);
+
+                sb.Append(sb1 + "\n\t");
+            }
+
+            return sb.ToString();
+        }
+
+        public static string GetFramesFlippersFromFrameList(Frame[] frames, bool FlipX, bool FlipY)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            int counter = frames.Length;
+
+            counter *= 2;
+
+            sb.Append("dw $0000");
+
+            if(FlipX)
+            {
+                sb.Append(",$" + counter.ToString("X4"));
+            }
+            else if(FlipY)
+            {
+                sb.Append(",$0000");
+            }
+
+            if(FlipY)
+            {
+                sb.Append(",$" + (2 * counter).ToString("X4"));
+            }
+
+            if(FlipX && FlipY)
+            {
+                sb.Append(",$" + (3 * counter).ToString("X4"));
+            }
+
+            return sb.ToString();
+        }
+
+        public static string GetFramesStartsFromFrameList(Frame[] frames, bool FlipX, bool FlipY)
+        {
+            StringBuilder sb = new StringBuilder();
+            int cur = 0;
+            StringBuilder sb1;
+
+            sb1 = new StringBuilder();
+            for (int i = 0; i < frames.Length; i++)
+            {
+                cur += frames[i].Tiles.Count;
+
+                if (i % 16 == 0) 
+                {
+                    if (sb1.Length > 0)
+                    {
+                        sb1.Remove(sb1.Length - 1, 1);
+                        sb1.Append("\n\t");
+                    }
+                    
+                    sb1.Append("dw ");
+                }
+                if (frames[i].Tiles.Count > 0)
+                    sb1.Append("$" + (cur - 1).ToString("X4") + ",");
+                else sb1.Append("$FFFF,");
+            }
+            if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',') 
+                sb1.Remove(sb1.Length - 1, 1);
+
+            sb.Append(sb1 + "\n\t");
+
+            if(FlipX)
+            {
+                sb1 = new StringBuilder();
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    cur += frames[i].Tiles.Count;
+
+                    if (i % 16 == 0)
+                    {
+                        if (sb1.Length > 0)
+                        {
+                            sb1.Remove(sb1.Length - 1, 1);
+                            sb1.Append("\n\t");
+                        }
+
+                        sb1.Append("dw ");
+                    }
+                    if (frames[i].Tiles.Count > 0)
+                        sb1.Append("$" + (cur - 1).ToString("X4") + ",");
+                    else sb1.Append("$FFFF,");
+                }
+                if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                    sb1.Remove(sb1.Length - 1, 1);
+
+                sb.Append(sb1 + "\n\t");
+            }
+
+            if(FlipY)
+            {
+                sb1 = new StringBuilder();
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    cur += frames[i].Tiles.Count;
+
+                    if (i % 16 == 0)
+                    {
+                        if (sb1.Length > 0)
+                        {
+                            sb1.Remove(sb1.Length - 1, 1);
+                            sb1.Append("\n\t");
+                        }
+
+                        sb1.Append("dw ");
+                    }
+                    if (frames[i].Tiles.Count > 0)
+                        sb1.Append("$" + (cur - 1).ToString("X4") + ",");
+                    else sb1.Append("$FFFF,");
+                }
+                if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                    sb1.Remove(sb1.Length - 1, 1);
+
+                sb.Append(sb1 + "\n\t");
+            }
+
+            if(FlipX && FlipY)
+            {
+                sb1 = new StringBuilder();
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    cur += frames[i].Tiles.Count;
+
+                    if (i % 16 == 0)
+                    {
+                        if (sb1.Length > 0)
+                        {
+                            sb1.Remove(sb1.Length - 1, 1);
+                            sb1.Append("\n\t");
+                        }
+
+                        sb1.Append("dw ");
+                    }
+                    if (frames[i].Tiles.Count > 0)
+                        sb1.Append("$" + (cur - 1).ToString("X4") + ",");
+                    else sb1.Append("$FFFF,");
+                }
+                if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                    sb1.Remove(sb1.Length - 1, 1);
+
+                sb.Append(sb1 + "\n\t");
+            }
+
+            return sb.ToString();
+        }
+
+        public static string GetFramesEndsFromFrameList(Frame[] frames, bool FlipX, bool FlipY)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            StringBuilder sb1;
+            int cur;
+
+            cur = 0;
+            sb1 = new StringBuilder();
+            for (int i = 0; i < frames.Length; i++)
+            {
+                if (i % 16 == 0)
+                {
+                    if (sb1.Length > 0)
+                    {
+                        sb1.Remove(sb1.Length - 1, 1);
+                        sb1.Append("\n\t");
+                    }
+
+                    sb1.Append("dw ");
+                }
+                if (frames[i].Tiles.Count > 0)
+                    sb1.Append("$" + cur.ToString("X4") + ",");
+                else sb1.Append("$FFFF,");
+
+                cur += frames[i].Tiles.Count;
+            }
+            if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                sb1.Remove(sb1.Length - 1, 1);
+
+            sb.Append(sb1 + "\n\t");
+            
+            if(FlipX)
+            {
+                sb1 = new StringBuilder();
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    if (i % 16 == 0)
+                    {
+                        if (sb1.Length > 0)
+                        {
+                            sb1.Remove(sb1.Length - 1, 1);
+                            sb1.Append("\n\t");
+                        }
+
+                        sb1.Append("dw ");
+                    }
+                    if (frames[i].Tiles.Count > 0)
+                        sb1.Append("$" + cur.ToString("X4") + ",");
+                    else sb1.Append("$FFFF,");
+
+                    cur += frames[i].Tiles.Count;
+                }
+                if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                    sb1.Remove(sb1.Length - 1, 1);
+
+                sb.Append(sb1 + "\n\t");
+            }
+
+            if(FlipY)
+            {
+                sb1 = new StringBuilder();
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    if (i % 16 == 0)
+                    {
+                        if (sb1.Length > 0)
+                        {
+                            sb1.Remove(sb1.Length - 1, 1);
+                            sb1.Append("\n\t");
+                        }
+
+                        sb1.Append("dw ");
+                    }
+                    if (frames[i].Tiles.Count > 0)
+                        sb1.Append("$" + cur.ToString("X4") + ",");
+                    else sb1.Append("$FFFF,");
+
+                    cur += frames[i].Tiles.Count;
+                }
+                if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                    sb1.Remove(sb1.Length - 1, 1);
+
+                sb.Append(sb1 + "\n\t");
+            }
+
+            if(FlipX && FlipY)
+            {
+                sb1 = new StringBuilder();
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    if (i % 16 == 0)
+                    {
+                        if (sb1.Length > 0)
+                        {
+                            sb1.Remove(sb1.Length - 1, 1);
+                            sb1.Append("\n\t");
+                        }
+
+                        sb1.Append("dw ");
+                    }
+                    if (frames[i].Tiles.Count > 0)
+                        sb1.Append("$" + cur.ToString("X4") + ",");
+                    else sb1.Append("$FFFF,");
+
+                    cur += frames[i].Tiles.Count;
+                }
+                if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                    sb1.Remove(sb1.Length - 1, 1);
+
+                sb.Append(sb1 + "\n\t");
+            }
+
+            return sb.ToString();
+        }
+
+        public static string GetTilesCodesFromFrameList(Frame[] frames, bool FlipX, bool FlipY)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("\n");
+            StringBuilder sb1;
+            int counter;
+
+            for (int i = 0; i < frames.Length; i++)
+            {
+                counter = 0;
+                sb1 = new StringBuilder();
+                sb1.Append("Frame" + i + "_" + frames[i] + "_Tiles:\n");
+                foreach (TileMask tm in frames[i].Tiles)
+                {
+                    if (counter % 16 == 0)
+                    {
+                        if (sb1.Length > 0)
+                        {
+                            sb1.Remove(sb1.Length - 1, 1);
+                            sb1.Append("\n\t");
+                        }
+
+                        sb1.Append("db ");
+                    }
+                    sb1.Append(tm.Tile + ",");
+                    counter++;
+                }
+                if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                    sb1.Remove(sb1.Length - 1, 1);
+                sb.Append(sb1 + "\n");
+            }
+
+            if (FlipX)
+            {
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    counter = 0;
+                    sb1 = new StringBuilder();
+                    sb1.Append("Frame" + i + "_" + frames[i] + "_TilesFlipX:\n");
+                    foreach (TileMask tm in frames[i].Tiles)
+                    {
+                        if (counter % 16 == 0)
+                        {
+                            if (sb1.Length > 0)
+                            {
+                                sb1.Remove(sb1.Length - 1, 1);
+                                sb1.Append("\n\t");
+                            }
+
+                            sb1.Append("db ");
+                        }
+                        sb1.Append(tm.Tile + ",");
+                        counter++;
+                    }
+                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                        sb1.Remove(sb1.Length - 1, 1);
+                    sb.Append(sb1 + "\n");
+                }
+            }
+
+            if (FlipY)
+            {
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    counter = 0;
+                    sb1 = new StringBuilder();
+                    sb1.Append("Frame" + i + "_" + frames[i] + "_TilesFlipY:\n");
+                    foreach (TileMask tm in frames[i].Tiles)
+                    {
+                        if (counter % 16 == 0)
+                        {
+                            if (sb1.Length > 0)
+                            {
+                                sb1.Remove(sb1.Length - 1, 1);
+                                sb1.Append("\n\t");
+                            }
+
+                            sb1.Append("db ");
+                        }
+                        sb1.Append(tm.Tile + ",");
+                        counter++;
+                    }
+                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                        sb1.Remove(sb1.Length - 1, 1);
+                    sb.Append(sb1 + "\n");
+                }
+            }
+
+            if (FlipX && FlipY)
+            {
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    counter = 0;
+                    sb1 = new StringBuilder();
+                    sb1.Append("Frame" + i + "_" + frames[i] + "_TilesFlipXY:\n");
+                    foreach (TileMask tm in frames[i].Tiles)
+                    {
+                        if (counter % 16 == 0)
+                        {
+                            if (sb1.Length > 0)
+                            {
+                                sb1.Remove(sb1.Length - 1, 1);
+                                sb1.Append("\n\t");
+                            }
+
+                            sb1.Append("db ");
+                        }
+                        sb1.Append(tm.Tile + ",");
+                        counter++;
+                    }
+                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                        sb1.Remove(sb1.Length - 1, 1);
+                    sb.Append(sb1 + "\n");
+                }
+            }
+
+            return sb.ToString();
+        }
+
+        public static string GetTilesYDispFromFrameList(Frame[] frames, bool FlipX, bool FlipY)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("\n");
+            StringBuilder sb1;
+            int counter;
+            int y, dy;
+
+            for (int i = 0; i < frames.Length; i++)
+            {
+                counter = 0;
+                sb1 = new StringBuilder();
+                sb1.Append("Frame" + i + "_" + frames[i] + "_YDisp:\n");
+                foreach (TileMask tm in frames[i].Tiles)
+                {
+                    if (counter % 16 == 0)
+                    {
+                        if (sb1.Length > 0)
+                        {
+                            sb1.Remove(sb1.Length - 1, 1);
+                            sb1.Append("\n\t");
+                        }
+
+                        sb1.Append("db ");
+                    }
+                    sb1.Append(tm.YDispString + ",");
+                    counter++;
+                }
+                if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                    sb1.Remove(sb1.Length - 1, 1);
+                sb.Append(sb1 + "\n");
+            }
+            if (FlipX)
+            {
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    counter = 0;
+                    sb1 = new StringBuilder();
+                    sb1.Append("Frame" + i + "_" + frames[i] + "_YDispFlipX:\n");
+                    foreach (TileMask tm in frames[i].Tiles)
+                    {
+                        if (counter % 16 == 0)
+                        {
+                            if (sb1.Length > 0)
+                            {
+                                sb1.Remove(sb1.Length - 1, 1);
+                                sb1.Append("\n\t");
+                            }
+
+                            sb1.Append("db ");
+                        }
+                        sb1.Append(tm.YDispString + ",");
+                        counter++;
+                    }
+                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                        sb1.Remove(sb1.Length - 1, 1);
+                    sb.Append(sb1 + "\n");
+                }
+            }
+
+            if (FlipY)
+            {
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    counter = 0;
+                    sb1 = new StringBuilder();
+                    sb1.Append("Frame" + i + "_" + frames[i] + "_YDispFlipY:\n");
+                    foreach (TileMask tm in frames[i].Tiles)
+                    {
+                        if (counter % 16 == 0)
+                        {
+                            if (sb1.Length > 0)
+                            {
+                                sb1.Remove(sb1.Length - 1, 1);
+                                sb1.Append("\n\t");
+                            }
+
+                            sb1.Append("db ");
+                        }
+                        y = tm.YDisp;
+                        dy = frames[i].MidY - ((y / tm.Zoom) - 112);
+                        tm.YDisp = frames[i].MidY + 112 + dy;
+                        tm.YDisp *= tm.Zoom;
+                        sb1.Append(tm.YDispString + ",");
+                        tm.YDisp = y;
+                        counter++;
+                    }
+                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                        sb1.Remove(sb1.Length - 1, 1);
+                    sb.Append(sb1 + "\n");
+                }
+            }
+
+            if (FlipX && FlipY)
+            {
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    counter = 0;
+                    sb1 = new StringBuilder();
+                    sb1.Append("Frame" + i + "_" + frames[i] + "_YDispFlipXY:\n");
+                    foreach (TileMask tm in frames[i].Tiles)
+                    {
+                        if (counter % 16 == 0)
+                        {
+                            if (sb1.Length > 0)
+                            {
+                                sb1.Remove(sb1.Length - 1, 1);
+                                sb1.Append("\n\t");
+                            }
+
+                            sb1.Append("db ");
+                        }
+                        y = tm.YDisp;
+                        dy = frames[i].MidY - ((y / tm.Zoom) - 112);
+                        tm.YDisp = frames[i].MidY + 112 + dy;
+                        tm.YDisp *= tm.Zoom;
+                        sb1.Append(tm.YDispString + ",");
+                        tm.YDisp = y;
+                        counter++;
+                    }
+                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                        sb1.Remove(sb1.Length - 1, 1);
+                    sb.Append(sb1 + "\n");
+                }
+            }
+
+            return sb.ToString();
+        }
+
+        public static string GetTilesXDispFromFrameList(Frame[] frames, bool FlipX, bool FlipY)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("\n");
+            StringBuilder sb1;
+            int counter;
+            int x, dx;
+
+            for (int i = 0; i < frames.Length; i++)
+            {
+                counter = 0;
+                sb1 = new StringBuilder();
+                sb1.Append("Frame" + i + "_" + frames[i] + "_XDisp:\n");
+                foreach (TileMask tm in frames[i].Tiles)
+                {
+                    if (counter % 16 == 0)
+                    {
+                        if (sb1.Length > 0)
+                        {
+                            sb1.Remove(sb1.Length - 1, 1);
+                            sb1.Append("\n\t");
+                        }
+
+                        sb1.Append("db ");
+                    }
+                    sb1.Append(tm.XDispString + ",");
+                    counter++;
+                }
+                if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                    sb1.Remove(sb1.Length - 1, 1);
+                sb.Append(sb1 + "\n");
+            }
+
+            if (FlipX)
+            {
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    counter = 0;
+                    sb1 = new StringBuilder();
+                    sb1.Append("Frame" + i + "_" + frames[i] + "_XDispFlipX:\n");
+                    foreach (TileMask tm in frames[i].Tiles)
+                    {
+                        if (counter % 16 == 0)
+                        {
+                            if (sb1.Length > 0)
+                            {
+                                sb1.Remove(sb1.Length - 1, 1);
+                                sb1.Append("\n\t");
+                            }
+
+                            sb1.Append("db ");
+                        }
+                        x = tm.XDisp;
+                        dx = frames[i].MidX - ((x / tm.Zoom) - 128);
+                        tm.XDisp = frames[i].MidX + 128 + dx;
+                        tm.XDisp *= tm.Zoom;
+                        sb1.Append(tm.XDispString + ",");
+                        tm.XDisp = x;
+                        counter++;
+                    }
+                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                        sb1.Remove(sb1.Length - 1, 1);
+                    sb.Append(sb1 + "\n");
+                }
+            }
+
+            if (FlipY)
+            {
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    counter = 0;
+                    sb1 = new StringBuilder();
+                    sb1.Append("Frame" + i + "_" + frames[i] + "_XDispFlipY:\n");
+                    foreach (TileMask tm in frames[i].Tiles)
+                    {
+                        if (counter % 16 == 0)
+                        {
+                            if (sb1.Length > 0)
+                            {
+                                sb1.Remove(sb1.Length - 1, 1);
+                                sb1.Append("\n\t");
+                            }
+
+                            sb1.Append("db ");
+                        }
+                        sb1.Append(tm.XDispString + ",");
+                        counter++;
+                    }
+                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                        sb1.Remove(sb1.Length - 1, 1);
+                    sb.Append(sb1 + "\n");
+                }
+            }
+
+            if (FlipX && FlipY)
+            {
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    counter = 0;
+                    sb1 = new StringBuilder();
+                    sb1.Append("Frame" + i + "_" + frames[i] + "_XDispFlipXY:\n");
+                    foreach (TileMask tm in frames[i].Tiles)
+                    {
+                        if (counter % 16 == 0)
+                        {
+                            if (sb1.Length > 0)
+                            {
+                                sb1.Remove(sb1.Length - 1, 1);
+                                sb1.Append("\n\t");
+                            }
+
+                            sb1.Append("db ");
+                        }
+                        x = tm.XDisp;
+                        dx = frames[i].MidX - ((x / tm.Zoom) - 128);
+                        tm.XDisp = frames[i].MidX + 128 + dx;
+                        tm.XDisp *= tm.Zoom;
+                        sb1.Append(tm.XDispString + ",");
+                        tm.XDisp = x;
+                        counter++;
+                    }
+                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                        sb1.Remove(sb1.Length - 1, 1);
+                    sb.Append(sb1 + "\n");
+                }
+            }
+
+            return sb.ToString();
+        }
+
+        public static string GetTilesPropertiesFromFrameList(Frame[] frames, bool FlipX, bool FlipY)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("\n");
+            StringBuilder sb1;
+            int counter;
+            bool fx, fy;
+
+            for (int i = 0; i < frames.Length; i++)
+            {
+                counter = 0;
+                sb1 = new StringBuilder();
+                sb1.Append("Frame" + i + "_" + frames[i] + "_Properties:\n");
+                foreach (TileMask tm in frames[i].Tiles)
+                {
+                    if (counter % 16 == 0)
+                    {
+                        if (sb1.Length > 0)
+                        {
+                            sb1.Remove(sb1.Length - 1, 1);
+                            sb1.Append("\n\t");
+                        }
+
+                        sb1.Append("db ");
+                    }
+                    sb1.Append(tm.Properties + ",");
+                    counter++;
+                }
+                if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                    sb1.Remove(sb1.Length - 1, 1);
+                sb.Append(sb1 + "\n");
+            }
+
+            if (FlipX)
+            {
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    counter = 0;
+                    sb1 = new StringBuilder();
+                    sb1.Append("Frame" + i + "_" + frames[i] + "_PropertiesFlipX:\n");
+                    foreach (TileMask tm in frames[i].Tiles)
+                    {
+                        if (counter % 16 == 0)
+                        {
+                            if (sb1.Length > 0)
+                            {
+                                sb1.Remove(sb1.Length - 1, 1);
+                                sb1.Append("\n\t");
+                            }
+
+                            sb1.Append("db ");
+                        }
+                        fx = tm.FlipX;
+                        tm.FlipX = !tm.FlipX;
+                        sb1.Append(tm.Properties + ",");
+                        tm.FlipX = fx;
+                        counter++;
+                    }
+                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                        sb1.Remove(sb1.Length - 1, 1);
+                    sb.Append(sb1 + "\n");
+                }
+            }
+
+            if (FlipY)
+            {
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    counter = 0;
+                    sb1 = new StringBuilder();
+                    sb1.Append("Frame" + i + "_" + frames[i] + "_PropertiesFlipY:\n");
+                    foreach (TileMask tm in frames[i].Tiles)
+                    {
+                        if (counter % 16 == 0)
+                        {
+                            if (sb1.Length > 0)
+                            {
+                                sb1.Remove(sb1.Length - 1, 1);
+                                sb1.Append("\n\t");
+                            }
+
+                            sb1.Append("db ");
+                        }
+                        fy = tm.FlipY;
+                        tm.FlipY = !tm.FlipY;
+                        sb1.Append(tm.Properties + ",");
+                        tm.FlipY = fy;
+                        counter++;
+                    }
+                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                        sb1.Remove(sb1.Length - 1, 1);
+                    sb.Append(sb1 + "\n");
+                }
+            }
+
+            if (FlipX && FlipY)
+            {
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    counter = 0;
+                    sb1 = new StringBuilder();
+                    sb1.Append("Frame" + i + "_" + frames[i] + "_PropertiesFlipXY:\n");
+                    foreach (TileMask tm in frames[i].Tiles)
+                    {
+                        if (counter % 16 == 0)
+                        {
+                            if (sb1.Length > 0)
+                            {
+                                sb1.Remove(sb1.Length - 1, 1);
+                                sb1.Append("\n\t");
+                            }
+
+                            sb1.Append("db ");
+                        }
+                        fx = tm.FlipX;
+                        tm.FlipX = !tm.FlipX;
+                        fy = tm.FlipY;
+                        tm.FlipY = !tm.FlipY;
+                        sb1.Append(tm.Properties + ",");
+                        tm.FlipX = fx;
+                        tm.FlipY = fy;
+                        counter++;
+                    }
+                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                        sb1.Remove(sb1.Length - 1, 1);
+                    sb.Append(sb1 + "\n");
+                }
+            }
+
+            return sb.ToString();
+        }
+
+        public static string GetTilesSizesFromFrameList(Frame[] frames, bool FlipX, bool FlipY)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("\n");
+            StringBuilder sb1;
+            int counter;
+
+            for (int i = 0; i < frames.Length; i++)
+            {
+                counter = 0;
+                sb1 = new StringBuilder();
+                sb1.Append("Frame" + i + "_" + frames[i] + "_Sizes:\n");
+                foreach (TileMask tm in frames[i].Tiles)
+                {
+                    if (counter % 16 == 0)
+                    {
+                        if (sb1.Length > 0)
+                        {
+                            sb1.Remove(sb1.Length - 1, 1);
+                            sb1.Append("\n\t");
+                        }
+
+                        sb1.Append("db ");
+                    }
+                    sb1.Append(tm.SizeString + ",");
+                    counter++;
+                }
+                if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                    sb1.Remove(sb1.Length - 1, 1);
+                sb.Append(sb1 + "\n");
+            }
+
+            if (FlipX)
+            {
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    counter = 0;
+                    sb1 = new StringBuilder();
+                    sb1.Append("Frame" + i + "_" + frames[i] + "_SizesFlipX:\n");
+                    foreach (TileMask tm in frames[i].Tiles)
+                    {
+                        if (counter % 16 == 0)
+                        {
+                            if (sb1.Length > 0)
+                            {
+                                sb1.Remove(sb1.Length - 1, 1);
+                                sb1.Append("\n\t");
+                            }
+
+                            sb1.Append("db ");
+                        }
+                        sb1.Append(tm.SizeString + ",");
+                        counter++;
+                    }
+                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                        sb1.Remove(sb1.Length - 1, 1);
+                    sb.Append(sb1 + "\n");
+                }
+            }
+
+            if (FlipY)
+            {
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    counter = 0;
+                    sb1 = new StringBuilder();
+                    sb1.Append("Frame" + i + "_" + frames[i] + "_SizesFlipY:\n");
+                    foreach (TileMask tm in frames[i].Tiles)
+                    {
+                        if (counter % 16 == 0)
+                        {
+                            if (sb1.Length > 0)
+                            {
+                                sb1.Remove(sb1.Length - 1, 1);
+                                sb1.Append("\n\t");
+                            }
+
+                            sb1.Append("db ");
+                        }
+                        sb1.Append(tm.SizeString + ",");
+                        counter++;
+                    }
+                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                        sb1.Remove(sb1.Length - 1, 1);
+                    sb.Append(sb1 + "\n");
+                }
+            }
+
+            if (FlipX && FlipY)
+            {
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    counter = 0;
+                    sb1 = new StringBuilder();
+                    sb1.Append("Frame" + i + "_" + frames[i] + "_SizesFlipXY:\n");
+                    foreach (TileMask tm in frames[i].Tiles)
+                    {
+                        if (counter % 16 == 0)
+                        {
+                            if (sb1.Length > 0)
+                            {
+                                sb1.Remove(sb1.Length - 1, 1);
+                                sb1.Append("\n\t");
+                            }
+
+                            sb1.Append("db ");
+                        }
+                        sb1.Append(tm.SizeString + ",");
+                        counter++;
+                    }
+                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
+                        sb1.Remove(sb1.Length - 1, 1);
+                    sb.Append(sb1 + "\n");
+                }
+            }
+
+            return sb.ToString();
+        }
         public Bitmap GetBitmap()
         {
             int minX = int.MaxValue, minY = int.MaxValue;

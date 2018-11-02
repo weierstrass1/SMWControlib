@@ -64,10 +64,10 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.extractToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadProj = new System.Windows.Forms.ToolStripMenuItem();
+            this.save = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.extratTo = new System.Windows.Forms.ToolStripMenuItem();
             this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spriteGridSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.interactionGridSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,6 +79,8 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.versionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.creditsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFile = new System.Windows.Forms.SaveFileDialog();
+            this.openFile = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -544,10 +546,10 @@
             this.toolStripMenuItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newProjectToolStripMenuItem,
-            this.openProjectToolStripMenuItem,
-            this.saveProjectToolStripMenuItem,
-            this.saveAsToolStripMenuItem,
-            this.extractToolStripMenuItem});
+            this.loadProj,
+            this.save,
+            this.saveAs,
+            this.extratTo});
             this.toolStripMenuItem1.Font = new System.Drawing.Font("MS Reference Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
@@ -560,40 +562,40 @@
             this.newProjectToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.newProjectToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newProjectToolStripMenuItem.Text = "New Project";
             // 
-            // openProjectToolStripMenuItem
+            // loadProj
             // 
-            this.openProjectToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
-            this.openProjectToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.openProjectToolStripMenuItem.Name = "openProjectToolStripMenuItem";
-            this.openProjectToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.openProjectToolStripMenuItem.Text = "Open Project";
+            this.loadProj.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
+            this.loadProj.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.loadProj.Name = "loadProj";
+            this.loadProj.Size = new System.Drawing.Size(180, 22);
+            this.loadProj.Text = "Load";
             // 
-            // saveProjectToolStripMenuItem
+            // save
             // 
-            this.saveProjectToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
-            this.saveProjectToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
-            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.saveProjectToolStripMenuItem.Text = "Save Project";
+            this.save.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
+            this.save.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.save.Name = "save";
+            this.save.Size = new System.Drawing.Size(180, 22);
+            this.save.Text = "Save";
             // 
-            // saveAsToolStripMenuItem
+            // saveAs
             // 
-            this.saveAsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
-            this.saveAsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.saveAsToolStripMenuItem.Text = "Save as";
+            this.saveAs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
+            this.saveAs.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.saveAs.Name = "saveAs";
+            this.saveAs.Size = new System.Drawing.Size(180, 22);
+            this.saveAs.Text = "Save as";
             // 
-            // extractToolStripMenuItem
+            // extratTo
             // 
-            this.extractToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
-            this.extractToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.extractToolStripMenuItem.Name = "extractToolStripMenuItem";
-            this.extractToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.extractToolStripMenuItem.Text = "Extract";
+            this.extratTo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
+            this.extratTo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.extratTo.Name = "extratTo";
+            this.extratTo.Size = new System.Drawing.Size(180, 22);
+            this.extratTo.Text = "Extract To";
             // 
             // windowToolStripMenuItem
             // 
@@ -776,10 +778,10 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openProjectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem extractToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadProj;
+        private System.Windows.Forms.ToolStripMenuItem save;
+        private System.Windows.Forms.ToolStripMenuItem saveAs;
+        private System.Windows.Forms.ToolStripMenuItem extratTo;
         private System.Windows.Forms.ToolStripMenuItem windowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem spriteGridSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem interactionGridSettingsToolStripMenuItem;
@@ -792,5 +794,7 @@
         private System.Windows.Forms.ToolStripMenuItem versionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem creditsToolStripMenuItem;
         private SMWControlibControls.LogicControls.CodeEditorController codeEditorController1;
+        private System.Windows.Forms.SaveFileDialog saveFile;
+        private System.Windows.Forms.OpenFileDialog openFile;
     }
 }

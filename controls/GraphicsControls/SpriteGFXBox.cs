@@ -20,8 +20,8 @@ namespace SMWControlibControls.GraphicsControls
         private int selectionAccuracy = 8;
         private Zoom tilezoom = SMWControlibBackend.Graphics.Zoom.X1;
         private TileSP sp;
-        private Tile[,] tiles16;
-        private Tile[,] tiles8;
+        public Tile[,] Tiles16 { get; private set; }
+        public Tile[,] Tiles8 { get; private set; }
         private Tile[,] selectedTiles;
         private int selectionStartX, selectionStartY;
         private int selectionEndX, selectionEndY;
@@ -175,13 +175,13 @@ namespace SMWControlibControls.GraphicsControls
             int zsiz = tileSize * TileZoom;
             for (int i = 0; i < selectedTiles.GetLength(0); i++, x += zsiz)
             {
-                if (oddX && i == w)
+                if (tileSize == 16 && oddX && i == w)
                     x -= (zsiz / 2);
 
                 y = 0;
                 for (int j = 0; j < selectedTiles.GetLength(1); j++, y += zsiz)
                 {
-                    if (oddY && j == h)
+                    if (tileSize == 16 && oddY && j == h)
                         y -= (zsiz / 2);
                     tms[k] = new TileMask(sp, selectedTiles[i, j], TileZoom, flipX, flipY)
                     {
@@ -286,37 +286,37 @@ namespace SMWControlibControls.GraphicsControls
         {
             base.LoadGFX(path, position);
             BaseTile bt = BaseTile.None;
-            if (tiles16 == null)
+            if (Tiles16 == null)
             {
-                tiles16 = Tile.GenerateTilesFromColorMatrix(colorMatrix,
+                Tiles16 = Tile.GenerateTilesFromColorMatrix(colorMatrix,
                 TileSize.Size16x16, bt, out bt);
             }
             else
             {
                 Tile[,] t = Tile.GenerateTilesFromColorMatrix(colorMatrix,
                 TileSize.Size16x16, bt, out bt);
-                for (int i = 0; i < tiles16.GetLength(0); i++)
+                for (int i = 0; i < Tiles16.GetLength(0); i++)
                 {
-                    for (int j = 0; j < tiles16.GetLength(1); j++)
+                    for (int j = 0; j < Tiles16.GetLength(1); j++)
                     {
-                        Tile.FusionTiles(tiles16[i, j], t[i, j], BaseTile.None);
+                        Tile.FusionTiles(Tiles16[i, j], t[i, j], BaseTile.None);
                     }
                 }
             }
-            if (tiles8 == null)
+            if (Tiles8 == null)
             {
-                tiles8 = Tile.GenerateTilesFromColorMatrix(colorMatrix,
+                Tiles8 = Tile.GenerateTilesFromColorMatrix(colorMatrix,
                 TileSize.Size8x8, bt, out bt);
             }
             else
             {
                 Tile[,] t = Tile.GenerateTilesFromColorMatrix(colorMatrix,
                 TileSize.Size8x8, bt, out bt);
-                for (int i = 0; i < tiles8.GetLength(0); i++)
+                for (int i = 0; i < Tiles8.GetLength(0); i++)
                 {
-                    for (int j = 0; j < tiles8.GetLength(1); j++)
+                    for (int j = 0; j < Tiles8.GetLength(1); j++)
                     {
-                        Tile.FusionTiles(tiles8[i, j], t[i, j], BaseTile.None);
+                        Tile.FusionTiles(Tiles8[i, j], t[i, j], BaseTile.None);
                     }
                 }
             }
@@ -325,11 +325,11 @@ namespace SMWControlibControls.GraphicsControls
         private void getTilesFromSelection()
         {
             int tileSize = 16;
-            Tile[,] tiles = tiles16;
+            Tile[,] tiles = Tiles16;
             if (selection.Width / Zoom == 8 || 
                 selection.Height / Zoom == 8)
             {
-                tiles = tiles8;
+                tiles = Tiles8;
                 tileSize = 8;
             }
             if (tiles == null) return;

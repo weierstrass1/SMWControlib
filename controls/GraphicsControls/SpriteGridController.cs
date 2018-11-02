@@ -25,8 +25,28 @@ namespace SMWControlibControls.GraphicsControls
         public Size MaxS { get; private set; }
         public event Action ZoomChanged, MidChanged;
 
-        public int MidX { get { return spriteGrid1.MidX; } }
-        public int MidY { get { return spriteGrid1.MidY; } }
+        public int MidX
+        {
+            get
+            {
+                return spriteGrid1.MidX;
+            }
+            set
+            {
+                trackBar1.Value = value;
+            }
+        }
+        public int MidY
+        {
+            get
+            {
+                return spriteGrid1.MidY;
+            }
+            set
+            {
+                trackBar2.Value = value;
+            }
+        }
 
         public SpriteGridController()
         {

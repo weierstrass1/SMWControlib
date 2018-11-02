@@ -28,7 +28,7 @@ namespace SMWControlibBackend.Graphics
             get
             {
                 int Y = YDisp / Zoom;
-                Y = 112 - Y;
+                Y -= 112;
                 string sy = Convert.ToString(Y, 16);
                 if (sy.Length <= 1) sy = "0" + sy;
                 sy = sy.Substring(sy.Length - 2, 2);
@@ -37,7 +37,7 @@ namespace SMWControlibBackend.Graphics
                 return sy;
             }
         }
-        private TileSP sp = TileSP.SP23;
+        public TileSP SP { get; private set; } = TileSP.SP23;
         private PaletteId palette = PaletteId.PF;
         public string SizeString
         {
@@ -172,7 +172,7 @@ namespace SMWControlibBackend.Graphics
             {
                 int pal = ((int)palette << 1) & 0b00001110;
                 byte[] prop = new byte[1];
-                prop[0] = (byte)((int)Priority | pal | (int)sp);
+                prop[0] = (byte)((int)Priority | pal | (int)SP);
                 if (flipX) prop[0] += 64;
                 if (flipY) prop[0] += 128;
                 return prop;
@@ -181,7 +181,7 @@ namespace SMWControlibBackend.Graphics
 
         public TileMask(TileSP SP, Tile Tile, Zoom Zoom, bool FlipX, bool FlipY)
         {
-            sp = SP;
+            this.SP = SP;
             XDisp = 0;
             YDisp = 0;
             zoom = Zoom;
@@ -241,7 +241,7 @@ namespace SMWControlibBackend.Graphics
         }
         public TileMask Clone()
         {
-            TileMask tm = new TileMask(sp, tile, zoom, flipX, flipY)
+            TileMask tm = new TileMask(SP, tile, zoom, flipX, flipY)
             {
                 XDisp = XDisp,
                 YDisp = YDisp,

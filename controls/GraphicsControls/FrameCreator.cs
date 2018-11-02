@@ -44,6 +44,19 @@ namespace SMWControlibControls.GraphicsControls
             frameSelector.SelectedIndexChanged += selectedIndexChanged;
         }
 
+        public void LoadProjectFrames(Frame[] projFrames)
+        {
+            frames.Clear();
+
+            foreach(Frame f in projFrames)
+            {
+                frames.Add(f);
+            }
+            SelectedFrame = null;
+            refreshFrames();
+            if (frames.Count > 0) frameSelector.SelectedIndex = 0;
+        }
+
         public void ChangeMid(int MidX, int MidY)
         {
             foreach(Frame f in frames)

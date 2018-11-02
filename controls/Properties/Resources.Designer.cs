@@ -83,6 +83,16 @@ namespace SMWControlibControls.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap boton_morado_claro {
+            get {
+                object obj = ResourceManager.GetObject("boton_morado_claro", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap snesAdd {
             get {
                 object obj = ResourceManager.GetObject("snesAdd", resourceCulture);

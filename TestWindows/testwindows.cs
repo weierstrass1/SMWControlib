@@ -3,13 +3,16 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using SMWControlibBackend;
 using SMWControlibBackend.Graphics;
+using SMWControlibBackend.Graphics.Frames;
 using SMWControlibControls.GraphicsControls;
 
 namespace TestWindows
 {
     public partial class testwindows : Form
     {
+        string projectPath = null;
         public testwindows()
         {
             InitializeComponent();
@@ -38,6 +41,10 @@ namespace TestWindows
             interactionMenu1.IPColorChanged += interactionMenuIPColorChanged;
             interactionMenu1.ZoomChanged += interactionMenuZoomChanged;
             interactionMenu1.CellSizeChanged += interactionMenuCellSizeChanged;
+            extratTo.Click += extratToClick;
+            save.Click += saveClick;
+            saveAs.Click += saveAsClick;
+            loadProj.Click += loadProjClick;
             try
             {
                 codeEditorController1.CodeEditor.CanUndoRedo = false;
@@ -50,6 +57,129 @@ namespace TestWindows
             catch
             {
             }
+        }
+
+        private void saveAsClick(object sender, EventArgs e)
+        {
+            saveFile.Filter = "Dyzen Project File (*.dyz)|*.dyz";
+            saveFile.DefaultExt = "dyz";
+            if (projectPath != null)
+            {
+                saveFile.FileName = Path.GetFileNameWithoutExtension(projectPath);
+            }
+            if (saveFile.ShowDialog() == DialogResult.OK)
+            {
+                projectPath = saveFile.FileName;
+            }
+            else
+            {
+                return;
+            }
+            if (Path.GetFileNameWithoutExtension(projectPath) == "")
+                return;
+            ProjectContainer pc = new ProjectContainer();
+            pc.GetAttributes(frameCreator1.Frames, animationCreator1.Animations,
+                codeEditorController1.CodeEditor.Text, spriteGFXBox1.GetGFX(), spriteGFXBox2.GetGFX());
+            pc.Serialize(projectPath);
+            MessageBox.Show("Project " + Path.GetFileNameWithoutExtension(projectPath) + " Saved.",
+                "Save Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void loadProjClick(object sender, EventArgs e)
+        {
+            openFile.Multiselect = false;
+            openFile.Filter = "Dyzen Project File (*.dyz)|*.dyz";
+            openFile.CheckFileExists = true;
+            openFile.CheckPathExists = true;
+            if (projectPath != null)
+            {
+                openFile.FileName = Path.GetFileNameWithoutExtension(projectPath);
+            }
+            if (openFile.ShowDialog() == DialogResult.OK)
+            {
+                projectPath = openFile.FileName;
+            }
+            else
+            {
+                return;
+            }
+            if (Path.GetFileNameWithoutExtension(projectPath) == "") return;
+            ProjectContainer pc = ProjectContainer.Deserialize(projectPath);
+            pc.GlobalPalette.ToGlobalColorPalette();
+            File.WriteAllBytes("tmp.bin", pc.SP12);
+            spriteGFXBox1.LoadGFX("tmp.bin", 0);
+            File.Delete("tmp.bin");
+            File.WriteAllBytes("tmp.bin", pc.SP34);
+            spriteGFXBox2.LoadGFX("tmp.bin", 0);
+            File.Delete("tmp.bin");
+            if (pc.Frames != null && pc.Frames.Length > 0)
+            {
+                resizeableSpriteGridController1.MidX = pc.Frames[0].MidX + 136;
+                resizeableSpriteGridController1.MidY = pc.Frames[0].MidY + 104;
+            }
+            frameCreator1.LoadProjectFrames(pc.GetFrames(spriteGFXBox1.Tiles16,
+            spriteGFXBox2.Tiles16, spriteGFXBox1.Tiles8, spriteGFXBox2.Tiles8));
+            animationCreator1.LoadProject(pc.GetAnimations(frameCreator1.Frames));
+            codeEditorController1.CodeEditor.ClearAll();
+            codeEditorController1.CodeEditor.AppendText(pc.Code);
+            MessageBox.Show("Project " + Path.GetFileNameWithoutExtension(projectPath) + " Loaded.",
+                "Load Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void saveClick(object sender, EventArgs e)
+        {
+            if (projectPath == null)
+            {
+                saveFile.Filter = "Dyzen Project File (*.dyz)|*.dyz";
+                saveFile.DefaultExt = "dyz";
+                if (projectPath != null) 
+                {
+                    saveFile.FileName = Path.GetFileNameWithoutExtension(projectPath);
+                }
+                if (saveFile.ShowDialog() == DialogResult.OK)
+                {
+                    projectPath = saveFile.FileName;
+                }
+                else
+                {
+                    return;
+                }
+            }
+            if (Path.GetFileNameWithoutExtension(projectPath) == "")
+                return;
+            ProjectContainer pc = new ProjectContainer();
+            pc.GetAttributes(frameCreator1.Frames, animationCreator1.Animations,
+                codeEditorController1.CodeEditor.Text, spriteGFXBox1.GetGFX(), spriteGFXBox2.GetGFX());
+            pc.Serialize(projectPath);
+            MessageBox.Show("Project " + Path.GetFileNameWithoutExtension(projectPath) + " Saved.",
+                "Save Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void extratToClick(object sender, EventArgs e)
+        {
+            string s = codeEditorController1.CodeEditor.Text;
+
+            s = s.Replace("dw @fls.",
+                Frame.GetFramesLengthFromFrameList(frameCreator1.Frames, true, true));
+            s = s.Replace("dw @ffps.",
+                Frame.GetFramesFlippersFromFrameList(frameCreator1.Frames, true, true));
+            s = s.Replace("dw @fsp.",
+                Frame.GetFramesStartsFromFrameList(frameCreator1.Frames, true, true));
+            s = s.Replace("dw @fep.",
+                Frame.GetFramesEndsFromFrameList(frameCreator1.Frames, true, true));
+            s = s.Replace("db @tiles.",
+                Frame.GetTilesCodesFromFrameList(frameCreator1.Frames, true, true));
+            s = s.Replace("db @props.",
+                Frame.GetTilesPropertiesFromFrameList(frameCreator1.Frames, true, true));
+            s = s.Replace("db @xdisps.",
+                Frame.GetTilesXDispFromFrameList(frameCreator1.Frames, true, true));
+            s = s.Replace("db @ydisps.",
+                Frame.GetTilesYDispFromFrameList(frameCreator1.Frames, true, true));
+            s = s.Replace("db @sizes.",
+                Frame.GetTilesSizesFromFrameList(frameCreator1.Frames, true, true));
+
+
+            File.WriteAllText("output.txt", s);
         }
 
         private void interactionMenuCellSizeChanged(int obj)

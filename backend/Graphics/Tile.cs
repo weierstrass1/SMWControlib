@@ -259,7 +259,7 @@ namespace SMWControlibBackend.Graphics
                     };
                     for (int p = 0; p < numSize && x + p < colors.GetLength(0); p++)
                     {
-                        for (int q = 0; y + q < colors.GetLength(1) && ((j < h - 1 && q < numSize) || (j == h - 1 && q < ylim)); q++)
+                        for (int q = 0; y + q < colors.GetLength(1) && (j < h && q < numSize); q++) 
                         {
                             tiles[i, j].colors[p, q] = colors[x + p, y + q];
                         }

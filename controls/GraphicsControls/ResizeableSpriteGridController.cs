@@ -25,8 +25,28 @@ namespace SMWControlibControls.GraphicsControls
 
         public event Action MidChanged;
 
-        public int MidX { get { return spriteGridController1.MidX; } }
-        public int MidY { get { return spriteGridController1.MidY; } }
+        public int MidX
+        {
+            get
+            {
+                return spriteGridController1.MidX;
+            }
+            set
+            {
+                spriteGridController1.MidX = value;
+            }
+        }
+        public int MidY
+        {
+            get
+            {
+                return spriteGridController1.MidY;
+            }
+            set
+            {
+                spriteGridController1.MidY = value;
+            }
+        }
         public ResizeableSpriteGridController()
         {
             InitializeComponent();

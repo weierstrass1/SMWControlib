@@ -525,12 +525,19 @@ namespace SMWControlibControls.GraphicsControls
             else dfy2 = 0;
 
             int accZoom = gridAccuracy * zoom;
+            int xmin = minX + xZoom + dfx2 - dfx;
+            xmin = (xmin / accZoom) * accZoom;
+            int ymin = minY + yZoom + dfy2 - dfy;
+            ymin = (ymin / accZoom) * accZoom;
+
+            int dif;
+
             foreach (TileMask tm in selection)
             {
-                tm.XDisp += xZoom + dfx2 - dfx;
-                tm.YDisp += yZoom + dfy2 - dfy;
-                tm.XDisp = (tm.XDisp / accZoom) * accZoom;
-                tm.YDisp = (tm.YDisp / accZoom) * accZoom;
+                dif = tm.XDisp - minX;
+                tm.XDisp = xmin + dif;
+                dif = tm.YDisp - minY;
+                tm.YDisp = ymin + dif;
             }
             buildSelectionBox();
         }
@@ -578,17 +585,19 @@ namespace SMWControlibControls.GraphicsControls
             else dfy2 = 0;
 
             int accZoom = gridAccuracy * zoom;
+            int xmin = -dMinx + selEndX + dfx2 - dfx;
+            int ymin = -dMiny + selEndY + dfy2 - dfy;
+            xmin = (xmin / accZoom) * accZoom;
+            ymin = (ymin / accZoom) * accZoom;
+
+            int dif;
 
             foreach (TileMask tm in selection)
             {
-                tm.XDisp -= minX;
-                tm.YDisp -= minY;
-                tm.XDisp -= dMinx;
-                tm.YDisp -= dMiny;
-                tm.XDisp += selEndX + dfx2 - dfx;
-                tm.YDisp += selEndY + dfy2 - dfy;
-                tm.XDisp = (tm.XDisp / accZoom) * accZoom;
-                tm.YDisp = (tm.YDisp / accZoom) * accZoom;
+                dif = tm.XDisp - minX;
+                tm.XDisp = xmin + dif;
+                dif = tm.YDisp - minY;
+                tm.YDisp = ymin + dif;
             }
 
             buildSelectionBox();

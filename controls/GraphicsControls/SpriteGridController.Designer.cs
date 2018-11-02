@@ -104,6 +104,7 @@
             // 
             this.spriteGrid1.ActivateCenterSquare = true;
             this.spriteGrid1.ActivateGrid = false;
+            this.spriteGrid1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
             this.spriteGrid1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("spriteGrid1.BackgroundImage")));
             this.spriteGrid1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.spriteGrid1.CenterSquareColor = System.Drawing.SystemColors.WindowFrame;
@@ -285,8 +286,9 @@
             // mirrorH
             // 
             this.mirrorH.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
+            this.mirrorH.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("mirrorH.BackgroundImage")));
             this.mirrorH.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.mirrorH.Border = null;
+            this.mirrorH.Border = ((System.Drawing.Image)(resources.GetObject("mirrorH.Border")));
             this.mirrorH.Clicked = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))));
             this.mirrorH.Disabled = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.mirrorH.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
@@ -298,12 +300,12 @@
             this.mirrorH.Location = new System.Drawing.Point(8, 8);
             this.mirrorH.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.mirrorH.Name = "mirrorH";
-            this.mirrorH.OffSetX1 = 5;
-            this.mirrorH.OffSetX2 = 9;
-            this.mirrorH.OffSetY1 = 5;
-            this.mirrorH.OffSetY2 = 9;
+            this.mirrorH.OffSetX1 = 2;
+            this.mirrorH.OffSetX2 = 7;
+            this.mirrorH.OffSetY1 = 2;
+            this.mirrorH.OffSetY2 = 7;
             this.mirrorH.Size = new System.Drawing.Size(32, 32);
-            this.mirrorH.Source = null;
+            this.mirrorH.Source = ((System.Drawing.Image)(resources.GetObject("mirrorH.Source")));
             this.mirrorH.TabIndex = 0;
             this.mirrorH.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.mirrorH.UseVisualStyleBackColor = false;
@@ -326,9 +328,9 @@
             this.mirrorV.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.mirrorV.Name = "mirrorV";
             this.mirrorV.OffSetX1 = 2;
-            this.mirrorV.OffSetX2 = 8;
+            this.mirrorV.OffSetX2 = 7;
             this.mirrorV.OffSetY1 = 2;
-            this.mirrorV.OffSetY2 = 8;
+            this.mirrorV.OffSetY2 = 7;
             this.mirrorV.Size = new System.Drawing.Size(32, 32);
             this.mirrorV.Source = ((System.Drawing.Image)(resources.GetObject("mirrorV.Source")));
             this.mirrorV.TabIndex = 1;
@@ -352,9 +354,9 @@
             this.moveDown.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.moveDown.Name = "moveDown";
             this.moveDown.OffSetX1 = 2;
-            this.moveDown.OffSetX2 = 8;
+            this.moveDown.OffSetX2 = 7;
             this.moveDown.OffSetY1 = 2;
-            this.moveDown.OffSetY2 = 8;
+            this.moveDown.OffSetY2 = 7;
             this.moveDown.Size = new System.Drawing.Size(32, 32);
             this.moveDown.Source = ((System.Drawing.Image)(resources.GetObject("moveDown.Source")));
             this.moveDown.TabIndex = 5;
@@ -378,9 +380,9 @@
             this.moveLeft.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.moveLeft.Name = "moveLeft";
             this.moveLeft.OffSetX1 = 2;
-            this.moveLeft.OffSetX2 = 8;
+            this.moveLeft.OffSetX2 = 7;
             this.moveLeft.OffSetY1 = 2;
-            this.moveLeft.OffSetY2 = 8;
+            this.moveLeft.OffSetY2 = 7;
             this.moveLeft.Size = new System.Drawing.Size(32, 32);
             this.moveLeft.Source = ((System.Drawing.Image)(resources.GetObject("moveLeft.Source")));
             this.moveLeft.TabIndex = 2;
@@ -404,9 +406,9 @@
             this.moveUp.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.moveUp.Name = "moveUp";
             this.moveUp.OffSetX1 = 2;
-            this.moveUp.OffSetX2 = 8;
+            this.moveUp.OffSetX2 = 7;
             this.moveUp.OffSetY1 = 2;
-            this.moveUp.OffSetY2 = 8;
+            this.moveUp.OffSetY2 = 7;
             this.moveUp.Size = new System.Drawing.Size(32, 32);
             this.moveUp.Source = ((System.Drawing.Image)(resources.GetObject("moveUp.Source")));
             this.moveUp.TabIndex = 4;
@@ -430,9 +432,9 @@
             this.moveRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.moveRight.Name = "moveRight";
             this.moveRight.OffSetX1 = 2;
-            this.moveRight.OffSetX2 = 8;
+            this.moveRight.OffSetX2 = 7;
             this.moveRight.OffSetY1 = 2;
-            this.moveRight.OffSetY2 = 8;
+            this.moveRight.OffSetY2 = 7;
             this.moveRight.Size = new System.Drawing.Size(32, 32);
             this.moveRight.Source = ((System.Drawing.Image)(resources.GetObject("moveRight.Source")));
             this.moveRight.TabIndex = 3;

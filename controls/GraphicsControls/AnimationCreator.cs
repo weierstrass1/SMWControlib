@@ -15,7 +15,7 @@ namespace SMWControlibControls.GraphicsControls
     {
         List<Animation> anims;
 
-        public Animation[] Frames
+        public Animation[] Animations
         {
             get
             {
@@ -34,13 +34,16 @@ namespace SMWControlibControls.GraphicsControls
             private set
             {
                 selectedAnimation = value;
-                if(selectedAnimation.PlayType == PlayType.Continuous)
+                if(selectedAnimation != null)
                 {
-                    continuous.Checked = true;
-                }
-                else
-                {
-                    onlyOnce.Checked = true;
+                    if (selectedAnimation.PlayType == PlayType.Continuous)
+                    {
+                        continuous.Checked = true;
+                    }
+                    else
+                    {
+                        onlyOnce.Checked = true;
+                    }
                 }
                 SelectionChanged?.Invoke();
             }
@@ -61,6 +64,17 @@ namespace SMWControlibControls.GraphicsControls
             info.Click += infoClick;
         }
 
+        public void LoadProject(Animation[] animations)
+        {
+            anims.Clear();
+            foreach(Animation an in animations)
+            {
+                anims.Add(an);
+            }
+            SelectedAnimation = null;
+            refreshAnimations();
+            if (anims.Count > 0) animationSelector.SelectedIndex = 0;
+        }
         private void infoClick(object sender, EventArgs e)
         {
             MessageBox.Show("Not implemented yet.", "Error",

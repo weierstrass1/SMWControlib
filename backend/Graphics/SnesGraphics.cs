@@ -103,6 +103,7 @@ namespace SMWControlibBackend.Graphics
             for (int i = 0, x = 0, y = 0; i < gfx.Length; i += 32, x = (x + 8) % 128)
             {
                 y = i / 512;
+                y *= 8;
                 for (int j = 0; j < 16; j += 2, y++)
                 {
                     k = i + j;
@@ -113,6 +114,10 @@ namespace SMWControlibBackend.Graphics
 
                     for (int p = 0, m = 128; p < 8; p++, m /= 2)
                     {
+                        if (y == 68)
+                        {
+                            int a = 0;
+                        }
                         b0 = (byte)(colors[x + p, y] & 1);
                         b1 = (byte)((colors[x + p, y] & 2) >> 1);
                         b2 = (byte)((colors[x + p, y] & 4) >> 2);

@@ -44,14 +44,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Graphics\ColorPalette.cs" />
+    <Compile Include="Graphics\ColorPaletteContainer.cs" />
+    <Compile Include="Graphics\GlobalColorPaletteContainer.cs" />
     <Compile Include="Graphics\Frames\Animation.cs" />
+    <Compile Include="Graphics\Frames\AnimationContainer.cs" />
     <Compile Include="Graphics\Frames\Frame.cs" />
+    <Compile Include="Graphics\Frames\FrameContainer.cs" />
     <Compile Include="Graphics\Frames\FrameMask.cs" />
+    <Compile Include="Graphics\Frames\FrameMaskContainer.cs" />
     <Compile Include="Graphics\TileMask.cs" />
     <Compile Include="Graphics\SnesGraphics.cs" />
+    <Compile Include="Graphics\TileMaskContainer.cs" />
     <Compile Include="Interaction\HitBox.cs" />
+    <Compile Include="Interaction\HitboxContainer.cs" />
     <Compile Include="Interaction\InteractionPoint.cs" />
+    <Compile Include="Interaction\InteractionPointContainer.cs" />
     <Compile Include="Interaction\RectangleHitBox.cs" />
+    <Compile Include="Interaction\RectangleHitboxContainer.cs" />
     <Compile Include="Logic\ArgsTypes.cs" />
     <Compile Include="Logic\Asar.cs" />
     <Compile Include="Logic\Code.cs" />
@@ -72,6 +81,7 @@
     <Compile Include="Logic\Routine.cs" />
     <Compile Include="Logic\SubLabel.cs" />
     <Compile Include="Logic\Table.cs" />
+    <Compile Include="ProjectContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Graphics\Tile.cs" />
   </ItemGroup>

@@ -170,6 +170,11 @@ namespace SMWControlibControls.GraphicsControls
             generateBehindImage();
         }
 
+        public byte[] GetGFX()
+        {
+            return SnesGraphics.GetGFXFromColorMatrix(colorMatrix);
+        }
+
         public virtual void LoadGFX(string path, int position)
         {
             if(position > ImageHeigth)

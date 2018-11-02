@@ -28,6 +28,23 @@ namespace SMWControlibBackend.Interaction
             Value = value;
         }
 
+        public static implicit operator InteractionPointType(int d)
+        {
+            switch(d)
+            {
+                case 0:
+                    return AboveDetector;
+                case 1:
+                    return BelowDetector;
+                case 2:
+                    return LeftSideDetector;
+                case 3:
+                    return RightSideDetector;
+                default:
+                    return SlopeDetector;
+            }
+        }
+
         public static implicit operator int(InteractionPointType d)
         {
             return d.Value;
@@ -43,6 +60,7 @@ namespace SMWControlibBackend.Interaction
             InteractionType = InteractionPointType.BelowDetector;
             Type = HitBoxType.InteractionPoint;
         }
+
         public override void Draw(System.Drawing.Graphics g, int centerX, int centerY, Zoom Zoom)
         {
             int x = centerX + XOffset;

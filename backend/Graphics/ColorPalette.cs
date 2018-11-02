@@ -11,8 +11,8 @@ namespace SMWControlibBackend.Graphics
     }
     public class ColorPalette
     {
-        private static ColorPalette[] _globalPalettes;
-        private static ColorPalette[] globalPalettes
+        internal static ColorPalette[] _globalPalettes;
+        internal static ColorPalette[] globalPalettes
         {
             get
             {
@@ -32,7 +32,7 @@ namespace SMWControlibBackend.Graphics
                 return globalPalettes.Length;
             }
         }
-        private Color[] colors;
+        internal Color[] colors;
         private static PaletteId selectedPalette;
         public static PaletteId SelectedPalette
         {
@@ -55,10 +55,9 @@ namespace SMWControlibBackend.Graphics
         }
         public static event Action SelectedGlobalPaletteChange, GlobalPalletesChange, GlobalPalletesChangeExcecuted;
         public static event Action<PaletteId> OneGlobalPaletteChange;
-        public byte Length { get; private set; }
+        public byte Length { get; internal set; }
 
-
-        private ColorPalette()
+        internal ColorPalette()
         {
         }
 
@@ -137,6 +136,12 @@ namespace SMWControlibBackend.Graphics
                     globalPalettes[i].colors[j] = Color.FromArgb(255 ,bytes[index], bytes[index + 1], bytes[index + 2]);
                 }
             }
+            GlobalPalletesChange?.Invoke();
+            GlobalPalletesChangeExcecuted?.Invoke();
+        }
+
+        internal static void eventTrigger()
+        {
             GlobalPalletesChange?.Invoke();
             GlobalPalletesChangeExcecuted?.Invoke();
         }

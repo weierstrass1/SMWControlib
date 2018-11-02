@@ -77,6 +77,7 @@ namespace TestWindows
             }
             if (Path.GetFileNameWithoutExtension(projectPath) == "")
                 return;
+            if (File.Exists(projectPath)) File.Delete(projectPath);
             ProjectContainer pc = new ProjectContainer();
             pc.GetAttributes(frameCreator1.Frames, animationCreator1.Animations,
                 codeEditorController1.CodeEditor.Text, spriteGFXBox1.GetGFX(), spriteGFXBox2.GetGFX());
@@ -147,6 +148,7 @@ namespace TestWindows
             }
             if (Path.GetFileNameWithoutExtension(projectPath) == "")
                 return;
+            if (File.Exists(projectPath)) File.Delete(projectPath);
             ProjectContainer pc = new ProjectContainer();
             pc.GetAttributes(frameCreator1.Frames, animationCreator1.Animations,
                 codeEditorController1.CodeEditor.Text, spriteGFXBox1.GetGFX(), spriteGFXBox2.GetGFX());

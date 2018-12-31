@@ -787,16 +787,22 @@ namespace SMWControlibControls.InteractionControls
         }
         void buildCurrentBox()
         {
-            currentBox.Size = new Size(Width, Height);
-            currentBox.Image = new Bitmap(Width, Height);
+            if (currentBox.Image == null ||
+                (currentBox.Size.Width != Width && currentBox.Size.Height != Height))
+            {
+                currentBox.Size = new Size(Width, Height);
+                currentBox.Image = new Bitmap(Width, Height);
+            }
 
             using (Graphics g = Graphics.FromImage(currentBox.Image))
             {
+                g.Clear(Color.FromArgb(0, 0, 0, 0));
                 if (selectedHitbox != null && selectingHitbox)
                     SelectedHitbox.Draw(g, 128, 112, zoom, 2);
                 else if (SelectedInteractionPoint != null && !selectingHitbox)
                     SelectedInteractionPoint.Draw(g, 128, 112, zoom, zoom * 5);
             }
+            currentBox.Refresh();
         }
 
         protected override void OnPaint(PaintEventArgs pe)

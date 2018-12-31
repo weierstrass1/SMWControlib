@@ -8,6 +8,7 @@ namespace SMWControlibControls.GraphicsControls
 {
     public partial class FrameCreator : UserControl
     {
+        public event Action<Frame> FrameAdded;
         List<Frame> frames;
 
         public Frame[] Frames
@@ -100,6 +101,7 @@ namespace SMWControlibControls.GraphicsControls
             if (NewFrameDialog.Show(ParentForm, frames)
                 == DialogResult.OK)
             {
+                FrameAdded?.Invoke(frames[frames.Count - 1]);
                 refreshFrames();
                 if(NewFrameDialog.AutoSelect)
                 {

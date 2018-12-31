@@ -17,7 +17,7 @@ namespace SMWControlibBackend.Interaction
         public int XOffset, YOffset;
         public int BorderColorA, BorderColorR, BorderColorG, BorderColorB;
         public int FrontColorA, FrontColorR, FrontColorG, FrontColorB;
-        public string Action;
+        public int ActionID;
 
         public virtual HitBox ToHitBox()
         {
@@ -57,10 +57,7 @@ namespace SMWControlibBackend.Interaction
             FrontColorG = hb.FrontColor.G;
             FrontColorB = hb.FrontColor.B;
 
-            if (hb.Action != null)
-            {
-                Action = hb.Action.Name;
-            }
+            ActionID = hb.ActionID;
         }
     }
 }

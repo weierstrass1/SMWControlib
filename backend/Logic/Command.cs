@@ -24,6 +24,9 @@ namespace SMWControlibBackend.Logic
         public ArgsTypes[] Args;
         public Group Group { get; private set; }
 
+        public string Prefix { get; private set; }
+        public string Sufix { get; private set; }
+
         private Command(string name, ArgsTypes[] args, Group group)
         {
             Name = name;
@@ -97,27 +100,18 @@ namespace SMWControlibBackend.Logic
 
         public bool IsCorrect(string cmd)
         {
-            cmd = cmd.Split(';')[0];
-            cmd = cmd.ToLower();
-            string n = cmd.Replace("\t", " ");
-            n = n.Split(' ')[0];
-
-            if (n != Name) return false;
-
-            cmd = cmd.Replace(" ", "").Replace("\t", "");
+            
             if (Args == null || Args.Length <= 0)
             {
-                if (cmd == Name)
+                if (cmd == null || cmd == "" || cmd.Length <= 0)
                     return true;
                 else
                     return false;
             }
 
-            cmd = cmd.Remove(0, Name.Length);
-
-            if(Args.Length==1)
+            if (Args.Length == 1)
             {
-                if (Args[0].IsCorrect(cmd))
+                if (Args[0].IsCorrectWithoutPrefixSufix(cmd))
                     return true;
                 else
                     return false;
@@ -128,12 +122,28 @@ namespace SMWControlibBackend.Logic
 
             for (int i = 0; i < args.Length; i++)
             {
-                if (!Args[i].IsCorrect(args[i])) return false;
+                if (i == 0)
+                {
+                    if (!Args[i].IsCorrectWithoutPrefix(args[i]))
+                        return false;
+                }
+                else if (i == args.Length - 1)
+                {
+                    if (!Args[i].IsCorrectWithoutSufix(args[i]))
+                        return false;
+                }
+                else
+                {
+                    if (!Args[i].IsCorrect(args[i]))
+                        return false;
+                }
             }
             return true;
         }
 
-        public static Dictionary<string, Command[]> GetCommands(string path,
+        static string numPostMod = @"((\*\*|\~|\%|\<\<|\>\>|\+|\-|\/|\&|\||\*|\^)(\%[0-1]+|\$[\da-fA-F]+|\d+))*";
+        public static Dictionary<string, Dictionary<string,
+            Dictionary<string, Command[]>>> GetCommands(string path,
             ArgsTypes[] argsTypes, Group[] groups)
         {
             if (!File.Exists(path))
@@ -181,23 +191,62 @@ namespace SMWControlibBackend.Logic
 
                 commands[i - 1] = new Command(cmd[0].ToLower(), newargs,
                     Group.FindGroup(groups, cmd[2]));
+                if (commands[i - 1].Args != null && commands[i - 1].Args.Length > 0)
+                {
+                    commands[i - 1].Prefix = commands[i - 1].Args[0].Prefix;
+                    commands[i - 1].Sufix = commands[i - 1].Args[commands[i - 1].Args.Length - 1].Postfix;
+
+                    string pref;
+                    pref = commands[i - 1].Prefix.Replace(",", ", *").Replace("[", @"\[").Replace("]", @"\]");
+                    string postf;
+                    postf = commands[i - 1].Sufix.Replace(",", ", *").Replace("[", @"\[").Replace("]", @"\]");
+                    pref = pref.Replace(".", @"\.").Replace("+", @"\+");
+                    postf = postf.Replace(".", @"\.").Replace("+", @"\+");
+                    pref = pref.Replace("(", @"\(").Replace(")", @"\)" + numPostMod);
+                    postf = postf.Replace("(", @"\(").Replace(")", @"\)" + numPostMod);
+                    commands[i - 1].Prefix = "^" + pref;
+                    commands[i - 1].Sufix = postf + "$";
+                }
+                if (commands[i - 1].Prefix == null || commands[i - 1].Prefix == "^")
+                    commands[i - 1].Prefix = "NULL";
+                if (commands[i - 1].Sufix == null || commands[i - 1].Sufix == "$") 
+                    commands[i - 1].Sufix = "NULL";
             }
 
-            Dictionary<string, List<Command>> dic = new Dictionary<string, List<Command>>();
+            Dictionary<string, Dictionary<string, Dictionary<string, List<Command>>>> dic =
+                new Dictionary<string, Dictionary<string, Dictionary<string, List<Command>>>>();
 
             foreach (Command c in commands)
             {
                 if (!dic.ContainsKey(c.Name))
                 {
-                    dic.Add(c.Name, new List<Command>());
+                    dic.Add(c.Name, new Dictionary<string, Dictionary<string, List<Command>>>());
                 }
-                dic[c.Name].Add(c);
+                if(!dic[c.Name].ContainsKey(c.Prefix))
+                {
+                    dic[c.Name].Add(c.Prefix, new Dictionary<string, List<Command>>());
+                }
+                if(!dic[c.Name][c.Prefix].ContainsKey(c.Sufix))
+                {
+                    dic[c.Name][c.Prefix].Add(c.Sufix, new List<Command>());
+                }
+                dic[c.Name][c.Prefix][c.Sufix].Add(c);
             }
 
-            Dictionary<string, Command[]> arrDic = new Dictionary<string, Command[]>();
-            foreach (KeyValuePair<string, List<Command>> pair in dic)
+            Dictionary<string, Dictionary<string,
+            Dictionary<string, Command[]>>> arrDic = new Dictionary<string, Dictionary<string,
+            Dictionary<string, Command[]>>>();
+            foreach (string s in dic.Keys)
             {
-                arrDic.Add(pair.Key, pair.Value.ToArray());
+                arrDic.Add(s, new Dictionary<string, Dictionary<string, Command[]>>());
+                foreach (string s2 in dic[s].Keys)
+                {
+                    arrDic[s].Add(s2, new Dictionary<string, Command[]>());
+                    foreach (string s3 in dic[s][s2].Keys)
+                    {
+                        arrDic[s][s2].Add(s3, dic[s][s2][s3].ToArray());
+                    }
+                }
             }
 
             return arrDic;

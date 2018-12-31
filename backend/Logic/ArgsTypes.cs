@@ -17,6 +17,9 @@ namespace SMWControlibBackend.Logic
         public int Bytes { get; private set; }
         public string Type { get; private set; }
         public string RegEXPattern { get; private set; }
+        public string RegEXPatternWithoutPrefix { get; private set; }
+        public string RegEXPatternWithoutSufix { get; private set; }
+        public string RegEXPatternWithoutPrefixSufix { get; private set; }
         public Group Group { get; private set; }
 
         private ArgsTypes()
@@ -44,8 +47,34 @@ namespace SMWControlibBackend.Logic
 
         public bool IsCorrect(string arg)
         {
-            if (arg == null || arg == "" || arg.Length <= 0) return false;
+            if (arg == null || arg == "" || arg.Length <= 0)
+                return false;
             MatchCollection m = Regex.Matches(arg, RegEXPattern);
+            if (m.Count == 0) return false;
+            return true;
+        }
+
+        public bool IsCorrectWithoutPrefix(string arg)
+        {
+            if (arg == null) return false;
+            MatchCollection m = Regex.Matches(arg, RegEXPatternWithoutPrefix);
+            if (m.Count == 0) return false;
+            return true;
+        }
+
+        public bool IsCorrectWithoutSufix(string arg)
+        {
+            if (arg == null) return false;
+            MatchCollection m = Regex.Matches(arg, RegEXPatternWithoutSufix);
+            if (m.Count == 0) return false;
+            return true;
+        }
+
+        public bool IsCorrectWithoutPrefixSufix(string arg)
+        {
+            if (arg == null)
+                return false;
+            MatchCollection m = Regex.Matches(arg, RegEXPatternWithoutPrefixSufix);
             if (m.Count == 0) return false;
             return true;
         }
@@ -100,6 +129,9 @@ namespace SMWControlibBackend.Logic
         private void buildRegEX()
         {
             RegEXPattern = "^";
+            RegEXPatternWithoutPrefix = "^";
+            RegEXPatternWithoutSufix = "^";
+            RegEXPatternWithoutPrefixSufix = "^";
             string pref;
             pref = Prefix.Replace(",", ", *").Replace("[", @"\[").Replace("]", @"\]");
             string postf;
@@ -110,6 +142,7 @@ namespace SMWControlibBackend.Logic
             postf = postf.Replace("(", @"\(").Replace(")", @"\)" + numPostMod);
 
             RegEXPattern += pref;
+            RegEXPatternWithoutSufix += pref;
 
             if (Bytes == 0)
             {
@@ -120,6 +153,9 @@ namespace SMWControlibBackend.Logic
             if(Type == "string with spaces")
             {
                 RegEXPattern += @"[^\" + '"' + "]+" + postf + "$";
+                RegEXPatternWithoutPrefix += @"[^\" + '"' + "]+" + postf + "$";
+                RegEXPatternWithoutSufix += @"[^\" + '"' + "]+" + "$";
+                RegEXPatternWithoutPrefixSufix += @"[^\" + '"' + "]+" + "$";
                 return;
             }
             if (Type == "string")
@@ -127,11 +163,17 @@ namespace SMWControlibBackend.Logic
                 string adder = "";
                 if (Prefix.Length > 0) adder = @"\d";
                 RegEXPattern += @"([" + adder + @"a-zA-Z]|_)+(\.*_*[\da-zA-Z]*)*" + numPostMod + postf + "$";
+                RegEXPatternWithoutPrefix += @"([" + adder + @"a-zA-Z]|_)+(\.*_*[\da-zA-Z]*)*" + numPostMod + postf + "$";
+                RegEXPatternWithoutSufix += @"([" + adder + @"a-zA-Z]|_)+(\.*_*[\da-zA-Z]*)*" + numPostMod + "$";
+                RegEXPatternWithoutPrefixSufix += @"([" + adder + @"a-zA-Z]|_)+(\.*_*[\da-zA-Z]*)*" + numPostMod + "$";
                 return;
             }
             if (Type == "fixed" && Bytes < 0)
             {
                 RegEXPattern += pref + "*" + numPostMod + postf + "$";
+                RegEXPatternWithoutPrefix += pref + "*" + numPostMod + postf + "$";
+                RegEXPatternWithoutSufix += pref + "*" + numPostMod + "$";
+                RegEXPatternWithoutPrefixSufix += pref + "*" + numPostMod + "$";
                 return;
             }
 
@@ -142,6 +184,9 @@ namespace SMWControlibBackend.Logic
             string dnum = "0*" + dnums[Bytes - 1];
             //RegEXPattern += "[" + bnum + "-" + hnum + "-" + dnum + "]" + postf;
             RegEXPattern += "(" + bnum + "|" + hnum + "|" + dnum + ")" + numPostMod + postf + "$";
+            RegEXPatternWithoutPrefix += "(" + bnum + "|" + hnum + "|" + dnum + ")" + numPostMod + postf + "$";
+            RegEXPatternWithoutSufix += "(" + bnum + "|" + hnum + "|" + dnum + ")" + numPostMod + "$";
+            RegEXPatternWithoutPrefixSufix += "(" + bnum + "|" + hnum + "|" + dnum + ")" + numPostMod + "$";
         }
         public static ArgsTypes Exists(string arg, ArgsTypes[] args)
         {

@@ -15,8 +15,22 @@ namespace SMWControlibBackend.Interaction
         public RectangleHitBox()
         {
             Type = HitBoxType.Rectangle;
+            Size = 6;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != typeof(RectangleHitBox)) return false;
+
+            RectangleHitBox rhb = (RectangleHitBox)obj;
+            if (XOffset != rhb.XOffset) return false;
+            if (YOffset != rhb.YOffset) return false;
+            if (ActionID != rhb.ActionID) return false;
+            if (Width != rhb.Width) return false;
+            if (Height != rhb.Height) return false;
+
+            return true;
+        }
         public override void Draw(System.Drawing.Graphics g,
             int centerX, int centerY, Zoom Zoom)
         {
@@ -55,6 +69,52 @@ namespace SMWControlibBackend.Interaction
                 borderSize2, borderSize2);
             g.FillRectangle(b, x - borderSize + w, y - borderSize + h,
                 borderSize2, borderSize2);
+        }
+
+        public override HitBox GetFlippedBox(bool FlipX, bool FlipY, int midX, int midY)
+        {
+            int deltaX = XOffset + Width - midX;
+            int deltaY = YOffset + Height - midY;
+
+            RectangleHitBox rhb = new RectangleHitBox();
+            if(FlipX)
+            {
+                rhb.XOffset = midX - deltaX;
+            }
+            else
+            {
+                rhb.XOffset = XOffset;
+            }
+            if(FlipY)
+            {
+                rhb.YOffset = midY - deltaY;
+            }
+            else
+            {
+                rhb.YOffset = YOffset;
+            }
+            rhb.Width = Width;
+            rhb.Height = Height;
+            return rhb;
+        }
+
+        public override string GetHitBoxString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("db ");
+            string s = (XOffset).ToString("X2");
+            s = s.Substring(s.Length - 2);
+            sb.Append("$01,$" + s + ",$");
+            s = (YOffset).ToString("X2");
+            s = s.Substring(s.Length - 2);
+            sb.Append(s + ",$");
+            s = (Width).ToString("X2");
+            s = s.Substring(s.Length - 2);
+            sb.Append(s + ",$");
+            s = (Height).ToString("X2");
+            s = s.Substring(s.Length - 2);
+            sb.Append(s + ",$" + (ActionID).ToString("X2") + "\n");
+            return sb.ToString();
         }
     }
 }

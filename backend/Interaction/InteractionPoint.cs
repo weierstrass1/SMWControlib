@@ -81,5 +81,15 @@ namespace SMWControlibBackend.Interaction
             g.FillEllipse(new SolidBrush(FrontColor), bx, by, borderSize, borderSize);
             g.DrawRectangle(new Pen(BorderColor), x, y, Zoom, Zoom);
         }
+
+        public override HitBox GetFlippedBox(bool FlipX, bool FlipY, int midX, int midY)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string GetHitBoxString()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

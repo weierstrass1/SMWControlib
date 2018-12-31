@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using SMWControlibBackend.Graphics;
+using SMWControlibBackend.Interaction;
 
 namespace SMWControlibBackend.Graphics.Frames
 {
@@ -14,6 +15,7 @@ namespace SMWControlibBackend.Graphics.Frames
         public List<TileMask> Tiles { get; private set; }
         public int MidX;
         public int MidY;
+        public int Index { get; private set; }
 
         public Frame()
         {
@@ -36,6 +38,14 @@ namespace SMWControlibBackend.Graphics.Frames
             return frame;
         }
 
+        public static void GetFramesIndexs(Frame[] frames)
+        {
+            for (int i = 0; i < frames.Length; i++)
+            {
+                frames[i].Index = i;
+            }
+        }
+
         public Bitmap GetBitmap(int BitmapWidth, int BitmapHeight, Zoom zoom)
         {
             Bitmap bp = new Bitmap(BitmapWidth * zoom, BitmapHeight * zoom);
@@ -56,7 +66,288 @@ namespace SMWControlibBackend.Graphics.Frames
             }
             return bp;
         }
+        public static bool HaveHitboxInteraction(Frame[] frames)
+        {
+            bool have = false;
+            for (int i = 0; i < frames.Length; i++)
+            {
+                if(frames[i].HitBoxes.Count > 0)
+                {
+                    have = true;
+                    break;
+                }
+            }
+            return have;
+        }
+        public static string GetFramesHitboxesIndexersFromFrameList(Frame[] frames, bool FlipX, bool FlipY)
+        {
+            StringBuilder sb = new StringBuilder();
+            int count = 0;
 
+            for (int i = 0; i < frames.Length; i++)
+            {
+                if (i % 16 == 0)
+                {
+                    if (i != 0)
+                    {
+                        sb.Remove(sb.Length - 1, 1);
+                        sb.Append("\n\t");
+                    }
+                    sb.Append("dw ");
+                }
+                sb.Append("$" + count.ToString("X4") + ",");
+                count += frames[i].HitBoxes.Count + 1;
+            }
+
+            if (FlipX)
+            {
+                sb.Remove(sb.Length - 1, 1);
+                sb.Append("\n\t");
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    if (i % 16 == 0)
+                    {
+                        if (i != 0)
+                        {
+                            sb.Remove(sb.Length - 1, 1);
+                            sb.Append("\n\t");
+                        }
+                        sb.Append("dw ");
+                    }
+                    sb.Append("$" + count.ToString("X4") + ",");
+                    count += frames[i].HitBoxes.Count + 1;
+                }
+            }
+            if (FlipY)
+            {
+                sb.Remove(sb.Length - 1, 1);
+                sb.Append("\n\t");
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    if (i % 16 == 0)
+                    {
+                        if (i != 0)
+                        {
+                            sb.Remove(sb.Length - 1, 1);
+                            sb.Append("\n\t");
+                        }
+                        sb.Append("dw ");
+                    }
+                    sb.Append("$" + count.ToString("X4") + ",");
+                    count += frames[i].HitBoxes.Count + 1;
+                }
+            }
+            if (FlipX && FlipY)
+            {
+                sb.Remove(sb.Length - 1, 1);
+                sb.Append("\n\t");
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    if (i % 16 == 0)
+                    {
+                        if (i != 0)
+                        {
+                            sb.Remove(sb.Length - 1, 1);
+                            sb.Append("\n\t");
+                        }
+                        sb.Append("dw ");
+                    }
+                    sb.Append("$" + count.ToString("X4") + ",");
+                    count += frames[i].HitBoxes.Count + 1;
+                }
+            }
+            sb.Remove(sb.Length - 1, 1);
+
+            return sb.ToString();
+        }
+        public static string GetFramesHitboxesIdsFromFrameList(Frame[] frames, HitBox[] hitboxes, bool FlipX, bool FlipY)
+        {
+            int leng = hitboxes.Length;
+            if (FlipX) leng /= 2;
+            if (FlipY) leng /= 2;
+
+            List<int>[] fhbs = new List<int>[frames.Length];
+
+            for (int i = 0; i < frames.Length; i++)
+            {
+                fhbs[i] = new List<int>();
+                foreach (HitBox hb in frames[i].HitBoxes)
+                {
+                    for (int j = 0; j < leng; j++)
+                    {
+                        if (hb.Equals(hitboxes[j]))
+                        {
+                            fhbs[i].Add(j);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            StringBuilder sb = new StringBuilder();
+            int k;
+            int mul = 0;
+            string s;
+            for (int i = 0; i < fhbs.Length; i++)
+            {
+                k = 0;
+                foreach (int j in fhbs[i])
+                {
+                    if (k % 16 == 0)
+                    {
+                        if (k != 0)
+                        {
+                            sb.Remove(sb.Length - 1, 1);
+                            sb.Append("\n\t");
+                        }
+                        sb.Append("db ");
+                    }
+                    s = (j + (leng * mul)).ToString("X2");
+                    s = s.Substring(s.Length - 2);
+                    sb.Append("$" + s + ",");
+                    k++;
+                }
+                sb.Append("$FF\n\t");
+            }
+
+            if (FlipX)
+            {
+                sb.Append("\n\t");
+                mul++;
+                for (int i = 0; i < fhbs.Length; i++)
+                {
+                    k = 0;
+                    foreach (int j in fhbs[i])
+                    {
+                        if (k % 16 == 0)
+                        {
+                            if (k != 0)
+                            {
+                                sb.Remove(sb.Length - 1, 1);
+                                sb.Append("\n\t");
+                            }
+                            sb.Append("db ");
+                        }
+                        s = (j + (leng * mul)).ToString("X2");
+                        s = s.Substring(s.Length - 2);
+                        sb.Append("$" + s + ",");
+                        k++;
+                    }
+                    sb.Append("$FF\n\t");
+                }
+            }
+
+            if (FlipY)
+            {
+                sb.Append("\n\t");
+                mul++;
+                for (int i = 0; i < fhbs.Length; i++)
+                {
+                    k = 0;
+                    foreach (int j in fhbs[i])
+                    {
+                        if (k % 16 == 0)
+                        {
+                            if (k != 0)
+                            {
+                                sb.Remove(sb.Length - 1, 1);
+                                sb.Append("\n\t");
+                            }
+                            sb.Append("db ");
+                        }
+                        s = (j + (leng * mul)).ToString("X2");
+                        s = s.Substring(s.Length - 2);
+                        sb.Append("$" + s + ",");
+                        k++;
+                    }
+                    sb.Append("$FF\n\t");
+                }
+            }
+
+            if (FlipX && FlipY) 
+            {
+                sb.Append("\n\t");
+                mul++;
+                for (int i = 0; i < fhbs.Length; i++)
+                {
+                    k = 0;
+                    foreach (int j in fhbs[i])
+                    {
+                        if (k % 16 == 0)
+                        {
+                            if (k != 0)
+                            {
+                                sb.Remove(sb.Length - 1, 1);
+                                sb.Append("\n\t");
+                            }
+                            sb.Append("db ");
+                        }
+                        s = (j + (leng * mul)).ToString("X2");
+                        s = s.Substring(s.Length - 2);
+                        sb.Append("$" + s + ",");
+                        k++;
+                    }
+                    sb.Append("$FF\n\t");
+                }
+            }
+            return sb.ToString();
+        }
+        public static HitBox[] GetFramesHitboxesFromFrameList(Frame[] frames, bool FlipX, bool FlipY)
+        {
+            List<HitBox> hbs = new List<HitBox>();
+            bool found;
+            int midx = 0;
+            int midy = 0;
+            for (int i = 0; i < frames.Length; i++)
+            {
+                midx = frames[i].MidX;
+                midy = frames[i].MidY;
+                foreach (HitBox hb1 in frames[i].HitBoxes)
+                {
+                    found = false;
+                    foreach (HitBox hb2 in hbs)
+                    {
+                        if(hb1.Equals(hb2))
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if(!found)
+                    {
+                        hbs.Add(hb1);
+                    }
+                }
+            }
+            List<HitBox> add = new List<HitBox>();
+            if (FlipX)
+            {
+                foreach (HitBox hb in hbs)
+                {
+                    add.Add(hb.GetFlippedBox(true, false, midx + 8, midy + 8));
+                }
+            }
+            if (FlipY)
+            {
+                foreach (HitBox hb in hbs)
+                {
+                    add.Add(hb.GetFlippedBox(false, true, midx + 8, midy + 8));
+                }
+            }
+            if (FlipX && FlipY)
+            {
+                foreach (HitBox hb in hbs)
+                {
+                    add.Add(hb.GetFlippedBox(true, true, midx + 8, midy + 8));
+                }
+            }
+
+            foreach (HitBox hb in add)
+            {
+                hbs.Add(hb);
+            }
+            return hbs.ToArray();
+        }
         public static string GetFramesLengthFromFrameList(Frame[] frames, bool FlipX, bool FlipY)
         {
             StringBuilder sb = new StringBuilder();
@@ -85,10 +376,11 @@ namespace SMWControlibBackend.Graphics.Frames
             if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
                 sb1.Remove(sb1.Length - 1, 1);
 
-            sb.Append(sb1 + "\n\t");
+            sb.Append(sb1 + "\n");
 
             if (FlipX)
             {
+                sb.Append("\t");
                 sb1 = new StringBuilder();
                 for (int i = 0; i < frames.Length; i++)
                 {
@@ -111,11 +403,12 @@ namespace SMWControlibBackend.Graphics.Frames
                 if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
                     sb1.Remove(sb1.Length - 1, 1);
 
-                sb.Append(sb1 + "\n\t");
+                sb.Append(sb1 + "\n");
             }
 
             if (FlipY)
             {
+                sb.Append("\t");
                 sb1 = new StringBuilder();
                 for (int i = 0; i < frames.Length; i++)
                 {
@@ -138,11 +431,12 @@ namespace SMWControlibBackend.Graphics.Frames
                 if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
                     sb1.Remove(sb1.Length - 1, 1);
 
-                sb.Append(sb1 + "\n\t");
+                sb.Append(sb1 + "\n");
             }
 
             if (FlipX && FlipY)
             {
+                sb.Append("\t");
                 sb1 = new StringBuilder();
                 for (int i = 0; i < frames.Length; i++)
                 {
@@ -165,8 +459,10 @@ namespace SMWControlibBackend.Graphics.Frames
                 if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
                     sb1.Remove(sb1.Length - 1, 1);
 
-                sb.Append(sb1 + "\n\t");
+                sb.Append(sb1 + "\n");
             }
+            if (sb.Length > 0 && (sb[sb.Length - 1] == ',' || sb[sb.Length - 1] == '\n'))
+                sb.Remove(sb.Length - 1, 1);
 
             return sb.ToString();
         }
@@ -199,6 +495,8 @@ namespace SMWControlibBackend.Graphics.Frames
             {
                 sb.Append(",$" + (3 * counter).ToString("X4"));
             }
+            if (sb.Length > 0 && (sb[sb.Length - 1] == ',' || sb[sb.Length - 1] == '\n'))
+                sb.Remove(sb.Length - 1, 1);
 
             return sb.ToString();
         }
@@ -231,10 +529,11 @@ namespace SMWControlibBackend.Graphics.Frames
             if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',') 
                 sb1.Remove(sb1.Length - 1, 1);
 
-            sb.Append(sb1 + "\n\t");
+            sb.Append(sb1 + "\n");
 
             if(FlipX)
             {
+                sb.Append("\t");
                 sb1 = new StringBuilder();
                 for (int i = 0; i < frames.Length; i++)
                 {
@@ -257,11 +556,12 @@ namespace SMWControlibBackend.Graphics.Frames
                 if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
                     sb1.Remove(sb1.Length - 1, 1);
 
-                sb.Append(sb1 + "\n\t");
+                sb.Append(sb1 + "\n");
             }
 
             if(FlipY)
             {
+                sb.Append("\t");
                 sb1 = new StringBuilder();
                 for (int i = 0; i < frames.Length; i++)
                 {
@@ -284,11 +584,12 @@ namespace SMWControlibBackend.Graphics.Frames
                 if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
                     sb1.Remove(sb1.Length - 1, 1);
 
-                sb.Append(sb1 + "\n\t");
+                sb.Append(sb1 + "\n");
             }
 
             if(FlipX && FlipY)
             {
+                sb.Append("\t");
                 sb1 = new StringBuilder();
                 for (int i = 0; i < frames.Length; i++)
                 {
@@ -311,8 +612,10 @@ namespace SMWControlibBackend.Graphics.Frames
                 if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
                     sb1.Remove(sb1.Length - 1, 1);
 
-                sb.Append(sb1 + "\n\t");
+                sb.Append(sb1 + "\n");
             }
+            if (sb.Length > 0 && (sb[sb.Length - 1] == ',' || sb[sb.Length - 1] == '\n'))
+                sb.Remove(sb.Length - 1, 1);
 
             return sb.ToString();
         }
@@ -347,10 +650,11 @@ namespace SMWControlibBackend.Graphics.Frames
             if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
                 sb1.Remove(sb1.Length - 1, 1);
 
-            sb.Append(sb1 + "\n\t");
+            sb.Append(sb1 + "\n");
             
             if(FlipX)
             {
+                sb.Append("\t");
                 sb1 = new StringBuilder();
                 for (int i = 0; i < frames.Length; i++)
                 {
@@ -373,11 +677,12 @@ namespace SMWControlibBackend.Graphics.Frames
                 if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
                     sb1.Remove(sb1.Length - 1, 1);
 
-                sb.Append(sb1 + "\n\t");
+                sb.Append(sb1 + "\n");
             }
 
             if(FlipY)
             {
+                sb.Append("\t");
                 sb1 = new StringBuilder();
                 for (int i = 0; i < frames.Length; i++)
                 {
@@ -400,11 +705,12 @@ namespace SMWControlibBackend.Graphics.Frames
                 if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
                     sb1.Remove(sb1.Length - 1, 1);
 
-                sb.Append(sb1 + "\n\t");
+                sb.Append(sb1 + "\n");
             }
 
             if(FlipX && FlipY)
             {
+                sb.Append("\t");
                 sb1 = new StringBuilder();
                 for (int i = 0; i < frames.Length; i++)
                 {
@@ -427,8 +733,10 @@ namespace SMWControlibBackend.Graphics.Frames
                 if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
                     sb1.Remove(sb1.Length - 1, 1);
 
-                sb.Append(sb1 + "\n\t");
+                sb.Append(sb1 + "\n");
             }
+            if (sb.Length > 0 && (sb[sb.Length - 1] == ',' || sb[sb.Length - 1] == '\n'))
+                sb.Remove(sb.Length - 1, 1);
 
             return sb.ToString();
         }
@@ -548,6 +856,8 @@ namespace SMWControlibBackend.Graphics.Frames
                     sb.Append(sb1 + "\n");
                 }
             }
+            if (sb.Length > 0 && (sb[sb.Length - 1] == ',' || sb[sb.Length - 1] == '\n'))
+                sb.Remove(sb.Length - 1, 1);
 
             return sb.ToString();
         }
@@ -634,6 +944,7 @@ namespace SMWControlibBackend.Graphics.Frames
                         y = tm.YDisp;
                         dy = frames[i].MidY - ((y / tm.Zoom) - 112);
                         tm.YDisp = frames[i].MidY + 112 + dy;
+                        if (tm.Size == 8) tm.YDisp += 8;
                         tm.YDisp *= tm.Zoom;
                         sb1.Append(tm.YDispString + ",");
                         tm.YDisp = y;
@@ -667,6 +978,7 @@ namespace SMWControlibBackend.Graphics.Frames
                         y = tm.YDisp;
                         dy = frames[i].MidY - ((y / tm.Zoom) - 112);
                         tm.YDisp = frames[i].MidY + 112 + dy;
+                        if (tm.Size == 8) tm.YDisp += 8;
                         tm.YDisp *= tm.Zoom;
                         sb1.Append(tm.YDispString + ",");
                         tm.YDisp = y;
@@ -677,6 +989,8 @@ namespace SMWControlibBackend.Graphics.Frames
                     sb.Append(sb1 + "\n");
                 }
             }
+            if (sb.Length > 0 && (sb[sb.Length - 1] == ',' || sb[sb.Length - 1] == '\n'))
+                sb.Remove(sb.Length - 1, 1);
 
             return sb.ToString();
         }
@@ -736,6 +1050,7 @@ namespace SMWControlibBackend.Graphics.Frames
                         x = tm.XDisp;
                         dx = frames[i].MidX - ((x / tm.Zoom) - 128);
                         tm.XDisp = frames[i].MidX + 128 + dx;
+                        if (tm.Size == 8) tm.XDisp += 8;
                         tm.XDisp *= tm.Zoom;
                         sb1.Append(tm.XDispString + ",");
                         tm.XDisp = x;
@@ -797,6 +1112,7 @@ namespace SMWControlibBackend.Graphics.Frames
                         x = tm.XDisp;
                         dx = frames[i].MidX - ((x / tm.Zoom) - 128);
                         tm.XDisp = frames[i].MidX + 128 + dx;
+                        if (tm.Size == 8) tm.XDisp += 8;
                         tm.XDisp *= tm.Zoom;
                         sb1.Append(tm.XDispString + ",");
                         tm.XDisp = x;
@@ -807,6 +1123,8 @@ namespace SMWControlibBackend.Graphics.Frames
                     sb.Append(sb1 + "\n");
                 }
             }
+            if (sb.Length > 0 && (sb[sb.Length - 1] == ',' || sb[sb.Length - 1] == '\n'))
+                sb.Remove(sb.Length - 1, 1);
 
             return sb.ToString();
         }
@@ -939,6 +1257,8 @@ namespace SMWControlibBackend.Graphics.Frames
                     sb.Append(sb1 + "\n");
                 }
             }
+            if (sb.Length > 0 && (sb[sb.Length - 1] == ',' || sb[sb.Length - 1] == '\n'))
+                sb.Remove(sb.Length - 1, 1);
 
             return sb.ToString();
         }
@@ -1058,6 +1378,8 @@ namespace SMWControlibBackend.Graphics.Frames
                     sb.Append(sb1 + "\n");
                 }
             }
+            if (sb.Length > 0 && (sb[sb.Length - 1] == ',' || sb[sb.Length - 1] == '\n'))
+                sb.Remove(sb.Length - 1, 1);
 
             return sb.ToString();
         }

@@ -540,10 +540,16 @@
     <None Include="Resources\snesStopBorder.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ASM\AnimationRoutine.asm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="ASM\Defines.asm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ASM\GraphicRoutine.asm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ASM\HitboxInteractionRoutine.asm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ASM\Main.asm">

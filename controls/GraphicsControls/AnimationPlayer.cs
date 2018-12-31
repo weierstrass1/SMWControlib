@@ -201,7 +201,7 @@ namespace SMWControlibControls.GraphicsControls
         }
 
         float[] intervals = { 0.125f, 0.25f, 0.5f, 0.75f, 1f,
-            1.5f, 2f, 2.5f, 3f, 3.5f, 4 };
+            1.5f, 2f, 2.5f, 3f, 3.5f, 4f };
         private void speedBoxSelectedIndexChanged(object sender, EventArgs e)
         {
             timer1.Interval = (int)(initInterval /

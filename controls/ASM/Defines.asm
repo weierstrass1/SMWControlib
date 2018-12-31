@@ -120,7 +120,7 @@ endif
 !WaterFlag = $85
 !SlipperyFlag = $86
 !GameMode = $0100|!addr
-!TwoPlayersFlag= $0DB2|!addr
+!TwoPlayersFlag = $0DB2|!addr
 
 ;########################################
 ;################ OAM ###################

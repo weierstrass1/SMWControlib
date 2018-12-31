@@ -216,6 +216,233 @@ namespace SMWControlibBackend.Graphics.Frames
             return Name;
         }
 
+        public static string GetAnimationChangeRoutine(Animation[] ans)
+        {
+            StringBuilder sb = new StringBuilder();
+            int j = 0;
+
+            for (int i = 0; i < ans.Length; i++)
+            {
+                if (ans[i].Length > 0)
+                {
+                    if (j != 0)
+                    {
+                        sb.Append("\tJMP ChangeAnimationFromStart\n");
+                    }
+                    sb.Append("ChangeAnimationFromStart_" + ans[i].Name + ":\n");
+                    if(j != 0)
+                    {
+                        sb.Append("\tLDA #$" + (j).ToString("X2") + "\n\t" + "STA !AnimationIndex,x\n");
+                    }
+                    else
+                    {
+                        sb.Append("\tSTZ !AnimationIndex,x\n");
+                    }
+                    j++;
+                }
+            }
+            if (sb.Length > 0 && sb[sb.Length - 1] == ',')
+                sb.Remove(sb.Length - 1, 1);
+            return sb.ToString();
+        }
+        public static string GetAnimationLenghts(Animation[] ans)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < ans.Length; i++)
+            {
+                if (ans[i].Length > 0)
+                {
+                    if (i % 16 == 0)
+                    {
+                        if (sb.Length > 0)
+                        {
+                            sb.Remove(sb.Length - 1, 1);
+                            sb.Append("\n\t");
+                        }
+
+                        sb.Append("dw ");
+                    }
+                    sb.Append("$" + (ans[i].Length).ToString("X4") + ",");
+                }
+            }
+            if (sb.Length > 0 && sb[sb.Length - 1] == ',')
+                sb.Remove(sb.Length - 1, 1);
+            return sb.ToString();
+        }
+
+        public static string GetAnimationLastTransitions(Animation[] ans)
+        {
+            StringBuilder sb = new StringBuilder();
+            int n = 0;
+
+            for (int i = 0; i < ans.Length; i++)
+            {
+                if (ans[i].Length > 0)
+                {
+                    if (i % 16 == 0)
+                    {
+                        if (sb.Length > 0)
+                        {
+                            sb.Remove(sb.Length - 1, 1);
+                            sb.Append("\n\t");
+                        }
+
+                        sb.Append("dw ");
+                    }
+                    n = ans[i].Length - 1;
+                    if (ans[i].PlayType == PlayType.Continuous) n = 0;
+                    sb.Append("$" + (n).ToString("X4") + ",");
+                }
+            }
+            if (sb.Length > 0 && sb[sb.Length - 1] == ',')
+                sb.Remove(sb.Length - 1, 1);
+            return sb.ToString();
+        }
+
+        public static string GetAnimationIndexers(Animation[] ans)
+        {
+            StringBuilder sb = new StringBuilder();
+            int s = 0;
+
+            for (int i = 0; i < ans.Length; i++)
+            {
+                if (ans[i].Length > 0)
+                {
+                    if (i % 16 == 0)
+                    {
+                        if (sb.Length > 0)
+                        {
+                            sb.Remove(sb.Length - 1, 1);
+                            sb.Append("\n\t");
+                        }
+
+                        sb.Append("dw ");
+                    }
+                    sb.Append("$" + (s).ToString("X4") + ",");
+                    s += ans[i].Length;
+                }
+            }
+            if (sb.Length > 0 && sb[sb.Length - 1] == ',')
+                sb.Remove(sb.Length - 1, 1);
+            return sb.ToString();
+        }
+
+        public static string GetAnimationFrames(Animation[] ans)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("\n");
+            FrameMask fm;
+
+            for (int i = 0; i < ans.Length; i++)
+            {
+                if (ans[i].Length > 0)
+                {
+                    fm = ans[i].first;
+                    sb.Append("Animation" + i + "_" + ans[i].Name + "_Frames:\n");
+                    for (int j = 0; j < ans[i].Length; j++)
+                    {
+                        if (j % 16 == 0)
+                        {
+                            if (sb.Length > 0)
+                            {
+                                sb.Remove(sb.Length - 1, 1);
+                                sb.Append("\n\t");
+                            }
+
+                            sb.Append("db ");
+                        }
+                        sb.Append("$" + (fm.Frame.Index).ToString("X2") + ",");
+                        fm = fm.Next;
+                    }
+                    if (sb.Length > 0 && sb[sb.Length - 1] == ',')
+                        sb.Remove(sb.Length - 1, 1);
+                    sb.Append("\n");
+                }
+            }
+            if (sb.Length > 0 && (sb[sb.Length - 1] == ',' || sb[sb.Length - 1] == '\n')) 
+                sb.Remove(sb.Length - 1, 1);
+            return sb.ToString();
+        }
+
+        public static string GetAnimationTimes(Animation[] ans)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("\n");
+            FrameMask fm;
+
+            for (int i = 0; i < ans.Length; i++)
+            {
+                if (ans[i].Length > 0)
+                {
+                    fm = ans[i].first;
+                    sb.Append("Animation" + i + "_" + ans[i].Name + "_Times:\n");
+                    for (int j = 0; j < ans[i].Length; j++)
+                    {
+                        if (j % 16 == 0)
+                        {
+                            if (sb.Length > 0)
+                            {
+                                sb.Remove(sb.Length - 1, 1);
+                                sb.Append("\n\t");
+                            }
+
+                            sb.Append("db ");
+                        }
+                        sb.Append("$" + (fm.Time).ToString("X2") + ",");
+                        fm = fm.Next;
+                    }
+                    if (sb.Length > 0 && sb[sb.Length - 1] == ',')
+                        sb.Remove(sb.Length - 1, 1);
+                    sb.Append("\n");
+                }
+            }
+            if (sb.Length > 0 && (sb[sb.Length - 1] == ',' || sb[sb.Length - 1] == '\n'))
+                sb.Remove(sb.Length - 1, 1);
+            return sb.ToString();
+        }
+
+        public static string GetAnimationFlips(Animation[] ans)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("\n");
+            FrameMask fm;
+            int n = 0;
+
+            for (int i = 0; i < ans.Length; i++)
+            {
+                if (ans[i].Length > 0)
+                {
+                    fm = ans[i].first;
+                    sb.Append("Animation" + i + "_" + ans[i].Name + "_Flips:\n");
+                    for (int j = 0; j < ans[i].Length; j++)
+                    {
+                        if (j % 16 == 0)
+                        {
+                            if (sb.Length > 0)
+                            {
+                                sb.Remove(sb.Length - 1, 1);
+                                sb.Append("\n\t");
+                            }
+
+                            sb.Append("db ");
+                        }
+                        n = 0;
+                        if (fm.FlipX) n = 1;
+                        if (fm.FlipY) n += 2;
+                        sb.Append("$" + (n).ToString("X2") + ",");
+                        fm = fm.Next;
+                    }
+                    if (sb.Length > 0 && sb[sb.Length - 1] == ',')
+                        sb.Remove(sb.Length - 1, 1);
+                    sb.Append("\n");
+                }
+            }
+            if (sb.Length > 0 && (sb[sb.Length - 1] == ',' || sb[sb.Length - 1] == '\n'))
+                sb.Remove(sb.Length - 1, 1);
+            return sb.ToString();
+        }
+
         public FrameMask this[int key]
         {
             get

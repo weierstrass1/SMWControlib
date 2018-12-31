@@ -28,7 +28,8 @@ namespace SMWControlibBackend.Logic
                 return styles;
             }
         }
-        private Dictionary<string, Command[]> commands;
+        private Dictionary<string, Dictionary<string, 
+            Dictionary<string, Command[]>>> commands;
         public List<int> CommandsStyles
         {
             get
@@ -37,11 +38,17 @@ namespace SMWControlibBackend.Logic
 
                 foreach(string s in commands.Keys)
                 {
-                    foreach (Command c in commands[s])
+                    foreach (string s2 in commands[s].Keys)
                     {
-                        if (!styles.Contains(c.Group.Style))
+                        foreach(string s3 in commands[s][s2].Keys)
                         {
-                            styles.Add(c.Group.Style);
+                            foreach(Command c in commands[s][s2][s3])
+                            {
+                                if (!styles.Contains(c.Group.Style))
+                                {
+                                    styles.Add(c.Group.Style);
+                                }
+                            }
                         }
                     }
                 }
@@ -482,7 +489,7 @@ namespace SMWControlibBackend.Logic
             if (cmds != null && cmds.Length > 0)
             {
 
-                List<CodePointer> tmps;
+                List<CodePointer> tmps = new List<CodePointer>();
 
                 for (int j = 0; j < cmds.Length; j++)
                 {
@@ -534,6 +541,7 @@ namespace SMWControlibBackend.Logic
             string rep;
             string nextChar;
 
+            
             for (int i = 0; i < cmds.Length; i++)
             {
                 cmds[i].Move(pointer.Start);
@@ -552,7 +560,8 @@ namespace SMWControlibBackend.Logic
                         newErrors = true;
                     }
                 }
-
+                
+                
                 if (tmps.Count <= 0)
                 {
                     rep = Define.Replace(defines, cmds[i].Code, lineIndex, cmds[i].Start);
@@ -562,7 +571,8 @@ namespace SMWControlibBackend.Logic
                         End = cmds[i].Start + rep.Length - 1,
                         Code = rep
                     };
-
+                    
+                    
                     tmps = getPointersFromCommands(cp, lineIndex);
                     if (tmps.Count <= 0)
                     {
@@ -577,6 +587,7 @@ namespace SMWControlibBackend.Logic
                     }
                 }
 
+                
                 if (tmps.Count <= 0) 
                 {
                     tmps = new List<CodePointer>();
@@ -650,20 +661,88 @@ namespace SMWControlibBackend.Logic
         {
             List<CodePointer> pointers = new List<CodePointer>();
 
-            string name = cmd.Code.Replace('\t', ' ').Split(' ')[0].ToLower();
+            string scmd = cmd.Code.Split(';')[0];
+            scmd = scmd.ToLower();
+            scmd = scmd.Replace("\t", " ");
+            string name = scmd.Split(' ')[0];
 
             if (!commands.ContainsKey(name)) return pointers;
+
+            scmd = scmd.Replace(" ", "");
+
+            scmd = scmd.Remove(0, name.Length);
+
             Command foundedC;
             List<CodePointer> tmps = null;
 
-            foreach (Command c in commands[name]) 
+            string prefix = "";
+            Match m = null;
+
+            foreach(string s in commands[name].Keys)
             {
-                if (c.IsCorrect(cmd.Code))
+                if (s != "NULL")
                 {
-                    tmps = c.GetPointers(cmd.Start, cmd.Code).ToList();
-                    foundedC = c;
-                    break;
+                    m = Regex.Match(scmd, s);
+                    if (m.Success)
+                    {
+                        prefix = s;
+                        break;
+                    }
                 }
+            }
+
+            if (prefix == "") prefix = "NULL";
+            else
+            {
+                scmd = scmd.Substring(m.Length);
+                if(prefix[1]=='"')
+                {
+                    int a = 0;
+                }
+            }
+
+            string sufix = "";
+
+            if(commands[name].ContainsKey(prefix))
+            {
+                foreach (string s in commands[name][prefix].Keys)
+                {
+                    if (s != "NULL")
+                    {
+                        m = Regex.Match(scmd, s);
+                        if (m.Success)
+                        {
+                            sufix = s;
+                            break;
+                        }
+                    }
+                }
+
+                if (sufix == "") sufix = "NULL";
+                else
+                    scmd = scmd.Remove(m.Index, m.Length);
+
+
+                if (commands[name][prefix].ContainsKey(sufix))
+                {
+                    foreach (Command c in commands[name][prefix][sufix])
+                    {
+                        if (c.IsCorrect(scmd))
+                        {
+                            tmps = c.GetPointers(cmd.Start, cmd.Code).ToList();
+                            foundedC = c;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    return pointers;
+                }
+            }
+            else
+            {
+                return pointers;
             }
 
             if (tmps != null)

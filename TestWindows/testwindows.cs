@@ -2,10 +2,12 @@
 using System.Drawing;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using SMWControlibBackend;
 using SMWControlibBackend.Graphics;
 using SMWControlibBackend.Graphics.Frames;
+using SMWControlibBackend.Interaction;
 using SMWControlibControls.GraphicsControls;
 
 namespace TestWindows
@@ -45,18 +47,24 @@ namespace TestWindows
             save.Click += saveClick;
             saveAs.Click += saveAsClick;
             loadProj.Click += loadProjClick;
+            frameCreator1.FrameAdded += frameCreatorFrameAdded;
             try
             {
                 codeEditorController1.CodeEditor.CanUndoRedo = false;
                 StringBuilder sb = new StringBuilder();
                 sb.Append(File.ReadAllText(@".\ASM\Main.asm"));
-                sb.Append(File.ReadAllText(@".\ASM\GraphicRoutine.asm"));
                 codeEditorController1.CodeEditor.AppendText(sb.ToString());
                 codeEditorController1.CodeEditor.CanUndoRedo = true;
             }
             catch
             {
             }
+        }
+
+        private void frameCreatorFrameAdded(Frame obj)
+        {
+            obj.MidX = resizeableSpriteGridController1.MidX;
+            obj.MidY = resizeableSpriteGridController1.MidY;
         }
 
         private void saveAsClick(object sender, EventArgs e)
@@ -159,29 +167,54 @@ namespace TestWindows
 
         private void extratToClick(object sender, EventArgs e)
         {
+            RefreshCode();
             string s = codeEditorController1.CodeEditor.Text;
+            Frame.GetFramesIndexs(frameCreator1.Frames);
 
-            s = s.Replace("dw @fls.",
+            HitBox[] hbs =  Frame.GetFramesHitboxesFromFrameList(frameCreator1.Frames, true, true);
+            s = s.Replace("db >intAdd.",
+                HitBox.GetHitboxesFlipAdder(hbs, true, true));
+            s = s.Replace("dw >hbst.",
+                HitBox.GetHitboxesStartsFromArray(hbs));
+            s = s.Replace("dw >fhbsInd.",
+                Frame.GetFramesHitboxesIndexersFromFrameList(frameCreator1.Frames, true, true));
+            s = s.Replace("db >fhbs.",
+                Frame.GetFramesHitboxesIdsFromFrameList(frameCreator1.Frames, hbs, true, true));
+            s = s.Replace("db >hbs.",
+                HitBox.GetHitboxesFromArray(hbs));
+            s = s.Replace("dw >fls.",
                 Frame.GetFramesLengthFromFrameList(frameCreator1.Frames, true, true));
-            s = s.Replace("dw @ffps.",
+            s = s.Replace("dw >ffps.",
                 Frame.GetFramesFlippersFromFrameList(frameCreator1.Frames, true, true));
-            s = s.Replace("dw @fsp.",
+            s = s.Replace("dw >fsp.",
                 Frame.GetFramesStartsFromFrameList(frameCreator1.Frames, true, true));
-            s = s.Replace("dw @fep.",
+            s = s.Replace("dw >fep.",
                 Frame.GetFramesEndsFromFrameList(frameCreator1.Frames, true, true));
-            s = s.Replace("db @tiles.",
+            s = s.Replace("db >tiles.",
                 Frame.GetTilesCodesFromFrameList(frameCreator1.Frames, true, true));
-            s = s.Replace("db @props.",
+            s = s.Replace("db >props.",
                 Frame.GetTilesPropertiesFromFrameList(frameCreator1.Frames, true, true));
-            s = s.Replace("db @xdisps.",
+            s = s.Replace("db >xdisps.",
                 Frame.GetTilesXDispFromFrameList(frameCreator1.Frames, true, true));
-            s = s.Replace("db @ydisps.",
+            s = s.Replace("db >ydisps.",
                 Frame.GetTilesYDispFromFrameList(frameCreator1.Frames, true, true));
-            s = s.Replace("db @sizes.",
+            s = s.Replace("db >sizes.",
                 Frame.GetTilesSizesFromFrameList(frameCreator1.Frames, true, true));
+            s = s.Replace("dw >anl.",
+                Animation.GetAnimationLenghts(animationCreator1.Animations));
+            s = s.Replace("dw >alt.",
+                Animation.GetAnimationLastTransitions(animationCreator1.Animations));
+            s = s.Replace("dw >ai.",
+                Animation.GetAnimationIndexers(animationCreator1.Animations));
+            s = s.Replace("db >af.",
+                Animation.GetAnimationFrames(animationCreator1.Animations));
+            s = s.Replace("db >aft.",
+                Animation.GetAnimationTimes(animationCreator1.Animations));
+            s = s.Replace("db >aff.",
+                Animation.GetAnimationFlips(animationCreator1.Animations));
 
-
-            File.WriteAllText("output.txt", s);
+            s = File.ReadAllText(@".\ASM\Defines.asm") + "\n" + s;
+            File.WriteAllText("output.asm", s);
         }
 
         private void interactionMenuCellSizeChanged(int obj)
@@ -256,6 +289,13 @@ namespace TestWindows
             animationEditor1.Selection = frameSelector1.GetSelection();
         }
 
+        string secGrString = @"\;\>Section Graphics(.*\n)*\;\>End Graphics Section";
+        string grCallString = @"JSR( |\t)+GraphicRoutine";
+        string secAnString = @"\;\>Section Animations(.*\n)*\;\>End Animations Section";
+        string anCallString = @"JSR( |\t)+AnimationRoutine";
+        string anCallString2 = @"JSL( |\t)+InitWrapperChangeAnimationFromStart";
+        string secHBIntString = @"\;\>Section Hitboxes Interaction(.*\n)*\;\>End Hitboxes Interaction Section";
+        string hbIntCallString = @"JSR( |\t)+InteractMarioSprite";
         private void selectedIndexChanged(object sender, System.EventArgs e)
         {
             frameSelector1.Frames = frameCreator1.Frames;
@@ -265,8 +305,270 @@ namespace TestWindows
             {
                 interactionMenu1.UpdateFrameList(frameCreator1.Frames);
             }
+            else if (tabControl1.SelectedIndex == 3) 
+            {
+                Match m = Regex.Match(codeEditorController1.CodeEditor.Text,
+                        secGrString);
+                MatchCollection ms;
+                if (m.Success)
+                {
+                    codeEditorController1.CodeEditor.DeleteRange(m.Index,
+                        m.Length);
+                    if (frameCreator1.Frames.Length > 0)
+                    {
+                        codeEditorController1.CodeEditor.InsertText(m.Index,
+                                File.ReadAllText(@".\ASM\GraphicRoutine.asm"));
+                        ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
+                            ";( |\t)*" + grCallString);
+                        foreach(Match ma in ms)
+                        {
+                            codeEditorController1.CodeEditor.DeleteRange(ma.Index,
+                                ma.Length);
+                            codeEditorController1.CodeEditor.InsertText(ma.Index,
+                                "JSR GraphicRoutine");
+                        }
+                    }
+                    else
+                    {
+                        codeEditorController1.CodeEditor.InsertText(m.Index,
+                                ";>Section Graphics\n;>End Graphics Section");
+                        ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
+                            "(;( |\t)*)?" + grCallString);
+                        foreach (Match ma in ms)
+                        {
+                            codeEditorController1.CodeEditor.DeleteRange(ma.Index,
+                                ma.Length);
+                            codeEditorController1.CodeEditor.InsertText(ma.Index,
+                                    ";JSR GraphicRoutine");
+                        }
+                    }
+                }
+
+                m = Regex.Match(codeEditorController1.CodeEditor.Text,
+                        secAnString);
+
+                if(m.Success)
+                {
+                    codeEditorController1.CodeEditor.DeleteRange(m.Index,
+                                m.Length);
+                    if (animationCreator1.Animations.Length > 0)
+                    {
+                        codeEditorController1.CodeEditor.InsertText(m.Index,
+                            File.ReadAllText(@".\ASM\AnimationRoutine.asm").Replace(">ChangeRoutines.",
+                            Animation.GetAnimationChangeRoutine(animationCreator1.Animations)));
+                        ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
+                           ";( |\t)*" + anCallString);
+                        foreach (Match ma in ms)
+                        {
+                            codeEditorController1.CodeEditor.DeleteRange(ma.Index,
+                                ma.Length);
+                            codeEditorController1.CodeEditor.InsertText(ma.Index,
+                                "JSR AnimationRoutine");
+                        }
+                        ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
+                           ";( |\t)*" + anCallString2);
+                        foreach (Match ma in ms)
+                        {
+                            codeEditorController1.CodeEditor.DeleteRange(ma.Index,
+                                ma.Length);
+                            codeEditorController1.CodeEditor.InsertText(ma.Index,
+                                "JSL InitWrapperChangeAnimationFromStart");
+                        }
+                    }
+                    else
+                    {
+                        codeEditorController1.CodeEditor.InsertText(m.Index,
+                            ";>Section Animations\n;>End Animations Section");
+                        ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
+                            "(;( |\t)*)?" + anCallString);
+                        foreach (Match ma in ms)
+                        {
+                            codeEditorController1.CodeEditor.DeleteRange(ma.Index,
+                                ma.Length);
+                            codeEditorController1.CodeEditor.InsertText(ma.Index,
+                                    ";JSR AnimationRoutine");
+                        }
+                        ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
+                           "(;( |\t)*)?" + anCallString2);
+                        foreach (Match ma in ms)
+                        {
+                            codeEditorController1.CodeEditor.DeleteRange(ma.Index,
+                                ma.Length);
+                            codeEditorController1.CodeEditor.InsertText(ma.Index,
+                                ";JSL InitWrapperChangeAnimationFromStart");
+                        }
+                    }
+                }
+
+                m = Regex.Match(codeEditorController1.CodeEditor.Text,
+                    secHBIntString);
+                if (m.Success) 
+                {
+                    codeEditorController1.CodeEditor.DeleteRange(m.Index,
+                                m.Length);
+                    if (Frame.HaveHitboxInteraction(frameCreator1.Frames))
+                    {
+                        codeEditorController1.CodeEditor.InsertText(m.Index,
+                            File.ReadAllText(@".\ASM\HitboxInteractionRoutine.asm"));
+                        ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
+                           ";( |\t)*" + hbIntCallString);
+                        foreach (Match ma in ms)
+                        {
+                            codeEditorController1.CodeEditor.DeleteRange(ma.Index,
+                                ma.Length);
+                            codeEditorController1.CodeEditor.InsertText(ma.Index,
+                                "JSR InteractMarioSprite");
+                        }
+                    }
+                    else
+                    {
+                        codeEditorController1.CodeEditor.InsertText(m.Index,
+                            ";>Section Hitboxes Interaction\n;>End Hitboxes Interaction Section");
+                        ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
+                           "(;( |\t)*)?" + hbIntCallString);
+                        foreach (Match ma in ms)
+                        {
+                            codeEditorController1.CodeEditor.DeleteRange(ma.Index,
+                                ma.Length);
+                            codeEditorController1.CodeEditor.InsertText(ma.Index,
+                                ";JSR InteractMarioSprite");
+                        }
+                    }
+                }
+            }
         }
 
+        public void RefreshCode()
+        {
+            Match m = Regex.Match(codeEditorController1.CodeEditor.Text,
+                        secGrString);
+            MatchCollection ms;
+            if (m.Success)
+            {
+                codeEditorController1.CodeEditor.DeleteRange(m.Index,
+                    m.Length);
+                if (frameCreator1.Frames.Length > 0)
+                {
+                    codeEditorController1.CodeEditor.InsertText(m.Index,
+                            File.ReadAllText(@".\ASM\GraphicRoutine.asm"));
+                    ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
+                        ";( |\t)*" + grCallString);
+                    foreach (Match ma in ms)
+                    {
+                        codeEditorController1.CodeEditor.DeleteRange(ma.Index,
+                            ma.Length);
+                        codeEditorController1.CodeEditor.InsertText(ma.Index,
+                            "JSR GraphicRoutine");
+                    }
+                }
+                else
+                {
+                    codeEditorController1.CodeEditor.InsertText(m.Index,
+                            ";>Section Graphics\n;>End Graphics Section");
+                    ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
+                        "(;( |\t)*)?" + grCallString);
+                    foreach (Match ma in ms)
+                    {
+                        codeEditorController1.CodeEditor.DeleteRange(ma.Index,
+                            ma.Length);
+                        codeEditorController1.CodeEditor.InsertText(ma.Index,
+                                ";JSR GraphicRoutine");
+                    }
+                }
+            }
+
+            m = Regex.Match(codeEditorController1.CodeEditor.Text,
+                    secAnString);
+
+            if (m.Success)
+            {
+                codeEditorController1.CodeEditor.DeleteRange(m.Index,
+                            m.Length);
+                if (animationCreator1.Animations.Length > 0)
+                {
+                    codeEditorController1.CodeEditor.InsertText(m.Index,
+                        File.ReadAllText(@".\ASM\AnimationRoutine.asm").Replace(">ChangeRoutines.",
+                        Animation.GetAnimationChangeRoutine(animationCreator1.Animations)));
+                    ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
+                       ";( |\t)*" + anCallString);
+                    foreach (Match ma in ms)
+                    {
+                        codeEditorController1.CodeEditor.DeleteRange(ma.Index,
+                            ma.Length);
+                        codeEditorController1.CodeEditor.InsertText(ma.Index,
+                            "JSR AnimationRoutine");
+                    }
+                    ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
+                       ";( |\t)*" + anCallString2);
+                    foreach (Match ma in ms)
+                    {
+                        codeEditorController1.CodeEditor.DeleteRange(ma.Index,
+                            ma.Length);
+                        codeEditorController1.CodeEditor.InsertText(ma.Index,
+                            "JSL InitWrapperChangeAnimationFromStart");
+                    }
+                }
+                else
+                {
+                    codeEditorController1.CodeEditor.InsertText(m.Index,
+                        ";>Section Animations\n;>End Animations Section");
+                    ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
+                        "(;( |\t)*)?" + anCallString);
+                    foreach (Match ma in ms)
+                    {
+                        codeEditorController1.CodeEditor.DeleteRange(ma.Index,
+                            ma.Length);
+                        codeEditorController1.CodeEditor.InsertText(ma.Index,
+                                ";JSR AnimationRoutine");
+                    }
+                    ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
+                       "(;( |\t)*)?" + anCallString2);
+                    foreach (Match ma in ms)
+                    {
+                        codeEditorController1.CodeEditor.DeleteRange(ma.Index,
+                            ma.Length);
+                        codeEditorController1.CodeEditor.InsertText(ma.Index,
+                            ";JSL InitWrapperChangeAnimationFromStart");
+                    }
+                }
+            }
+
+            m = Regex.Match(codeEditorController1.CodeEditor.Text,
+                secHBIntString);
+            if (m.Success)
+            {
+                codeEditorController1.CodeEditor.DeleteRange(m.Index,
+                            m.Length);
+                if (Frame.HaveHitboxInteraction(frameCreator1.Frames))
+                {
+                    codeEditorController1.CodeEditor.InsertText(m.Index,
+                        File.ReadAllText(@".\ASM\HitboxInteractionRoutine.asm"));
+                    ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
+                       ";( |\t)*" + hbIntCallString);
+                    foreach (Match ma in ms)
+                    {
+                        codeEditorController1.CodeEditor.DeleteRange(ma.Index,
+                            ma.Length);
+                        codeEditorController1.CodeEditor.InsertText(ma.Index,
+                            "JSR InteractMarioSprite");
+                    }
+                }
+                else
+                {
+                    codeEditorController1.CodeEditor.InsertText(m.Index,
+                        ";>Section Hitboxes Interaction\n;>End Hitboxes Interaction Section");
+                    ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
+                       "(;( |\t)*)?" + hbIntCallString);
+                    foreach (Match ma in ms)
+                    {
+                        codeEditorController1.CodeEditor.DeleteRange(ma.Index,
+                            ma.Length);
+                        codeEditorController1.CodeEditor.InsertText(ma.Index,
+                            ";JSR InteractMarioSprite");
+                    }
+                }
+            }
+        }
         private void graphicsLoaded()
         {
             resizeableSpriteGridController1.ReDraw();

@@ -113,6 +113,28 @@ namespace SMWControlibBackend.Graphics
             GenerateGlobalPalettes(bytes, PaletteSize);
         }
 
+        public static byte[] SaveGlobalPalette()
+        {
+            byte[] bytes = new byte[768];
+            int k = 0;
+            Color c;
+
+            for (int i = 0; i < globalPalettes.Length; i++)
+            {
+                for (byte j = 0; j < globalPalettes[i].Length; j++)
+                {
+                    c = globalPalettes[i].GetColor(j);
+                    bytes[k] = c.R;
+                    k++;
+                    bytes[k] = c.G;
+                    k++;
+                    bytes[k] = c.B;
+                    k++;
+                }
+            }
+            return bytes;
+        }
+
         public static void GenerateGlobalPalettes(byte[] bytes, byte PaletteSize)
         {
             if (bytes.Length != 768) 

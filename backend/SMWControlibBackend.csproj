@@ -61,6 +61,7 @@
     <Compile Include="Interaction\InteractionPointContainer.cs" />
     <Compile Include="Interaction\RectangleHitBox.cs" />
     <Compile Include="Interaction\RectangleHitboxContainer.cs" />
+    <Compile Include="Logic\HitBoxAction.cs" />
     <Compile Include="Logic\ArgsTypes.cs" />
     <Compile Include="Logic\Asar.cs" />
     <Compile Include="Logic\Code.cs" />

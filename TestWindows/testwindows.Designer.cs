@@ -81,6 +81,7 @@
             this.creditsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFile = new System.Windows.Forms.SaveFileDialog();
             this.openFile = new System.Windows.Forms.OpenFileDialog();
+            this.folderdialog = new System.Windows.Forms.FolderBrowserDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -133,6 +134,8 @@
             this.resizeableSpriteGridController1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.resizeableSpriteGridController1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.resizeableSpriteGridController1.Location = new System.Drawing.Point(283, 3);
+            this.resizeableSpriteGridController1.MidX = 0;
+            this.resizeableSpriteGridController1.MidY = 0;
             this.resizeableSpriteGridController1.Name = "resizeableSpriteGridController1";
             this.resizeableSpriteGridController1.Size = new System.Drawing.Size(549, 584);
             this.resizeableSpriteGridController1.TabIndex = 14;
@@ -796,5 +799,6 @@
         private SMWControlibControls.LogicControls.CodeEditorController codeEditorController1;
         private System.Windows.Forms.SaveFileDialog saveFile;
         private System.Windows.Forms.OpenFileDialog openFile;
+        private System.Windows.Forms.FolderBrowserDialog folderdialog;
     }
 }

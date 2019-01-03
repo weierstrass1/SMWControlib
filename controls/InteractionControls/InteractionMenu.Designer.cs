@@ -30,6 +30,10 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.gotoAct = new System.Windows.Forms.Button();
+            this.renameAct = new System.Windows.Forms.Button();
+            this.delAct = new System.Windows.Forms.Button();
+            this.newAct = new System.Windows.Forms.Button();
             this.label25 = new System.Windows.Forms.Label();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label9 = new System.Windows.Forms.Label();
@@ -48,33 +52,27 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.actionSelectorHB = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.infoHB = new System.Windows.Forms.Button();
             this.renameHB = new System.Windows.Forms.Button();
             this.deleteHB = new System.Windows.Forms.Button();
             this.createHB = new System.Windows.Forms.Button();
-            this.hbSelector = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
             this.borderC = new System.Windows.Forms.PictureBox();
             this.fillC = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label14 = new System.Windows.Forms.Label();
-            this.ipType = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.label26 = new System.Windows.Forms.Label();
-            this.actionSelectorIP = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
             this.label27 = new System.Windows.Forms.Label();
             this.infoIP = new System.Windows.Forms.Button();
             this.renameIP = new System.Windows.Forms.Button();
             this.deleteIP = new System.Windows.Forms.Button();
             this.createIP = new System.Windows.Forms.Button();
-            this.ipSelector = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
             this.borderColorIP = new System.Windows.Forms.PictureBox();
             this.ipColor = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.shareSelector = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
             this.label22 = new System.Windows.Forms.Label();
             this.shareWithRadioButton = new System.Windows.Forms.RadioButton();
             this.label21 = new System.Windows.Forms.Label();
@@ -82,17 +80,23 @@
             this.label20 = new System.Windows.Forms.Label();
             this.dontShareRadioButton = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
-            this.frameSelector = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.gfxButton2 = new SMWControlibControls.GraphicsControls.GFXButton();
             this.label19 = new System.Windows.Forms.Label();
             this.grid = new System.Windows.Forms.CheckBox();
-            this.cellSize = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
-            this.zoom = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
+            this.actionSelectorHB = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
+            this.hbSelector = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
+            this.ipType = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
+            this.actionSelectorIP = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
+            this.ipSelector = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
+            this.shareSelector = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
+            this.frameSelector = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
+            this.gfxButton2 = new SMWControlibControls.GraphicsControls.GFXButton();
+            this.cellSize = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
+            this.zoom = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.borderC)).BeginInit();
@@ -109,17 +113,21 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 327);
+            this.tabControl1.Location = new System.Drawing.Point(0, 291);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(6);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(234, 573);
+            this.tabControl1.Size = new System.Drawing.Size(234, 609);
             this.tabControl1.TabIndex = 31;
             // 
             // tabPage1
             // 
             this.tabPage1.AutoScroll = true;
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
+            this.tabPage1.Controls.Add(this.gotoAct);
+            this.tabPage1.Controls.Add(this.renameAct);
+            this.tabPage1.Controls.Add(this.delAct);
+            this.tabPage1.Controls.Add(this.newAct);
             this.tabPage1.Controls.Add(this.label25);
             this.tabPage1.Controls.Add(this.radioButton1);
             this.tabPage1.Controls.Add(this.label9);
@@ -150,16 +158,76 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(226, 545);
+            this.tabPage1.Size = new System.Drawing.Size(226, 581);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Hitboxes";
+            // 
+            // gotoAct
+            // 
+            this.gotoAct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(16)))), ((int)(((byte)(32)))));
+            this.gotoAct.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(8)))), ((int)(((byte)(16)))));
+            this.gotoAct.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(24)))), ((int)(((byte)(48)))));
+            this.gotoAct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.gotoAct.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.gotoAct.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(160)))), ((int)(((byte)(224)))));
+            this.gotoAct.Location = new System.Drawing.Point(107, 214);
+            this.gotoAct.Name = "gotoAct";
+            this.gotoAct.Size = new System.Drawing.Size(92, 23);
+            this.gotoAct.TabIndex = 57;
+            this.gotoAct.Text = "Go to Action";
+            this.gotoAct.UseVisualStyleBackColor = false;
+            // 
+            // renameAct
+            // 
+            this.renameAct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(160)))), ((int)(((byte)(32)))));
+            this.renameAct.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(80)))), ((int)(((byte)(16)))));
+            this.renameAct.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(200)))), ((int)(((byte)(48)))));
+            this.renameAct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.renameAct.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.renameAct.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(200)))));
+            this.renameAct.Location = new System.Drawing.Point(9, 214);
+            this.renameAct.Name = "renameAct";
+            this.renameAct.Size = new System.Drawing.Size(92, 23);
+            this.renameAct.TabIndex = 56;
+            this.renameAct.Text = "Rename";
+            this.renameAct.UseVisualStyleBackColor = false;
+            // 
+            // delAct
+            // 
+            this.delAct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(32)))), ((int)(((byte)(176)))));
+            this.delAct.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(16)))), ((int)(((byte)(88)))));
+            this.delAct.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(48)))), ((int)(((byte)(255)))));
+            this.delAct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.delAct.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.delAct.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+            this.delAct.Location = new System.Drawing.Point(107, 185);
+            this.delAct.Name = "delAct";
+            this.delAct.Size = new System.Drawing.Size(92, 23);
+            this.delAct.TabIndex = 55;
+            this.delAct.Text = "Delete";
+            this.delAct.UseVisualStyleBackColor = false;
+            // 
+            // newAct
+            // 
+            this.newAct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(102)))), ((int)(((byte)(64)))));
+            this.newAct.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(51)))), ((int)(((byte)(32)))));
+            this.newAct.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(153)))), ((int)(((byte)(96)))));
+            this.newAct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.newAct.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.newAct.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(255)))), ((int)(((byte)(224)))));
+            this.newAct.Location = new System.Drawing.Point(9, 185);
+            this.newAct.Name = "newAct";
+            this.newAct.Size = new System.Drawing.Size(92, 23);
+            this.newAct.TabIndex = 54;
+            this.newAct.Text = "New";
+            this.newAct.UseVisualStyleBackColor = false;
             // 
             // label25
             // 
             this.label25.AutoSize = true;
             this.label25.Enabled = false;
             this.label25.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(36, 369);
+            this.label25.Location = new System.Drawing.Point(34, 424);
             this.label25.Margin = new System.Windows.Forms.Padding(6, 2, 6, 3);
             this.label25.Name = "label25";
             this.label25.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
@@ -167,6 +235,7 @@
             this.label25.TabIndex = 53;
             this.label25.Text = "Circle";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label25.Visible = false;
             // 
             // radioButton1
             // 
@@ -175,19 +244,20 @@
             this.radioButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.radioButton1.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
             this.radioButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
-            this.radioButton1.Location = new System.Drawing.Point(18, 375);
+            this.radioButton1.Location = new System.Drawing.Point(16, 430);
             this.radioButton1.Margin = new System.Windows.Forms.Padding(6, 6, 0, 6);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(12, 12);
             this.radioButton1.TabIndex = 52;
             this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.Visible = false;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Enabled = false;
             this.label9.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(36, 340);
+            this.label9.Location = new System.Drawing.Point(34, 395);
             this.label9.Margin = new System.Windows.Forms.Padding(6, 2, 6, 3);
             this.label9.Name = "label9";
             this.label9.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
@@ -195,6 +265,7 @@
             this.label9.TabIndex = 51;
             this.label9.Text = "Rectangle";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label9.Visible = false;
             // 
             // onlyOnce
             // 
@@ -204,19 +275,20 @@
             this.onlyOnce.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.onlyOnce.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
             this.onlyOnce.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
-            this.onlyOnce.Location = new System.Drawing.Point(18, 346);
+            this.onlyOnce.Location = new System.Drawing.Point(16, 401);
             this.onlyOnce.Margin = new System.Windows.Forms.Padding(6, 6, 0, 6);
             this.onlyOnce.Name = "onlyOnce";
             this.onlyOnce.Size = new System.Drawing.Size(12, 12);
             this.onlyOnce.TabIndex = 50;
             this.onlyOnce.TabStop = true;
             this.onlyOnce.UseVisualStyleBackColor = true;
+            this.onlyOnce.Visible = false;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Enabled = false;
-            this.label8.Location = new System.Drawing.Point(8, 308);
+            this.label8.Location = new System.Drawing.Point(6, 363);
             this.label8.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.label8.Name = "label8";
             this.label8.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
@@ -224,13 +296,14 @@
             this.label8.TabIndex = 49;
             this.label8.Text = "Type:";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label8.Visible = false;
             // 
             // label24
             // 
             this.label24.AutoSize = true;
             this.label24.Enabled = false;
             this.label24.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(36, 278);
+            this.label24.Location = new System.Drawing.Point(34, 333);
             this.label24.Margin = new System.Windows.Forms.Padding(6, 2, 6, 3);
             this.label24.Name = "label24";
             this.label24.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
@@ -238,25 +311,27 @@
             this.label24.TabIndex = 48;
             this.label24.Text = "Extended";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label24.Visible = false;
             // 
             // checkBox3
             // 
             this.checkBox3.Enabled = false;
             this.checkBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.checkBox3.Location = new System.Drawing.Point(18, 283);
+            this.checkBox3.Location = new System.Drawing.Point(16, 338);
             this.checkBox3.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(12, 12);
             this.checkBox3.TabIndex = 47;
             this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.Visible = false;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Enabled = false;
             this.label7.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(119, 249);
+            this.label7.Location = new System.Drawing.Point(117, 304);
             this.label7.Margin = new System.Windows.Forms.Padding(6, 2, 6, 3);
             this.label7.Name = "label7";
             this.label7.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
@@ -264,25 +339,27 @@
             this.label7.TabIndex = 46;
             this.label7.Text = "Clusters";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label7.Visible = false;
             // 
             // checkBox2
             // 
             this.checkBox2.Enabled = false;
             this.checkBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.checkBox2.Location = new System.Drawing.Point(101, 254);
+            this.checkBox2.Location = new System.Drawing.Point(99, 309);
             this.checkBox2.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(12, 12);
             this.checkBox2.TabIndex = 45;
             this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.Visible = false;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Enabled = false;
             this.label6.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(119, 220);
+            this.label6.Location = new System.Drawing.Point(117, 275);
             this.label6.Margin = new System.Windows.Forms.Padding(6, 2, 6, 3);
             this.label6.Name = "label6";
             this.label6.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
@@ -290,25 +367,27 @@
             this.label6.TabIndex = 44;
             this.label6.Text = "Fireballs";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label6.Visible = false;
             // 
             // checkBox1
             // 
             this.checkBox1.Enabled = false;
             this.checkBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.checkBox1.Location = new System.Drawing.Point(101, 225);
+            this.checkBox1.Location = new System.Drawing.Point(99, 280);
             this.checkBox1.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(12, 12);
             this.checkBox1.TabIndex = 43;
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Visible = false;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Enabled = false;
             this.label5.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(36, 249);
+            this.label5.Location = new System.Drawing.Point(34, 304);
             this.label5.Margin = new System.Windows.Forms.Padding(6, 2, 6, 3);
             this.label5.Name = "label5";
             this.label5.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
@@ -316,25 +395,27 @@
             this.label5.TabIndex = 42;
             this.label5.Text = "Sprites";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label5.Visible = false;
             // 
             // checkBox8
             // 
             this.checkBox8.Enabled = false;
             this.checkBox8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBox8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.checkBox8.Location = new System.Drawing.Point(18, 254);
+            this.checkBox8.Location = new System.Drawing.Point(16, 309);
             this.checkBox8.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.checkBox8.Name = "checkBox8";
             this.checkBox8.Size = new System.Drawing.Size(12, 12);
             this.checkBox8.TabIndex = 41;
             this.checkBox8.UseVisualStyleBackColor = true;
+            this.checkBox8.Visible = false;
             // 
             // label23
             // 
             this.label23.AutoSize = true;
             this.label23.Enabled = false;
             this.label23.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(36, 220);
+            this.label23.Location = new System.Drawing.Point(34, 275);
             this.label23.Margin = new System.Windows.Forms.Padding(6, 2, 6, 3);
             this.label23.Name = "label23";
             this.label23.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
@@ -342,6 +423,7 @@
             this.label23.TabIndex = 40;
             this.label23.Text = "Player";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label23.Visible = false;
             // 
             // checkBox7
             // 
@@ -350,18 +432,19 @@
             this.checkBox7.Enabled = false;
             this.checkBox7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBox7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.checkBox7.Location = new System.Drawing.Point(18, 225);
+            this.checkBox7.Location = new System.Drawing.Point(16, 280);
             this.checkBox7.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.checkBox7.Name = "checkBox7";
             this.checkBox7.Size = new System.Drawing.Size(12, 12);
             this.checkBox7.TabIndex = 22;
             this.checkBox7.UseVisualStyleBackColor = true;
+            this.checkBox7.Visible = false;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Enabled = false;
-            this.label4.Location = new System.Drawing.Point(8, 188);
+            this.label4.Location = new System.Drawing.Point(6, 243);
             this.label4.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.label4.Name = "label4";
             this.label4.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
@@ -369,12 +452,13 @@
             this.label4.TabIndex = 39;
             this.label4.Text = "Interact With:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label4.Visible = false;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(42, 158);
+            this.label3.Location = new System.Drawing.Point(33, 125);
             this.label3.Margin = new System.Windows.Forms.Padding(6, 2, 6, 3);
             this.label3.Name = "label3";
             this.label3.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
@@ -387,7 +471,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(42, 129);
+            this.label11.Location = new System.Drawing.Point(33, 96);
             this.label11.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.label11.Name = "label11";
             this.label11.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
@@ -396,24 +480,10 @@
             this.label11.Text = "Border Color";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // actionSelectorHB
-            // 
-            this.actionSelectorHB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.actionSelectorHB.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
-            this.actionSelectorHB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.actionSelectorHB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.actionSelectorHB.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.actionSelectorHB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.actionSelectorHB.FormattingEnabled = true;
-            this.actionSelectorHB.Location = new System.Drawing.Point(75, 101);
-            this.actionSelectorHB.Name = "actionSelectorHB";
-            this.actionSelectorHB.Size = new System.Drawing.Size(125, 20);
-            this.actionSelectorHB.TabIndex = 29;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 96);
+            this.label2.Location = new System.Drawing.Point(6, 152);
             this.label2.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
@@ -482,26 +552,11 @@
             this.createHB.Text = "New";
             this.createHB.UseVisualStyleBackColor = false;
             // 
-            // hbSelector
-            // 
-            this.hbSelector.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.hbSelector.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
-            this.hbSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.hbSelector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hbSelector.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.hbSelector.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.hbSelector.FormattingEnabled = true;
-            this.hbSelector.Location = new System.Drawing.Point(11, 12);
-            this.hbSelector.Margin = new System.Windows.Forms.Padding(11, 9, 11, 3);
-            this.hbSelector.Name = "hbSelector";
-            this.hbSelector.Size = new System.Drawing.Size(190, 20);
-            this.hbSelector.TabIndex = 29;
-            // 
             // borderC
             // 
             this.borderC.BackColor = System.Drawing.Color.Red;
             this.borderC.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.borderC.Location = new System.Drawing.Point(20, 132);
+            this.borderC.Location = new System.Drawing.Point(11, 99);
             this.borderC.Margin = new System.Windows.Forms.Padding(6, 6, 0, 6);
             this.borderC.Name = "borderC";
             this.borderC.Size = new System.Drawing.Size(16, 16);
@@ -512,7 +567,7 @@
             // 
             this.fillC.BackColor = System.Drawing.Color.Red;
             this.fillC.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.fillC.Location = new System.Drawing.Point(20, 160);
+            this.fillC.Location = new System.Drawing.Point(11, 127);
             this.fillC.Margin = new System.Windows.Forms.Padding(6, 6, 0, 6);
             this.fillC.Name = "fillC";
             this.fillC.Size = new System.Drawing.Size(16, 16);
@@ -524,20 +579,20 @@
             this.tabPage2.AutoScroll = true;
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.tabPage2.Controls.Add(this.label14);
-            this.tabPage2.Controls.Add(this.ipType);
             this.tabPage2.Controls.Add(this.label13);
             this.tabPage2.Controls.Add(this.label12);
             this.tabPage2.Controls.Add(this.checkBox4);
             this.tabPage2.Controls.Add(this.label26);
-            this.tabPage2.Controls.Add(this.actionSelectorIP);
             this.tabPage2.Controls.Add(this.label27);
             this.tabPage2.Controls.Add(this.infoIP);
             this.tabPage2.Controls.Add(this.renameIP);
             this.tabPage2.Controls.Add(this.deleteIP);
             this.tabPage2.Controls.Add(this.createIP);
-            this.tabPage2.Controls.Add(this.ipSelector);
             this.tabPage2.Controls.Add(this.borderColorIP);
             this.tabPage2.Controls.Add(this.ipColor);
+            this.tabPage2.Controls.Add(this.ipType);
+            this.tabPage2.Controls.Add(this.actionSelectorIP);
+            this.tabPage2.Controls.Add(this.ipSelector);
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -557,26 +612,6 @@
             this.label14.TabIndex = 64;
             this.label14.Text = "Fill Color";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // ipType
-            // 
-            this.ipType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.ipType.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
-            this.ipType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ipType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ipType.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.ipType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.ipType.FormattingEnabled = true;
-            this.ipType.Items.AddRange(new object[] {
-            "Above Detector",
-            "Below Detector",
-            "Left Side Detector",
-            "Right Side Detector",
-            "Slope Detector"});
-            this.ipType.Location = new System.Drawing.Point(67, 225);
-            this.ipType.Name = "ipType";
-            this.ipType.Size = new System.Drawing.Size(135, 20);
-            this.ipType.TabIndex = 63;
             // 
             // label13
             // 
@@ -630,20 +665,6 @@
             this.label26.TabIndex = 58;
             this.label26.Text = "Border Color";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // actionSelectorIP
-            // 
-            this.actionSelectorIP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.actionSelectorIP.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
-            this.actionSelectorIP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.actionSelectorIP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.actionSelectorIP.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.actionSelectorIP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.actionSelectorIP.FormattingEnabled = true;
-            this.actionSelectorIP.Location = new System.Drawing.Point(75, 101);
-            this.actionSelectorIP.Name = "actionSelectorIP";
-            this.actionSelectorIP.Size = new System.Drawing.Size(125, 20);
-            this.actionSelectorIP.TabIndex = 51;
             // 
             // label27
             // 
@@ -717,21 +738,6 @@
             this.createIP.Text = "New";
             this.createIP.UseVisualStyleBackColor = false;
             // 
-            // ipSelector
-            // 
-            this.ipSelector.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.ipSelector.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
-            this.ipSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ipSelector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ipSelector.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.ipSelector.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.ipSelector.FormattingEnabled = true;
-            this.ipSelector.Location = new System.Drawing.Point(11, 12);
-            this.ipSelector.Margin = new System.Windows.Forms.Padding(11, 9, 11, 3);
-            this.ipSelector.Name = "ipSelector";
-            this.ipSelector.Size = new System.Drawing.Size(190, 20);
-            this.ipSelector.TabIndex = 53;
-            // 
             // borderColorIP
             // 
             this.borderColorIP.BackColor = System.Drawing.Color.Red;
@@ -766,30 +772,14 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.frameSelector);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 135);
+            this.panel1.Location = new System.Drawing.Point(0, 99);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(234, 192);
             this.panel1.TabIndex = 31;
             // 
-            // shareSelector
-            // 
-            this.shareSelector.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.shareSelector.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
-            this.shareSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.shareSelector.Enabled = false;
-            this.shareSelector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.shareSelector.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.shareSelector.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.shareSelector.FormattingEnabled = true;
-            this.shareSelector.Location = new System.Drawing.Point(33, 163);
-            this.shareSelector.Name = "shareSelector";
-            this.shareSelector.Size = new System.Drawing.Size(173, 20);
-            this.shareSelector.TabIndex = 28;
-            // 
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Enabled = false;
             this.label22.Location = new System.Drawing.Point(30, 130);
             this.label22.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.label22.Name = "label22";
@@ -801,7 +791,6 @@
             // 
             // shareWithRadioButton
             // 
-            this.shareWithRadioButton.Enabled = false;
             this.shareWithRadioButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
             this.shareWithRadioButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.shareWithRadioButton.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
@@ -816,7 +805,6 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Enabled = false;
             this.label21.Location = new System.Drawing.Point(30, 97);
             this.label21.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.label21.Name = "label21";
@@ -828,7 +816,6 @@
             // 
             // shareAllRadioButton
             // 
-            this.shareAllRadioButton.Enabled = false;
             this.shareAllRadioButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
             this.shareAllRadioButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.shareAllRadioButton.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
@@ -878,20 +865,6 @@
             this.label1.TabIndex = 22;
             this.label1.Text = "Frames";
             // 
-            // frameSelector
-            // 
-            this.frameSelector.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.frameSelector.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
-            this.frameSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.frameSelector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.frameSelector.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.frameSelector.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.frameSelector.FormattingEnabled = true;
-            this.frameSelector.Location = new System.Drawing.Point(7, 38);
-            this.frameSelector.Name = "frameSelector";
-            this.frameSelector.Size = new System.Drawing.Size(199, 20);
-            this.frameSelector.TabIndex = 22;
-            // 
             // colorDialog1
             // 
             this.colorDialog1.FullOpen = true;
@@ -909,8 +882,177 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(234, 135);
+            this.panel2.Size = new System.Drawing.Size(234, 99);
             this.panel2.TabIndex = 32;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(30, 99);
+            this.label19.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
+            this.label19.Name = "label19";
+            this.label19.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
+            this.label19.Size = new System.Drawing.Size(40, 27);
+            this.label19.TabIndex = 20;
+            this.label19.Text = "Grid";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label19.Visible = false;
+            // 
+            // grid
+            // 
+            this.grid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.grid.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
+            this.grid.Location = new System.Drawing.Point(12, 106);
+            this.grid.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.grid.Name = "grid";
+            this.grid.Size = new System.Drawing.Size(12, 12);
+            this.grid.TabIndex = 19;
+            this.grid.UseVisualStyleBackColor = true;
+            this.grid.Visible = false;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(6, 68);
+            this.label18.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
+            this.label18.Name = "label18";
+            this.label18.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
+            this.label18.Size = new System.Drawing.Size(71, 27);
+            this.label18.TabIndex = 13;
+            this.label18.Text = "Cell Size";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(6, 35);
+            this.label17.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
+            this.label17.Name = "label17";
+            this.label17.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
+            this.label17.Size = new System.Drawing.Size(49, 27);
+            this.label17.TabIndex = 11;
+            this.label17.Text = "Zoom";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.label16.Location = new System.Drawing.Point(3, 6);
+            this.label16.Margin = new System.Windows.Forms.Padding(3, 6, 6, 6);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(46, 20);
+            this.label16.TabIndex = 9;
+            this.label16.Text = "Grid";
+            // 
+            // actionSelectorHB
+            // 
+            this.actionSelectorHB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.actionSelectorHB.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
+            this.actionSelectorHB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.actionSelectorHB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.actionSelectorHB.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.actionSelectorHB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
+            this.actionSelectorHB.FormattingEnabled = true;
+            this.actionSelectorHB.Items.AddRange(new object[] {
+            "DefaultAction"});
+            this.actionSelectorHB.Location = new System.Drawing.Point(73, 157);
+            this.actionSelectorHB.Name = "actionSelectorHB";
+            this.actionSelectorHB.Size = new System.Drawing.Size(125, 20);
+            this.actionSelectorHB.TabIndex = 29;
+            // 
+            // hbSelector
+            // 
+            this.hbSelector.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.hbSelector.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
+            this.hbSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.hbSelector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hbSelector.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.hbSelector.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
+            this.hbSelector.FormattingEnabled = true;
+            this.hbSelector.Location = new System.Drawing.Point(11, 12);
+            this.hbSelector.Margin = new System.Windows.Forms.Padding(11, 9, 11, 3);
+            this.hbSelector.Name = "hbSelector";
+            this.hbSelector.Size = new System.Drawing.Size(190, 20);
+            this.hbSelector.TabIndex = 29;
+            // 
+            // ipType
+            // 
+            this.ipType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.ipType.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
+            this.ipType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ipType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ipType.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.ipType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
+            this.ipType.FormattingEnabled = true;
+            this.ipType.Items.AddRange(new object[] {
+            "Above Detector",
+            "Below Detector",
+            "Left Side Detector",
+            "Right Side Detector",
+            "Slope Detector"});
+            this.ipType.Location = new System.Drawing.Point(67, 225);
+            this.ipType.Name = "ipType";
+            this.ipType.Size = new System.Drawing.Size(135, 20);
+            this.ipType.TabIndex = 63;
+            // 
+            // actionSelectorIP
+            // 
+            this.actionSelectorIP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.actionSelectorIP.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
+            this.actionSelectorIP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.actionSelectorIP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.actionSelectorIP.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.actionSelectorIP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
+            this.actionSelectorIP.FormattingEnabled = true;
+            this.actionSelectorIP.Location = new System.Drawing.Point(75, 101);
+            this.actionSelectorIP.Name = "actionSelectorIP";
+            this.actionSelectorIP.Size = new System.Drawing.Size(125, 20);
+            this.actionSelectorIP.TabIndex = 51;
+            // 
+            // ipSelector
+            // 
+            this.ipSelector.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.ipSelector.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
+            this.ipSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ipSelector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ipSelector.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.ipSelector.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
+            this.ipSelector.FormattingEnabled = true;
+            this.ipSelector.Location = new System.Drawing.Point(11, 12);
+            this.ipSelector.Margin = new System.Windows.Forms.Padding(11, 9, 11, 3);
+            this.ipSelector.Name = "ipSelector";
+            this.ipSelector.Size = new System.Drawing.Size(190, 20);
+            this.ipSelector.TabIndex = 53;
+            // 
+            // shareSelector
+            // 
+            this.shareSelector.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.shareSelector.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
+            this.shareSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.shareSelector.Enabled = false;
+            this.shareSelector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.shareSelector.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.shareSelector.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
+            this.shareSelector.FormattingEnabled = true;
+            this.shareSelector.Location = new System.Drawing.Point(33, 163);
+            this.shareSelector.Name = "shareSelector";
+            this.shareSelector.Size = new System.Drawing.Size(173, 20);
+            this.shareSelector.TabIndex = 28;
+            // 
+            // frameSelector
+            // 
+            this.frameSelector.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.frameSelector.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
+            this.frameSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.frameSelector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.frameSelector.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.frameSelector.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
+            this.frameSelector.FormattingEnabled = true;
+            this.frameSelector.Location = new System.Drawing.Point(7, 38);
+            this.frameSelector.Name = "frameSelector";
+            this.frameSelector.Size = new System.Drawing.Size(199, 20);
+            this.frameSelector.TabIndex = 22;
             // 
             // gfxButton2
             // 
@@ -930,29 +1072,7 @@
             this.gfxButton2.Text = "Grid Settings";
             this.gfxButton2.Tilesize = 16;
             this.gfxButton2.UseVisualStyleBackColor = false;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(30, 99);
-            this.label19.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
-            this.label19.Name = "label19";
-            this.label19.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
-            this.label19.Size = new System.Drawing.Size(40, 27);
-            this.label19.TabIndex = 20;
-            this.label19.Text = "Grid";
-            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // grid
-            // 
-            this.grid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.grid.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.grid.Location = new System.Drawing.Point(12, 106);
-            this.grid.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.grid.Name = "grid";
-            this.grid.Size = new System.Drawing.Size(12, 12);
-            this.grid.TabIndex = 19;
-            this.grid.UseVisualStyleBackColor = true;
+            this.gfxButton2.Visible = false;
             // 
             // cellSize
             // 
@@ -996,41 +1116,6 @@
             this.zoom.Name = "zoom";
             this.zoom.Size = new System.Drawing.Size(120, 20);
             this.zoom.TabIndex = 17;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(6, 68);
-            this.label18.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
-            this.label18.Name = "label18";
-            this.label18.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
-            this.label18.Size = new System.Drawing.Size(71, 27);
-            this.label18.TabIndex = 13;
-            this.label18.Text = "Cell Size";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(6, 35);
-            this.label17.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
-            this.label17.Name = "label17";
-            this.label17.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
-            this.label17.Size = new System.Drawing.Size(49, 27);
-            this.label17.TabIndex = 11;
-            this.label17.Text = "Zoom";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.label16.Location = new System.Drawing.Point(3, 6);
-            this.label16.Margin = new System.Windows.Forms.Padding(3, 6, 6, 6);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(46, 20);
-            this.label16.TabIndex = 9;
-            this.label16.Text = "Grid";
             // 
             // InteractionMenu
             // 
@@ -1128,5 +1213,9 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button gotoAct;
+        private System.Windows.Forms.Button renameAct;
+        private System.Windows.Forms.Button delAct;
+        private System.Windows.Forms.Button newAct;
     }
 }

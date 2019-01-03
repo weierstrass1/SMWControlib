@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SMWControlibBackend.Graphics;
 
 namespace SMWControlibBackend.Interaction
@@ -87,7 +83,12 @@ namespace SMWControlibBackend.Interaction
             throw new NotImplementedException();
         }
 
-        public override string GetHitBoxString()
+        public override string GetHitBoxString(string[] actionNames)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override HitBox Clone()
         {
             throw new NotImplementedException();
         }

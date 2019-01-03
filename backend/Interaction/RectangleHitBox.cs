@@ -1,10 +1,6 @@
 ﻿using SMWControlibBackend.Graphics;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SMWControlibBackend.Interaction
 {
@@ -25,7 +21,7 @@ namespace SMWControlibBackend.Interaction
             RectangleHitBox rhb = (RectangleHitBox)obj;
             if (XOffset != rhb.XOffset) return false;
             if (YOffset != rhb.YOffset) return false;
-            if (ActionID != rhb.ActionID) return false;
+            if (ActionName != rhb.ActionName) return false;
             if (Width != rhb.Width) return false;
             if (Height != rhb.Height) return false;
 
@@ -98,7 +94,7 @@ namespace SMWControlibBackend.Interaction
             return rhb;
         }
 
-        public override string GetHitBoxString()
+        public override string GetHitBoxString(string[] actionNames)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("db ");
@@ -113,8 +109,34 @@ namespace SMWControlibBackend.Interaction
             sb.Append(s + ",$");
             s = (Height).ToString("X2");
             s = s.Substring(s.Length - 2);
-            sb.Append(s + ",$" + (ActionID).ToString("X2") + "\n");
+            int i = 0;
+            for (i = 0; i < actionNames.Length; i++)
+            {
+                if (actionNames[i] == ActionName)
+                {
+                    break;
+                }
+            }
+            sb.Append(s + ",$" + (i).ToString("X2") + "\n");
             return sb.ToString();
+        }
+
+        public override HitBox Clone()
+        {
+            RectangleHitBox rhb = new RectangleHitBox
+            {
+                Width = Width,
+                Height = Height,
+                Name = Name,
+                XOffset = XOffset,
+                YOffset = YOffset,
+                BorderColor = BorderColor,
+                FrontColor = FrontColor,
+                Type = Type,
+                ActionName = ActionName,
+                Size = Size
+            };
+            return rhb;
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Xml.Serialization;
 
 namespace SMWControlibBackend.Interaction
@@ -17,7 +12,7 @@ namespace SMWControlibBackend.Interaction
         public int XOffset, YOffset;
         public int BorderColorA, BorderColorR, BorderColorG, BorderColorB;
         public int FrontColorA, FrontColorR, FrontColorG, FrontColorB;
-        public int ActionID;
+        public string ActionName;
 
         public virtual HitBox ToHitBox()
         {
@@ -57,7 +52,7 @@ namespace SMWControlibBackend.Interaction
             FrontColorG = hb.FrontColor.G;
             FrontColorB = hb.FrontColor.B;
 
-            ActionID = hb.ActionID;
+            ActionName = hb.ActionName;
         }
     }
 }

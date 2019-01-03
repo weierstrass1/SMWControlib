@@ -1,11 +1,7 @@
 ﻿using SMWControlibBackend.Graphics;
-using SMWControlibBackend.Logic;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SMWControlibBackend.Interaction
 {
@@ -34,7 +30,7 @@ namespace SMWControlibBackend.Interaction
         public Color BorderColor = Color.FromArgb(255, 0, 0),
             FrontColor = Color.FromArgb(120, 255, 0, 0);
         public HitBoxType Type { get; protected set; }
-        public int ActionID = 0;
+        public string ActionName = "";
         public int Size;
 
         public abstract void Draw(System.Drawing.Graphics g, 
@@ -48,7 +44,7 @@ namespace SMWControlibBackend.Interaction
             return base.Equals(obj);
         }
 
-        public abstract string GetHitBoxString();
+        public abstract string GetHitBoxString(string[] actionNames);
 
         public abstract HitBox GetFlippedBox(bool FlipX, bool FlipY, int midX, int midY);
 
@@ -66,7 +62,7 @@ namespace SMWControlibBackend.Interaction
             hashCode = hashCode * -1521134295 + EqualityComparer<Color>.Default.GetHashCode(BorderColor);
             hashCode = hashCode * -1521134295 + EqualityComparer<Color>.Default.GetHashCode(FrontColor);
             hashCode = hashCode * -1521134295 + EqualityComparer<HitBoxType>.Default.GetHashCode(Type);
-            hashCode = hashCode * -1521134295 + ActionID.GetHashCode();
+            hashCode = hashCode * -1521134295 + ActionName.GetHashCode();
             return hashCode;
         }
 
@@ -123,14 +119,16 @@ namespace SMWControlibBackend.Interaction
             return sb.ToString();
         }
 
-        public static string GetHitboxesFromArray(HitBox[] hitboxes)
+        public static string GetHitboxesFromArray(HitBox[] hitboxes, string[] actionNames)
         {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < hitboxes.Length; i++)
             {
-                sb.Append(hitboxes[i].GetHitBoxString() + "\t");
+                sb.Append(hitboxes[i].GetHitBoxString(actionNames) + "\t");
             }
             return sb.ToString();
         }
+
+        public abstract HitBox Clone();
     }
 }

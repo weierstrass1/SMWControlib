@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -9,6 +8,7 @@ using SMWControlibBackend.Graphics;
 using SMWControlibBackend.Graphics.Frames;
 using SMWControlibBackend.Interaction;
 using SMWControlibControls.GraphicsControls;
+using SMWControlibControls.LogicControls;
 
 namespace TestWindows
 {
@@ -43,6 +43,9 @@ namespace TestWindows
             interactionMenu1.IPColorChanged += interactionMenuIPColorChanged;
             interactionMenu1.ZoomChanged += interactionMenuZoomChanged;
             interactionMenu1.CellSizeChanged += interactionMenuCellSizeChanged;
+            interactionMenu1.AddText += interactionMenu1AddText;
+            interactionMenu1.GotoText += interactionMenu1GotoText;
+            interactionMenu1.DelText += interactionMenu1DelText;
             extratTo.Click += extratToClick;
             save.Click += saveClick;
             saveAs.Click += saveAsClick;
@@ -59,6 +62,52 @@ namespace TestWindows
             catch
             {
             }
+        }
+
+        private void interactionMenu1DelText(string obj)
+        {
+            RefreshCode();
+            Match m = Regex.Match(codeEditorController1.CodeEditor.Text,
+                @";>Action( |\t)*(\r\n|\n)(|.*(\r\n|\n))" + obj +
+                ":( |\t)*(\r\n|\n)(|.*(\r\n|\n))*;>End Action");
+            if (m.Success)
+            {
+                codeEditorController1.CodeEditor.DeleteRange(m.Index, m.Length);
+                MessageBox.Show("Action " + obj + " was deleted.", "Action Deleted",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                interactionMenu1.GetActions(codeEditorController1.CodeEditor.Text);
+            }
+            else
+            {
+                MessageBox.Show("This action cant be deleted.", "Action Deleted Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void interactionMenu1GotoText(string obj)
+        {
+            RefreshCode();
+            Match m = Regex.Match(codeEditorController1.CodeEditor.Text,
+                "\n" + obj + ":");
+            if (m.Success)
+            {
+                tabControl1.SelectedIndex = 3;
+                int LineInd = 
+                    codeEditorController1.CodeEditor.LineFromPosition(m.Index);
+                LineInd += 5;
+                if (LineInd >= codeEditorController1.CodeEditor.Lines.Count)
+                {
+                    LineInd = codeEditorController1.CodeEditor.Lines.Count - 1;
+                }
+                codeEditorController1.CodeEditor.GotoPosition(codeEditorController1.CodeEditor.Lines[LineInd].Position);
+            }
+        }
+
+        private void interactionMenu1AddText(string obj)
+        {
+            codeEditorController1.CodeEditor.InsertText(codeEditorController1.CodeEditor.TextLength, obj);
+            RefreshCode();
+            interactionMenu1.GetActions(codeEditorController1.CodeEditor.Text);
         }
 
         private void frameCreatorFrameAdded(Frame obj)
@@ -167,54 +216,175 @@ namespace TestWindows
 
         private void extratToClick(object sender, EventArgs e)
         {
-            RefreshCode();
-            string s = codeEditorController1.CodeEditor.Text;
-            Frame.GetFramesIndexs(frameCreator1.Frames);
+            if (folderdialog.ShowDialog(this) != DialogResult.OK)
+                return;
+            if (ExtractResourcesDialog.Show(this) != DialogResult.OK)
+                return;
+            string path = folderdialog.SelectedPath;
+            path += "\\";
+            folderdialog.SelectedPath = "";
 
-            HitBox[] hbs =  Frame.GetFramesHitboxesFromFrameList(frameCreator1.Frames, true, true);
-            s = s.Replace("db >intAdd.",
-                HitBox.GetHitboxesFlipAdder(hbs, true, true));
-            s = s.Replace("dw >hbst.",
-                HitBox.GetHitboxesStartsFromArray(hbs));
-            s = s.Replace("dw >fhbsInd.",
-                Frame.GetFramesHitboxesIndexersFromFrameList(frameCreator1.Frames, true, true));
-            s = s.Replace("db >fhbs.",
-                Frame.GetFramesHitboxesIdsFromFrameList(frameCreator1.Frames, hbs, true, true));
-            s = s.Replace("db >hbs.",
-                HitBox.GetHitboxesFromArray(hbs));
-            s = s.Replace("dw >fls.",
-                Frame.GetFramesLengthFromFrameList(frameCreator1.Frames, true, true));
-            s = s.Replace("dw >ffps.",
-                Frame.GetFramesFlippersFromFrameList(frameCreator1.Frames, true, true));
-            s = s.Replace("dw >fsp.",
-                Frame.GetFramesStartsFromFrameList(frameCreator1.Frames, true, true));
-            s = s.Replace("dw >fep.",
-                Frame.GetFramesEndsFromFrameList(frameCreator1.Frames, true, true));
-            s = s.Replace("db >tiles.",
-                Frame.GetTilesCodesFromFrameList(frameCreator1.Frames, true, true));
-            s = s.Replace("db >props.",
-                Frame.GetTilesPropertiesFromFrameList(frameCreator1.Frames, true, true));
-            s = s.Replace("db >xdisps.",
-                Frame.GetTilesXDispFromFrameList(frameCreator1.Frames, true, true));
-            s = s.Replace("db >ydisps.",
-                Frame.GetTilesYDispFromFrameList(frameCreator1.Frames, true, true));
-            s = s.Replace("db >sizes.",
-                Frame.GetTilesSizesFromFrameList(frameCreator1.Frames, true, true));
-            s = s.Replace("dw >anl.",
-                Animation.GetAnimationLenghts(animationCreator1.Animations));
-            s = s.Replace("dw >alt.",
-                Animation.GetAnimationLastTransitions(animationCreator1.Animations));
-            s = s.Replace("dw >ai.",
-                Animation.GetAnimationIndexers(animationCreator1.Animations));
-            s = s.Replace("db >af.",
-                Animation.GetAnimationFrames(animationCreator1.Animations));
-            s = s.Replace("db >aft.",
-                Animation.GetAnimationTimes(animationCreator1.Animations));
-            s = s.Replace("db >aff.",
-                Animation.GetAnimationFlips(animationCreator1.Animations));
+            int boolcounter = 0;
+            if (ExtractResourcesDialog.Code) boolcounter++;
+            if (ExtractResourcesDialog.SP1) boolcounter++;
+            if (ExtractResourcesDialog.SP2) boolcounter++;
+            if (ExtractResourcesDialog.SP3) boolcounter++;
+            if (ExtractResourcesDialog.SP4) boolcounter++;
+            if (ExtractResourcesDialog.Palette) boolcounter++;
 
-            s = File.ReadAllText(@".\ASM\Defines.asm") + "\n" + s;
-            File.WriteAllText("output.asm", s);
+            if (boolcounter == 0) MessageBox.Show("Congratulations, you extract nothing, eat a cookie.", "?????????", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            else if (boolcounter > 1)
+            {
+                path += ExtractResourcesDialog.ProjectName;
+                if (!Directory.Exists(path)) 
+                {
+                    Directory.CreateDirectory(path);
+                }
+                path += "\\";
+            }
+
+            if (ExtractResourcesDialog.Code)
+            {
+                RefreshCode();
+                string s = codeEditorController1.CodeEditor.Text;
+                Frame.GetFramesIndexs(frameCreator1.Frames);
+
+                HitBox[] hbs = Frame.GetFramesHitboxesFromFrameList(frameCreator1.Frames,
+                    ExtractResourcesDialog.FlipX,
+                    ExtractResourcesDialog.FlipY);
+                s = s.Replace("db >intAdd.",
+                    HitBox.GetHitboxesFlipAdder(hbs,
+                    ExtractResourcesDialog.FlipX,
+                    ExtractResourcesDialog.FlipY));
+                s = s.Replace("dw >hbst.",
+                    HitBox.GetHitboxesStartsFromArray(hbs));
+                s = s.Replace("dw >fhbsInd.",
+                    Frame.GetFramesHitboxesIndexersFromFrameList(frameCreator1.Frames,
+                    ExtractResourcesDialog.FlipX,
+                    ExtractResourcesDialog.FlipY));
+                s = s.Replace("db >fhbs.",
+                    Frame.GetFramesHitboxesIdsFromFrameList(frameCreator1.Frames, hbs,
+                    ExtractResourcesDialog.FlipX,
+                    ExtractResourcesDialog.FlipY));
+                s = s.Replace("db >hbs.",
+                    HitBox.GetHitboxesFromArray(hbs, interactionMenu1.GetActionNames()));
+                s = s.Replace("dw >fls.",
+                    Frame.GetFramesLengthFromFrameList(frameCreator1.Frames,
+                    ExtractResourcesDialog.FlipX,
+                    ExtractResourcesDialog.FlipY));
+                s = s.Replace("dw >ffps.",
+                    Frame.GetFramesFlippersFromFrameList(frameCreator1.Frames,
+                    ExtractResourcesDialog.FlipX,
+                    ExtractResourcesDialog.FlipY));
+                s = s.Replace("dw >fsp.",
+                    Frame.GetFramesStartsFromFrameList(frameCreator1.Frames,
+                    ExtractResourcesDialog.FlipX,
+                    ExtractResourcesDialog.FlipY));
+                s = s.Replace("dw >fep.",
+                    Frame.GetFramesEndsFromFrameList(frameCreator1.Frames,
+                    ExtractResourcesDialog.FlipX,
+                    ExtractResourcesDialog.FlipY));
+                s = s.Replace("db >tiles.",
+                    Frame.GetTilesCodesFromFrameList(frameCreator1.Frames,
+                    ExtractResourcesDialog.FlipX,
+                    ExtractResourcesDialog.FlipY));
+                s = s.Replace("db >props.",
+                    Frame.GetTilesPropertiesFromFrameList(frameCreator1.Frames,
+                    ExtractResourcesDialog.FlipX,
+                    ExtractResourcesDialog.FlipY));
+                s = s.Replace("db >xdisps.",
+                    Frame.GetTilesXDispFromFrameList(frameCreator1.Frames,
+                    ExtractResourcesDialog.FlipX,
+                    ExtractResourcesDialog.FlipY));
+                s = s.Replace("db >ydisps.",
+                    Frame.GetTilesYDispFromFrameList(frameCreator1.Frames,
+                    ExtractResourcesDialog.FlipX,
+                    ExtractResourcesDialog.FlipY));
+                s = s.Replace("db >sizes.",
+                    Frame.GetTilesSizesFromFrameList(frameCreator1.Frames,
+                    ExtractResourcesDialog.FlipX,
+                    ExtractResourcesDialog.FlipY));
+                s = s.Replace("dw >anl.",
+                    Animation.GetAnimationLenghts(animationCreator1.Animations));
+                s = s.Replace("dw >alt.",
+                    Animation.GetAnimationLastTransitions(animationCreator1.Animations));
+                s = s.Replace("dw >ai.",
+                    Animation.GetAnimationIndexers(animationCreator1.Animations));
+                s = s.Replace("db >af.",
+                    Animation.GetAnimationFrames(animationCreator1.Animations));
+                s = s.Replace("db >aft.",
+                    Animation.GetAnimationTimes(animationCreator1.Animations));
+                s = s.Replace("db >aff.",
+                    Animation.GetAnimationFlips(animationCreator1.Animations));
+
+                s = File.ReadAllText(@".\ASM\Defines.asm") + "\n" + s;
+                if (File.Exists(path + ExtractResourcesDialog.ProjectName + ".asm"))
+                    File.Delete(path + ExtractResourcesDialog.ProjectName + ".asm");
+                File.WriteAllText(path + ExtractResourcesDialog.ProjectName + ".asm", s);
+            }
+            if (ExtractResourcesDialog.SP1 || ExtractResourcesDialog.SP2)
+            {
+                byte[] sp12 = spriteGFXBox1.GetGFX();
+                if (ExtractResourcesDialog.SP1)
+                {
+                    byte[] sp1 = new byte[sp12.Length / 2];
+
+                    for (int i = 0; i < sp1.Length; i++)
+                    {
+                        sp1[i] = sp12[i];
+                    }
+                    if (File.Exists(path + ExtractResourcesDialog.ProjectName + "SP1.bin"))
+                        File.Delete(path + ExtractResourcesDialog.ProjectName + "SP1.bin");
+                    File.WriteAllBytes(path + ExtractResourcesDialog.ProjectName + "SP1.bin", sp1);
+                }
+                if (ExtractResourcesDialog.SP2)
+                {
+                    byte[] sp2 = new byte[sp12.Length / 2];
+
+                    for (int i = 0; i < sp2.Length; i++)
+                    {
+                        sp2[i] = sp12[i + sp2.Length];
+                    }
+                    if (File.Exists(path + ExtractResourcesDialog.ProjectName + "SP2.bin"))
+                        File.Delete(path + ExtractResourcesDialog.ProjectName + "SP2.bin");
+                    File.WriteAllBytes(path + ExtractResourcesDialog.ProjectName + "SP2.bin", sp2);
+                }
+            }
+            if (ExtractResourcesDialog.SP3 || ExtractResourcesDialog.SP4)
+            {
+                byte[] sp34 = spriteGFXBox2.GetGFX();
+                if (ExtractResourcesDialog.SP3)
+                {
+                    byte[] sp3 = new byte[sp34.Length / 2];
+
+                    for (int i = 0; i < sp3.Length; i++)
+                    {
+                        sp3[i] = sp34[i];
+                    }
+                    if (File.Exists(path + ExtractResourcesDialog.ProjectName + "SP3.bin"))
+                        File.Delete(path + ExtractResourcesDialog.ProjectName + "SP3.bin");
+                    File.WriteAllBytes(path + ExtractResourcesDialog.ProjectName + "SP3.bin", sp3);
+                }
+                if (ExtractResourcesDialog.SP4)
+                {
+                    byte[] sp4 = new byte[sp34.Length / 2];
+
+                    for (int i = 0; i < sp4.Length; i++)
+                    {
+                        sp4[i] = sp34[i + sp4.Length];
+                    }
+                    if (File.Exists(path + ExtractResourcesDialog.ProjectName + "SP4.bin"))
+                        File.Delete(path + ExtractResourcesDialog.ProjectName + "SP4.bin");
+                    File.WriteAllBytes(path + ExtractResourcesDialog.ProjectName + "SP4.bin", sp4);
+                }
+            }
+            if(ExtractResourcesDialog.Palette)
+            {
+                byte[] pal = ColorPalette.SaveGlobalPalette();
+                if (File.Exists(path + ExtractResourcesDialog.ProjectName + "Palette.pal"))
+                    File.Delete(path + ExtractResourcesDialog.ProjectName + "Palette.pal");
+                File.WriteAllBytes(path + ExtractResourcesDialog.ProjectName + "Palette.pal", pal);
+            }
         }
 
         private void interactionMenuCellSizeChanged(int obj)
@@ -303,6 +473,7 @@ namespace TestWindows
             animationEditor1.Animation = animationEditor1.Animation;
             if (tabControl1.SelectedIndex == 2)
             {
+                interactionMenu1.GetActions(codeEditorController1.CodeEditor.Text);
                 interactionMenu1.UpdateFrameList(frameCreator1.Frames);
             }
             else if (tabControl1.SelectedIndex == 3) 

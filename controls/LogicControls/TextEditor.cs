@@ -3,9 +3,7 @@ using ScintillaNET;
 using SMWControlibBackend.Logic;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
@@ -46,8 +44,8 @@ namespace SMWControlibControls.LogicControls
             undoRedoList = new UndoRedoDynamicArray<UndoRedoStruct>(20, 20);
             CaretForeColor = Color.White;
 
-            /*try
-            {*/
+            try
+            {
                 StylesContainer = StylesContainer.Deserialize(@"Settings/ScriptnesStyles.set");
                 StylesContainer.MarginBackColorRed = 96;
                 StylesContainer.MarginBackColorGreen = 96;
@@ -87,12 +85,11 @@ namespace SMWControlibControls.LogicControls
                 code = new Code(@"CSVs\Syntax\args.csv", @"CSVs\Syntax\commands.csv",
                     @"CSVs\Syntax\groups.csv");
                 code.ImportDefines(@".\ASM\Defines.asm");
-            /*}
+            }
             catch(Exception e)
             {
 
-                int a = 0;
-            }*/
+            }
             autocom = new AutocompleteMenu
             {
                 SearchPattern = @"\!",

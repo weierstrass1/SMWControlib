@@ -197,6 +197,12 @@
     <Compile Include="InteractionControls\NewHitboxDiaglog.Designer.cs">
       <DependentUpon>NewHitboxDiaglog.cs</DependentUpon>
     </Compile>
+    <Compile Include="InteractionControls\NewHitboxInteractionActionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InteractionControls\NewHitboxInteractionActionDialog.Designer.cs">
+      <DependentUpon>NewHitboxInteractionActionDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="InteractionControls\NewInteractionPointDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -238,6 +244,12 @@
     </Compile>
     <Compile Include="LogicControls\CodeEditorSettings.Designer.cs">
       <DependentUpon>CodeEditorSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LogicControls\ExtractResourcesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogicControls\ExtractResourcesDialog.Designer.cs">
+      <DependentUpon>ExtractResourcesDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="LogicControls\GroupControl.cs">
       <SubType>UserControl</SubType>
@@ -397,6 +409,9 @@
     <EmbeddedResource Include="InteractionControls\NewHitboxDiaglog.resx">
       <DependentUpon>NewHitboxDiaglog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InteractionControls\NewHitboxInteractionActionDialog.resx">
+      <DependentUpon>NewHitboxInteractionActionDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InteractionControls\NewInteractionPointDialog.resx">
       <DependentUpon>NewInteractionPointDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -417,6 +432,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LogicControls\CodeEditorSettings.resx">
       <DependentUpon>CodeEditorSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogicControls\ExtractResourcesDialog.resx">
+      <DependentUpon>ExtractResourcesDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogicControls\GroupControl.resx">
       <DependentUpon>GroupControl.cs</DependentUpon>

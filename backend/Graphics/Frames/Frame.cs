@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
-using SMWControlibBackend.Graphics;
-using SMWControlibBackend.Interaction;
 
 namespace SMWControlibBackend.Graphics.Frames
 {
     public class Frame
     {
         public string Name;
-        public List<HitBox> HitBoxes { get; private set; }
+        public List<HitBox> HitBoxes { get; set; }
         public List<InteractionPoint> InteractionPoints { get; private set; }
         public List<TileMask> Tiles { get; private set; }
         public int MidX;
         public int MidY;
         public int Index { get; private set; }
+        public Frame ShareWith = null;
 
         public Frame()
         {

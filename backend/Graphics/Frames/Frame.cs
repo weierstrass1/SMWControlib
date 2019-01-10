@@ -15,6 +15,7 @@ namespace SMWControlibBackend.Graphics.Frames
         public int MidY;
         public int Index { get; private set; }
         public Frame ShareWith = null;
+        public bool MustShare = false;
 
         public Frame()
         {
@@ -78,6 +79,194 @@ namespace SMWControlibBackend.Graphics.Frames
             }
             return have;
         }
+
+        public static bool ValidArray(Frame[] frames)
+        {
+            if (frames == null || frames.Length <= 0) return false;
+            for (int i = 0; i < frames.Length; i++)
+            {
+                if (frames[i].Tiles != null && frames[i].Tiles.Count > 0)
+                    return true;
+            }
+            return false;
+        }
+
+        public static bool SameLenght(Frame[] frames)
+        {
+            int l = frames[0].Tiles.Count;
+
+            for (int i = 1; i < frames.Length; i++)
+            {
+                if (l != frames[i].Tiles.Count)
+                    return false;
+            }
+            return true;
+        }
+
+        public static bool SameXDisp(Frame[] frames, bool FlipX)
+        {
+            string tm = "";
+            int x, dx;
+            for (int i = 0; i < frames.Length; i++)
+            {
+                foreach (TileMask tm1 in frames[i].Tiles)
+                {
+                    if (tm == "")
+                        tm = tm1.XDispString;
+                    if (tm != tm1.XDispString)
+                        return false;
+                    x = tm1.XDisp;
+                    dx = frames[i].MidX - ((x / tm1.Zoom) - 128);
+                    tm1.XDisp = frames[i].MidX + 128 + dx;
+                    if (tm1.Size == 8) tm1.XDisp += 8;
+                    tm1.XDisp *= tm1.Zoom;
+                    if (tm != tm1.XDispString)
+                    {
+                        tm1.XDisp = x;
+                        return false;
+                    }
+                    tm1.XDisp = x;
+                }
+            }
+            return true;
+        }
+
+        public static string FirstXDisp(Frame[] frames)
+        {
+            for (int i = 0; i < frames.Length; i++)
+            {
+                foreach (TileMask tm in frames[i].Tiles)
+                {
+                    return tm.XDispString;
+                }
+            }
+            return "";
+        }
+
+        public static bool SameYDisp(Frame[] frames, bool FlipY)
+        {
+            string tm = "";
+            int y, dy;
+            for (int i = 0; i < frames.Length; i++)
+            {
+                foreach (TileMask tm1 in frames[i].Tiles)
+                {
+                    if (tm == "")
+                        tm = tm1.YDispString;
+                    if (tm != tm1.YDispString)
+                        return false;
+                    y = tm1.YDisp;
+                    dy = frames[i].MidY - ((y / tm1.Zoom) - 112);
+                    tm1.YDisp = frames[i].MidY + 112 + dy;
+                    if (tm1.Size == 8) tm1.YDisp += 8;
+                    tm1.YDisp *= tm1.Zoom;
+                    if (tm != tm1.YDispString)
+                    {
+                        tm1.YDisp = y;
+                        return false;
+                    }
+                    tm1.YDisp = y;
+                }
+            }
+            return true;
+        }
+
+        public static string FirstYDisp(Frame[] frames)
+        {
+            for (int i = 0; i < frames.Length; i++)
+            {
+                foreach (TileMask tm in frames[i].Tiles)
+                {
+                    return tm.YDispString;
+                }
+            }
+            return "";
+        }
+
+        public static bool SameTile(Frame[] frames)
+        {
+            string tm = "";
+            for (int i = 0; i < frames.Length; i++)
+            {
+                foreach (TileMask tm1 in frames[i].Tiles)
+                {
+                    if (tm == "")
+                        tm = tm1.Tile;
+                    if (tm != tm1.Tile)
+                        return false;
+                }
+            }
+            return true;
+        }
+
+        public static string FirstTile(Frame[] frames)
+        {
+            for (int i = 0; i < frames.Length; i++)
+            {
+                foreach (TileMask tm in frames[i].Tiles)
+                {
+                    return tm.Tile;
+                }
+            }
+            return "";
+        }
+
+        public static bool SameProp(Frame[] frames)
+        {
+            string tm = "";
+            for (int i = 0; i < frames.Length; i++)
+            {
+                foreach (TileMask tm1 in frames[i].Tiles)
+                {
+                    if (tm == "")
+                        tm = tm1.Properties;
+                    if (tm != tm1.Properties)
+                        return false;
+                }
+            }
+            return true;
+        }
+
+        public static string FirstProperty(Frame[] frames)
+        {
+            for (int i = 0; i < frames.Length; i++)
+            {
+                foreach (TileMask tm in frames[i].Tiles)
+                {
+                    return tm.Properties;
+                }
+            }
+            return "";
+        }
+
+        public static bool SameSize(Frame[] frames)
+        {
+            string tm = "";
+            for (int i = 0; i < frames.Length; i++)
+            {
+                foreach (TileMask tm1 in frames[i].Tiles)
+                {
+                    if (tm == "")
+                        tm = tm1.SizeString;
+                    if (tm != tm1.SizeString)
+                        return false;
+                }
+            }
+            return true;
+        }
+
+        public static string FirstSize(Frame[] frames)
+        {
+            for (int i = 0; i < frames.Length; i++)
+            {
+                foreach (TileMask tm in frames[i].Tiles)
+                {
+                    return tm.SizeString;
+                }
+            }
+            return "";
+        }
+
         public static string GetFramesHitboxesIndexersFromFrameList(Frame[] frames, bool FlipX, bool FlipY)
         {
             StringBuilder sb = new StringBuilder();
@@ -100,7 +289,8 @@ namespace SMWControlibBackend.Graphics.Frames
 
             if (FlipX)
             {
-                sb.Remove(sb.Length - 1, 1);
+                if (sb.Length > 0)
+                    sb.Remove(sb.Length - 1, 1);
                 sb.Append("\n\t");
                 for (int i = 0; i < frames.Length; i++)
                 {
@@ -119,7 +309,8 @@ namespace SMWControlibBackend.Graphics.Frames
             }
             if (FlipY)
             {
-                sb.Remove(sb.Length - 1, 1);
+                if (sb.Length > 0)
+                    sb.Remove(sb.Length - 1, 1);
                 sb.Append("\n\t");
                 for (int i = 0; i < frames.Length; i++)
                 {
@@ -138,7 +329,8 @@ namespace SMWControlibBackend.Graphics.Frames
             }
             if (FlipX && FlipY)
             {
-                sb.Remove(sb.Length - 1, 1);
+                if (sb.Length > 0)
+                    sb.Remove(sb.Length - 1, 1);
                 sb.Append("\n\t");
                 for (int i = 0; i < frames.Length; i++)
                 {
@@ -155,7 +347,8 @@ namespace SMWControlibBackend.Graphics.Frames
                     count += frames[i].HitBoxes.Count + 1;
                 }
             }
-            sb.Remove(sb.Length - 1, 1);
+            if (sb.Length > 0) 
+                sb.Remove(sb.Length - 1, 1);
 
             return sb.ToString();
         }
@@ -190,6 +383,8 @@ namespace SMWControlibBackend.Graphics.Frames
             for (int i = 0; i < fhbs.Length; i++)
             {
                 k = 0;
+                if(fhbs[i].Count<=0)
+                    sb.Append("db ");
                 foreach (int j in fhbs[i])
                 {
                     if (k % 16 == 0)
@@ -216,6 +411,8 @@ namespace SMWControlibBackend.Graphics.Frames
                 for (int i = 0; i < fhbs.Length; i++)
                 {
                     k = 0;
+                    if (fhbs[i].Count <= 0)
+                        sb.Append("db ");
                     foreach (int j in fhbs[i])
                     {
                         if (k % 16 == 0)
@@ -243,6 +440,8 @@ namespace SMWControlibBackend.Graphics.Frames
                 for (int i = 0; i < fhbs.Length; i++)
                 {
                     k = 0;
+                    if (fhbs[i].Count <= 0)
+                        sb.Append("db ");
                     foreach (int j in fhbs[i])
                     {
                         if (k % 16 == 0)
@@ -270,6 +469,8 @@ namespace SMWControlibBackend.Graphics.Frames
                 for (int i = 0; i < fhbs.Length; i++)
                 {
                     k = 0;
+                    if (fhbs[i].Count <= 0)
+                        sb.Append("db ");
                     foreach (int j in fhbs[i])
                     {
                         if (k % 16 == 0)

@@ -22,6 +22,16 @@ namespace TestWindows
             gfxButton2.Target = spriteGFXBox1;
             gfxButton3.Target = spriteGFXBox2;
             gfxButton4.Target = spriteGFXBox2;
+            try
+            {
+                spriteGFXBox1.LoadGFX("./Resources/GFX00.bin", 0);
+                spriteGFXBox1.LoadGFX("./Resources/GFX01.bin", 64);
+                spriteGFXBox2.LoadGFX("./Resources/GFX13.bin", 0);
+                spriteGFXBox2.LoadGFX("./Resources/GFX09.bin", 64);
+            }
+            catch
+            {
+            }
             spriteGFXBox1.SelectionChanged += selectionChanged;
             spriteGFXBox2.SelectionChanged += selectionChanged;
             paletteButton1.target = paletteBox1;
@@ -51,6 +61,7 @@ namespace TestWindows
             saveAs.Click += saveAsClick;
             loadProj.Click += loadProjClick;
             frameCreator1.FrameAdded += frameCreatorFrameAdded;
+            FormClosing += formClosing;
             try
             {
                 codeEditorController1.CodeEditor.CanUndoRedo = false;
@@ -61,6 +72,22 @@ namespace TestWindows
             }
             catch
             {
+            }
+        }
+
+        private void formClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Do you want to save the project?", 
+                "Dyzen Sprite Maker", 
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                save.PerformClick();
+            }
+            else if(result== DialogResult.Cancel)
+            {
+                e.Cancel = true;
             }
         }
 
@@ -218,11 +245,15 @@ namespace TestWindows
         {
             if (folderdialog.ShowDialog(this) != DialogResult.OK)
                 return;
+
+            ExtractResourcesDialog.LockedFlipX = 
+                Animation.RequireFlipX(animationCreator1.Animations);
+            ExtractResourcesDialog.LockedFlipY =
+                Animation.RequireFlipY(animationCreator1.Animations);
             if (ExtractResourcesDialog.Show(this) != DialogResult.OK)
                 return;
             string path = folderdialog.SelectedPath;
             path += "\\";
-            folderdialog.SelectedPath = "";
 
             int boolcounter = 0;
             if (ExtractResourcesDialog.Code) boolcounter++;
@@ -252,8 +283,8 @@ namespace TestWindows
                 HitBox[] hbs = Frame.GetFramesHitboxesFromFrameList(frameCreator1.Frames,
                     ExtractResourcesDialog.FlipX,
                     ExtractResourcesDialog.FlipY);
-                s = s.Replace("db >intAdd.",
-                    HitBox.GetHitboxesFlipAdder(hbs,
+                s = s.Replace("dw >intAdd.",
+                    Frame.GetFramesFlippersFromFrameList(frameCreator1.Frames,
                     ExtractResourcesDialog.FlipX,
                     ExtractResourcesDialog.FlipY));
                 s = s.Replace("dw >hbst.",
@@ -268,6 +299,8 @@ namespace TestWindows
                     ExtractResourcesDialog.FlipY));
                 s = s.Replace("db >hbs.",
                     HitBox.GetHitboxesFromArray(hbs, interactionMenu1.GetActionNames()));
+                s = s.Replace("dw >hbacts.",
+                    interactionMenu1.GetActionString(codeEditorController1.CodeEditor.Text));
                 s = s.Replace("dw >fls.",
                     Frame.GetFramesLengthFromFrameList(frameCreator1.Frames,
                     ExtractResourcesDialog.FlipX,
@@ -385,6 +418,7 @@ namespace TestWindows
                     File.Delete(path + ExtractResourcesDialog.ProjectName + "Palette.pal");
                 File.WriteAllBytes(path + ExtractResourcesDialog.ProjectName + "Palette.pal", pal);
             }
+            MessageBox.Show("Resources extracted successfully", "Extract Resources", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void interactionMenuCellSizeChanged(int obj)
@@ -478,135 +512,30 @@ namespace TestWindows
             }
             else if (tabControl1.SelectedIndex == 3) 
             {
-                Match m = Regex.Match(codeEditorController1.CodeEditor.Text,
-                        secGrString);
-                MatchCollection ms;
-                if (m.Success)
-                {
-                    codeEditorController1.CodeEditor.DeleteRange(m.Index,
-                        m.Length);
-                    if (frameCreator1.Frames.Length > 0)
-                    {
-                        codeEditorController1.CodeEditor.InsertText(m.Index,
-                                File.ReadAllText(@".\ASM\GraphicRoutine.asm"));
-                        ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
-                            ";( |\t)*" + grCallString);
-                        foreach(Match ma in ms)
-                        {
-                            codeEditorController1.CodeEditor.DeleteRange(ma.Index,
-                                ma.Length);
-                            codeEditorController1.CodeEditor.InsertText(ma.Index,
-                                "JSR GraphicRoutine");
-                        }
-                    }
-                    else
-                    {
-                        codeEditorController1.CodeEditor.InsertText(m.Index,
-                                ";>Section Graphics\n;>End Graphics Section");
-                        ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
-                            "(;( |\t)*)?" + grCallString);
-                        foreach (Match ma in ms)
-                        {
-                            codeEditorController1.CodeEditor.DeleteRange(ma.Index,
-                                ma.Length);
-                            codeEditorController1.CodeEditor.InsertText(ma.Index,
-                                    ";JSR GraphicRoutine");
-                        }
-                    }
-                }
-
-                m = Regex.Match(codeEditorController1.CodeEditor.Text,
-                        secAnString);
-
-                if(m.Success)
-                {
-                    codeEditorController1.CodeEditor.DeleteRange(m.Index,
-                                m.Length);
-                    if (animationCreator1.Animations.Length > 0)
-                    {
-                        codeEditorController1.CodeEditor.InsertText(m.Index,
-                            File.ReadAllText(@".\ASM\AnimationRoutine.asm").Replace(">ChangeRoutines.",
-                            Animation.GetAnimationChangeRoutine(animationCreator1.Animations)));
-                        ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
-                           ";( |\t)*" + anCallString);
-                        foreach (Match ma in ms)
-                        {
-                            codeEditorController1.CodeEditor.DeleteRange(ma.Index,
-                                ma.Length);
-                            codeEditorController1.CodeEditor.InsertText(ma.Index,
-                                "JSR AnimationRoutine");
-                        }
-                        ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
-                           ";( |\t)*" + anCallString2);
-                        foreach (Match ma in ms)
-                        {
-                            codeEditorController1.CodeEditor.DeleteRange(ma.Index,
-                                ma.Length);
-                            codeEditorController1.CodeEditor.InsertText(ma.Index,
-                                "JSL InitWrapperChangeAnimationFromStart");
-                        }
-                    }
-                    else
-                    {
-                        codeEditorController1.CodeEditor.InsertText(m.Index,
-                            ";>Section Animations\n;>End Animations Section");
-                        ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
-                            "(;( |\t)*)?" + anCallString);
-                        foreach (Match ma in ms)
-                        {
-                            codeEditorController1.CodeEditor.DeleteRange(ma.Index,
-                                ma.Length);
-                            codeEditorController1.CodeEditor.InsertText(ma.Index,
-                                    ";JSR AnimationRoutine");
-                        }
-                        ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
-                           "(;( |\t)*)?" + anCallString2);
-                        foreach (Match ma in ms)
-                        {
-                            codeEditorController1.CodeEditor.DeleteRange(ma.Index,
-                                ma.Length);
-                            codeEditorController1.CodeEditor.InsertText(ma.Index,
-                                ";JSL InitWrapperChangeAnimationFromStart");
-                        }
-                    }
-                }
-
-                m = Regex.Match(codeEditorController1.CodeEditor.Text,
-                    secHBIntString);
-                if (m.Success) 
-                {
-                    codeEditorController1.CodeEditor.DeleteRange(m.Index,
-                                m.Length);
-                    if (Frame.HaveHitboxInteraction(frameCreator1.Frames))
-                    {
-                        codeEditorController1.CodeEditor.InsertText(m.Index,
-                            File.ReadAllText(@".\ASM\HitboxInteractionRoutine.asm"));
-                        ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
-                           ";( |\t)*" + hbIntCallString);
-                        foreach (Match ma in ms)
-                        {
-                            codeEditorController1.CodeEditor.DeleteRange(ma.Index,
-                                ma.Length);
-                            codeEditorController1.CodeEditor.InsertText(ma.Index,
-                                "JSR InteractMarioSprite");
-                        }
-                    }
-                    else
-                    {
-                        codeEditorController1.CodeEditor.InsertText(m.Index,
-                            ";>Section Hitboxes Interaction\n;>End Hitboxes Interaction Section");
-                        ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
-                           "(;( |\t)*)?" + hbIntCallString);
-                        foreach (Match ma in ms)
-                        {
-                            codeEditorController1.CodeEditor.DeleteRange(ma.Index,
-                                ma.Length);
-                            codeEditorController1.CodeEditor.InsertText(ma.Index,
-                                ";JSR InteractMarioSprite");
-                        }
-                    }
-                }
+                ExtractResourcesDialog.LockedFlipX =
+                    Animation.RequireFlipX(animationCreator1.Animations);
+                ExtractResourcesDialog.LockedFlipY =
+                    Animation.RequireFlipY(animationCreator1.Animations);
+                RefreshCode();
             }
+        }
+
+        string tagPat = @"\<tag\>(|.*\n?)*\<\/tag\>";
+        string tagDelPat = @"\<\/?tag\>";
+        public string UseTag(string target, string tag, string replace)
+        {
+            string newt = target;
+            string tp = tagPat.Replace("tag", tag);
+            newt = Regex.Replace(newt, tp, replace);
+            return newt;
+        }
+
+        public string DeleteTag(string target, string tag)
+        {
+            string newt = target;
+            string tp = tagDelPat.Replace("tag", tag);
+            newt = Regex.Replace(newt, tp, "");
+            return newt;
         }
 
         public void RefreshCode()
@@ -614,14 +543,120 @@ namespace TestWindows
             Match m = Regex.Match(codeEditorController1.CodeEditor.Text,
                         secGrString);
             MatchCollection ms;
+
+            bool validFrames = Frame.ValidArray(frameCreator1.Frames);
+
             if (m.Success)
             {
                 codeEditorController1.CodeEditor.DeleteRange(m.Index,
                     m.Length);
-                if (frameCreator1.Frames.Length > 0)
+                if (validFrames)
                 {
+                    string grRout = File.ReadAllText(@".\ASM\GraphicRoutine.asm");
+
+                    if (ExtractResourcesDialog.LockedFlipX ||
+                        ExtractResourcesDialog.LockedFlipY)
+                        grRout = DeleteTag(grRout, "localflip");
+                    else
+                        grRout = UseTag(grRout, "localflip", "");
+
+                    if (ExtractResourcesDialog.FlipX ||
+                        ExtractResourcesDialog.FlipY)
+                        grRout = DeleteTag(grRout, "globalflip");
+                    else
+                        grRout = UseTag(grRout, "globalflip", "");
+
+                    if (Frame.SameLenght(frameCreator1.Frames))
+                    {
+                        grRout = UseTag(grRout, "samelength1", "\tLDA #$$" +
+                            (frameCreator1.Frames[0].Tiles.Count - 1).ToString("X4") + "\n");
+                        grRout = UseTag(grRout, "samelength2", "");
+                    }
+                    else
+                    {
+                        grRout = DeleteTag(grRout, "samelength1");
+                        grRout = DeleteTag(grRout, "samelength2");
+                    }
+
+                    if (frameCreator1.Frames.Length == 1 && !(ExtractResourcesDialog.FlipX ||
+                        ExtractResourcesDialog.FlipY))
+                    {
+                        grRout = UseTag(grRout, "oneframe1", "\tLDA #$$0000\n");
+                        grRout = UseTag(grRout, "oneframe2", "\tLDA #$$" +
+                            (frameCreator1.Frames[0].Tiles.Count - 1).ToString("X4") + "\n");
+                        grRout = UseTag(grRout, "oneframe3", "");
+                    }
+                    else
+                    {
+                        grRout = DeleteTag(grRout, "oneframe1");
+                        grRout = DeleteTag(grRout, "oneframe2");
+                        grRout = DeleteTag(grRout, "oneframe3");
+                    }
+
+                    if(Frame.SameTile(frameCreator1.Frames))
+                    {
+                        grRout = UseTag(grRout, "sametile1", "\tLDA #$"+
+                            Frame.FirstTile(frameCreator1.Frames) + "\n");
+                        grRout = UseTag(grRout, "sametile2", "");
+                    }
+                    else
+                    {
+                        grRout = DeleteTag(grRout, "sametile1");
+                        grRout = DeleteTag(grRout, "sametile2");
+                    }
+
+                    if(Frame.SameProp(frameCreator1.Frames))
+                    {
+                        grRout = UseTag(grRout, "sameprop1", "\tLDA #$"+
+                            Frame.FirstProperty(frameCreator1.Frames) + "\n");
+                        grRout = UseTag(grRout, "sameprop2", "");
+                    }
+                    else
+                    {
+                        grRout = DeleteTag(grRout, "sameprop1");
+                        grRout = DeleteTag(grRout, "sameprop2");
+                    }
+
+                    if(Frame.SameSize(frameCreator1.Frames))
+                    {
+                        grRout = UseTag(grRout, "samesize1", "");
+                        grRout = UseTag(grRout, "samesize2", "\tLDY #$"+
+                             Frame.FirstSize(frameCreator1.Frames) + "\n");
+                        grRout = UseTag(grRout, "samesize3", "");
+                    }
+                    else
+                    {
+                        grRout = DeleteTag(grRout, "samesize1");
+                        grRout = DeleteTag(grRout, "samesize2");
+                        grRout = DeleteTag(grRout, "samesize3");
+                    }
+
+                    if (Frame.SameXDisp(frameCreator1.Frames, ExtractResourcesDialog.FlipX))
+                    {
+                        grRout = UseTag(grRout, "samexdisp1", "\tADC #$" +
+                            Frame.FirstXDisp(frameCreator1.Frames) + "\n");
+                        grRout = UseTag(grRout, "samexdisp2", "");
+                    }
+                    else
+                    {
+                        grRout = DeleteTag(grRout, "samexdisp1");
+                        grRout = DeleteTag(grRout, "samexdisp2");
+                    }
+
+                    if (Frame.SameYDisp(frameCreator1.Frames, ExtractResourcesDialog.FlipY))
+                    {
+                        grRout = UseTag(grRout, "sameydisp1", "\tADC #$" +
+                            Frame.FirstYDisp(frameCreator1.Frames) + "\n");
+                        grRout = UseTag(grRout, "sameydisp2", "");
+                    }
+                    else
+                    {
+                        grRout = DeleteTag(grRout, "sameydisp1");
+                        grRout = DeleteTag(grRout, "sameydisp2");
+                    }
+
                     codeEditorController1.CodeEditor.InsertText(m.Index,
-                            File.ReadAllText(@".\ASM\GraphicRoutine.asm"));
+                        grRout);
                     ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
                         ";( |\t)*" + grCallString);
                     foreach (Match ma in ms)
@@ -655,11 +690,23 @@ namespace TestWindows
             {
                 codeEditorController1.CodeEditor.DeleteRange(m.Index,
                             m.Length);
-                if (animationCreator1.Animations.Length > 0)
+                if (animationCreator1.Animations.Length > 0 && validFrames)
                 {
+                    string anRout = File.ReadAllText(@".\ASM\AnimationRoutine.asm").Replace(">ChangeRoutines.",
+                        Animation.GetAnimationChangeRoutine(animationCreator1.Animations));
+
+                    if (!(ExtractResourcesDialog.LockedFlipX ||
+                        ExtractResourcesDialog.LockedFlipY))
+                    {
+                        anRout = UseTag(anRout, "localflip", "");
+                    }
+                    else
+                    {
+                        anRout = DeleteTag(anRout, "localflip");
+                    }
+
                     codeEditorController1.CodeEditor.InsertText(m.Index,
-                        File.ReadAllText(@".\ASM\AnimationRoutine.asm").Replace(">ChangeRoutines.",
-                        Animation.GetAnimationChangeRoutine(animationCreator1.Animations)));
+                        anRout);
                     ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
                        ";( |\t)*" + anCallString);
                     foreach (Match ma in ms)
@@ -712,8 +759,47 @@ namespace TestWindows
                             m.Length);
                 if (Frame.HaveHitboxInteraction(frameCreator1.Frames))
                 {
+                    string intRout = File.ReadAllText(@".\ASM\HitboxInteractionRoutine.asm");
+
+                    interactionMenu1.GetActions(codeEditorController1.CodeEditor.Text);
+                    string[] an = interactionMenu1.GetActionNames();
+
+                    if (an.Length < 2)
+                    {
+                        intRout = UseTag(intRout, "onlydefaultaction1", "" +
+                            "\tREP #$$10\n\tBCS ++\n\tPLY\n\tPLY\n\tINY\n\tJMP -\n++\n" +
+                            "\tPLY\n\tPLY\n\tLDA !ScratchE\n\tORA #$$01\n\tSTA !ScratchE\n\t" +
+                            "SEP #$$10\n\tLDX !SpriteIndex\n\tSEC\n\tRTS\n");
+                        intRout = UseTag(intRout, "onlydefaultaction2", "");
+                    }
+                    else
+                    {
+                        intRout = DeleteTag(intRout, "onlydefaultaction1");
+                        intRout = DeleteTag(intRout, "onlydefaultaction2");
+                    }
+
+                    if(!(ExtractResourcesDialog.FlipX ||
+                        ExtractResourcesDialog.FlipY))
+                    {
+                        intRout = UseTag(intRout, "globalflip", "");
+                    }
+                    else
+                    {
+                        intRout = DeleteTag(intRout, "globalflip");
+                    }
+
+                    if(!(ExtractResourcesDialog.LockedFlipX || 
+                        ExtractResourcesDialog.LockedFlipY))
+                    {
+                        intRout = UseTag(intRout, "localflip", "");
+                    }
+                    else
+                    {
+                        intRout = DeleteTag(intRout, "localflip");
+                    }
+
                     codeEditorController1.CodeEditor.InsertText(m.Index,
-                        File.ReadAllText(@".\ASM\HitboxInteractionRoutine.asm"));
+                        intRout);
                     ms = Regex.Matches(codeEditorController1.CodeEditor.Text,
                        ";( |\t)*" + hbIntCallString);
                     foreach (Match ma in ms)

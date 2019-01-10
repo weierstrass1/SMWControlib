@@ -60,7 +60,8 @@ namespace SMWControlibControls.GraphicsControls
         private void click(object sender, EventArgs e)
         {
             if(isDuplicate.Checked && 
-                frameSelector.SelectedItem.GetType() != typeof(Frame))
+                (frameSelector.SelectedItem == null || 
+                frameSelector.SelectedItem.GetType() != typeof(Frame)))
             {
                 MessageBox.Show("If you want to duplicate a frame, then You must select a frame.",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

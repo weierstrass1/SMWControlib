@@ -30,34 +30,31 @@ namespace SMWControlibControls.LogicControls
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Defines");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Macros");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Scripts");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Sprite Code");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Code Files", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4});
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Frames");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Animations");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Graphics", new System.Windows.Forms.TreeNode[] {
-            treeNode6,
-            treeNode7});
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("ExGFX");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Palettes");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Tilemaps");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("HDMAs");
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Resources", new System.Windows.Forms.TreeNode[] {
-            treeNode9,
-            treeNode10,
-            treeNode11,
-            treeNode12});
+            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Defines");
+            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Macros");
+            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Scripts");
+            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Sprite Code");
+            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Code Files", new System.Windows.Forms.TreeNode[] {
+            treeNode27,
+            treeNode28,
+            treeNode29,
+            treeNode30});
+            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("Frames");
+            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("Animations");
+            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("Graphics", new System.Windows.Forms.TreeNode[] {
+            treeNode32,
+            treeNode33});
+            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("ExGFX");
+            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("Palettes");
+            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("Tilemaps");
+            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("HDMAs");
+            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("Resources", new System.Windows.Forms.TreeNode[] {
+            treeNode35,
+            treeNode36,
+            treeNode37,
+            treeNode38});
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -70,28 +67,31 @@ namespace SMWControlibControls.LogicControls
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.treeView1 = new System.Windows.Forms.TreeView();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.codeEd0 = new SMWControlibControls.LogicControls.TextEditor();
-            this.hdmaControl1 = new HDMAControl(new HDMA(new Effect(EffectType.Brightness,EffectOptions.Option0Static)));
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.hdmaControl1 = new SMWControlibControls.LogicControls.HDMAControl();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.panel1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -101,7 +101,7 @@ namespace SMWControlibControls.LogicControls
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(707, 40);
+            this.panel1.Size = new System.Drawing.Size(707, 0);
             this.panel1.TabIndex = 0;
             // 
             // button1
@@ -113,41 +113,6 @@ namespace SMWControlibControls.LogicControls
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(538, 346);
-            this.tabControl1.TabIndex = 2;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.codeEd0);
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tabPage1.Size = new System.Drawing.Size(530, 318);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Sprite Code";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.hdmaControl1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 24);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(530, 318);
-            this.tabPage3.TabIndex = 1;
-            this.tabPage3.Text = "HDMA";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
             // tabControl2
             // 
             this.tabControl2.Controls.Add(this.tabPage2);
@@ -155,7 +120,7 @@ namespace SMWControlibControls.LogicControls
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(703, 96);
+            this.tabControl2.Size = new System.Drawing.Size(703, 52);
             this.tabControl2.TabIndex = 0;
             // 
             // tabPage2
@@ -167,7 +132,7 @@ namespace SMWControlibControls.LogicControls
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(695, 68);
+            this.tabPage2.Size = new System.Drawing.Size(695, 24);
             this.tabPage2.TabIndex = 0;
             this.tabPage2.Text = "Errors";
             // 
@@ -178,7 +143,7 @@ namespace SMWControlibControls.LogicControls
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 33);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(689, 32);
+            this.panel3.Size = new System.Drawing.Size(689, 0);
             this.panel3.TabIndex = 2;
             // 
             // errorMatrix
@@ -195,7 +160,7 @@ namespace SMWControlibControls.LogicControls
             this.errorMatrix.RowCount = 2;
             this.errorMatrix.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.errorMatrix.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.errorMatrix.Size = new System.Drawing.Size(672, 77);
+            this.errorMatrix.Size = new System.Drawing.Size(689, 77);
             this.errorMatrix.TabIndex = 0;
             // 
             // panel2
@@ -307,10 +272,31 @@ namespace SMWControlibControls.LogicControls
             this.label3.Size = new System.Drawing.Size(39, 30);
             this.label3.TabIndex = 6;
             // 
+            // splitContainer2
+            // 
+            this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.splitContainer1);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
+            this.splitContainer2.Panel2.Controls.Add(this.tabControl2);
+            this.splitContainer2.Size = new System.Drawing.Size(707, 494);
+            this.splitContainer2.SplitterDistance = 434;
+            this.splitContainer2.TabIndex = 0;
+            // 
             // splitContainer1
             // 
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -323,69 +309,35 @@ namespace SMWControlibControls.LogicControls
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.splitContainer1.Panel2.Controls.Add(this.treeView1);
             this.splitContainer1.Panel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.splitContainer1.Size = new System.Drawing.Size(707, 350);
-            this.splitContainer1.SplitterDistance = 542;
+            this.splitContainer1.Panel2Collapsed = true;
+            this.splitContainer1.Panel2MinSize = 0;
+            this.splitContainer1.Size = new System.Drawing.Size(707, 434);
+            this.splitContainer1.SplitterDistance = 677;
             this.splitContainer1.TabIndex = 0;
             // 
-            // treeView1
+            // tabControl1
             // 
-            this.treeView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.treeView1.Location = new System.Drawing.Point(0, 0);
-            this.treeView1.Name = "treeView1";
-            treeNode1.Name = "Nodo10";
-            treeNode1.Text = "Defines";
-            treeNode2.Name = "Nodo12";
-            treeNode2.Text = "Macros";
-            treeNode3.Name = "Nodo13";
-            treeNode3.Text = "Scripts";
-            treeNode4.Name = "Nodo14";
-            treeNode4.Text = "Sprite Code";
-            treeNode5.Name = "Nodo0";
-            treeNode5.Text = "Code Files";
-            treeNode6.Name = "frame";
-            treeNode6.Text = "Frames";
-            treeNode7.Name = "animation";
-            treeNode7.Text = "Animations";
-            treeNode8.Name = "graphics";
-            treeNode8.Text = "Graphics";
-            treeNode9.Name = "exgfx";
-            treeNode9.Text = "ExGFX";
-            treeNode10.Name = "palette";
-            treeNode10.Text = "Palettes";
-            treeNode11.Name = "tilemap";
-            treeNode11.Text = "Tilemaps";
-            treeNode12.Name = "hdma";
-            treeNode12.Text = "HDMAs";
-            treeNode13.Name = "resources";
-            treeNode13.Text = "Resources";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode8,
-            treeNode13});
-            this.treeView1.Size = new System.Drawing.Size(157, 346);
-            this.treeView1.TabIndex = 0;
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(703, 430);
+            this.tabControl1.TabIndex = 2;
             // 
-            // splitContainer2
+            // tabPage1
             // 
-            this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 40);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.Controls.Add(this.splitContainer1);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
-            this.splitContainer2.Panel2.Controls.Add(this.tabControl2);
-            this.splitContainer2.Size = new System.Drawing.Size(707, 454);
-            this.splitContainer2.SplitterDistance = 350;
-            this.splitContainer2.TabIndex = 0;
+            this.tabPage1.Controls.Add(this.codeEd0);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabPage1.Size = new System.Drawing.Size(695, 402);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Sprite Code";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // codeEd0
             // 
@@ -396,8 +348,19 @@ namespace SMWControlibControls.LogicControls
             this.codeEd0.Location = new System.Drawing.Point(4, 3);
             this.codeEd0.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.codeEd0.Name = "codeEd0";
-            this.codeEd0.Size = new System.Drawing.Size(522, 312);
+            this.codeEd0.Size = new System.Drawing.Size(687, 396);
             this.codeEd0.TabIndex = 0;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.hdmaControl1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(666, 320);
+            this.tabPage3.TabIndex = 1;
+            this.tabPage3.Text = "HDMA";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // hdmaControl1
             // 
@@ -407,8 +370,48 @@ namespace SMWControlibControls.LogicControls
             this.hdmaControl1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.hdmaControl1.Location = new System.Drawing.Point(3, 3);
             this.hdmaControl1.Name = "hdmaControl1";
-            this.hdmaControl1.Size = new System.Drawing.Size(524, 312);
+            this.hdmaControl1.Size = new System.Drawing.Size(660, 314);
             this.hdmaControl1.TabIndex = 0;
+            // 
+            // treeView1
+            // 
+            this.treeView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.treeView1.Location = new System.Drawing.Point(0, 0);
+            this.treeView1.Name = "treeView1";
+            treeNode27.Name = "Nodo10";
+            treeNode27.Text = "Defines";
+            treeNode28.Name = "Nodo12";
+            treeNode28.Text = "Macros";
+            treeNode29.Name = "Nodo13";
+            treeNode29.Text = "Scripts";
+            treeNode30.Name = "Nodo14";
+            treeNode30.Text = "Sprite Code";
+            treeNode31.Name = "Nodo0";
+            treeNode31.Text = "Code Files";
+            treeNode32.Name = "frame";
+            treeNode32.Text = "Frames";
+            treeNode33.Name = "animation";
+            treeNode33.Text = "Animations";
+            treeNode34.Name = "graphics";
+            treeNode34.Text = "Graphics";
+            treeNode35.Name = "exgfx";
+            treeNode35.Text = "ExGFX";
+            treeNode36.Name = "palette";
+            treeNode36.Text = "Palettes";
+            treeNode37.Name = "tilemap";
+            treeNode37.Text = "Tilemaps";
+            treeNode38.Name = "hdma";
+            treeNode38.Text = "HDMAs";
+            treeNode39.Name = "resources";
+            treeNode39.Text = "Resources";
+            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode31,
+            treeNode34,
+            treeNode39});
+            this.treeView1.Size = new System.Drawing.Size(22, 346);
+            this.treeView1.TabIndex = 0;
             // 
             // CodeEditorController
             // 
@@ -423,23 +426,23 @@ namespace SMWControlibControls.LogicControls
             this.Name = "CodeEditorController";
             this.Size = new System.Drawing.Size(707, 494);
             this.panel1.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

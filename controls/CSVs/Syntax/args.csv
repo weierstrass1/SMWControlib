@@ -49,3 +49,9 @@ sublabel,y;.;,y;var;string;Arg Label
 >xdisps.;>xdisps.;;0;fixed;Dyzen Args
 >ydisps.;>ydisps.;;0;fixed;Dyzen Args
 >sizes.;>sizes.;;0;fixed;Dyzen Args
+>intAdd.;>intAdd.;;0;fixed;Dyzen Args
+>fhbsInd.;>fhbsInd.;;0;fixed;Dyzen Args
+>fhbs.;>fhbs.;;0;fixed;Dyzen Args
+>hbst.;>hbst.;;0;fixed;Dyzen Args
+>hbs.;>hbs.;;0;fixed;Dyzen Args
+>hbacts.;>hbacts.;;0;fixed;Dyzen Args

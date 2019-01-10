@@ -214,6 +214,42 @@ namespace SMWControlibBackend.Graphics.Frames
             return Name;
         }
 
+        public static bool RequireFlipX(Animation[] ans)
+        {
+            if (ans == null || ans.Length <= 0) return false;
+            FrameMask[] fms;
+            for (int i = 0; i < ans.Length; i++)
+            {
+                fms = ans[i].GetFrameMasks();
+                if (fms != null && fms.Length > 0)
+                {
+                    foreach (FrameMask fm in fms)
+                    {
+                        if (fm.FlipX) return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static bool RequireFlipY(Animation[] ans)
+        {
+            if (ans == null || ans.Length <= 0) return false;
+            FrameMask[] fms;
+            for (int i = 0; i < ans.Length; i++)
+            {
+                fms = ans[i].GetFrameMasks();
+                if (fms != null && fms.Length > 0)
+                {
+                    foreach (FrameMask fm in fms)
+                    {
+                        if (fm.FlipY) return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         public static string GetAnimationChangeRoutine(Animation[] ans)
         {
             StringBuilder sb = new StringBuilder();

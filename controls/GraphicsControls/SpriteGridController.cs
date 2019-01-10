@@ -33,7 +33,7 @@ namespace SMWControlibControls.GraphicsControls
             }
             set
             {
-                trackBar1.Value = value;
+                trackBar1.Value = Math.Abs(value);
             }
         }
         public int MidY
@@ -44,7 +44,7 @@ namespace SMWControlibControls.GraphicsControls
             }
             set
             {
-                trackBar2.Value = value;
+                trackBar2.Value = Math.Abs(value);
             }
         }
 

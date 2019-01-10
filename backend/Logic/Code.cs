@@ -118,6 +118,19 @@ namespace SMWControlibBackend.Logic
             DefineArgsGroup = Group.FindGroup(groups, "Define Arg");
         }
 
+        public List<string> GetActiveDefines()
+        {
+            List<string> actDef = new List<string>();
+            foreach (Define d in defines.Values)
+            {
+                foreach (Tuple<int, int, string> t in d.OthersPositions)
+                {
+
+                }
+            }
+            return actDef;
+        }
+
         public List<string> FilterAutocompleteWords(string word)
         {
             List<string> at = new List<string>();

@@ -12,6 +12,7 @@ namespace SMWControlibControls.LogicControls
 {
     public partial class ExtractResourcesDialog : Form
     {
+        public static bool LockedFlipX = false, LockedFlipY = false;
         public static bool FlipX = true, FlipY = false;
         public static bool Code = true;
         public static bool SP1 = false, SP2 = false, SP3 = false, SP4 = false;
@@ -26,17 +27,17 @@ namespace SMWControlibControls.LogicControls
 
         private void codecheckCheckedChanged(object sender, EventArgs e)
         {
-            xflipcheck.Enabled = codecheck.Checked;
-            label19.Enabled = codecheck.Checked;
-            yflipcheck.Enabled = codecheck.Checked;
-            label2.Enabled = codecheck.Checked;
+            xflipcheck.Enabled = codecheck.Checked && !LockedFlipX;
+            label19.Enabled = codecheck.Checked && !LockedFlipX;
+            yflipcheck.Enabled = codecheck.Checked && !LockedFlipY;
+            label2.Enabled = codecheck.Checked && !LockedFlipY;
         }
 
         private void acceptClick(object sender, EventArgs e)
         {
+            FlipX = xflipcheck.Checked || LockedFlipX;
+            FlipY  = yflipcheck.Checked || LockedFlipY;
             Code = codecheck.Checked;
-            FlipX = xflipcheck.Checked;
-            FlipY  = yflipcheck.Checked;
             SP1 = sp1check.Checked;
             SP2 = sp2check.Checked;
             SP3 = sp3check.Checked;
@@ -68,9 +69,9 @@ namespace SMWControlibControls.LogicControls
         {
             ExtractResourcesDialog erd = new ExtractResourcesDialog();
 
+            erd.xflipcheck.Checked = FlipX || LockedFlipX;
+            erd.yflipcheck.Checked = FlipY || LockedFlipY;
             erd.codecheck.Checked = Code;
-            erd.xflipcheck.Checked = FlipX;
-            erd.yflipcheck.Checked = FlipY;
             erd.sp1check.Checked = SP1;
             erd.sp2check.Checked = SP2;
             erd.sp3check.Checked = SP3;

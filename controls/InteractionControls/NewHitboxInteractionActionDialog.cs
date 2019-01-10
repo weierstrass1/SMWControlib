@@ -42,6 +42,7 @@ namespace SMWControlibControls.InteractionControls
                     name.Text = newStr + j;
                 }
             }
+            NewName = name.Text;
 
             DialogResult = DialogResult.OK;
             Dispose();

@@ -7,6 +7,12 @@ namespace SMWControlibControls.LogicControls
     public partial class HDMAControl : UserControl
     {
         HDMA hdma;
+        public HDMAControl()
+        {
+            InitializeComponent();
+            Resize += resize;
+            add.Click += addClick;
+        }
         public HDMAControl(HDMA HDMA)
         {
             hdma = HDMA;

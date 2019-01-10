@@ -40,6 +40,7 @@ namespace SMWControlibControls.LogicControls
                 treeView1.NodeMouseDoubleClick += nodeMouseDoubleClick;
             }
             catch { }
+            tabControl1.TabPages.Remove(tabPage3);
         }
 
         private void nodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)

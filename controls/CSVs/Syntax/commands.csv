@@ -545,3 +545,9 @@ DB;1;Table;>props.
 DB;1;Table;>xdisps.
 DB;1;Table;>ydisps.
 DB;1;Table;>sizes.
+DW;1;Table;>intAdd.
+DW;1;Table;>fhbsInd.
+DB;1;Table;>fhbs.
+DW;1;Table;>hbst.
+DB;1;Table;>hbs.
+DW;1;Table;>hbacts.

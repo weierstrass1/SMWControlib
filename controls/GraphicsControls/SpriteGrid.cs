@@ -976,17 +976,24 @@ namespace SMWControlibControls.GraphicsControls
             int minY = int.MaxValue;
             int maxX = int.MinValue;
             int maxY = int.MinValue;
-            selectionBox.Image = new Bitmap(Width, Height);
-            selectionBox.Size = new Size(selectionBox.Image.Width,
-                selectionBox.Image.Height);
-
-            if (selection != null && selection.Count > 0)
+            bool needClear = false;
+            try
             {
                 selectionBox.Image = new Bitmap(Width, Height);
                 selectionBox.Size = new Size(selectionBox.Image.Width,
                     selectionBox.Image.Height);
+            }
+            catch
+            {
+                needClear = true;
+            }
+
+            if (selection != null && selection.Count > 0)
+            {
                 using (Graphics g = Graphics.FromImage(selectionBox.Image))
                 {
+                    if (needClear)
+                        g.Clear(selectionBox.BackColor);
                     if (selection != null && selection.Count != 0)
                     {
                         Pen p = new Pen(SelectionBorderColor);
@@ -998,11 +1005,14 @@ namespace SMWControlibControls.GraphicsControls
                                 tm.Size * zoom, tm.Size * zoom);
                         }
                     }
+                    needClear = false;
                 }
             }
            
             using (Graphics g = Graphics.FromImage(selectionBox.Image))
             {
+                if (needClear)
+                    g.Clear(selectionBox.BackColor);
                 if (selecting)
                 {
                     selectionFillColor = Color.FromArgb(96,
@@ -1027,16 +1037,22 @@ namespace SMWControlibControls.GraphicsControls
         public void ReDraw()
         {
             if (grids == null) buildGrid();
-            baseImage.Image = new Bitmap(Width, Height);
+
+            bool mustClear = false;
             try
             {
-                using (Graphics g = Graphics.FromImage(baseImage.Image))
-                {
-                    Brush br = new SolidBrush(BackgroundColor);
-                    g.FillRectangle(br, 0, 0, Width, Height);
-                }
+                baseImage.Image = new Bitmap(Width, Height);
             }
-            catch { }
+            catch
+            {
+                mustClear = true;
+            }
+            using (Graphics g = Graphics.FromImage(baseImage.Image))
+            {
+                if (mustClear) g.Clear(baseImage.BackColor);
+                Brush br = new SolidBrush(BackgroundColor);
+                g.FillRectangle(br, 0, 0, Width, Height);
+            }
 
             if (Tiles != null)
             {

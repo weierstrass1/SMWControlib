@@ -34,6 +34,8 @@ RTL
 ;>Routine: SpriteCode
 ;>Description: This routine excecute the logic of the sprite
 ;>RoutineLength: Short
+Return:
+RTS
 SpriteCode:
 
     JSR GraphicRoutine                  ;Calls the graphic routine and updates sprite graphics
@@ -42,25 +44,24 @@ SpriteCode:
 
     LDA !SpriteStatus,x			        
 	CMP #$08                            ;if sprite dead return
-	BEQ +			                
+	BNE Return	
+
 	LDA !LockAnimationFlag				    
-	BEQ +			                    ;if locked animation return.
+	BNE Return			                    ;if locked animation return.
 
-RTS
-
-+
     JSL SubOffScreen
+
+    JSR InteractMarioSprite
+    ;After this routine, if the sprite interact with mario, Carry is Set.
 
     ;Here you can write your sprite code routine
     ;This will be excecuted once per frame excepts when 
     ;the animation is locked or when sprite status is not #$08
 
-	JSR InteractMarioSprite
-    ;After this routine, if the sprite interact with mario, Carry is Set.
     JSR AnimationRoutine                ;Calls animation routine and decides the next frame to draw
+    
+    RTS
 
-.Return
-RTS
 ;>EndRoutine
 
 ;######################################

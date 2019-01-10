@@ -52,11 +52,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.actionSelectorHB = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.infoHB = new System.Windows.Forms.Button();
             this.renameHB = new System.Windows.Forms.Button();
             this.deleteHB = new System.Windows.Forms.Button();
             this.createHB = new System.Windows.Forms.Button();
+            this.hbSelector = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
             this.borderC = new System.Windows.Forms.PictureBox();
             this.fillC = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -72,7 +74,11 @@
             this.createIP = new System.Windows.Forms.Button();
             this.borderColorIP = new System.Windows.Forms.PictureBox();
             this.ipColor = new System.Windows.Forms.PictureBox();
+            this.ipType = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
+            this.actionSelectorIP = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
+            this.ipSelector = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.shareSelector = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
             this.label22 = new System.Windows.Forms.Label();
             this.shareWithRadioButton = new System.Windows.Forms.RadioButton();
             this.label21 = new System.Windows.Forms.Label();
@@ -80,23 +86,17 @@
             this.label20 = new System.Windows.Forms.Label();
             this.dontShareRadioButton = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
+            this.frameSelector = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.gfxButton2 = new SMWControlibControls.GraphicsControls.GFXButton();
             this.label19 = new System.Windows.Forms.Label();
             this.grid = new System.Windows.Forms.CheckBox();
+            this.cellSize = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
+            this.zoom = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.actionSelectorHB = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
-            this.hbSelector = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
-            this.ipType = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
-            this.actionSelectorIP = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
-            this.ipSelector = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
-            this.shareSelector = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
-            this.frameSelector = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
-            this.gfxButton2 = new SMWControlibControls.GraphicsControls.GFXButton();
-            this.cellSize = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
-            this.zoom = new SMWControlibControls.GraphicsControls.ColoreableBorderComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.borderC)).BeginInit();
@@ -113,11 +113,11 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 291);
+            this.tabControl1.Location = new System.Drawing.Point(0, 227);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(6);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(234, 609);
+            this.tabControl1.Size = new System.Drawing.Size(234, 673);
             this.tabControl1.TabIndex = 31;
             // 
             // tabPage1
@@ -158,7 +158,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(226, 581);
+            this.tabPage1.Size = new System.Drawing.Size(226, 645);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Hitboxes";
             // 
@@ -191,6 +191,7 @@
             this.renameAct.TabIndex = 56;
             this.renameAct.Text = "Rename";
             this.renameAct.UseVisualStyleBackColor = false;
+            this.renameAct.Visible = false;
             // 
             // delAct
             // 
@@ -480,6 +481,22 @@
             this.label11.Text = "Border Color";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // actionSelectorHB
+            // 
+            this.actionSelectorHB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.actionSelectorHB.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
+            this.actionSelectorHB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.actionSelectorHB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.actionSelectorHB.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.actionSelectorHB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
+            this.actionSelectorHB.FormattingEnabled = true;
+            this.actionSelectorHB.Items.AddRange(new object[] {
+            "DefaultAction"});
+            this.actionSelectorHB.Location = new System.Drawing.Point(73, 157);
+            this.actionSelectorHB.Name = "actionSelectorHB";
+            this.actionSelectorHB.Size = new System.Drawing.Size(125, 20);
+            this.actionSelectorHB.TabIndex = 29;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -506,6 +523,7 @@
             this.infoHB.TabIndex = 36;
             this.infoHB.Text = "Info";
             this.infoHB.UseVisualStyleBackColor = false;
+            this.infoHB.Visible = false;
             // 
             // renameHB
             // 
@@ -521,6 +539,7 @@
             this.renameHB.TabIndex = 35;
             this.renameHB.Text = "Rename";
             this.renameHB.UseVisualStyleBackColor = false;
+            this.renameHB.Visible = false;
             // 
             // deleteHB
             // 
@@ -551,6 +570,21 @@
             this.createHB.TabIndex = 33;
             this.createHB.Text = "New";
             this.createHB.UseVisualStyleBackColor = false;
+            // 
+            // hbSelector
+            // 
+            this.hbSelector.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.hbSelector.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
+            this.hbSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.hbSelector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hbSelector.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.hbSelector.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
+            this.hbSelector.FormattingEnabled = true;
+            this.hbSelector.Location = new System.Drawing.Point(11, 12);
+            this.hbSelector.Margin = new System.Windows.Forms.Padding(11, 9, 11, 3);
+            this.hbSelector.Name = "hbSelector";
+            this.hbSelector.Size = new System.Drawing.Size(190, 20);
+            this.hbSelector.TabIndex = 29;
             // 
             // borderC
             // 
@@ -596,7 +630,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(226, 545);
+            this.tabPage2.Size = new System.Drawing.Size(226, 645);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Object interaction";
             // 
@@ -760,6 +794,55 @@
             this.ipColor.TabIndex = 50;
             this.ipColor.TabStop = false;
             // 
+            // ipType
+            // 
+            this.ipType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.ipType.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
+            this.ipType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ipType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ipType.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.ipType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
+            this.ipType.FormattingEnabled = true;
+            this.ipType.Items.AddRange(new object[] {
+            "Above Detector",
+            "Below Detector",
+            "Left Side Detector",
+            "Right Side Detector",
+            "Slope Detector"});
+            this.ipType.Location = new System.Drawing.Point(67, 225);
+            this.ipType.Name = "ipType";
+            this.ipType.Size = new System.Drawing.Size(135, 20);
+            this.ipType.TabIndex = 63;
+            // 
+            // actionSelectorIP
+            // 
+            this.actionSelectorIP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.actionSelectorIP.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
+            this.actionSelectorIP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.actionSelectorIP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.actionSelectorIP.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.actionSelectorIP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
+            this.actionSelectorIP.FormattingEnabled = true;
+            this.actionSelectorIP.Location = new System.Drawing.Point(75, 101);
+            this.actionSelectorIP.Name = "actionSelectorIP";
+            this.actionSelectorIP.Size = new System.Drawing.Size(125, 20);
+            this.actionSelectorIP.TabIndex = 51;
+            // 
+            // ipSelector
+            // 
+            this.ipSelector.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.ipSelector.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
+            this.ipSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ipSelector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ipSelector.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.ipSelector.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
+            this.ipSelector.FormattingEnabled = true;
+            this.ipSelector.Location = new System.Drawing.Point(11, 12);
+            this.ipSelector.Margin = new System.Windows.Forms.Padding(11, 9, 11, 3);
+            this.ipSelector.Name = "ipSelector";
+            this.ipSelector.Size = new System.Drawing.Size(190, 20);
+            this.ipSelector.TabIndex = 53;
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.shareSelector);
@@ -774,12 +857,28 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 99);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(234, 192);
+            this.panel1.Size = new System.Drawing.Size(234, 128);
             this.panel1.TabIndex = 31;
+            // 
+            // shareSelector
+            // 
+            this.shareSelector.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.shareSelector.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
+            this.shareSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.shareSelector.Enabled = false;
+            this.shareSelector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.shareSelector.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.shareSelector.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
+            this.shareSelector.FormattingEnabled = true;
+            this.shareSelector.Location = new System.Drawing.Point(33, 163);
+            this.shareSelector.Name = "shareSelector";
+            this.shareSelector.Size = new System.Drawing.Size(173, 20);
+            this.shareSelector.TabIndex = 28;
             // 
             // label22
             // 
             this.label22.AutoSize = true;
+            this.label22.Enabled = false;
             this.label22.Location = new System.Drawing.Point(30, 130);
             this.label22.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.label22.Name = "label22";
@@ -791,6 +890,7 @@
             // 
             // shareWithRadioButton
             // 
+            this.shareWithRadioButton.Enabled = false;
             this.shareWithRadioButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
             this.shareWithRadioButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.shareWithRadioButton.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
@@ -865,6 +965,20 @@
             this.label1.TabIndex = 22;
             this.label1.Text = "Frames";
             // 
+            // frameSelector
+            // 
+            this.frameSelector.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.frameSelector.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
+            this.frameSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.frameSelector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.frameSelector.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.frameSelector.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
+            this.frameSelector.FormattingEnabled = true;
+            this.frameSelector.Location = new System.Drawing.Point(7, 38);
+            this.frameSelector.Name = "frameSelector";
+            this.frameSelector.Size = new System.Drawing.Size(199, 20);
+            this.frameSelector.TabIndex = 22;
+            // 
             // colorDialog1
             // 
             this.colorDialog1.FullOpen = true;
@@ -884,6 +998,26 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(234, 99);
             this.panel2.TabIndex = 32;
+            // 
+            // gfxButton2
+            // 
+            this.gfxButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.gfxButton2.BaseTile = 8;
+            this.gfxButton2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
+            this.gfxButton2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
+            this.gfxButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.gfxButton2.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gfxButton2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+            this.gfxButton2.Location = new System.Drawing.Point(86, 102);
+            this.gfxButton2.Name = "gfxButton2";
+            this.gfxButton2.Position = 64;
+            this.gfxButton2.Size = new System.Drawing.Size(120, 23);
+            this.gfxButton2.StartFolder = "";
+            this.gfxButton2.TabIndex = 21;
+            this.gfxButton2.Text = "Grid Settings";
+            this.gfxButton2.Tilesize = 16;
+            this.gfxButton2.UseVisualStyleBackColor = false;
+            this.gfxButton2.Visible = false;
             // 
             // label19
             // 
@@ -909,170 +1043,6 @@
             this.grid.TabIndex = 19;
             this.grid.UseVisualStyleBackColor = true;
             this.grid.Visible = false;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(6, 68);
-            this.label18.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
-            this.label18.Name = "label18";
-            this.label18.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
-            this.label18.Size = new System.Drawing.Size(71, 27);
-            this.label18.TabIndex = 13;
-            this.label18.Text = "Cell Size";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(6, 35);
-            this.label17.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
-            this.label17.Name = "label17";
-            this.label17.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
-            this.label17.Size = new System.Drawing.Size(49, 27);
-            this.label17.TabIndex = 11;
-            this.label17.Text = "Zoom";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.label16.Location = new System.Drawing.Point(3, 6);
-            this.label16.Margin = new System.Windows.Forms.Padding(3, 6, 6, 6);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(46, 20);
-            this.label16.TabIndex = 9;
-            this.label16.Text = "Grid";
-            // 
-            // actionSelectorHB
-            // 
-            this.actionSelectorHB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.actionSelectorHB.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
-            this.actionSelectorHB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.actionSelectorHB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.actionSelectorHB.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.actionSelectorHB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.actionSelectorHB.FormattingEnabled = true;
-            this.actionSelectorHB.Items.AddRange(new object[] {
-            "DefaultAction"});
-            this.actionSelectorHB.Location = new System.Drawing.Point(73, 157);
-            this.actionSelectorHB.Name = "actionSelectorHB";
-            this.actionSelectorHB.Size = new System.Drawing.Size(125, 20);
-            this.actionSelectorHB.TabIndex = 29;
-            // 
-            // hbSelector
-            // 
-            this.hbSelector.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.hbSelector.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
-            this.hbSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.hbSelector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hbSelector.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.hbSelector.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.hbSelector.FormattingEnabled = true;
-            this.hbSelector.Location = new System.Drawing.Point(11, 12);
-            this.hbSelector.Margin = new System.Windows.Forms.Padding(11, 9, 11, 3);
-            this.hbSelector.Name = "hbSelector";
-            this.hbSelector.Size = new System.Drawing.Size(190, 20);
-            this.hbSelector.TabIndex = 29;
-            // 
-            // ipType
-            // 
-            this.ipType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.ipType.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
-            this.ipType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ipType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ipType.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.ipType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.ipType.FormattingEnabled = true;
-            this.ipType.Items.AddRange(new object[] {
-            "Above Detector",
-            "Below Detector",
-            "Left Side Detector",
-            "Right Side Detector",
-            "Slope Detector"});
-            this.ipType.Location = new System.Drawing.Point(67, 225);
-            this.ipType.Name = "ipType";
-            this.ipType.Size = new System.Drawing.Size(135, 20);
-            this.ipType.TabIndex = 63;
-            // 
-            // actionSelectorIP
-            // 
-            this.actionSelectorIP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.actionSelectorIP.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
-            this.actionSelectorIP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.actionSelectorIP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.actionSelectorIP.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.actionSelectorIP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.actionSelectorIP.FormattingEnabled = true;
-            this.actionSelectorIP.Location = new System.Drawing.Point(75, 101);
-            this.actionSelectorIP.Name = "actionSelectorIP";
-            this.actionSelectorIP.Size = new System.Drawing.Size(125, 20);
-            this.actionSelectorIP.TabIndex = 51;
-            // 
-            // ipSelector
-            // 
-            this.ipSelector.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.ipSelector.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
-            this.ipSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ipSelector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ipSelector.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.ipSelector.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.ipSelector.FormattingEnabled = true;
-            this.ipSelector.Location = new System.Drawing.Point(11, 12);
-            this.ipSelector.Margin = new System.Windows.Forms.Padding(11, 9, 11, 3);
-            this.ipSelector.Name = "ipSelector";
-            this.ipSelector.Size = new System.Drawing.Size(190, 20);
-            this.ipSelector.TabIndex = 53;
-            // 
-            // shareSelector
-            // 
-            this.shareSelector.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.shareSelector.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
-            this.shareSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.shareSelector.Enabled = false;
-            this.shareSelector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.shareSelector.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.shareSelector.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.shareSelector.FormattingEnabled = true;
-            this.shareSelector.Location = new System.Drawing.Point(33, 163);
-            this.shareSelector.Name = "shareSelector";
-            this.shareSelector.Size = new System.Drawing.Size(173, 20);
-            this.shareSelector.TabIndex = 28;
-            // 
-            // frameSelector
-            // 
-            this.frameSelector.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.frameSelector.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
-            this.frameSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.frameSelector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.frameSelector.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.frameSelector.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
-            this.frameSelector.FormattingEnabled = true;
-            this.frameSelector.Location = new System.Drawing.Point(7, 38);
-            this.frameSelector.Name = "frameSelector";
-            this.frameSelector.Size = new System.Drawing.Size(199, 20);
-            this.frameSelector.TabIndex = 22;
-            // 
-            // gfxButton2
-            // 
-            this.gfxButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
-            this.gfxButton2.BaseTile = 8;
-            this.gfxButton2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
-            this.gfxButton2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
-            this.gfxButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.gfxButton2.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gfxButton2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-            this.gfxButton2.Location = new System.Drawing.Point(86, 102);
-            this.gfxButton2.Name = "gfxButton2";
-            this.gfxButton2.Position = 64;
-            this.gfxButton2.Size = new System.Drawing.Size(120, 23);
-            this.gfxButton2.StartFolder = "";
-            this.gfxButton2.TabIndex = 21;
-            this.gfxButton2.Text = "Grid Settings";
-            this.gfxButton2.Tilesize = 16;
-            this.gfxButton2.UseVisualStyleBackColor = false;
-            this.gfxButton2.Visible = false;
             // 
             // cellSize
             // 
@@ -1116,6 +1086,41 @@
             this.zoom.Name = "zoom";
             this.zoom.Size = new System.Drawing.Size(120, 20);
             this.zoom.TabIndex = 17;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(6, 68);
+            this.label18.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
+            this.label18.Name = "label18";
+            this.label18.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
+            this.label18.Size = new System.Drawing.Size(71, 27);
+            this.label18.TabIndex = 13;
+            this.label18.Text = "Cell Size";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(6, 35);
+            this.label17.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
+            this.label17.Name = "label17";
+            this.label17.Padding = new System.Windows.Forms.Padding(3, 6, 2, 6);
+            this.label17.Size = new System.Drawing.Size(49, 27);
+            this.label17.TabIndex = 11;
+            this.label17.Text = "Zoom";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.label16.Location = new System.Drawing.Point(3, 6);
+            this.label16.Margin = new System.Windows.Forms.Padding(3, 6, 6, 6);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(46, 20);
+            this.label16.TabIndex = 9;
+            this.label16.Text = "Grid";
             // 
             // InteractionMenu
             // 

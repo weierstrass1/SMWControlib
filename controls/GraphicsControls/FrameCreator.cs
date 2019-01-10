@@ -42,6 +42,12 @@ namespace SMWControlibControls.GraphicsControls
             settings.Click += settingsClick;
             SelectedFrame = null;
             frameSelector.SelectedIndexChanged += selectedIndexChanged;
+            frameSelector.MouseLeave += frameSelectorMouseLeave;
+        }
+
+        private void frameSelectorMouseLeave(object sender, EventArgs e)
+        {
+            label1.Focus();
         }
 
         public void LoadProjectFrames(Frame[] projFrames)

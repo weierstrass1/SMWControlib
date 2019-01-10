@@ -30,7 +30,7 @@ namespace SMWControlibBackend.Interaction
         public Color BorderColor = Color.FromArgb(255, 0, 0),
             FrontColor = Color.FromArgb(120, 255, 0, 0);
         public HitBoxType Type { get; protected set; }
-        public string ActionName = "";
+        public string ActionName = "DefaultAction";
         public int Size;
 
         public abstract void Draw(System.Drawing.Graphics g, 
@@ -114,7 +114,8 @@ namespace SMWControlibBackend.Interaction
                 sb.Append("$" + count.ToString("X4") + ",");
                 count += hitboxes[i].Size;
             }
-            sb.Remove(sb.Length - 1, 1);
+            if (sb.Length > 0)
+                sb.Remove(sb.Length - 1, 1);
 
             return sb.ToString();
         }

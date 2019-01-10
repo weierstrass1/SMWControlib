@@ -96,6 +96,7 @@
             this.rename.TabIndex = 5;
             this.rename.Text = "Rename";
             this.rename.UseVisualStyleBackColor = false;
+            this.rename.Visible = false;
             // 
             // info
             // 
@@ -111,6 +112,7 @@
             this.info.TabIndex = 6;
             this.info.Text = "Info";
             this.info.UseVisualStyleBackColor = false;
+            this.info.Visible = false;
             // 
             // onlyOnce
             // 
@@ -169,6 +171,7 @@
             // 
             this.animationSelector.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.animationSelector.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(38)))), ((int)(((byte)(105)))));
+            this.animationSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.animationSelector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.animationSelector.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
             this.animationSelector.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));

@@ -134,8 +134,8 @@
             this.resizeableSpriteGridController1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.resizeableSpriteGridController1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.resizeableSpriteGridController1.Location = new System.Drawing.Point(283, 3);
-            this.resizeableSpriteGridController1.MidX = 0;
-            this.resizeableSpriteGridController1.MidY = 0;
+            this.resizeableSpriteGridController1.MidX = -136;
+            this.resizeableSpriteGridController1.MidY = 120;
             this.resizeableSpriteGridController1.Name = "resizeableSpriteGridController1";
             this.resizeableSpriteGridController1.Size = new System.Drawing.Size(549, 584);
             this.resizeableSpriteGridController1.TabIndex = 14;
@@ -567,6 +567,7 @@
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
             this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newProjectToolStripMenuItem.Text = "New Project";
+            this.newProjectToolStripMenuItem.Visible = false;
             // 
             // loadProj
             // 
@@ -614,6 +615,7 @@
             this.windowToolStripMenuItem.Name = "windowToolStripMenuItem";
             this.windowToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.windowToolStripMenuItem.Text = "Window";
+            this.windowToolStripMenuItem.Visible = false;
             // 
             // spriteGridSettingsToolStripMenuItem
             // 
@@ -666,13 +668,14 @@
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Visible = false;
             // 
             // fuckYouToolStripMenuItem
             // 
             this.fuckYouToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.fuckYouToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.fuckYouToolStripMenuItem.Name = "fuckYouToolStripMenuItem";
-            this.fuckYouToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.fuckYouToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.fuckYouToolStripMenuItem.Text = "Content";
             // 
             // aboutToolStripMenuItem
@@ -687,13 +690,14 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Visible = false;
             // 
             // versionToolStripMenuItem
             // 
             this.versionToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.versionToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.versionToolStripMenuItem.Name = "versionToolStripMenuItem";
-            this.versionToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.versionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.versionToolStripMenuItem.Text = "Version";
             // 
             // creditsToolStripMenuItem
@@ -701,7 +705,7 @@
             this.creditsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.creditsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.creditsToolStripMenuItem.Name = "creditsToolStripMenuItem";
-            this.creditsToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.creditsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.creditsToolStripMenuItem.Text = "Credits";
             // 
             // testwindows

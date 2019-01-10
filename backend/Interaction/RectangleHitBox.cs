@@ -91,6 +91,7 @@ namespace SMWControlibBackend.Interaction
             }
             rhb.Width = Width;
             rhb.Height = Height;
+            rhb.ActionName = ActionName;
             return rhb;
         }
 

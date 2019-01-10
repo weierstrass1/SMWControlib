@@ -108,6 +108,7 @@
             this.rename.TabIndex = 5;
             this.rename.Text = "Rename";
             this.rename.UseVisualStyleBackColor = false;
+            this.rename.Visible = false;
             // 
             // frameSelector
             // 

@@ -8,6 +8,7 @@ using SMWControlibBackend.Interaction;
 using SMWControlibBackend.Graphics;
 using System.Text.RegularExpressions;
 using SMWControlibBackend.Logic;
+using System.Text;
 
 namespace SMWControlibControls.InteractionControls
 {
@@ -16,6 +17,8 @@ namespace SMWControlibControls.InteractionControls
         List<Frame> frames;
         Frame selectedFrame;
         List<HitBox> shareWithAllList = new List<HitBox>();
+        List<HitBox> shareWithTemp;
+        Frame latestSharewith;
         public Frame SelectedFrame
         {
             get
@@ -76,6 +79,7 @@ namespace SMWControlibControls.InteractionControls
         {
             InitializeComponent();
             actionSelectorHB.SelectedIndex = 0;
+            actionSelectorHB.SelectedIndexChanged += actionSelectorHBSelectedIndexChanged;
             frameSelector.SelectedIndexChanged += frameSelectorSelectedIndexChanged;
             hbSelector.SelectedIndexChanged += hbSelectorSelectedIndexChanged;
             ipSelector.SelectedIndexChanged += ipSelectorSelectedIndexChanged;
@@ -88,6 +92,7 @@ namespace SMWControlibControls.InteractionControls
             newAct.Click += newActClick;
             gotoAct.Click += gotoActClick;
             delAct.Click += delActClick;
+            dontShareRadioButton.CheckedChanged += dontShareRadioButtonCheckedChanged;
             shareAllRadioButton.CheckedChanged += shareAllRadioButtonCheckedChanged;
             shareWithRadioButton.CheckedChanged += shareWithRadioButtonCheckedChanged;
             shareSelector.SelectedIndexChanged += shareSelectorSelectedIndexChanged;
@@ -99,6 +104,30 @@ namespace SMWControlibControls.InteractionControls
             zoom.SelectedIndex = 2;
             cellSize.SelectedIndex = 3;
             tabControl1.TabPages.Remove(tabPage2);
+        }
+
+        private void actionSelectorHBSelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (SelectedHitBox != null)
+                SelectedHitBox.ActionName = 
+                    actionSelectorHB.SelectedItem.ToString();
+        }
+
+        public string GetActionString(string Code)
+        {
+            GetActions(Code);
+            string[] s = GetActionNames();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < s.Length; i++)
+            {
+                sb.Append("dw " + s[i] + "\n\t");
+            }
+            return sb.ToString();
+        }
+
+        private void dontShareRadioButtonCheckedChanged(object sender, EventArgs e)
+        {
+            if (selectedFrame != null) selectedFrame.MustShare = false;
         }
 
         private void deleteHBClick(object sender, EventArgs e)
@@ -136,7 +165,13 @@ namespace SMWControlibControls.InteractionControls
             if (shareSelector.Enabled && selectedFrame != null && 
                 shareSelector.SelectedItem != null)  
             {
+                if (shareWithTemp != null && latestSharewith != null) 
+                {
+                    latestSharewith.HitBoxes = shareWithTemp;
+                }
+                shareWithTemp = ((Frame)shareSelector.SelectedItem).HitBoxes;
                 selectedFrame.ShareWith = (Frame)shareSelector.SelectedItem;
+                latestSharewith = (Frame)shareSelector.SelectedItem;
             }
         }
 
@@ -149,6 +184,8 @@ namespace SMWControlibControls.InteractionControls
                     foreach (Frame f in frames)
                     {
                         f.HitBoxes = selectedFrame.HitBoxes;
+                        f.ShareWith = null;
+                        f.MustShare = false;
                     }
                     shareWithAllList = selectedFrame.HitBoxes;
                 }
@@ -166,6 +203,7 @@ namespace SMWControlibControls.InteractionControls
                             {
                                 f.HitBoxes.Add(h.Clone());
                             }
+                            f.ShareWith = null;
                         }
                     }
                 }
@@ -301,6 +339,7 @@ namespace SMWControlibControls.InteractionControls
             ZoomChanged?.Invoke(zoom.SelectedIndex + 1);
         }
 
+        bool canChange = false;
         private void shareWithRadioButtonCheckedChanged(object sender, EventArgs e)
         {
             shareSelector.Enabled = shareWithRadioButton.Checked;
@@ -309,17 +348,22 @@ namespace SMWControlibControls.InteractionControls
             {
                 if (selectedFrame.ShareWith == null)
                     selectedFrame.ShareWith = (Frame)shareSelector.SelectedItem;
-
-                selectedFrame.HitBoxes = ((Frame)shareSelector.SelectedItem).HitBoxes;
+                latestSharewith = (Frame)shareSelector.SelectedItem;
+                shareWithTemp = ((Frame)shareSelector.SelectedItem).HitBoxes;
+                selectedFrame.MustShare = true;
+                ((Frame)shareSelector.SelectedItem).HitBoxes = selectedFrame.HitBoxes;
+                canChange = true;
             }
             else if (!shareWithRadioButton.Checked && selectedFrame != null
-                && shareSelector.SelectedItem != null)
+                && shareSelector.SelectedItem != null && canChange)
             {
                 selectedFrame.HitBoxes = new List<HitBox>();
+                selectedFrame.MustShare = false;
                 foreach (HitBox hb in ((Frame)shareSelector.SelectedItem).HitBoxes)
                 {
                     selectedFrame.HitBoxes.Add(hb.Clone());
                 }
+                canChange = false;
             }
         }
 
@@ -396,8 +440,19 @@ namespace SMWControlibControls.InteractionControls
 
         private void frameSelectorSelectedIndexChanged(object sender, EventArgs e)
         {
+            canChange = false;
+            latestSharewith = null;
+            shareWithTemp = null;
             if (frameSelector.SelectedItem.GetType() == typeof(Frame))
+            {
                 SelectedFrame = (Frame)frameSelector.SelectedItem;
+                if (!selectedFrame.MustShare)
+                {
+                    if (shareWithRadioButton.Checked)
+                        dontShareRadioButton.Checked = true;
+                    selectedFrame.ShareWith = null;
+                }
+            }
             else
                 SelectedFrame = null;
             refreshHB();
@@ -425,6 +480,7 @@ namespace SMWControlibControls.InteractionControls
                     shareSelector.Items.Add(f);
                 }
             }
+
             if (shareSelector.Items == null || shareSelector.Items.Count <= 0)
             {
                 shareWithRadioButton.Enabled = false;
@@ -434,7 +490,7 @@ namespace SMWControlibControls.InteractionControls
                     dontShareRadioButton.Checked = true;
                 selectedFrame.ShareWith = null;
             }
-            else
+            else if (selectedFrame.MustShare) 
             {
                 shareWithRadioButton.Enabled = true;
                 label22.Enabled = true;
@@ -446,6 +502,7 @@ namespace SMWControlibControls.InteractionControls
                 }
                 else
                 {
+                    canChange = true;
                     bool found = false;
                     foreach (Frame f in shareSelector.Items)
                     {
@@ -463,6 +520,12 @@ namespace SMWControlibControls.InteractionControls
                     }
                 }
                 shareSelector.Enabled = shareWithRadioButton.Checked;
+            }
+            else
+            {
+                shareSelector.SelectedIndex = 0;
+                if (shareWithRadioButton.Checked)
+                    dontShareRadioButton.Checked = true;
             }
 
         }
@@ -517,6 +580,18 @@ namespace SMWControlibControls.InteractionControls
             }
             else
                 SelectedHitBox = null;
+
+            if (SelectedHitBox != null)
+            {
+                foreach (var s in actionSelectorHB.Items)
+                {
+                    if (SelectedHitBox.ActionName == s.ToString())
+                    {
+                        actionSelectorHB.SelectedItem = s;
+                        break;
+                    }
+                }
+            }
         }
 
         private void createHBClick(object sender, EventArgs e)

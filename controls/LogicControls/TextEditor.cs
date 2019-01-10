@@ -201,7 +201,8 @@ namespace SMWControlibControls.LogicControls
             if (e.LinesAdded != 0)
                 updateLineNumbers(LineFromPosition(e.Position));
             int deltaLines = curLinesLen - Lines.Count;
-            Line curL = Lines[CurrentLine];
+            int lind = LineFromPosition(e.Position);
+            Line curL = Lines[lind];
             string line = curL.Text;
             int lineInd = curL.Position;
             int linel = line.Length;
@@ -210,7 +211,7 @@ namespace SMWControlibControls.LogicControls
             code.ClearFlags();
             code.DeleteLinesAt(lineN, lineInd, e.Position, deltaLines, line);
 
-            highlightLine(line, CurrentLine);
+            highlightLine(line, lind);
 
             List<int> anLines = code.EndAnalysis();
 

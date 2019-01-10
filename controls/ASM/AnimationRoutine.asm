@@ -51,10 +51,10 @@ ChangeAnimationFromStart:
 	LDA Times,y
 	STA !AnimationTimer,x			;Time = Times[New Animation Frame Index]
 
-	LDA Flips,y
+<localflip>	LDA Flips,y
 	STA !LocalFlip,x				;Flip = Flips[New Animation Frame Index]
 
-	LDA !Scratch2
+</localflip>	LDA !Scratch2
 	STA !AnimationFrameIndex,x
 
 	SEP #$10						;X/Y of 8 bits
@@ -113,10 +113,10 @@ AnimationRoutine:
 	LDA Times,y
 	STA !AnimationTimer,x			;Time = Times[New Animation Frame Index]
 
-	LDA Flips,y
+<localflip>	LDA Flips,y
 	STA !LocalFlip,x				;Flip = Flips[New Animation Frame Index]
 
-	LDA !Scratch2
+</localflip>	LDA !Scratch2
 	STA !AnimationFrameIndex,x
 
 	SEP #$10						;X/Y of 8 bits
@@ -140,8 +140,8 @@ Frames:
 
 Times:
 	db >aft.
-
+<localflip>
 Flips:
 	db >aff.
 
-;>End Animations Section
+</localflip>;>End Animations Section

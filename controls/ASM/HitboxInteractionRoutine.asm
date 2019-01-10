@@ -8,7 +8,7 @@ InteractMarioSprite:
 	AND #$20
 	BNE ProcessInteract      
 	TXA                       
-	EOR $13      			
+	EOR !TrueFrameCounter      			
 	AND #$01                	
 	ORA !SpriteHOffScreenFlag,x 				
 	BEQ ProcessInteract       
@@ -16,13 +16,13 @@ ReturnNoContact:
 	CLC                       
 	RTS
 ProcessInteract:
-	JSR SubHorzPos
+	JSL SubHorzPos
 	LDA !ScratchF                  
 	CLC                       
 	ADC #$50                
 	CMP #$A0                
 	BCS ReturnNoContact       ; No contact, return 
-	JSR SubVertPos         
+	JSL SubVertPos         
 	LDA !ScratchE                   
 	CLC                       
 	ADC #$60                
@@ -32,20 +32,20 @@ ProcessInteract:
 	CMP #$01                ;  | 
 	BCS ReturnNoContact       ; / ...no contact, return 
 	LDA #$00                ; \ Branch if bit 6 of $0D9B set? 
-	BIT $0D9B               ;  | 
+	BIT $0D9B|!addr               ;  | 
 	BVS +           ; / 
-	LDA $13F9 ; \ If Mario and Sprite not on same side of scenery... 
+	LDA $13F9|!addr ; \ If Mario and Sprite not on same side of scenery... 
 	EOR !SpriteBehindEscenaryFlag,x ;  |
 +
 	BNE ReturnNoContact2
-	JSL $03B664				; MarioClipping
+	JSL $03B664|!rom				; MarioClipping
 	JSR Interaction
 
 	BCC ReturnNoContact2
 	LDA !ScratchE
 	CMP #$01
 	BNE +
-	JSL $00F5B7
+	JSR DefaultAction
 +
 	SEC
 	RTS
@@ -53,48 +53,26 @@ ReturnNoContact2:
 	CLC
 	RTS
 
-	
-SubHorzPos:
-	LDY #$00                
-	LDA $D1                   
-	SEC                       
-	SBC !SpriteXLow,x       
-	STA !ScratchF                   
-	LDA $D2                   
-	SBC !SpriteXHigh,x     
-	BPL +        
-	INY                       
-+
-	RTS
-	
-SubVertPos:
-	LDY #$00                
-	LDA $D3                   
-	SEC                       
-	SBC !SpriteYLow,x       
-	STA !ScratchE                  
-	LDA $D4                   
-	SBC !SpriteYHigh,x     
-	BPL +        
-	INY                       
-+
-	RTS
-
 Interaction:
     STZ !ScratchE
-    LDA !GlobalFlip,x
-    EOR !LocalFlip,x
-    TAY                     ;Y = Flip Adder, used to jump to the frame with the current flip
+<globalflip>	LDA !GlobalFlip,x
+<localflip>    EOR !LocalFlip,x
+</localflip>    ASL
+	TAY                     ;Y = Flip Adder, used to jump to the frame with the current flip
 
-    LDA !FrameIndex,x
-    CLC
-    ADC HitboxAdder,y
-    ASL
-    TAY                     ;
+</globalflip>    LDA !FrameIndex,x
+	STA !Scratch4
+	STZ !Scratch5
 
     REP #$20
+	LDA !Scratch4
+	ASL
+<globalflip>	CLC
+	ADC HitboxAdder,y
+</globalflip>	REP #$10
+	TAY
+
     LDA FrameHitboxesIndexer,y
-    REP #$10
     TAY
     SEP #$20
 
@@ -126,20 +104,19 @@ Interaction:
     LDA HitboxesStart,y
     TAY
     SEP #$20
-
+<onlydefaultaction2>
 	LDA !ScratchE
 	AND #$01
 	BEQ +
 
 	LDA Hitboxes+5,y
-	CMP #$FF
 	BNE +
 
 	PLY
     INY
 	BRA -
 
-+
+</onlydefaultaction2>+
 
 	STZ !ScratchA
     LDA Hitboxes+1,y
@@ -211,17 +188,15 @@ Interaction:
 	PLA
 	PLA
 
-    JSL $03B72B
+    JSL $03B72B|!rom
+<onlydefaultaction1>	REP #$10
 	BCS ++
-	REP #$10
 	PLY
 	BRA +
 ++
-	REP #$10
 	PLY
 
     LDA Hitboxes+5,y
-	CMP #$FF
 	BNE ++
 
 	LDA !ScratchE
@@ -233,28 +208,29 @@ Interaction:
 
 ++
 
-    STA !Scratch4
-    STZ !Scratch5
+    STA !ScratchC
+    STZ !ScratchD
     REP #$20
-    LDA !Scratch4
+    LDA !ScratchC
     ASL
     TAY
 
     LDA Actions,y
-    STA !Scratch4
+    STA !ScratchC
     SEP #$30
 	LDX #$00
-    JSR ($0004|!dp,x)
+    JSR ($000C|!dp,x)
     REP #$10
 +
     PLY
     INY
     JMP -
 
-HitboxAdder:
-    db >intAdd.
+</onlydefaultaction1>
+<globalflip>HitboxAdder:
+    dw >intAdd.
 
-FrameHitboxesIndexer:
+</globalflip>FrameHitboxesIndexer:
     dw >fhbsInd.
 
 FrameHitBoxes:
@@ -265,8 +241,13 @@ HitboxesStart:
 
 Hitboxes:
     db >hbs.
-
+<onlydefaultaction2>
 Actions:
     dw >hbacts.
+</onlydefaultaction2>
+;This routine will be executed when mario interact with a standar hitbox.
+;It will be excecuted if $0E is 1 after execute Interaction routine
+DefaultAction:
+RTS
     
 ;>End Hitboxes Interaction Section

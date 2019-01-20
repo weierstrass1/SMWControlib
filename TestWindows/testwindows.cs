@@ -61,7 +61,10 @@ namespace TestWindows
             saveAs.Click += saveAsClick;
             loadProj.Click += loadProjClick;
             frameCreator1.FrameAdded += frameCreatorFrameAdded;
+            frameCreator1.FrameDeleted += frameCreator1FrameDeleted;
             FormClosing += formClosing;
+            resizeableSpriteGridController1.MidX = 136;
+            resizeableSpriteGridController1.MidY = 120;
             try
             {
                 codeEditorController1.CodeEditor.CanUndoRedo = false;
@@ -73,6 +76,12 @@ namespace TestWindows
             catch
             {
             }
+        }
+
+        private void frameCreator1FrameDeleted(Frame obj)
+        {
+            animationCreator1.RemoveFrame(obj);
+            animationEditor1.Animation = animationEditor1.Animation;
         }
 
         private void formClosing(object sender, FormClosingEventArgs e)
@@ -321,10 +330,12 @@ namespace TestWindows
                     Frame.GetTilesCodesFromFrameList(frameCreator1.Frames,
                     ExtractResourcesDialog.FlipX,
                     ExtractResourcesDialog.FlipY));
+                bool sameprop = Frame.SameProp(frameCreator1.Frames);
                 s = s.Replace("db >props.",
                     Frame.GetTilesPropertiesFromFrameList(frameCreator1.Frames,
                     ExtractResourcesDialog.FlipX,
-                    ExtractResourcesDialog.FlipY));
+                    ExtractResourcesDialog.FlipY,
+                    sameprop));
                 s = s.Replace("db >xdisps.",
                     Frame.GetTilesXDispFromFrameList(frameCreator1.Frames,
                     ExtractResourcesDialog.FlipX,
@@ -610,11 +621,13 @@ namespace TestWindows
                         grRout = UseTag(grRout, "sameprop1", "\tLDA #$"+
                             Frame.FirstProperty(frameCreator1.Frames) + "\n");
                         grRout = UseTag(grRout, "sameprop2", "");
+                        grRout = DeleteTag(grRout, "sameprop3");
                     }
                     else
                     {
                         grRout = DeleteTag(grRout, "sameprop1");
                         grRout = DeleteTag(grRout, "sameprop2");
+                        grRout = UseTag(grRout, "sameprop3", "");
                     }
 
                     if(Frame.SameSize(frameCreator1.Frames))

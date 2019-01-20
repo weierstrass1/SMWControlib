@@ -22,16 +22,16 @@ GraphicRoutine:
     STZ !Scratch5
     LDA !GlobalFlip,x   
 <localflip>    EOR !LocalFlip,x
-</localflip>    STA !ScratchF
-    ASL
+</localflip><sameprop3>    STA !ScratchF
+</sameprop3>    ASL
     STA !Scratch4                       ;$04 = Global Flip but in 16bits
-    LDA !ScratchF
+<sameprop3>    LDA !ScratchF
     CLC
     ROR A
     ROR A 
     ROR A
     STA !ScratchF
-</globalflip>
+</sameprop3></globalflip>
     PHX                                 ;Preserve X
     
     STZ !Scratch7
@@ -69,8 +69,8 @@ GraphicRoutine:
 </sametile1>    STA !TileCode,y                     ;Set the Tile code of the tile Y
 
 <sameprop1>    LDA Properties,x
-</sameprop1><globalflip>    EOR !ScratchF
-</globalflip>    STA !TileProperty,y                 ;Set the Tile property of the tile Y
+</sameprop1><sameprop3><globalflip>    EOR !ScratchF
+</globalflip></sameprop3>    STA !TileProperty,y                 ;Set the Tile property of the tile Y
 
     LDA !Scratch0
 	CLC

@@ -7,7 +7,7 @@ namespace SMWControlibControls.GraphicsControls
 {
     public partial class FrameCreator : UserControl
     {
-        public event Action<Frame> FrameAdded;
+        public event Action<Frame> FrameAdded, FrameDeleted;
         List<Frame> frames;
 
         public Frame[] Frames
@@ -42,12 +42,6 @@ namespace SMWControlibControls.GraphicsControls
             settings.Click += settingsClick;
             SelectedFrame = null;
             frameSelector.SelectedIndexChanged += selectedIndexChanged;
-            frameSelector.MouseLeave += frameSelectorMouseLeave;
-        }
-
-        private void frameSelectorMouseLeave(object sender, EventArgs e)
-        {
-            label1.Focus();
         }
 
         public void LoadProjectFrames(Frame[] projFrames)
@@ -119,6 +113,7 @@ namespace SMWControlibControls.GraphicsControls
             if (SelectedFrame != null)
             {
                 int i = frames.IndexOf(SelectedFrame);
+                FrameDeleted?.Invoke(SelectedFrame);
                 frames.Remove(SelectedFrame);
                 if (frames.Count == 0)
                 {

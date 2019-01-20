@@ -21,12 +21,12 @@ namespace SMWControlibControls.GraphicsControls
                 numericUpDown1.Value = frameMask.Time;
                 FlipX = frameMask.FlipX;
                 FlipY = frameMask.FlipY;
-                reDraw();
             }
         }
         public event Action<AnimationFrameEditor> AddClick,
             RemoveClick, ExchangeClick, FlipXChanged, 
             FlipYChanged, TimeChanged;
+        private bool started;
 
         public bool FlipX
         {
@@ -60,6 +60,7 @@ namespace SMWControlibControls.GraphicsControls
             numericUpDown1.ValueChanged += valueChanged;
             checkBox1.CheckedChanged += flipXCheckedChanged;
             checkBox2.CheckedChanged += flipYCheckedChanged;
+            started = false;
 
             border = new PictureBox()
             {
@@ -123,7 +124,8 @@ namespace SMWControlibControls.GraphicsControls
                 return;
             }
             frameMask.FlipY = checkBox2.Checked;
-            reDraw();
+            if(started)
+                reDraw();
             FlipYChanged?.Invoke(this);
         }
 
@@ -135,7 +137,8 @@ namespace SMWControlibControls.GraphicsControls
                 return;
             }
             frameMask.FlipX = checkBox1.Checked;
-            reDraw();
+            if (started)
+                reDraw();
             FlipXChanged?.Invoke(this);
         }
 
@@ -165,6 +168,16 @@ namespace SMWControlibControls.GraphicsControls
         private void exchangeClick(object sender, EventArgs e)
         {
             ExchangeClick?.Invoke(this);
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            if(!started)
+            {
+                reDraw();
+                started = true;
+            }
+            base.OnPaint(e);
         }
 
         private void reDraw()

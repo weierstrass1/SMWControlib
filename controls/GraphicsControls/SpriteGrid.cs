@@ -259,6 +259,7 @@ namespace SMWControlibControls.GraphicsControls
             selectionBox;
         public Control ToolTipControl { get { return selectionBox; } }
         private Bitmap gridBoxImg, centerSquareImg;
+        public Action<object, MouseEventArgs> MovingMouse;
         public SpriteGrid()
         {
             InitializeComponent();
@@ -365,6 +366,7 @@ namespace SMWControlibControls.GraphicsControls
         }
         private void spriteGrid_MouseMove(object sender, MouseEventArgs e)
         {
+            MovingMouse?.Invoke(sender, e);
             int X = e.X;
             int Y = e.Y;
 
@@ -977,6 +979,8 @@ namespace SMWControlibControls.GraphicsControls
             int maxX = int.MinValue;
             int maxY = int.MinValue;
             bool needClear = false;
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
             try
             {
                 selectionBox.Image = new Bitmap(Width, Height);
@@ -1033,6 +1037,7 @@ namespace SMWControlibControls.GraphicsControls
                     g.FillRectangle(br, minX, minY, maxX - minX, maxY - minY);
                 }
             }
+            if (needClear) selectionBox.Refresh();
         }
         public void ReDraw()
         {

@@ -345,6 +345,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="SuspendUpdate.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
@@ -594,6 +595,10 @@
     <None Include="Resources\info.png" />
     <None Include="Resources\goUp.png" />
     <None Include="Resources\goDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ASM\Templates\Giepy\" />
+    <Folder Include="ASM\Templates\Pixi\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

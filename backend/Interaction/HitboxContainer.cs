@@ -33,6 +33,7 @@ namespace SMWControlibBackend.Interaction
             hb.YOffset = YOffset;
             hb.BorderColor = Color.FromArgb(BorderColorA, BorderColorR, BorderColorG, BorderColorB);
             hb.FrontColor = Color.FromArgb(FrontColorA, FrontColorR, FrontColorG, FrontColorB);
+            hb.ActionName = ActionName;
 
             return hb;
         }

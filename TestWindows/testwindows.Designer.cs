@@ -134,8 +134,8 @@
             this.resizeableSpriteGridController1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.resizeableSpriteGridController1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.resizeableSpriteGridController1.Location = new System.Drawing.Point(283, 3);
-            this.resizeableSpriteGridController1.MidX = -136;
-            this.resizeableSpriteGridController1.MidY = 120;
+            this.resizeableSpriteGridController1.MidX = 0;
+            this.resizeableSpriteGridController1.MidY = 0;
             this.resizeableSpriteGridController1.Name = "resizeableSpriteGridController1";
             this.resizeableSpriteGridController1.Size = new System.Drawing.Size(549, 584);
             this.resizeableSpriteGridController1.TabIndex = 14;
@@ -565,7 +565,7 @@
             this.newProjectToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.newProjectToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.newProjectToolStripMenuItem.Text = "New Project";
             this.newProjectToolStripMenuItem.Visible = false;
             // 
@@ -574,7 +574,7 @@
             this.loadProj.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.loadProj.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.loadProj.Name = "loadProj";
-            this.loadProj.Size = new System.Drawing.Size(180, 22);
+            this.loadProj.Size = new System.Drawing.Size(153, 22);
             this.loadProj.Text = "Load";
             // 
             // save
@@ -582,7 +582,7 @@
             this.save.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.save.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.save.Name = "save";
-            this.save.Size = new System.Drawing.Size(180, 22);
+            this.save.Size = new System.Drawing.Size(153, 22);
             this.save.Text = "Save";
             // 
             // saveAs
@@ -590,7 +590,7 @@
             this.saveAs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.saveAs.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.saveAs.Name = "saveAs";
-            this.saveAs.Size = new System.Drawing.Size(180, 22);
+            this.saveAs.Size = new System.Drawing.Size(153, 22);
             this.saveAs.Text = "Save as";
             // 
             // extratTo
@@ -598,7 +598,7 @@
             this.extratTo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.extratTo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.extratTo.Name = "extratTo";
-            this.extratTo.Size = new System.Drawing.Size(180, 22);
+            this.extratTo.Size = new System.Drawing.Size(153, 22);
             this.extratTo.Text = "Extract To";
             // 
             // windowToolStripMenuItem
@@ -675,7 +675,7 @@
             this.fuckYouToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.fuckYouToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.fuckYouToolStripMenuItem.Name = "fuckYouToolStripMenuItem";
-            this.fuckYouToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fuckYouToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.fuckYouToolStripMenuItem.Text = "Content";
             // 
             // aboutToolStripMenuItem
@@ -697,7 +697,7 @@
             this.versionToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.versionToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.versionToolStripMenuItem.Name = "versionToolStripMenuItem";
-            this.versionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.versionToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.versionToolStripMenuItem.Text = "Version";
             // 
             // creditsToolStripMenuItem
@@ -705,7 +705,7 @@
             this.creditsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.creditsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.creditsToolStripMenuItem.Name = "creditsToolStripMenuItem";
-            this.creditsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.creditsToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.creditsToolStripMenuItem.Text = "Credits";
             // 
             // testwindows

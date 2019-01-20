@@ -19,6 +19,7 @@ namespace SMWControlibBackend.Graphics.Frames
 
         public void LoadFrameMasks(FrameMask[] fms)
         {
+            if (fms == null || fms.Length <= 0) return;
             first = fms[0];
             Length = fms.Length;
 

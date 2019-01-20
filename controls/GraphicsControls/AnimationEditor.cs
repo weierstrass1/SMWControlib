@@ -80,7 +80,13 @@ namespace SMWControlibControls.GraphicsControls
             {
                 tableLayoutPanel1.ColumnCount = 1;
 
+                foreach(Control c in tableLayoutPanel1.Controls)
+                {
+                    c.Dispose();
+                }
                 tableLayoutPanel1.Controls.Clear();
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
 
                 tableLayoutPanel1.Width = 208 * tableLayoutPanel1.ColumnCount;
                 AnimationFrameEditor afex = new AnimationFrameEditor();
@@ -92,13 +98,20 @@ namespace SMWControlibControls.GraphicsControls
             int scroll = panel1.HorizontalScroll.Value;
             tableLayoutPanel1.ColumnCount = animation.Length;
 
+            foreach (Control c in tableLayoutPanel1.Controls)
+            {
+                c.Dispose();
+            }
             tableLayoutPanel1.Controls.Clear();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
 
             tableLayoutPanel1.Width = 208 * tableLayoutPanel1.ColumnCount;
 
             FrameMask fm = animation[0];
             int i = 0;
-            AnimationFrameEditor afe; 
+            AnimationFrameEditor afe;
+            SuspendUpdate.Suspend(tableLayoutPanel1);
             while (fm != null)
             {
                 tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 208));
@@ -122,6 +135,8 @@ namespace SMWControlibControls.GraphicsControls
                 i++;
             }
             panel1.AutoScrollPosition = new Point(scroll, panel1.AutoScrollPosition.Y);
+            SuspendUpdate.Resume(tableLayoutPanel1);
+            tableLayoutPanel1.Refresh();
         }
 
         private void timeChanged(AnimationFrameEditor obj)

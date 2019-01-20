@@ -70,6 +70,8 @@ namespace SMWControlibControls.GraphicsControls
             mirrorH.Click += mirrorHClick;
             mirrorV.Click += mirrorVClick;
             spriteGrid1.MidChanged += midChange;
+            spriteGrid1.MovingMouse += spriteGrid1MouseMove;
+            /*
             toolTip1.SetToolTip(mirrorH,
                 "Flip selected tiles horizontally.\nHotkey: 'H'");
             toolTip1.SetToolTip(mirrorV,
@@ -90,7 +92,15 @@ namespace SMWControlibControls.GraphicsControls
                                   "'Delete' key.");
             toolTip1.SetToolTip(grid, "Show or Hide the grid.");
             toolTip1.SetToolTip(settings, "Change some properties of the\n" +
-                                         "grid, for example, the color.");
+                                         "grid, for example, the color.");*/
+        }
+
+        private void spriteGrid1MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!cellSize.Focused)
+            {
+                cellSize.Focus();
+            }
         }
 
         private void midChange()

@@ -1329,7 +1329,7 @@ namespace SMWControlibBackend.Graphics.Frames
             return sb.ToString();
         }
 
-        public static string GetTilesPropertiesFromFrameList(Frame[] frames, bool FlipX, bool FlipY)
+        public static string GetTilesPropertiesFromFrameList(Frame[] frames, bool FlipX, bool FlipY, bool SameProp)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("\n");
@@ -1382,7 +1382,7 @@ namespace SMWControlibBackend.Graphics.Frames
                             sb1.Append("db ");
                         }
                         fx = tm.FlipX;
-                        tm.FlipX = !tm.FlipX;
+                        if(!SameProp) tm.FlipX = !tm.FlipX;
                         sb1.Append(tm.Properties + ",");
                         tm.FlipX = fx;
                         counter++;
@@ -1413,7 +1413,7 @@ namespace SMWControlibBackend.Graphics.Frames
                             sb1.Append("db ");
                         }
                         fy = tm.FlipY;
-                        tm.FlipY = !tm.FlipY;
+                        if (!SameProp) tm.FlipY = !tm.FlipY;
                         sb1.Append(tm.Properties + ",");
                         tm.FlipY = fy;
                         counter++;
@@ -1446,7 +1446,7 @@ namespace SMWControlibBackend.Graphics.Frames
                         fx = tm.FlipX;
                         tm.FlipX = !tm.FlipX;
                         fy = tm.FlipY;
-                        tm.FlipY = !tm.FlipY;
+                        if (!SameProp) tm.FlipY = !tm.FlipY;
                         sb1.Append(tm.Properties + ",");
                         tm.FlipX = fx;
                         tm.FlipY = fy;

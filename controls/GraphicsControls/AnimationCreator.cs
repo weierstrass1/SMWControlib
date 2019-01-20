@@ -139,6 +139,32 @@ namespace SMWControlibControls.GraphicsControls
             }
         }
 
+        public void RemoveFrame(Frame f)
+        {
+            FrameMask fm;
+            List<int> remList;
+            int i, c;
+            foreach(Animation an in anims)
+            {
+                fm = an[0];
+                remList = new List<int>();
+                i = 0;
+                while (fm != null)
+                {
+                    if (fm.Frame == f)
+                        remList.Add(i);
+                    fm = fm.Next;
+                    i++;
+                }
+                c = 0;
+                foreach(int j in remList)
+                {
+                    an.Remove(j - c);
+                    c++;
+                }
+            }
+        }
+
         private void refreshAnimations()
         {
             animationSelector.Items.Clear();

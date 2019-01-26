@@ -537,6 +537,9 @@ namespace TestWindows
         {
             string newt = target;
             string tp = tagPat.Replace("tag", tag);
+
+            MatchCollection mc = Regex.Matches(newt, tp);
+
             newt = Regex.Replace(newt, tp, replace);
             return newt;
         }

@@ -31,7 +31,8 @@ GraphicRoutine:
     ROR A 
     ROR A
     STA !ScratchF
-</sameprop3></globalflip>
+</sameprop3>
+</globalflip>
     PHX                                 ;Preserve X
     
     STZ !Scratch7
@@ -69,7 +70,8 @@ GraphicRoutine:
 </sametile1>    STA !TileCode,y                     ;Set the Tile code of the tile Y
 
 <sameprop1>    LDA Properties,x
-</sameprop1><sameprop3><globalflip>    EOR !ScratchF
+</sameprop1><sameprop3>
+<globalflip>    EOR !ScratchF
 </globalflip></sameprop3>    STA !TileProperty,y                 ;Set the Tile property of the tile Y
 
     LDA !Scratch0

@@ -22,6 +22,7 @@ namespace TestWindows
             gfxButton2.Target = spriteGFXBox1;
             gfxButton3.Target = spriteGFXBox2;
             gfxButton4.Target = spriteGFXBox2;
+            gfxButton6.Target = spriteGFXBox3;
             try
             {
                 spriteGFXBox1.LoadGFX("./Resources/GFX00.bin", 0);
@@ -76,7 +77,39 @@ namespace TestWindows
             catch
             {
             }
+            ImageProcessor.Tiles16 = spriteGFXBox2.Tiles16;
+            ImageProcessor.Tiles8 = spriteGFXBox2.Tiles8;
+            ImageProcessor.Priority = TilePriority.AboveAllLayersP0;
+            /*frameCreator1.AddFrames(
+                ImageProcessor.FromSpriteSheetToFrames("img.png", 49, 33));*/
+            if(NewProjectWindow.Show(this)==DialogResult.OK)
+            {
+                if (!tabControl2.TabPages.Contains(tabPage4)) tabControl2.TabPages.Add(tabPage4);
+                if (!tabControl2.TabPages.Contains(tabPage7)) tabControl2.TabPages.Add(tabPage7);
+                if (NewProjectWindow.ProjectType == 0)
+                {
+                    tabControl2.TabPages.Remove(tabPage7);
+                    spriteGFXBox2.Height = 260;
+                    spritesheet.Visible = false;
+                }
+                else if (NewProjectWindow.ProjectType == 1)
+                {
+                    if(DynamicSpriteSizeDialog.Show(this)==DialogResult.OK)
+                    {
+                        spritesheet.Visible = true;
+                        spriteGFXBox3.Width = DynamicSpriteSizeDialog.DynSize.Width * 2 + 4;
+                        spriteGFXBox3.Height = DynamicSpriteSizeDialog.DynSize.Height * 2 + 4;
+                        spriteGFXBox2.Height = 68;
+                        if(DynamicSpriteSizeDialog.DynSize >= DynamicSize.DynamicSprite96x96)
+                        {
+                            tabControl2.TabPages.Remove(tabPage4);
+                            spriteGFXBox1.Height = 132;
+                        }
+                    }
+                }
+            }
         }
+
 
         private void frameCreator1FrameDeleted(Frame obj)
         {
@@ -851,8 +884,15 @@ namespace TestWindows
         {
             if (frameCreator1.SelectedFrame == null)
                 resizeableSpriteGridController1.Tiles = null;
-            else
+            else if(frameCreator1.SelectedFrame.Dynamic)
+            {
+                if (File.Exists("tmp.bin"))
+                    File.Delete("tmp.bin");
+                File.WriteAllBytes("tmp.bin",frameCreator1.SelectedFrame.GFX);
+                spriteGFXBox3.LoadGFX("tmp.bin", 0);
+                File.Delete("tmp.bin");
                 resizeableSpriteGridController1.Tiles = frameCreator1.SelectedFrame.Tiles;
+            }
         }
 
         private void selectionChanged(object sender)

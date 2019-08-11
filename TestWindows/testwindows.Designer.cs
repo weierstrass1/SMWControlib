@@ -46,6 +46,9 @@
             this.spriteGFXBox2 = new SMWControlibControls.GraphicsControls.SpriteGFXBox();
             this.gfxButton3 = new SMWControlibControls.GraphicsControls.GFXButton();
             this.gfxButton4 = new SMWControlibControls.GraphicsControls.GFXButton();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.spriteGFXBox3 = new SMWControlibControls.GraphicsControls.SpriteGFXBox();
+            this.gfxButton6 = new SMWControlibControls.GraphicsControls.GFXButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.animationPlayer1 = new SMWControlibControls.GraphicsControls.AnimationPlayer();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -82,6 +85,7 @@
             this.saveFile = new System.Windows.Forms.SaveFileDialog();
             this.openFile = new System.Windows.Forms.OpenFileDialog();
             this.folderdialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.spritesheet = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -92,6 +96,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.spriteGFXBox1)).BeginInit();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spriteGFXBox2)).BeginInit();
+            this.tabPage7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spriteGFXBox3)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -143,6 +149,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
+            this.panel2.Controls.Add(this.spritesheet);
             this.panel2.Controls.Add(this.frameCreator1);
             this.panel2.Controls.Add(this.paletteButton1);
             this.panel2.Controls.Add(this.paletteBox1);
@@ -202,6 +209,7 @@
             // 
             this.tabControl2.Controls.Add(this.tabPage3);
             this.tabControl2.Controls.Add(this.tabPage4);
+            this.tabControl2.Controls.Add(this.tabPage7);
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl2.Font = new System.Drawing.Font("MS Reference Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
@@ -354,6 +362,58 @@
             this.gfxButton4.Text = "Load Top";
             this.gfxButton4.Tilesize = 16;
             this.gfxButton4.UseVisualStyleBackColor = false;
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
+            this.tabPage7.Controls.Add(this.spriteGFXBox3);
+            this.tabPage7.Controls.Add(this.gfxButton6);
+            this.tabPage7.Location = new System.Drawing.Point(4, 24);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(272, 556);
+            this.tabPage7.TabIndex = 2;
+            this.tabPage7.Text = "Dynamic Space";
+            // 
+            // spriteGFXBox3
+            // 
+            this.spriteGFXBox3.BehindBitmap = ((System.Drawing.Bitmap)(resources.GetObject("spriteGFXBox3.BehindBitmap")));
+            this.spriteGFXBox3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.spriteGFXBox3.Image = ((System.Drawing.Image)(resources.GetObject("spriteGFXBox3.Image")));
+            this.spriteGFXBox3.ImageHeigth = 128;
+            this.spriteGFXBox3.ImageWidth = 128;
+            this.spriteGFXBox3.Location = new System.Drawing.Point(6, 9);
+            this.spriteGFXBox3.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
+            this.spriteGFXBox3.Name = "spriteGFXBox3";
+            this.spriteGFXBox3.Selection = new System.Drawing.Rectangle(0, 0, 16, 16);
+            this.spriteGFXBox3.SelectionAccuracy = 8;
+            this.spriteGFXBox3.SelectionColor = System.Drawing.Color.White;
+            this.spriteGFXBox3.SelectionMinSize = 8;
+            this.spriteGFXBox3.Size = new System.Drawing.Size(260, 260);
+            this.spriteGFXBox3.SP = 1;
+            this.spriteGFXBox3.TabIndex = 9;
+            this.spriteGFXBox3.TabStop = false;
+            this.spriteGFXBox3.TileZoom = 1;
+            this.spriteGFXBox3.Zoom = 2;
+            // 
+            // gfxButton6
+            // 
+            this.gfxButton6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.gfxButton6.BaseTile = 0;
+            this.gfxButton6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
+            this.gfxButton6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
+            this.gfxButton6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.gfxButton6.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gfxButton6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+            this.gfxButton6.Location = new System.Drawing.Point(6, 275);
+            this.gfxButton6.Name = "gfxButton6";
+            this.gfxButton6.Position = 0;
+            this.gfxButton6.Size = new System.Drawing.Size(100, 23);
+            this.gfxButton6.StartFolder = "";
+            this.gfxButton6.TabIndex = 7;
+            this.gfxButton6.Text = "Load";
+            this.gfxButton6.Tilesize = 16;
+            this.gfxButton6.UseVisualStyleBackColor = false;
             // 
             // tabPage2
             // 
@@ -708,6 +768,22 @@
             this.creditsToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.creditsToolStripMenuItem.Text = "Credits";
             // 
+            // spritesheet
+            // 
+            this.spritesheet.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.spritesheet.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
+            this.spritesheet.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
+            this.spritesheet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.spritesheet.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.spritesheet.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+            this.spritesheet.Location = new System.Drawing.Point(6, 298);
+            this.spritesheet.Name = "spritesheet";
+            this.spritesheet.Size = new System.Drawing.Size(204, 23);
+            this.spritesheet.TabIndex = 3;
+            this.spritesheet.Text = "Load Sprite Sheet";
+            this.spritesheet.UseVisualStyleBackColor = false;
+            this.spritesheet.Visible = false;
+            // 
             // testwindows
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -734,6 +810,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.spriteGFXBox1)).EndInit();
             this.tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.spriteGFXBox2)).EndInit();
+            this.tabPage7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.spriteGFXBox3)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -804,5 +882,9 @@
         private System.Windows.Forms.SaveFileDialog saveFile;
         private System.Windows.Forms.OpenFileDialog openFile;
         private System.Windows.Forms.FolderBrowserDialog folderdialog;
+        private System.Windows.Forms.TabPage tabPage7;
+        private SMWControlibControls.GraphicsControls.SpriteGFXBox spriteGFXBox3;
+        private SMWControlibControls.GraphicsControls.GFXButton gfxButton6;
+        private System.Windows.Forms.Button spritesheet;
     }
 }

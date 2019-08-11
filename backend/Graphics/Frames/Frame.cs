@@ -5,6 +5,51 @@ using System.Text;
 
 namespace SMWControlibBackend.Graphics.Frames
 {
+    public class DynamicSize
+    {
+        int value;
+        public int Width { get; private set; }
+        public int Height { get; private set; }
+        public static DynamicSize DynamicSprite32x32 = new DynamicSize(0, 64, 16);
+        public static DynamicSize DynamicSprite48x48 = new DynamicSize(1, 128, 16);
+        public static DynamicSize DynamicSprite64x64 = new DynamicSize(2, 128, 32);
+        public static DynamicSize DynamicSprite80x80 = new DynamicSize(3, 128, 48);
+        public static DynamicSize DynamicSprite96x96 = new DynamicSize(4, 128, 64);
+        public static DynamicSize DynamicSprite112x112 = new DynamicSize(5, 128, 96);
+
+        DynamicSize(int val, int w, int h)
+        {
+            value = val;
+            Width = w;
+            Height = h;
+        }
+
+        public static implicit operator int(DynamicSize dz)
+        {
+            return dz.value;
+        }
+
+        public static implicit operator DynamicSize(int i)
+        {
+            switch(i)
+            {
+                case 0:
+                    return DynamicSprite32x32;
+                case 1:
+                    return DynamicSprite48x48;
+                case 2:
+                    return DynamicSprite64x64;
+                case 3:
+                    return DynamicSprite80x80;
+                case 4:
+                    return DynamicSprite96x96;
+                case 5:
+                    return DynamicSprite112x112;
+                default:
+                    return null;
+            }
+        }
+    }
     public class Frame
     {
         public string Name;
@@ -16,6 +61,9 @@ namespace SMWControlibBackend.Graphics.Frames
         public int Index { get; private set; }
         public Frame ShareWith = null;
         public bool MustShare = false;
+        public bool Dynamic = false;
+        public byte[] GFX = null;
+        public DynamicSize DynSize = null;
 
         public Frame()
         {

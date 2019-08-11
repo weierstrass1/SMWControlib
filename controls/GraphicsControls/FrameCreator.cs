@@ -57,6 +57,17 @@ namespace SMWControlibControls.GraphicsControls
             if (frames.Count > 0) frameSelector.SelectedIndex = 0;
         }
 
+        public void AddFrames(List<Frame> newFrames)
+        {
+            foreach(Frame f in newFrames)
+            {
+                frames.Add(f);
+            }
+            refreshFrames();
+            if (SelectedFrame == null)
+                SelectedFrame = frames[0];
+        }
+
         public void ChangeMid(int MidX, int MidY)
         {
             foreach(Frame f in frames)

@@ -32,6 +32,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="C5">
+      <HintPath>..\..\..\..\Desktop\C5\C5.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -45,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Graphics\ColorPalette.cs" />
     <Compile Include="Graphics\ColorPaletteContainer.cs" />
+    <Compile Include="Graphics\Frames\DynamicFrame.cs" />
     <Compile Include="Graphics\GlobalColorPaletteContainer.cs" />
     <Compile Include="Graphics\Frames\Animation.cs" />
     <Compile Include="Graphics\Frames\AnimationContainer.cs" />
@@ -52,6 +56,7 @@
     <Compile Include="Graphics\Frames\FrameContainer.cs" />
     <Compile Include="Graphics\Frames\FrameMask.cs" />
     <Compile Include="Graphics\Frames\FrameMaskContainer.cs" />
+    <Compile Include="Graphics\ImageProcessor.cs" />
     <Compile Include="Graphics\TileMask.cs" />
     <Compile Include="Graphics\SnesGraphics.cs" />
     <Compile Include="Graphics\TileMaskContainer.cs" />

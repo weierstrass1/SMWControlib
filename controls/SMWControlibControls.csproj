@@ -81,6 +81,12 @@
     <Compile Include="GraphicsControls\ColoreableBorderComboBox.Designer.cs">
       <DependentUpon>ColoreableBorderComboBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="GraphicsControls\DynamicSpriteSizeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GraphicsControls\DynamicSpriteSizeDialog.Designer.cs">
+      <DependentUpon>DynamicSpriteSizeDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="GraphicsControls\FrameCreator.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -110,6 +116,18 @@
     </Compile>
     <Compile Include="GraphicsControls\ImageButton.Designer.cs">
       <DependentUpon>ImageButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GraphicsControls\NewProjectWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GraphicsControls\NewProjectWindow.Designer.cs">
+      <DependentUpon>NewProjectWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GraphicsControls\SpriteSheetDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GraphicsControls\SpriteSheetDialog.Designer.cs">
+      <DependentUpon>SpriteSheetDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="GraphicsControls\Theme.cs" />
     <Compile Include="InteractionControls\InteractionMenu.cs">
@@ -370,6 +388,9 @@
     <EmbeddedResource Include="GraphicsControls\ColoreableBorderComboBox.resx">
       <DependentUpon>ColoreableBorderComboBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GraphicsControls\DynamicSpriteSizeDialog.resx">
+      <DependentUpon>DynamicSpriteSizeDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GraphicsControls\FrameCreator.resx">
       <DependentUpon>FrameCreator.cs</DependentUpon>
     </EmbeddedResource>
@@ -385,6 +406,12 @@
     <EmbeddedResource Include="GraphicsControls\ImageButton.resx">
       <DependentUpon>ImageButton.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphicsControls\NewProjectWindow.resx">
+      <DependentUpon>NewProjectWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphicsControls\SpriteSheetDialog.resx">
+      <DependentUpon>SpriteSheetDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InteractionControls\InteractionMenu.resx">
       <DependentUpon>InteractionMenu.cs</DependentUpon>

@@ -130,6 +130,18 @@ namespace SMWControlibControls.GraphicsControls
             base.OnPaint(pe);
         }
 
+        public Tile GetTile(int i, int j, TileSize ts)
+        {
+            if(ts==TileSize.Size8x8)
+            {
+                return Tiles8[i, j];
+            }
+            else
+            {
+                return Tiles16[i, j];
+            }
+        }
+
         public TileMask[] GetBitmapsFromSelectedTiles(bool flipX, bool flipY, TilePriority priority)
         {
             if (selectedTiles == null) return null;

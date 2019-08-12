@@ -30,18 +30,18 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DynamicSpriteSizeDialog));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.accept = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.s112 = new System.Windows.Forms.RadioButton();
+            this.s96 = new System.Windows.Forms.RadioButton();
             this.s80 = new System.Windows.Forms.RadioButton();
             this.s64 = new System.Windows.Forms.RadioButton();
             this.s48 = new System.Windows.Forms.RadioButton();
             this.s32 = new System.Windows.Forms.RadioButton();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.accept = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.desc = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.s96 = new System.Windows.Forms.RadioButton();
-            this.s112 = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -64,30 +64,55 @@
             this.panel1.Size = new System.Drawing.Size(542, 305);
             this.panel1.TabIndex = 7;
             // 
-            // panel2
+            // label1
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel2.Controls.Add(this.accept);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 305);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(808, 40);
-            this.panel2.TabIndex = 8;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(144)))));
+            this.label1.Location = new System.Drawing.Point(133, 273);
+            this.label1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(273, 20);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "↑Requires 50% More Mode↑";
             // 
-            // accept
+            // s112
             // 
-            this.accept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
-            this.accept.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
-            this.accept.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
-            this.accept.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.accept.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-            this.accept.Location = new System.Drawing.Point(354, 6);
-            this.accept.Name = "accept";
-            this.accept.Size = new System.Drawing.Size(99, 23);
-            this.accept.TabIndex = 2;
-            this.accept.Text = "Ok";
-            this.accept.UseVisualStyleBackColor = false;
+            this.s112.Appearance = System.Windows.Forms.Appearance.Button;
+            this.s112.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.s112.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
+            this.s112.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
+            this.s112.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
+            this.s112.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.s112.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+            this.s112.Image = ((System.Drawing.Image)(resources.GetObject("s112.Image")));
+            this.s112.Location = new System.Drawing.Point(271, 138);
+            this.s112.Name = "s112";
+            this.s112.Padding = new System.Windows.Forms.Padding(0, 0, 0, 9);
+            this.s112.Size = new System.Drawing.Size(128, 128);
+            this.s112.TabIndex = 8;
+            this.s112.Text = "112x112";
+            this.s112.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.s112.UseVisualStyleBackColor = false;
+            // 
+            // s96
+            // 
+            this.s96.Appearance = System.Windows.Forms.Appearance.Button;
+            this.s96.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.s96.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
+            this.s96.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
+            this.s96.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
+            this.s96.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.s96.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+            this.s96.Image = ((System.Drawing.Image)(resources.GetObject("s96.Image")));
+            this.s96.Location = new System.Drawing.Point(405, 4);
+            this.s96.Name = "s96";
+            this.s96.Padding = new System.Windows.Forms.Padding(0, 0, 0, 9);
+            this.s96.Size = new System.Drawing.Size(128, 128);
+            this.s96.TabIndex = 7;
+            this.s96.Text = "96x96";
+            this.s96.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.s96.UseVisualStyleBackColor = false;
             // 
             // s80
             // 
@@ -167,6 +192,31 @@
             this.s32.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.s32.UseVisualStyleBackColor = false;
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel2.Controls.Add(this.accept);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 305);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(808, 40);
+            this.panel2.TabIndex = 8;
+            // 
+            // accept
+            // 
+            this.accept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.accept.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
+            this.accept.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
+            this.accept.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.accept.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+            this.accept.Location = new System.Drawing.Point(354, 6);
+            this.accept.Name = "accept";
+            this.accept.Size = new System.Drawing.Size(99, 23);
+            this.accept.TabIndex = 2;
+            this.accept.Text = "Ok";
+            this.accept.UseVisualStyleBackColor = false;
+            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
@@ -202,61 +252,10 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Description";
             // 
-            // s96
-            // 
-            this.s96.Appearance = System.Windows.Forms.Appearance.Button;
-            this.s96.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
-            this.s96.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
-            this.s96.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
-            this.s96.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
-            this.s96.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s96.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-            this.s96.Image = ((System.Drawing.Image)(resources.GetObject("s96.Image")));
-            this.s96.Location = new System.Drawing.Point(405, 4);
-            this.s96.Name = "s96";
-            this.s96.Padding = new System.Windows.Forms.Padding(0, 0, 0, 9);
-            this.s96.Size = new System.Drawing.Size(128, 128);
-            this.s96.TabIndex = 7;
-            this.s96.Text = "96x96";
-            this.s96.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.s96.UseVisualStyleBackColor = false;
-            // 
-            // s112
-            // 
-            this.s112.Appearance = System.Windows.Forms.Appearance.Button;
-            this.s112.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
-            this.s112.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
-            this.s112.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
-            this.s112.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
-            this.s112.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s112.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-            this.s112.Image = ((System.Drawing.Image)(resources.GetObject("s112.Image")));
-            this.s112.Location = new System.Drawing.Point(271, 138);
-            this.s112.Name = "s112";
-            this.s112.Padding = new System.Windows.Forms.Padding(0, 0, 0, 9);
-            this.s112.Size = new System.Drawing.Size(128, 128);
-            this.s112.TabIndex = 8;
-            this.s112.Text = "112x112";
-            this.s112.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.s112.UseVisualStyleBackColor = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(144)))));
-            this.label1.Location = new System.Drawing.Point(133, 273);
-            this.label1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(273, 20);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "↑Requires 50% More Mode↑";
-            // 
             // DynamicSpriteSizeDialog
             // 
             this.AcceptButton = this.accept;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(808, 345);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);

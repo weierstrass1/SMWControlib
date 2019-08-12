@@ -29,6 +29,8 @@ namespace TestWindows
                 spriteGFXBox1.LoadGFX("./Resources/GFX01.bin", 64);
                 spriteGFXBox2.LoadGFX("./Resources/GFX13.bin", 0);
                 spriteGFXBox2.LoadGFX("./Resources/GFX09.bin", 64);
+                spriteGFXBox3.LoadGFX("./Resources/GFX13.bin", 0);
+                spriteGFXBox3.LoadGFX("./Resources/GFX09.bin", 64);
             }
             catch
             {
@@ -77,8 +79,9 @@ namespace TestWindows
             catch
             {
             }
-            ImageProcessor.Tiles16 = spriteGFXBox2.Tiles16;
-            ImageProcessor.Tiles8 = spriteGFXBox2.Tiles8;
+            spritesheet.Click += Spritesheet_Click;
+            ImageProcessor.Tiles16 = spriteGFXBox3.Tiles16;
+            ImageProcessor.Tiles8 = spriteGFXBox3.Tiles8;
             ImageProcessor.Priority = TilePriority.AboveAllLayersP0;
             /*frameCreator1.AddFrames(
                 ImageProcessor.FromSpriteSheetToFrames("img.png", 49, 33));*/
@@ -110,6 +113,14 @@ namespace TestWindows
             }
         }
 
+        private void Spritesheet_Click(object sender, EventArgs e)
+        {
+            if (SpriteSheetDialog.Show(this) == DialogResult.OK)
+            {
+                frameCreator1.AddFrames(SpriteSheetDialog.NewFrames,
+                    SpriteSheetDialog.FrameWidth, SpriteSheetDialog.FrameHeight);
+            }
+        }
 
         private void frameCreator1FrameDeleted(Frame obj)
         {

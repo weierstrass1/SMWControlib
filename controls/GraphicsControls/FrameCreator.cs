@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using SMWControlibBackend.Graphics;
 using SMWControlibBackend.Graphics.Frames;
 
 namespace SMWControlibControls.GraphicsControls
@@ -57,10 +58,17 @@ namespace SMWControlibControls.GraphicsControls
             if (frames.Count > 0) frameSelector.SelectedIndex = 0;
         }
 
-        public void AddFrames(List<Frame> newFrames)
+        public void AddFrames(List<Frame> newFrames, int w, int h)
         {
             foreach(Frame f in newFrames)
             {
+                f.MidX = 136;
+                f.MidY = 120;
+                foreach (TileMask tm in f.Tiles)
+                {
+                    tm.XDisp = (tm.XDisp - w) + f.MidX * 2;
+                    tm.YDisp = (tm.YDisp - h) + f.MidY * 2;
+                }
                 frames.Add(f);
             }
             refreshFrames();

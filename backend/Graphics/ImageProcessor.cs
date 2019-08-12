@@ -278,20 +278,15 @@ namespace SMWControlibBackend.Graphics
         public static Tile[,] Tiles8;
         public static Tile[,] Tiles16;
         public static TilePriority Priority;
-        public static List<Frame> FromSpriteSheetToFrames(string path, int FrameWidth, int FrameHeight)
+        public static List<Frame> FromSpriteSheetToFrames(Bitmap[] b, Dictionary<Int32, byte> Pal, DynamicSize ds, PaletteId curId)
         {
-            if (!File.Exists(path)) return null;
-            Bitmap im = (Bitmap)Image.FromFile(path);
-
-            Bitmap[] b = GetFrames(im, FrameWidth, FrameHeight);
-            Dictionary<Int32, byte> Pal = GetPalette(b[0],PaletteId.PD);
             Frame f;
             List<Frame> frames = new List<Frame>();
 
             for (int i = 0; i < b.Length; i++)
             {
                 ImageNode imn = CropFrameInTiles(b[i]);
-                f = FillGFX(b[i], PaletteId.PD, imn, DynamicSize.DynamicSprite32x32, Pal);
+                f = FillGFX(b[i], curId, imn, ds, Pal);
                 f.Name = "Frame" + i;
                 frames.Add(f);
             }

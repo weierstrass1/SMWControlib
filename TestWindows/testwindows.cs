@@ -326,13 +326,19 @@ namespace TestWindows
                 }
                 path += "\\";
             }
+            Tuple<string, string, string, byte[]> t = null;
+            if(NewProjectWindow.ProjectType==1)
+                t = Frame.GetDynamicSource(frameCreator1.Frames);
 
             if (ExtractResourcesDialog.Code)
             {
                 RefreshCode();
                 string s = codeEditorController1.CodeEditor.Text;
                 Frame.GetFramesIndexs(frameCreator1.Frames);
-
+                
+                s = s.Replace("dw >resoff.", t.Item1);
+                s = s.Replace("dw >ressz.", t.Item2);
+                s = s.Replace(">lns.", t.Item3);
                 HitBox[] hbs = Frame.GetFramesHitboxesFromFrameList(frameCreator1.Frames,
                     ExtractResourcesDialog.FlipX,
                     ExtractResourcesDialog.FlipY);
@@ -412,6 +418,9 @@ namespace TestWindows
             }
             if (ExtractResourcesDialog.SP1 || ExtractResourcesDialog.SP2)
             {
+                if (File.Exists(path + ExtractResourcesDialog.ProjectName + ".bin"))
+                    File.Delete(path + ExtractResourcesDialog.ProjectName + ".bin");
+                File.WriteAllBytes(path + ExtractResourcesDialog.ProjectName + ".bin",t.Item4);
                 byte[] sp12 = spriteGFXBox1.GetGFX();
                 if (ExtractResourcesDialog.SP1)
                 {
@@ -548,6 +557,7 @@ namespace TestWindows
             animationEditor1.Selection = frameSelector1.GetSelection();
         }
 
+        string secDnString = @"\;\>Section Dynamic(.*\n)*\;\>End Dynamic Section";
         string secGrString = @"\;\>Section Graphics(.*\n)*\;\>End Graphics Section";
         string grCallString = @"JSR( |\t)+GraphicRoutine";
         string secAnString = @"\;\>Section Animations(.*\n)*\;\>End Animations Section";
@@ -740,6 +750,20 @@ namespace TestWindows
                         codeEditorController1.CodeEditor.InsertText(ma.Index,
                                 ";JSR GraphicRoutine");
                     }
+                }
+            }
+
+            if(NewProjectWindow.ProjectType==1)
+            {
+                m = Regex.Match(codeEditorController1.CodeEditor.Text,
+                secDnString);
+                if (m.Success)
+                {
+                    string dnOut = File.ReadAllText(@".\ASM\DynamicRoutine.asm");
+                    codeEditorController1.CodeEditor.DeleteRange(m.Index,
+                            m.Length);
+                    codeEditorController1.CodeEditor.InsertText(m.Index,
+                            dnOut);
                 }
             }
 

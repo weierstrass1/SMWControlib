@@ -67,7 +67,7 @@ namespace SMWControlibControls.GraphicsControls
                 foreach (TileMask tm in f.Tiles)
                 {
                     tm.XDisp = (tm.XDisp - w) + f.MidX;
-                    tm.YDisp = (tm.YDisp - h) + f.MidY;
+                    tm.YDisp = (tm.YDisp - h) + f.MidY + 2;
                 }
                 frames.Add(f);
             }

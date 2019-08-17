@@ -1,4 +1,5 @@
 ﻿using SMWControlibBackend.Interaction;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
@@ -10,18 +11,20 @@ namespace SMWControlibBackend.Graphics.Frames
         int value;
         public int Width { get; private set; }
         public int Height { get; private set; }
-        public static DynamicSize DynamicSprite32x32 = new DynamicSize(0, 64, 16);
-        public static DynamicSize DynamicSprite48x48 = new DynamicSize(1, 128, 16);
-        public static DynamicSize DynamicSprite64x64 = new DynamicSize(2, 128, 32);
-        public static DynamicSize DynamicSprite80x80 = new DynamicSize(3, 128, 48);
-        public static DynamicSize DynamicSprite96x96 = new DynamicSize(4, 128, 64);
-        public static DynamicSize DynamicSprite112x112 = new DynamicSize(5, 128, 96);
+        public int Lines { get; private set; }
+        public static DynamicSize DynamicSprite32x32 = new DynamicSize(0, 64, 16, 2);
+        public static DynamicSize DynamicSprite48x48 = new DynamicSize(1, 128, 16, 2);
+        public static DynamicSize DynamicSprite64x64 = new DynamicSize(2, 128, 32, 4);
+        public static DynamicSize DynamicSprite80x80 = new DynamicSize(3, 128, 48, 6);
+        public static DynamicSize DynamicSprite96x96 = new DynamicSize(4, 128, 64, 8);
+        public static DynamicSize DynamicSprite112x112 = new DynamicSize(5, 128, 96, 12);
 
-        DynamicSize(int val, int w, int h)
+        DynamicSize(int val, int w, int h,int lines)
         {
             value = val;
             Width = w;
             Height = h;
+            Lines = lines;
         }
 
         public static implicit operator int(DynamicSize dz)
@@ -70,6 +73,92 @@ namespace SMWControlibBackend.Graphics.Frames
             Tiles = new List<TileMask>();
             HitBoxes = new List<HitBox>();
             InteractionPoints = new List<InteractionPoint>();
+        }
+
+        public static Tuple<string, string,string, byte[]> GetDynamicSource(Frame[] f)
+        {
+            StringBuilder sb1 = new StringBuilder();
+            StringBuilder sb2 = new StringBuilder();
+            Tuple<int[], int[]> taux;
+            int lastVal = 0;
+            int lns = 0;
+            byte[] b = new byte[6144 * f.Length];
+            for (int i = 0; i < f.Length; i++)
+            {
+                lns = f[i].DynSize.Lines;
+                sb1.Append(f[i].Name+"_"+"ResourceOffset:\n\tdw ");
+                sb2.Append(f[i].Name + "_" + "ResourceSize:\n\tdw ");
+                taux = f[i].GetDynamicSource();
+                for (int j = 0; j < lns; j++)
+                {
+                    sb1.Append("$" + (lastVal + taux.Item1[j]).ToString("X4") + ",");
+                    sb2.Append("$" + (taux.Item2[j]).ToString("X4") + ",");
+                    Buffer.BlockCopy(f[i].GFX, 512 * j, b, lastVal + taux.Item1[j], taux.Item2[j]);
+                }
+                lastVal += (taux.Item1[lns - 1] + taux.Item2[lns - 1]);
+                sb1.Remove(sb1.Length - 1, 1);
+                sb2.Remove(sb2.Length - 1, 1);
+                sb1.Append("\n");
+                sb2.Append("\n");
+            }
+            byte[] br = new byte[lastVal];
+            Buffer.BlockCopy(b, 0, br, 0, lastVal);
+            Tuple<string, string, string, byte[]> t =
+                new Tuple<string, string, string, byte[]>
+                (sb1.ToString(), sb2.ToString(), "$" + lns.ToString("X2"), br);
+            return t;
+        }
+
+        public Tuple<int[], int[]> GetDynamicSource()
+        {
+            int lns = DynSize.Lines;
+            int[] blocksPerLine = new int[lns];
+            int curl = 0;
+            int curw = 0;
+
+            foreach(TileMask tm in Tiles)
+            {
+                curw = -1;
+                if(tm.Tile[1] <= '9' && tm.Tile[1] >= '0')
+                {
+                    curl = tm.Tile[1] - 48;
+                }
+                else if(tm.Tile[1] >= 'A' && tm.Tile[1] <= 'F')
+                {
+                    curl = tm.Tile[1] - 55;
+                }
+
+                if (tm.Tile[2] <= '9' && tm.Tile[2] >= '0')
+                {
+                    curw = tm.Tile[2] - 48;
+                }
+                else if (tm.Tile[2] >= 'A' && tm.Tile[2] <= 'F')
+                {
+                    curw = tm.Tile[2] - 55;
+                }
+
+                if (tm.Size == 16 && curw > 0) curw++;
+                if (blocksPerLine[curl] < curw + 1) 
+                    blocksPerLine[curl] = curw + 1;
+                if (tm.Size == 16 && blocksPerLine[curl + 1] < curw + 1) 
+                    blocksPerLine[curl + 1] = curw + 1;
+            }
+
+            int[] ResOffset = new int[lns];
+            int[] Ressize = new int[lns];
+            for (int i = 0; i < blocksPerLine.Length; i++)
+            {
+                if (i > 0)
+                    ResOffset[i] = 
+                        ResOffset[i - 1] + blocksPerLine[i - 1] * 32;
+                else
+                    ResOffset[i] = 0;
+                Ressize[i]= blocksPerLine[i] * 32;
+            }
+
+            Tuple<int[], int[]> tuple = new Tuple<int[], int[]>(ResOffset, Ressize);
+            
+            return tuple;
         }
 
         public Frame Duplicate()

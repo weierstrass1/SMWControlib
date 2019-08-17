@@ -70,6 +70,9 @@ SpriteCode:
 
 ;Here you can write routines or tables
 
+;>Section Dynamic
+;>End Dynamic Section
+
 ;Don't Delete or write another >Section Graphics or >End Section
 ;All code between >Section Graphics and >End Graphics Section will be changed by Dyzen : Sprite Maker
 ;>Section Graphics

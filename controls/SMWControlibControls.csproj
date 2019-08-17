@@ -592,6 +592,9 @@
     <Content Include="ASM\Defines.asm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="ASM\DynamicRoutine.asm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="ASM\GraphicRoutine.asm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -5,6 +5,7 @@ namespace SMWControlibBackend.Graphics
 {
     public enum TileSP { SP01 = 0, SP23 = 1 };
     public enum TilePriority { BehindLayer3 = 0, BehindLayer3P1NotForcedAbove = 16, AboveAllLayersP0 = 32, AboveAllExceptLayer3P1ForcedAbove = 48};
+
     public class TileMask
     {
         public int XDisp;
@@ -149,7 +150,7 @@ namespace SMWControlibBackend.Graphics
             }
         }
 
-        private Tile tile;
+        private readonly Tile tile;
         public string Tile
         {
             get
@@ -250,11 +251,6 @@ namespace SMWControlibBackend.Graphics
             };
             tm.tile.IsFullyDirty += tm.tileDirty;
             return tm;
-        }
-
-        private void getbi(Tile obj)
-        {
-            throw new NotImplementedException();
         }
     }
 }

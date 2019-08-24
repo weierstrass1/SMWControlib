@@ -11,18 +11,18 @@ namespace SMWControlibBackend.Graphics
     }
     public class ColorPalette
     {
-        internal static ColorPalette[] _globalPalettes;
+        internal static ColorPalette[] globalPalettesVariable;
         internal static ColorPalette[] globalPalettes
         {
             get
             {
-                if (_globalPalettes == null)
+                if (globalPalettesVariable == null)
                     GenerateGlobalPalettes("./Resources/DefaultPalette.pal", 16);
-                return _globalPalettes;
+                return globalPalettesVariable;
             }
             set
             {
-                _globalPalettes = value;
+                globalPalettesVariable = value;
             }
         }
         public static int GlobalPalettesLength
@@ -63,7 +63,7 @@ namespace SMWControlibBackend.Graphics
 
         public Color GetColor(byte i)
         {
-            if (Length == 0) return default(Color);
+            if (Length == 0) return default;
             if (i >= Length) i = (byte)(Length - 1);
             Color c = colors[i];
             return Color.FromArgb(c.A, c.R, c.G, c.B);
@@ -79,14 +79,14 @@ namespace SMWControlibBackend.Graphics
 
         public static Color GetGlobalColor(byte i)
         {
-            if (globalPalettes == null) return default(Color);
+            if (globalPalettes == null) return default;
 
             return globalPalettes[(int)selectedPalette].GetColor(i); ;
         }
 
         public static Color GetGlobalColor(byte i, PaletteId pid)
         {
-            if (globalPalettes == null) return default(Color);
+            if (globalPalettes == null) return default;
 
             return globalPalettes[(int)pid].GetColor(i); ;
         }

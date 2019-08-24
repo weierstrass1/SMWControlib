@@ -13,6 +13,7 @@ namespace SMWControlibControls.LogicControls
     {
         private UndoRedoDynamicArray<UndoRedoStruct> undoRedoList;
         private Code code;
+        private AutocompleteMenu autocom;
         public bool CanUndoRedo = false;
         public event Action<Dictionary<int, List<Error>>> ErrorsAdded
         {
@@ -36,8 +37,6 @@ namespace SMWControlibControls.LogicControls
         private const int bookmarkMargin = 1; // Conventionally the symbol margin
         private const int bookmarkMarker = 3;
         public StylesContainer StylesContainer { get; private set; }
-
-        AutocompleteMenu autocom;
         public TextEditor()
         {
             InitializeComponent();
@@ -84,9 +83,9 @@ namespace SMWControlibControls.LogicControls
 
                 code = new Code(@"CSVs\Syntax\args.csv", @"CSVs\Syntax\commands.csv",
                     @"CSVs\Syntax\groups.csv");
-                code.ImportDefines(@".\ASM\Defines.asm");
+                code.ImportDefines();
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -206,11 +205,11 @@ namespace SMWControlibControls.LogicControls
             Line curL = Lines[lind];
             string line = curL.Text;
             int lineInd = curL.Position;
-            int linel = line.Length;
+            int linel;
             int lineN = LineFromPosition(lineInd);
 
             code.ClearFlags();
-            code.DeleteLinesAt(lineN, lineInd, e.Position, deltaLines, line);
+            code.DeleteLinesAt(lineN, deltaLines);
 
             highlightLine(line, lind);
 
@@ -226,22 +225,10 @@ namespace SMWControlibControls.LogicControls
             }
         }
 
-        private void deleteBookMark(int Line)
-        {
-            Line line = Lines[Line];
-            line.MarkerDelete(bookmarkMarker);
-        }
-
-        private void addBookMark(int Line)
-        {
-            Line line = Lines[Line];
-            line.MarkerAdd(bookmarkMarker);
-        }
-
         public void SuperSnescriptUndo()
         {
             UndoRedoStruct e = undoRedoList.Undo();
-            if (e == default(UndoRedoStruct)) return;
+            if (e == default) return;
             CanUndoRedo = false;
             if (e.UndoRedoAction == UndoRedoAction.Delete)
             {
@@ -359,7 +346,6 @@ namespace SMWControlibControls.LogicControls
                 updateLineNumbers(LineFromPosition(e.Position));
             string[] newLines = e.Text.Replace("\r", "").Split('\n');
             int linePos = LineFromPosition(e.Position);
-            int pos = Lines[linePos].Position;
 
 
             int endL = Lines.Count - 1;
@@ -367,15 +353,11 @@ namespace SMWControlibControls.LogicControls
 
             Line curL;
             string line;
-            int lineInd;
-            int linel;
 
             for (int i = linePos; i < linePos + newLines.Length; i++)
             {
                 curL = Lines[i];
                 line = curL.Text;
-                lineInd = curL.Position;
-                linel = line.Length;
                 highlightLine(line, i);
             }
 
@@ -385,8 +367,6 @@ namespace SMWControlibControls.LogicControls
             {
                 curL = Lines[tl];
                 line = curL.Text;
-                lineInd = curL.Position;
-                linel = line.Length;
                 highlightLine(line, tl);
             }
         }

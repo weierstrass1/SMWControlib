@@ -7,8 +7,8 @@ namespace TestWindows
 {
     public static class Program
     {
-        static PerformanceCounter cpuCounter;
-        static PerformanceCounter ramCounter;
+        private static PerformanceCounter cpuCounter = null;
+        private static PerformanceCounter ramCounter = null;
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>
@@ -18,10 +18,10 @@ namespace TestWindows
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            /*try
-            {*/
+            try
+            {
                 Application.Run(new testwindows());
-            /*}
+            }
             catch(Exception e)
             {
 
@@ -31,7 +31,7 @@ namespace TestWindows
                     "\nCPU Used: " + getCurrentCpuUsage() +
                     "\nError: " + e.Message +
                     "\nTrace: " + e.StackTrace);
-            }*/
+            }
         }
 
         public static string getCurrentCpuUsage()

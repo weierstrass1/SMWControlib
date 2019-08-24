@@ -78,7 +78,7 @@ namespace SMWControlibBackend.Graphics
             if (colors.Length % 1024 != 0) height = ((colors.Length / 1024) + 1) * 1024;
             byte[,] cols = new byte[128, height];
 
-            for (int i = 0, j = 0, k = 0; i < colors.Length; i++)
+            for (int i = 0, j, k; i < colors.Length; i++)
             {
                 j = ((i % 8) + 8 * (i / 64)) % 128;
                 k = ((i / 8) % 8) + 8 * (i / 1024);
@@ -100,7 +100,7 @@ namespace SMWControlibBackend.Graphics
             int k;
             byte b0, b1, b2, b3;
 
-            for (int i = 0, x = 0, y = 0; i < gfx.Length; i += 32, x = (x + 8) % 128)
+            for (int i = 0, x = 0, y; i < gfx.Length; i += 32, x = (x + 8) % 128)
             {
                 y = i / 512;
                 y *= 8;
@@ -114,10 +114,6 @@ namespace SMWControlibBackend.Graphics
 
                     for (int p = 0, m = 128; p < 8; p++, m /= 2)
                     {
-                        if (y == 68)
-                        {
-                            int a = 0;
-                        }
                         b0 = (byte)(colors[x + p, y] & 1);
                         b1 = (byte)((colors[x + p, y] & 2) >> 1);
                         b2 = (byte)((colors[x + p, y] & 4) >> 2);
@@ -142,7 +138,6 @@ namespace SMWControlibBackend.Graphics
         public static byte[,] GetBits(byte[] bytes)
         {
             byte[,] bits = new byte[8, bytes.Length];
-            bool[] comp = new bool[bytes.Length];
 
             for (int i = 0; i < bytes.Length; i++)
             {

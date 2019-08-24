@@ -46,15 +46,15 @@ namespace SMWControlibControls.GraphicsControls
         }
         public static event Action<Color> NormalButtonBorderColorChanged,
             NormalButtonBackColorChanged, NormalButtonHoverBackColorChanged;
-        private static Color[] buttonBorderColor, 
-            buttonBackColor, buttonHoverBackColor;
+        private static Color[] buttonBorderColor = null, 
+            buttonBackColor = null, buttonHoverBackColor = null;
         public static event Action<int, Color> ButtonBorderColorChanged,
             ButtonBackColorChanged, ButtonHoverBackColorChanged;
 
         public Color GetButtonBorderColor(int i)
         {
             if (buttonBorderColor == null || buttonBorderColor.Length <= i || i < 0)
-                return default(Color);
+                return default;
 
             return buttonBorderColor[i];
         }
@@ -62,7 +62,7 @@ namespace SMWControlibControls.GraphicsControls
         public Color GetButtonBackColor(int i)
         {
             if (buttonBackColor == null || buttonBackColor.Length <= i || i < 0)
-                return default(Color);
+                return default;
 
             return buttonBackColor[i];
         }
@@ -70,7 +70,7 @@ namespace SMWControlibControls.GraphicsControls
         public Color GetButtonHoverBackColor(int i)
         {
             if (buttonHoverBackColor == null || buttonHoverBackColor.Length <= i || i < 0)
-                return default(Color);
+                return default;
 
             return buttonHoverBackColor[i];
         }

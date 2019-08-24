@@ -53,6 +53,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GraphicsControls\AnimationCreator.cs">
       <SubType>UserControl</SubType>
     </Compile>

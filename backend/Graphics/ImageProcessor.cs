@@ -22,7 +22,7 @@ namespace SMWControlibBackend.Graphics
         public int Length16 { get; private set; }
         public ImageNode Father { get; private set; }
 
-        static int getLeft(int[] min)
+        private static int getLeft(int[] min)
         {
             int Left = -1;
             for (int i = 0; i < min.Length; i++)
@@ -112,8 +112,8 @@ namespace SMWControlibBackend.Graphics
             Heuristic += (p * 64);
         }
 
-        static void getMinMax(out int MinY, out int MaxY,
-            int Left, int[] min, int[] max, int size)
+        private static void getMinMax(out int MinY, out int MaxY,
+            int Left, int[] min, int size)
         {
             MinY = min[Left];
             MaxY = min[Left];
@@ -189,13 +189,13 @@ namespace SMWControlibBackend.Graphics
             if (Left < 0) return null;
 
             getMinMax(out int MinY, out int MaxY,
-                Left, min, max, 8);
+                Left, min, 8);
 
             LinkedList<ImageNode> imns =
                 getNodes(null, Left, Right, min, max, 8, MinY, MaxY);
 
             getMinMax(out MinY, out MaxY,
-                Left, min, max, 16);
+                Left, min, 16);
 
             LinkedList<ImageNode> imns2 = 
                 getNodes(null, Left, Right, min, max, 16, MinY, MaxY);
@@ -216,13 +216,13 @@ namespace SMWControlibBackend.Graphics
             if (Left < 0) return null;
 
             getMinMax(out int MinY, out int MaxY,
-                Left, root.min, root.max, 8);
+                Left, root.min, 8);
 
             LinkedList<ImageNode> imns =
                 getNodes(root, Left, Right, root.min, root.max, 8, MinY, MaxY);
 
             getMinMax(out MinY, out MaxY,
-                Left, root.min, root.max, 16);
+                Left, root.min, 16);
 
             LinkedList<ImageNode> imns2 =
                 getNodes(root, Left, Right, root.min, root.max, 16, MinY, MaxY);
@@ -345,8 +345,8 @@ namespace SMWControlibBackend.Graphics
             }
 
             Color minCol = Color.FromArgb(0, 255, 255, 255);
-            int min = 0;
-            int cur = 0;
+            int min;
+            int cur;
             int r, g, b;
 
             Color pcol;
@@ -355,7 +355,6 @@ namespace SMWControlibBackend.Graphics
             {
                 if (cols.Count > 0)
                 {
-                    minCol = Color.FromArgb(0, 255, 255, 255);
                     min = -1;
                     pcol = ColorPalette.GetGlobalColor(i, pid);
                     foreach (Color col in cols)
@@ -616,7 +615,7 @@ namespace SMWControlibBackend.Graphics
             f.Tiles.Sort(tilesorter);
             return f;
         }
-        static int[] space24x16 = { 1, 1, 1 };
+        static readonly int[] space24x16 = { 1, 1, 1 };
         static int tilesorter(TileMask tm1, TileMask tm2)
         {
             if (tm1.XDisp < tm2.XDisp) return -1;
@@ -625,15 +624,6 @@ namespace SMWControlibBackend.Graphics
             if (tm1.YDisp < tm2.YDisp) return -1;
             else if (tm1.YDisp > tm2.YDisp) return 1;
 
-            return 0;
-        }
-        static int xSorter(ImageNode imn1, ImageNode imn2)
-        {
-            if (imn1.Y < imn2.Y) return -1;
-            if (imn1.Y > imn2.Y) return 1;
-
-            if (imn1.X < imn2.X) return -1;
-            if (imn1.X > imn2.X) return 1;
             return 0;
         }
 
@@ -680,7 +670,7 @@ namespace SMWControlibBackend.Graphics
 
         public static void getMinMaxH(Bitmap bp, int[] max, int[] min)
         {
-            bool minF = false;
+            bool minF;
 
             for (int i = 0; i < bp.Width; i++)
             {

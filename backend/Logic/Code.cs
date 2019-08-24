@@ -145,7 +145,7 @@ namespace SMWControlibBackend.Logic
             return at;
         }
 
-        public void ImportDefines(string path)
+        public void ImportDefines()
         {
             string s = File.ReadAllText(@".\ASM\Defines.asm");
 
@@ -162,7 +162,7 @@ namespace SMWControlibBackend.Logic
             }
 
             errors.Clear();
-            List<Tuple<int, int, string>> newsPos = new List<Tuple<int, int, string>>();
+            List<Tuple<int, int, string>> newsPos;
             foreach (Define d in defines.Values)
             {
                 newsPos = new List<Tuple<int, int, string>>();
@@ -179,10 +179,8 @@ namespace SMWControlibBackend.Logic
             }
         }
 
-        public void DeleteLinesAt(int lineIndex, int linePosition, int startIndex, int deltaLines, string line)
+        public void DeleteLinesAt(int lineIndex, int deltaLines)
         {
-            int lineInd = linePosition;
-            int linel = line.Length;
             int lineN = lineIndex;
 
             if (deltaLines > 0)
@@ -308,7 +306,7 @@ namespace SMWControlibBackend.Logic
             List<int> removeList2 = new List<int>();
             List<KeyValuePair<int, List<Error>>> news2 =
                 new List<KeyValuePair<int, List<Error>>>();
-            bool mustRemove = false;
+            bool mustRemove;
             newErrors = false;
             if (m.Success)
             {
@@ -500,7 +498,7 @@ namespace SMWControlibBackend.Logic
             if (cmds != null && cmds.Length > 0)
             {
 
-                List<CodePointer> tmps = new List<CodePointer>();
+                List<CodePointer> tmps;
 
                 for (int j = 0; j < cmds.Length; j++)
                 {
@@ -547,7 +545,7 @@ namespace SMWControlibBackend.Logic
             CodePointer[] cmds = CodePointer.Split(pointer.Code, @":(\ |\t)*");
             if (cmds == null || cmds.Length <= 0) return pointers;
 
-            List<CodePointer> tmps = new List<CodePointer>();
+            List<CodePointer> tmps;
             CodePointer cp;
             string rep;
             string nextChar;
@@ -584,7 +582,7 @@ namespace SMWControlibBackend.Logic
                     };
                     
                     
-                    tmps = getPointersFromCommands(cp, lineIndex);
+                    tmps = getPointersFromCommands(cp);
                     if (tmps.Count <= 0)
                     {
                         nextChar = "";
@@ -594,7 +592,7 @@ namespace SMWControlibBackend.Logic
                             nextChar = ":";
                         }
 
-                        tmps = getPointersFromLabels(cp, nextChar, lineIndex);
+                        tmps = getPointersFromLabels(cp, nextChar);
                     }
                 }
 
@@ -623,7 +621,7 @@ namespace SMWControlibBackend.Logic
 
             return pointers;
         }
-        private List<CodePointer> getPointersFromLabels(CodePointer cmd, string nextChar, int lineIndex)
+        private List<CodePointer> getPointersFromLabels(CodePointer cmd, string nextChar)
         {
             List<CodePointer> pointers = new List<CodePointer>();
             List<CodePointer> tmps = new List<CodePointer>();
@@ -668,7 +666,7 @@ namespace SMWControlibBackend.Logic
 
             return pointers;
         }
-        private List<CodePointer> getPointersFromCommands(CodePointer cmd, int lineIndex)
+        private List<CodePointer> getPointersFromCommands(CodePointer cmd)
         {
             List<CodePointer> pointers = new List<CodePointer>();
 
@@ -703,14 +701,6 @@ namespace SMWControlibBackend.Logic
             }
 
             if (prefix == "") prefix = "NULL";
-            else
-            {
-                scmd = scmd.Substring(m.Length);
-                if(prefix[1]=='"')
-                {
-                    int a = 0;
-                }
-            }
 
             string sufix = "";
 

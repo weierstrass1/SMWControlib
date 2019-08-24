@@ -110,7 +110,7 @@ namespace SMWControlibBackend.Interaction
             sb.Append(s + ",$");
             s = (Height).ToString("X2");
             s = s.Substring(s.Length - 2);
-            int i = 0;
+            int i;
             for (i = 0; i < actionNames.Length; i++)
             {
                 if (actionNames[i] == ActionName)
@@ -138,6 +138,15 @@ namespace SMWControlibBackend.Interaction
                 Size = Size
             };
             return rhb;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 1290862079;
+            hashCode = hashCode * -1521134295 + base.GetHashCode();
+            hashCode = hashCode * -1521134295 + Width.GetHashCode();
+            hashCode = hashCode * -1521134295 + Height.GetHashCode();
+            return hashCode;
         }
     }
 }

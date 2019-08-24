@@ -32,8 +32,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="C5">
-      <HintPath>..\..\..\..\Desktop\C5\C5.dll</HintPath>
+    <Reference Include="C5, Version=1.1.1.0, Culture=neutral, PublicKeyToken=06a1b38866503b69, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Desktop\repos\Master Transformer\backend\bin\Debug\C5.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -93,6 +94,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="asar.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="C5.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -86,7 +86,7 @@ namespace SMWControlibControls.LogicControls
                     @"CSVs\Syntax\groups.csv");
                 code.ImportDefines(@".\ASM\Defines.asm");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
 
             }
@@ -167,7 +167,8 @@ namespace SMWControlibControls.LogicControls
             marker.SetBackColor(Color.FromArgb(105, 75, 224));
             marker.SetForeColor(Color.FromArgb(70, 50, 150));
             TextChanged += textChanged;
-        }
+            
+        } 
 
         private int maxLineNumberCharLength = 1;
         private void textChanged(object sender, EventArgs e)

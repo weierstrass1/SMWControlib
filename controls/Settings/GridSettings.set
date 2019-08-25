@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<SpriteGridSettingsContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GridColorR>64</GridColorR>
+  <GridColorG>0</GridColorG>
+  <GridColorB>128</GridColorB>
+  <CenterSquareColorR>176</CenterSquareColorR>
+  <CenterSquareColorG>16</CenterSquareColorG>
+  <CenterSquareColorB>32</CenterSquareColorB>
+  <SelectionRectangleColorR>16</SelectionRectangleColorR>
+  <SelectionRectangleColorG>32</SelectionRectangleColorG>
+  <SelectionRectangleColorB>176</SelectionRectangleColorB>
+  <SelectedTilesColorR>16</SelectedTilesColorR>
+  <SelectedTilesColorG>102</SelectedTilesColorG>
+  <SelectedTilesColorB>64</SelectedTilesColorB>
+  <BackgroundColorR>0</BackgroundColorR>
+  <BackgroundColorG>255</BackgroundColorG>
+  <BackgroundColorB>64</BackgroundColorB>
+  <EnableCenterSquare>true</EnableCenterSquare>
+  <GridType>0</GridType>
+</SpriteGridSettingsContainer>

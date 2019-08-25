@@ -87,7 +87,6 @@ namespace SMWControlibControls.LogicControls
             }
             catch (Exception)
             {
-
             }
             autocom = new AutocompleteMenu
             {

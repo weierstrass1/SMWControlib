@@ -490,7 +490,7 @@ namespace SMWControlibBackend.Graphics
                     Priority = Priority,
                     Palette = pid
                 };
-                f.Tiles.Add(tm);
+                f.AddTile(tm);
                 baseX += 8;
                 for (int x = Math.Abs(FollowsX[i].X- FollowsX[i+1].X); x < 16 && x + baseX < f.DynSize.Width; x++)
                 {
@@ -508,7 +508,7 @@ namespace SMWControlibBackend.Graphics
                     Priority = Priority,
                     Palette = pid
                 };
-                f.Tiles.Add(tm);
+                f.AddTile(tm);
                 baseX += 16;
                 if(baseX>= f.DynSize.Width)
                 {
@@ -563,7 +563,7 @@ namespace SMWControlibBackend.Graphics
                         Priority = Priority,
                         Palette = pid
                     };
-                    f.Tiles.Add(tm);
+                    f.AddTile(tm);
                 }
             }
 
@@ -607,12 +607,12 @@ namespace SMWControlibBackend.Graphics
                         Priority = Priority,
                         Palette = pid
                     };
-                    f.Tiles.Add(tm);
+                    f.AddTile(tm);
                 }
             }
 
             f.GFX = SnesGraphics.GetGFXFromColorMatrix(gfx);
-            f.Tiles.Sort(tilesorter);
+            f.Sort(tilesorter);
             return f;
         }
         static readonly int[] space24x16 = { 1, 1, 1 };

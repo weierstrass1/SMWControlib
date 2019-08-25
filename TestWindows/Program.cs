@@ -18,10 +18,10 @@ namespace TestWindows
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            try
-            {
+            /*try
+            {*/
                 Application.Run(new testwindows());
-            }
+            /*}
             catch(Exception e)
             {
 
@@ -31,7 +31,7 @@ namespace TestWindows
                     "\nCPU Used: " + getCurrentCpuUsage() +
                     "\nError: " + e.Message +
                     "\nTrace: " + e.StackTrace);
-            }
+            }*/
         }
 
         public static string getCurrentCpuUsage()

@@ -260,6 +260,7 @@ namespace SMWControlibControls.GraphicsControls
         public Control ToolTipControl { get { return selectionBox; } }
         private Bitmap gridBoxImg, centerSquareImg;
         public Action<object, MouseEventArgs> MovingMouse;
+        public Action Moved;
         public SpriteGrid()
         {
             InitializeComponent();
@@ -601,7 +602,7 @@ namespace SMWControlibControls.GraphicsControls
                 dif = tm.YDisp - minY;
                 tm.YDisp = ymin + dif;
             }
-
+            Moved?.Invoke();
             buildSelectionBox();
         }
         private void getDiffPos()

@@ -164,7 +164,7 @@ namespace SMWControlibBackend
                 };
                 for (int j = 0; j < Frames[i].TileMasks.Length; j++) 
                 {
-                    frs[i].Tiles.Add(Frames[i].TileMasks[j].ToTileMask(t16SP12, t16SP34, t8SP12, t8SP34));
+                    frs[i].AddTile(Frames[i].TileMasks[j].ToTileMask(t16SP12, t16SP34, t8SP12, t8SP34));
                 }
                 for (int j = 0; j < Frames[i].HitboxesNames.Length; j++)
                 {

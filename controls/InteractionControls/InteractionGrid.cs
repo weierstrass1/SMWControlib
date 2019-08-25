@@ -572,7 +572,16 @@ namespace SMWControlibControls.InteractionControls
 
             Bitmap b = null;
             if (selectedFrame != null)
-                b = selectedFrame.GetBitmap(256, 240, zoom);
+            {
+                b = new Bitmap(256 * zoom, 240 * zoom);
+                Bitmap nb = selectedFrame.GetBitmap();
+                using (Graphics g = Graphics.FromImage(b))
+                {
+                    g.InterpolationMode = InterpolationMode.NearestNeighbor;
+                    g.DrawImage(nb, SelectedFrame.MinX * zoom, SelectedFrame.MinY * zoom, 
+                        nb.Width * zoom, nb.Height * zoom);
+                }
+            }
 
             using (Graphics g = Graphics.FromImage(Image))
             {

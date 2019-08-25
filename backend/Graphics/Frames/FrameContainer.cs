@@ -33,7 +33,7 @@ namespace SMWControlibBackend.Graphics.Frames
                 i++;
             }
 
-            TileMasks = new TileMaskContainer[f.Tiles.Count];
+            TileMasks = new TileMaskContainer[f.TilesLenght];
             i = 0;
 
             foreach(TileMask tm in f.Tiles)

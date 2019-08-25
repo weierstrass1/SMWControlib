@@ -14,7 +14,7 @@ namespace SMWControlibBackend.Graphics.Frames
 
         public Bitmap GetBitmap()
         {
-            if (Frame.Tiles == null || Frame.Tiles.Count <= 0) return null;
+            if (Frame.Tiles == null || Frame.TilesLenght <= 0) return null;
             Bitmap bp = Frame.GetBitmap();
             Bitmap bp2 = null;
             int leftDist = 0;
@@ -23,23 +23,14 @@ namespace SMWControlibBackend.Graphics.Frames
             int bottomDist = 0;
             int fMidX = (Frame.MidX);
             int fMidY = (Frame.MidY);
-            int zoom = Frame.Tiles.First().Zoom;
+            int zoom = 1;
             int fmidXZ = fMidX + 8;
             int fmidYZ = fMidY + 8;
             int xd = 0, yd = 0;
-            int minX = int.MaxValue, minY = int.MaxValue
-                , maxX = int.MinValue, maxY = int.MinValue;
-            foreach (TileMask tm in Frame.Tiles)
-            {
-                xd = tm.XDisp / zoom;
-                yd = tm.YDisp / zoom;
-                if (xd < minX) minX = xd;
-                if (yd < minY) minY = yd;
-                xd += tm.Size;
-                yd += tm.Size;
-                if (xd > maxX) maxX = xd;
-                if (yd > maxY) maxY = yd;
-            }
+            int minX = Frame.MinX;
+            int minY = Frame.MinY;
+            int maxX = minX + bp.Width;
+            int maxY = minY + bp.Height;
 
             minX -= 128;
             maxX -= 128;

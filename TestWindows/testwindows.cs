@@ -45,6 +45,7 @@ namespace TestWindows
             animationEditor1.AddClick += addClick;
             animationEditor1.AnimationChanged += animationChanged;
             resizeableSpriteGridController1.MidChanged += midChanged;
+            resizeableSpriteGridController1.Moved += ResizeableSpriteGridController1_Moved;
             animationPlayer1.TimeChanged += playerTimeChanged;
             animationCreator1.SelectionChanged += animationCreatorSelectionChanged;
             interactionMenu1.FrameSelectionChanged += interactionMenuFrameSelectionChanged;
@@ -111,6 +112,12 @@ namespace TestWindows
                     }
                 }
             }
+        }
+
+        private void ResizeableSpriteGridController1_Moved()
+        {
+            if (frameCreator1.SelectedFrame != null)
+                frameCreator1.SelectedFrame.IsDirty();
         }
 
         private void Spritesheet_Click(object sender, EventArgs e)
@@ -635,7 +642,7 @@ namespace TestWindows
                     if (Frame.SameLenght(frameCreator1.Frames))
                     {
                         grRout = UseTag(grRout, "samelength1", "\tLDA #$$" +
-                            (frameCreator1.Frames[0].Tiles.Count - 1).ToString("X4") + "\n");
+                            (frameCreator1.Frames[0].TilesLenght - 1).ToString("X4") + "\n");
                         grRout = UseTag(grRout, "samelength2", "");
                     }
                     else
@@ -649,7 +656,7 @@ namespace TestWindows
                     {
                         grRout = UseTag(grRout, "oneframe1", "\tLDA #$$0000\n");
                         grRout = UseTag(grRout, "oneframe2", "\tLDA #$$" +
-                            (frameCreator1.Frames[0].Tiles.Count - 1).ToString("X4") + "\n");
+                            (frameCreator1.Frames[0].TilesLenght - 1).ToString("X4") + "\n");
                         grRout = UseTag(grRout, "oneframe3", "");
                     }
                     else
@@ -924,6 +931,7 @@ namespace TestWindows
                 File.WriteAllBytes("tmp.bin",frameCreator1.SelectedFrame.GFX);
                 spriteGFXBox3.LoadGFX("tmp.bin", 0);
                 File.Delete("tmp.bin");
+                frameCreator1.SelectedFrame.TilesDirty();
                 resizeableSpriteGridController1.Tiles = frameCreator1.SelectedFrame.Tiles;
             }
         }

@@ -59,6 +59,14 @@ namespace SMWControlibBackend.Graphics.Frames
         public List<HitBox> HitBoxes { get; set; }
         public List<InteractionPoint> InteractionPoints { get; private set; }
         public List<TileMask> Tiles { get; private set; }
+        public int TilesLenght
+        {
+            get
+            {
+                return Tiles.Count;
+            }
+        }
+     
         public int MidX;
         public int MidY;
         public int Index { get; private set; }
@@ -67,12 +75,42 @@ namespace SMWControlibBackend.Graphics.Frames
         public bool Dynamic = false;
         public byte[] GFX = null;
         public DynamicSize DynSize = null;
+        private Bitmap bitmap;
+        private bool dirty;
+        public int MinX { get; private set; }
+        public int MinY{ get; private set; }
 
         public Frame()
         {
             Tiles = new List<TileMask>();
             HitBoxes = new List<HitBox>();
             InteractionPoints = new List<InteractionPoint>();
+            IsDirty();
+        }
+
+        public void AddTile(TileMask tm)
+        {
+            Tiles.Add(tm);
+            IsDirty();
+        }
+
+        public void TilesDirty()
+        {
+            foreach(TileMask tm in Tiles)
+            {
+                tm.Dirty = false;
+            }
+        }
+
+        public void IsDirty()
+        {
+            dirty = true;
+        }
+
+        public void Sort(Comparison<TileMask> func)
+        {
+            Tiles.Sort(func);
+            IsDirty();
         }
 
         public static Tuple<string, string,string, byte[]> GetDynamicSource(Frame[] f)
@@ -114,7 +152,7 @@ namespace SMWControlibBackend.Graphics.Frames
             int lns = DynSize.Lines;
             int[] blocksPerLine = new int[lns];
             int curl = 0;
-            int curw = 0;
+            int curw;
 
             foreach(TileMask tm in Tiles)
             {
@@ -183,26 +221,6 @@ namespace SMWControlibBackend.Graphics.Frames
             }
         }
 
-        public Bitmap GetBitmap(int BitmapWidth, int BitmapHeight, Zoom zoom)
-        {
-            Bitmap bp = new Bitmap(BitmapWidth * zoom, BitmapHeight * zoom);
-            using (System.Drawing.Graphics g =
-                System.Drawing.Graphics.FromImage(bp))
-            {
-                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-                int aux = 0;
-                foreach (TileMask tm in Tiles)
-                {
-                    aux = tm.Zoom;
-                    tm.Zoom = zoom;
-
-                    g.DrawImage(tm.GetBitmap(),
-                        (tm.XDisp / aux) * zoom, (tm.YDisp / aux) * zoom);
-                    tm.Zoom = aux;
-                }
-            }
-            return bp;
-        }
         public static bool HaveHitboxInteraction(Frame[] frames)
         {
             bool have = false;
@@ -1722,31 +1740,39 @@ namespace SMWControlibBackend.Graphics.Frames
         }
         public Bitmap GetBitmap()
         {
-            int minX = int.MaxValue, minY = int.MaxValue;
+            if (!dirty && bitmap != null) return bitmap;
+            dirty = false;
+            MinX = int.MaxValue;
+            MinY = int.MaxValue;
             int maxX = int.MinValue, maxY = int.MinValue;
             int mx, my;
+            int oz;
             foreach(TileMask tm in Tiles)
             {
-                if (tm.XDisp < minX) minX = tm.XDisp;
-                if (tm.YDisp < minY) minY = tm.YDisp;
+                oz = tm.Zoom;
+                mx = tm.XDisp / oz;
+                my = tm.YDisp / oz;
+                if (mx < MinX) MinX = mx;
+                if (my < MinY) MinY = my;
 
-                mx = tm.XDisp + tm.Size * tm.Zoom;
+                mx += tm.Size;
+                my += tm.Size;
+
                 if (mx > maxX) maxX = mx;
-                my = tm.YDisp + tm.Size * tm.Zoom;
                 if (my > maxY) maxY = my;
             }
 
-            Bitmap bp = new Bitmap(maxX - minX, maxY - minY);
+            bitmap = new Bitmap(maxX - MinX, maxY - MinY);
             using (System.Drawing.Graphics g =
-                System.Drawing.Graphics.FromImage(bp))
+                System.Drawing.Graphics.FromImage(bitmap))
             {
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
                 foreach(TileMask tm in Tiles)
                 {
-                    g.DrawImage(tm.GetBitmap(), tm.XDisp - minX, tm.YDisp - minY);
+                    g.DrawImage(tm.GetBitmap(), tm.XDisp / tm.Zoom - MinX, tm.YDisp / tm.Zoom - MinY, tm.Size, tm.Size);
                 }
             }
-            return bp;
+            return bitmap;
         }
         public override string ToString()
         {

@@ -8,6 +8,17 @@ namespace SMWControlibControls.GraphicsControls
 {
     public partial class SpriteGridController : UserControl
     {
+        public event Action Moved
+        {
+            add
+            {
+                spriteGrid1.Moved += value;
+            }
+            remove
+            {
+                spriteGrid1.Moved -= value;
+            }
+        }
         public List<TileMask> Tiles
         {
             set

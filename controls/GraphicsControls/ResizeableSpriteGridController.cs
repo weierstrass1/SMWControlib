@@ -8,6 +8,17 @@ namespace SMWControlibControls.GraphicsControls
 {
     public partial class ResizeableSpriteGridController : UserControl
     {
+        public event Action Moved
+        {
+            add
+            {
+                spriteGridController1.Moved += value;
+            }
+            remove
+            {
+                spriteGridController1.Moved -= value;
+            }
+        }
         public List<TileMask>Tiles
         {
             set

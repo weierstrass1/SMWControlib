@@ -62,16 +62,23 @@ namespace SMWControlibControls.GraphicsControls
         {
             foreach(Frame f in newFrames)
             {
-                f.MidX = 136*2;
-                f.MidY = 120*2;
+                f.MidX = 136;
+                f.MidY = 120;
                 foreach (TileMask tm in f.Tiles)
                 {
-                    tm.XDisp = (tm.XDisp - w) + f.MidX;
-                    tm.YDisp = (tm.YDisp - h) + f.MidY + 2;
+                    tm.XDisp = (tm.XDisp - w) + f.MidX * 2;
+                    tm.YDisp = (tm.YDisp - h) + f.MidY * 2 + 2;
                 }
                 frames.Add(f);
             }
             refreshFrames();
+
+            foreach(Frame f in frames)
+            {
+                SelectedFrame = f;
+                SelectedFrame.GetBitmap();
+            }
+
             if (SelectedFrame == null)
                 SelectedFrame = frames[0];
         }

@@ -68,7 +68,7 @@ namespace SMWControlibBackend.Graphics
                 if(palette != value)
                 {
                     palette = value;
-                    _Dirty = true;
+                    Dirty = true;
                 }
             }
         }
@@ -88,7 +88,7 @@ namespace SMWControlibBackend.Graphics
                 if(flipX != value)
                 {
                     flipX = value;
-                    _Dirty = true;
+                    Dirty = true;
                 }
             }
         }
@@ -106,7 +106,7 @@ namespace SMWControlibBackend.Graphics
                 if (flipY != value)
                 {
                     flipY = value;
-                    _Dirty = true;
+                    Dirty = true;
                 }
             }
         }
@@ -116,7 +116,7 @@ namespace SMWControlibBackend.Graphics
         private Bitmap graphics;
 
         private bool dirty = true;
-        private bool _Dirty
+        public bool Dirty
         {
             get
             {
@@ -145,7 +145,7 @@ namespace SMWControlibBackend.Graphics
                 if(zoom!=value)
                 {
                     zoom = value;
-                    _Dirty = true;
+                    Dirty = true;
                 }
             }
         }
@@ -202,7 +202,7 @@ namespace SMWControlibBackend.Graphics
 
         public Bitmap GetBitmap()
         {
-            if (!_Dirty) return graphics;
+            if (!Dirty && graphics != null) return graphics;
             if (tile == null)
             {
                 graphics = null;
@@ -228,12 +228,12 @@ namespace SMWControlibBackend.Graphics
             else if (flipY) r = RotateFlipType.RotateNoneFlipY;
 
             if (r != RotateFlipType.RotateNoneFlipNone) graphics.RotateFlip(r);
-            _Dirty = false;
+            Dirty = false;
             return graphics;
         }
         private void tileDirty(Tile t)
         {
-            _Dirty = true;
+            Dirty = true;
             GetBitmap();
         }
         public void RemoveDirtyEvent()

@@ -95,13 +95,18 @@ namespace SMWControlibBackend.Graphics
         void getHeuristic()
         {
             int pixels = 0;
+            int maxH = 0, curH;
             for (int i = 0; i < min.Length; i++)
             {
+                
                 if (min[i] >= 0)
                 {
-                    pixels += max[i] + 1;
-                    pixels -= min[i];
+                    curH = max[i] + 1 - min[i];
+                    pixels += curH;
+                    if (maxH < curH) maxH = curH;
+                    
                 }
+                
             }
 
             int p = pixels / 256;
@@ -109,27 +114,32 @@ namespace SMWControlibBackend.Graphics
             HeuristicBlocks = p;
             p = pixels / 64;
             if (pixels % 64 != 0) p++;
-            Heuristic += (p * 64);
+            Heuristic = (p * 64);
         }
 
         private static void getMinMax(out int MinY, out int MaxY,
-            int Left, int[] min, int size)
+            int Left, int[] min, int[] max, int size)
         {
             MinY = min[Left];
-            MaxY = min[Left];
+            MaxY = 0;
 
             for (int i = Left; i < Left + size && i < min.Length; i++)
             {
                 if(min[i] < MinY)
-                {
                     MinY = min[i];
-                    if (MinY <= Math.Max(min[Left] - size + 1, 0))
-                    {
-                        MinY = Math.Max(min[Left] - size + 1, 0);
-                        break;
-                    }
-                }
+                if (MaxY < max[i])
+                    MaxY = max[i];
+
             }
+            if (MinY < Math.Max(min[Left] - size + 1, 0))
+                MinY = Math.Max(min[Left] - size + 1, 0);
+
+            MaxY -= size - 1; 
+
+            if (MaxY < MinY)
+                MaxY = MinY;
+            if (MaxY > min[Left])
+                MaxY = min[Left];
         }
 
         static LinkedList<ImageNode> getNodes(ImageNode r, int Left, int Right,
@@ -139,7 +149,7 @@ namespace SMWControlibBackend.Graphics
                 new LinkedList<ImageNode>();
             ImageNode imn;
 
-            for (int i = MinY; i <= MaxY; i++)
+            for (int i = MinY; i <= MaxY; i += Math.Max(MaxY - MinY, 1))  
             {
                 imn = new ImageNode()
                 {
@@ -147,6 +157,7 @@ namespace SMWControlibBackend.Graphics
                     Y = i,
                     Father = r,
                     Length8 = 0,
+                    Length16 = 0,
                     min = new int[min.Length],
                     max = new int[max.Length],
                     Size = size
@@ -189,13 +200,13 @@ namespace SMWControlibBackend.Graphics
             if (Left < 0) return null;
 
             getMinMax(out int MinY, out int MaxY,
-                Left, min, 8);
+                Left, min, max, 8);
 
             LinkedList<ImageNode> imns =
                 getNodes(null, Left, Right, min, max, 8, MinY, MaxY);
 
             getMinMax(out MinY, out MaxY,
-                Left, min, 16);
+                Left, min, max, 16);
 
             LinkedList<ImageNode> imns2 = 
                 getNodes(null, Left, Right, min, max, 16, MinY, MaxY);
@@ -216,13 +227,13 @@ namespace SMWControlibBackend.Graphics
             if (Left < 0) return null;
 
             getMinMax(out int MinY, out int MaxY,
-                Left, root.min, 8);
+                Left, root.min, root.max, 8);
 
             LinkedList<ImageNode> imns =
                 getNodes(root, Left, Right, root.min, root.max, 8, MinY, MaxY);
 
             getMinMax(out MinY, out MaxY,
-                Left, root.min, 16);
+                Left, root.min, root.max, 16);
 
             LinkedList<ImageNode> imns2 =
                 getNodes(root, Left, Right, root.min, root.max, 16, MinY, MaxY);
@@ -248,6 +259,13 @@ namespace SMWControlibBackend.Graphics
             int fo = other.Cost + other.Heuristic;
             if (f < fo) return -1;
             else if (f > fo) return 1;
+
+            if (HeuristicBlocks < other.HeuristicBlocks) return -1;
+            else if (HeuristicBlocks > other.HeuristicBlocks) return 1;
+
+            if (Heuristic < other.Heuristic) return -1;
+            else if (Heuristic > other.Heuristic) return 1;
+
             return 0;
         }
 
@@ -527,16 +545,16 @@ namespace SMWControlibBackend.Graphics
                     {
                         if (spaceUsed[q * w + p] == 0 &&
                             spaceUsed[q * w + p + 1] == 0 &&
-                            spaceUsed[q * w + p + 8] == 0 &&
-                            spaceUsed[q * w + p + 9] == 0)
+                            spaceUsed[q * w + p + w] == 0 &&
+                            spaceUsed[q * w + p + w + 1] == 0)
                         {
                             found = true;
                             baseX = p * 8;
                             baseY = q * 8;
                             spaceUsed[q * w + p] = 1;
                             spaceUsed[q * w + p + 1] = 1;
-                            spaceUsed[q * w + p + 8] = 1;
-                            spaceUsed[q * w + p + 9] = 1;
+                            spaceUsed[q * w + p + w] = 1;
+                            spaceUsed[q * w + p + w + 1] = 1;
                             for (int x = 0; x < 16 && x + baseX < f.DynSize.Width; x++)
                             {
                                 for (int y = 0; y < 16 && y + baseY < f.DynSize.Height; y++)
@@ -571,16 +589,16 @@ namespace SMWControlibBackend.Graphics
             {
                 if (imns8[i] == null) break;
                 found = false;
-                for (int p = 0; p < w; p++) 
+                for (int p = 0; p < h; p++) 
                 {
-                    for (int q = 0; q < h; q++)
+                    for (int q = 0; q < w; q++)
                     {
-                        if(spaceUsed[q * w + p] == 0)
+                        if(spaceUsed[p * w + q] == 0)
                         {
                             found = true;
-                            baseX = p * 8;
-                            baseY = q * 8;
-                            spaceUsed[q * w + p] = 1;
+                            baseX = q * 8;
+                            baseY = p * 8;
+                            spaceUsed[p * w + q] = 1;
                             for (int x = 0; x < 8 && x + baseX < f.DynSize.Width; x++)
                             {
                                 for (int y = 0; y < 8 && y + baseY < f.DynSize.Height; y++)
@@ -650,6 +668,10 @@ namespace SMWControlibBackend.Graphics
             while (ih.Count > 0)
             {
                 imnaux = ih.DeleteMin();
+                if(imnaux.Length8 + imnaux.Length16>9)
+                {
+                    int a = 0;
+                }
                 close.Add(imnaux);
 
                 newnodes = ImageNode.GetNodes(imnaux);

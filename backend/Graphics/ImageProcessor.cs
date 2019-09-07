@@ -117,39 +117,70 @@ namespace SMWControlibBackend.Graphics
             Heuristic = (p * 64);
         }
 
-        private static void getMinMax(out int MinY, out int MaxY,
-            int Left, int[] min, int[] max, int size)
+        private static void getPositions(List<int> positions,
+            int Left, int Right, int[] min, int[] max, int size)
         {
-            MinY = min[Left];
-            MaxY = 0;
-
-            for (int i = Left; i < Left + size && i < min.Length; i++)
+            int MaxY = 0;
+            int MinY = min[Left];
+            int MinLimit = Math.Max(min[Left] - size + 1, 0);
+            for (int i = Left; i < Left + size && i < Right; i++)
             {
-                if(min[i] < MinY)
+                if(MinY > min[i])
+                {
                     MinY = min[i];
-                if (MaxY < max[i])
+                }
+                if(MaxY < max[i])
+                {
                     MaxY = max[i];
-
+                }
             }
-            if (MinY < Math.Max(min[Left] - size + 1, 0))
-                MinY = Math.Max(min[Left] - size + 1, 0);
+            if(MinY < MinLimit)
+            {
+                MinY = MinLimit;
+            }
 
-            MaxY -= size - 1; 
-
+            MaxY -= size - 1;
             if (MaxY < MinY)
                 MaxY = MinY;
             if (MaxY > min[Left])
                 MaxY = min[Left];
+
+            int LocalMinY = min[Left];
+            int LocalMaxY = 0;
+            int curMax;
+            bool addmin = false;
+            bool addmax = false;
+            for (int i = Left; i < Left + size && i < Right; i++)
+            {
+                if (LocalMinY > min[i] && min[i] >= MinY)
+                {
+                    LocalMinY = min[i];
+                    addmin = true;
+                }
+                curMax = max[i] - size + 1;
+                if (LocalMaxY < curMax && curMax <= min[Left] && curMax >= MinY) 
+                {
+                    LocalMaxY = curMax;
+                    addmax = true;
+                }
+            }
+            positions.Add(MinY);
+            if (!positions.Contains(MaxY))
+                positions.Add(MaxY);
+            if(addmin && !positions.Contains(LocalMinY))
+                positions.Add(LocalMinY);
+            if (addmax && !positions.Contains(LocalMaxY))
+                positions.Add(LocalMaxY);
         }
 
         static LinkedList<ImageNode> getNodes(ImageNode r, int Left, int Right,
-            int[] min, int[] max, int size, int MinY, int MaxY)
+            int[] min, int[] max, int size, List<int> positions)
         {
             LinkedList<ImageNode> imns =
                 new LinkedList<ImageNode>();
             ImageNode imn;
 
-            for (int i = MinY; i <= MaxY; i += Math.Max(MaxY - MinY, 1))  
+            foreach(int i in positions) 
             {
                 imn = new ImageNode()
                 {
@@ -199,17 +230,21 @@ namespace SMWControlibBackend.Graphics
 
             if (Left < 0) return null;
 
-            getMinMax(out int MinY, out int MaxY,
-                Left, min, max, 8);
+            List<int> positions = new List<int>();
+
+            getPositions(positions,
+                Left, Right, min, max, 8);
 
             LinkedList<ImageNode> imns =
-                getNodes(null, Left, Right, min, max, 8, MinY, MaxY);
+                getNodes(null, Left, Right, min, max, 8, positions);
 
-            getMinMax(out MinY, out MaxY,
-                Left, min, max, 16);
+            positions.Clear();
+
+            getPositions(positions,
+                Left, Right, min, max, 16);
 
             LinkedList<ImageNode> imns2 = 
-                getNodes(null, Left, Right, min, max, 16, MinY, MaxY);
+                getNodes(null, Left, Right, min, max, 16, positions);
             foreach (ImageNode imn in imns2)
             {
                 imns.AddLast(imn);
@@ -226,17 +261,21 @@ namespace SMWControlibBackend.Graphics
 
             if (Left < 0) return null;
 
-            getMinMax(out int MinY, out int MaxY,
-                Left, root.min, root.max, 8);
+            List<int> positions = new List<int>();
+
+            getPositions(positions,
+                Left, Right, root.min, root.max, 8);
 
             LinkedList<ImageNode> imns =
-                getNodes(root, Left, Right, root.min, root.max, 8, MinY, MaxY);
+                getNodes(root, Left, Right, root.min, root.max, 8, positions);
 
-            getMinMax(out MinY, out MaxY,
-                Left, root.min, root.max, 16);
+            positions.Clear();
+
+            getPositions(positions,
+                Left, Right, root.min, root.max, 16);
 
             LinkedList<ImageNode> imns2 =
-                getNodes(root, Left, Right, root.min, root.max, 16, MinY, MaxY);
+                getNodes(root, Left, Right, root.min, root.max, 16, positions);
             foreach (ImageNode imn in imns2)
             {
                 imns.AddLast(imn);
@@ -484,10 +523,18 @@ namespace SMWControlibBackend.Graphics
             Color c;
             int bx, by;
             TileMask tm;
+            ImageNode imn1,imn2;
 
             for (int i = 0; i < FollowsX.Length; i += 2)
             {
                 if (FollowsX[i] == null) break;
+                imn1 = FollowsX[i];
+                imn2 = FollowsX[i+1];
+                if (FollowsX[i + 1].X < FollowsX[i].X)
+                {
+                    imn1 = FollowsX[i + 1];
+                    imn2 = FollowsX[i];
+                }
                 bx = baseX / 8;
                 by = baseY / 8;
                 Buffer.BlockCopy(space24x16, 0, spaceUsed, (by / w + (bx % w)) * 4, 12);
@@ -496,33 +543,33 @@ namespace SMWControlibBackend.Graphics
                 {
                     for (int y = 0; y < 16 && y + baseY < f.DynSize.Height; y++)
                     {
-                        c = bp.GetPixel(FollowsX[i].X + x, FollowsX[i].Y + y);
+                        c = bp.GetPixel(imn1.X + x, imn1.Y + y);
                         if (c.A == 255) 
                             gfx[baseX + x, baseY + y] = pal[c.ToArgb()];
                     }
                 }
                 tm = new TileMask(TileSP.SP23, Tiles16[bx, by], 2, false, false)
                 {
-                    XDisp = FollowsX[i].X * 2,
-                    YDisp = FollowsX[i].Y * 2,
+                    XDisp = imn1.X * 2,
+                    YDisp = imn1.Y * 2,
                     Priority = Priority,
                     Palette = pid
                 };
                 f.AddTile(tm);
                 baseX += 8;
-                for (int x = Math.Abs(FollowsX[i].X- FollowsX[i+1].X); x < 16 && x + baseX < f.DynSize.Width; x++)
+                for (int x = 0; x < 16 && x + baseX < f.DynSize.Width; x++)
                 {
                     for (int y = 0; y < 16 && y + baseY < f.DynSize.Height; y++)
                     {
-                        c = bp.GetPixel(FollowsX[i+1].X + x, FollowsX[i+1].Y + y);
+                        c = bp.GetPixel(imn1.X + 8 + x, imn1.Y + y);
                         if (c.A == 255) 
                             gfx[baseX + x, baseY + y] = pal[c.ToArgb()];
                     }
                 }
                 tm = new TileMask(TileSP.SP23, Tiles16[bx + 1, by], 2, false, false)
                 {
-                    XDisp = (FollowsX[i].X + 8) * 2,
-                    YDisp = FollowsX[i + 1].Y * 2,
+                    XDisp = (imn1.X + 8) * 2,
+                    YDisp = imn1.Y * 2,
                     Priority = Priority,
                     Palette = pid
                 };

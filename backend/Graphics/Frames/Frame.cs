@@ -194,15 +194,6 @@ namespace SMWControlibBackend.Graphics.Frames
                 Ressize[i]= blocksPerLine[i] * 32;
             }
 
-            for (int i = lns - 1; i > 0; i--)
-            {
-                if (blocksPerLine[i - 1] >= 16)
-                {
-                    Ressize[i - 1] += Ressize[i];
-                    Ressize[i] = 0;
-                }
-            }
-
             Tuple<int[], int[]> tuple = new Tuple<int[], int[]>(ResOffset, Ressize);
             
             return tuple;

@@ -602,9 +602,9 @@ namespace SMWControlibBackend.Graphics
                             spaceUsed[q * w + p + 1] = 1;
                             spaceUsed[q * w + p + w] = 1;
                             spaceUsed[q * w + p + w + 1] = 1;
-                            for (int x = 0; x < 16 && x + baseX < f.DynSize.Width; x++)
+                            for (int x = 0; x < 16 && x + baseX < f.DynSize.Width && imns16[i].X + x < bp.Width; x++)
                             {
-                                for (int y = 0; y < 16 && y + baseY < f.DynSize.Height; y++)
+                                for (int y = 0; y < 16 && y + baseY < f.DynSize.Height && imns16[i].Y + y < bp.Height; y++)
                                 {
                                     c = bp.GetPixel(imns16[i].X + x, imns16[i].Y + y);
                                     if (c.A == 255)

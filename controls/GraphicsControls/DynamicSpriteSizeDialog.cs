@@ -14,6 +14,8 @@ namespace SMWControlibControls.GraphicsControls
     public partial class DynamicSpriteSizeDialog : Form
     {
         public static DynamicSize DynSize = DynamicSize.DynamicSprite32x32;
+        static string desc16 = "Dynamic sprite that use a space of 16x16 or less on the VRAM per frame.\n\nIt doesn't require 50% More Mode.\n\nIt can be of 60fps or 30fps.";
+        static string desc1632 = "Dynamic sprite that use a space of 32x16 or less on the VRAM per frame.\n\nIt doesn't require 50% More Mode.\n\nIt can be of 60fps or 30fps.";
         static string desc32 = "Dynamic sprite that use a space of 64x16 or less on the VRAM per frame.\n\nIt doesn't require 50% More Mode.\n\nIt can be of 60fps or 30fps.";
         static string desc48 = "Dynamic sprite that use a space of 128x16 or less on the VRAM per frame.\n\nIt doesn't require 50% More Mode.\n\nIt can be of 60fps or 30fps.";
         static string desc64 = "Dynamic sprite that use a space of 128x32 or less on the VRAM per frame.\n\nIt doesn't require 50% More Mode.\n\nIt can be of 60fps or 30fps.";
@@ -24,12 +26,32 @@ namespace SMWControlibControls.GraphicsControls
         {
             InitializeComponent();
             accept.Click += Accept_Click;
+            s16.CheckedChanged += S16_CheckedChanged;
+            s1632.CheckedChanged += S1632_CheckedChanged;
             s32.CheckedChanged += S32_CheckedChanged;
             s48.CheckedChanged += S48_CheckedChanged;
             s64.CheckedChanged += S64_CheckedChanged;
             s80.CheckedChanged += S80_CheckedChanged;
             s96.CheckedChanged += S96_CheckedChanged;
             s112.CheckedChanged += S112_CheckedChanged;
+        }
+
+        private void S1632_CheckedChanged(object sender, EventArgs e)
+        {
+            if (s1632.Checked)
+            {
+                desc.Text = desc16;
+                DynSize = DynamicSize.DynamicSprite32x16;
+            }
+        }
+
+        private void S16_CheckedChanged(object sender, EventArgs e)
+        {
+            if (s16.Checked)
+            {
+                desc.Text = desc16;
+                DynSize = DynamicSize.DynamicSprite16x16;
+            }
         }
 
         private void S112_CheckedChanged(object sender, EventArgs e)

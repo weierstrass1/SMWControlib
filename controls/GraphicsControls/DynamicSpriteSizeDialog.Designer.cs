@@ -42,6 +42,8 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.desc = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.s1632 = new System.Windows.Forms.RadioButton();
+            this.s16 = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -51,6 +53,8 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.s16);
+            this.panel1.Controls.Add(this.s1632);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.s112);
             this.panel1.Controls.Add(this.s96);
@@ -69,10 +73,10 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(144)))));
-            this.label1.Location = new System.Drawing.Point(133, 273);
+            this.label1.Location = new System.Drawing.Point(280, 273);
             this.label1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(273, 20);
+            this.label1.Size = new System.Drawing.Size(253, 20);
             this.label1.TabIndex = 3;
             this.label1.Text = "↑Requires 50% More Mode↑";
             // 
@@ -86,7 +90,7 @@
             this.s112.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.s112.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.s112.Image = ((System.Drawing.Image)(resources.GetObject("s112.Image")));
-            this.s112.Location = new System.Drawing.Point(271, 138);
+            this.s112.Location = new System.Drawing.Point(405, 138);
             this.s112.Name = "s112";
             this.s112.Padding = new System.Windows.Forms.Padding(0, 0, 0, 9);
             this.s112.Size = new System.Drawing.Size(128, 128);
@@ -105,7 +109,7 @@
             this.s96.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.s96.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.s96.Image = ((System.Drawing.Image)(resources.GetObject("s96.Image")));
-            this.s96.Location = new System.Drawing.Point(405, 4);
+            this.s96.Location = new System.Drawing.Point(137, 138);
             this.s96.Name = "s96";
             this.s96.Padding = new System.Windows.Forms.Padding(0, 0, 0, 9);
             this.s96.Size = new System.Drawing.Size(128, 128);
@@ -124,7 +128,7 @@
             this.s80.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.s80.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.s80.Image = ((System.Drawing.Image)(resources.GetObject("s80.Image")));
-            this.s80.Location = new System.Drawing.Point(137, 138);
+            this.s80.Location = new System.Drawing.Point(271, 138);
             this.s80.Name = "s80";
             this.s80.Padding = new System.Windows.Forms.Padding(0, 0, 0, 9);
             this.s80.Size = new System.Drawing.Size(128, 128);
@@ -143,7 +147,7 @@
             this.s64.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.s64.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.s64.Image = ((System.Drawing.Image)(resources.GetObject("s64.Image")));
-            this.s64.Location = new System.Drawing.Point(271, 4);
+            this.s64.Location = new System.Drawing.Point(3, 138);
             this.s64.Name = "s64";
             this.s64.Padding = new System.Windows.Forms.Padding(0, 0, 0, 9);
             this.s64.Size = new System.Drawing.Size(128, 128);
@@ -162,7 +166,7 @@
             this.s48.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.s48.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.s48.Image = ((System.Drawing.Image)(resources.GetObject("s48.Image")));
-            this.s48.Location = new System.Drawing.Point(137, 4);
+            this.s48.Location = new System.Drawing.Point(405, 4);
             this.s48.Name = "s48";
             this.s48.Padding = new System.Windows.Forms.Padding(0, 0, 0, 9);
             this.s48.Size = new System.Drawing.Size(128, 128);
@@ -182,12 +186,11 @@
             this.s32.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.s32.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.s32.Image = ((System.Drawing.Image)(resources.GetObject("s32.Image")));
-            this.s32.Location = new System.Drawing.Point(3, 3);
+            this.s32.Location = new System.Drawing.Point(271, 4);
             this.s32.Name = "s32";
             this.s32.Padding = new System.Windows.Forms.Padding(0, 0, 0, 9);
             this.s32.Size = new System.Drawing.Size(128, 128);
             this.s32.TabIndex = 3;
-            this.s32.TabStop = true;
             this.s32.Text = "32x32";
             this.s32.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.s32.UseVisualStyleBackColor = false;
@@ -252,6 +255,44 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Description";
             // 
+            // s1632
+            // 
+            this.s1632.Appearance = System.Windows.Forms.Appearance.Button;
+            this.s1632.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.s1632.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
+            this.s1632.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
+            this.s1632.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
+            this.s1632.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.s1632.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+            this.s1632.Image = ((System.Drawing.Image)(resources.GetObject("s1632.Image")));
+            this.s1632.Location = new System.Drawing.Point(137, 4);
+            this.s1632.Name = "s1632";
+            this.s1632.Padding = new System.Windows.Forms.Padding(0, 0, 0, 9);
+            this.s1632.Size = new System.Drawing.Size(128, 128);
+            this.s1632.TabIndex = 9;
+            this.s1632.Text = "32x16";
+            this.s1632.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.s1632.UseVisualStyleBackColor = false;
+            // 
+            // s16
+            // 
+            this.s16.Appearance = System.Windows.Forms.Appearance.Button;
+            this.s16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.s16.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
+            this.s16.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
+            this.s16.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
+            this.s16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.s16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+            this.s16.Image = ((System.Drawing.Image)(resources.GetObject("s16.Image")));
+            this.s16.Location = new System.Drawing.Point(3, 4);
+            this.s16.Name = "s16";
+            this.s16.Padding = new System.Windows.Forms.Padding(0, 0, 0, 9);
+            this.s16.Size = new System.Drawing.Size(128, 128);
+            this.s16.TabIndex = 10;
+            this.s16.Text = "16x16";
+            this.s16.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.s16.UseVisualStyleBackColor = false;
+            // 
             // DynamicSpriteSizeDialog
             // 
             this.AcceptButton = this.accept;
@@ -289,5 +330,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label desc;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RadioButton s16;
+        private System.Windows.Forms.RadioButton s1632;
     }
 }

@@ -18,6 +18,8 @@ namespace SMWControlibBackend.Graphics.Frames
         public static DynamicSize DynamicSprite80x80 = new DynamicSize(3, 128, 48, 6);
         public static DynamicSize DynamicSprite96x96 = new DynamicSize(4, 128, 64, 8);
         public static DynamicSize DynamicSprite112x112 = new DynamicSize(5, 128, 96, 12);
+        public static DynamicSize DynamicSprite32x16 = new DynamicSize(6, 32, 16, 2);
+        public static DynamicSize DynamicSprite16x16 = new DynamicSize(7, 16, 16, 2);
 
         DynamicSize(int val, int w, int h,int lines)
         {
@@ -48,6 +50,10 @@ namespace SMWControlibBackend.Graphics.Frames
                     return DynamicSprite96x96;
                 case 5:
                     return DynamicSprite112x112;
+                case 6:
+                    return DynamicSprite32x16;
+                case 7:
+                    return DynamicSprite16x16;
                 default:
                     return null;
             }

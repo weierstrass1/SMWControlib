@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SMWControlibBackend.Graphics;
 
 namespace SMWControlibControls.GraphicsControls
 {
@@ -25,10 +26,17 @@ namespace SMWControlibControls.GraphicsControls
             InitializeComponent();
             accept.Click += Accept_Click;
             lss.Click += Lss_Click;
+            noLoad.CheckedChanged += noLoad_CheckedChanged;
             openFileDialog1.Filter = "Image Files |*.png;*.bmp;*.jpg";
             openFileDialog1.FileName = "";
             lfs.Click += Lfs_Click;
             frameSelector.SelectedIndexChanged += FrameSelector_SelectedIndexChanged;
+        }
+
+        private void noLoad_CheckedChanged(object sender, EventArgs e)
+        {
+            lfs.Enabled = !noLoad.Checked;
+            lff.Enabled = !noLoad.Checked;
         }
 
         private void FrameSelector_SelectedIndexChanged(object sender, EventArgs e)
@@ -82,8 +90,17 @@ namespace SMWControlibControls.GraphicsControls
 
         private void Accept_Click(object sender, EventArgs e)
         {
+            if(noLoad.Checked)
+            {
+                pal = new Dictionary<Int32, byte>();
+                for (byte i = 0; i < 16; i++)
+                {
+                    PaletteId a = ColorPalette.SelectedPalette;
+                    pal.Add(ColorPalette.GetGlobalColor(i).ToArgb(), i);
+                }
+            }
             NewFrames.Clear();
-            NewFrames = ImageProcessor.FromSpriteSheetToFrames(bps, pal, DynamicSpriteSizeDialog.DynSize, ColorPalette.SelectedPalette);
+            NewFrames = ImageProcessor.FromSpriteSheetToFrames(bps, pal, name.Text, DynamicSpriteSizeDialog.DynSize, ColorPalette.SelectedPalette);
             DialogResult = DialogResult.OK;
             FrameWidth = (int)w.Value;
             FrameHeight = (int)h.Value;

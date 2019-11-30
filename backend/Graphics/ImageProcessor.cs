@@ -335,16 +335,17 @@ namespace SMWControlibBackend.Graphics
         public static Tile[,] Tiles8;
         public static Tile[,] Tiles16;
         public static TilePriority Priority;
-        public static List<Frame> FromSpriteSheetToFrames(Bitmap[] b, Dictionary<Int32, byte> Pal, DynamicSize ds, PaletteId curId)
+        public static List<Frame> FromSpriteSheetToFrames(Bitmap[] b, Dictionary<Int32, byte> Pal, string name, DynamicSize ds, PaletteId curId)
         {
-            Frame f;
+            if (name == "" || name == null) name = "Frame";
+             Frame f;
             List<Frame> frames = new List<Frame>();
 
             for (int i = 0; i < b.Length; i++)
             {
                 ImageNode imn = CropFrameInTiles(b[i]);
                 f = FillGFX(b[i], curId, imn, ds, Pal);
-                f.Name = "Frame" + i;
+                f.Name = name + i;
                 frames.Add(f);
             }
 
@@ -586,9 +587,9 @@ namespace SMWControlibBackend.Graphics
             {
                 if (imns16[i] == null) break;
                 found = false;
-                for (int p = 0; p < w - 1; p++) 
+                for (int q = 0; q < h - 1; q++) 
                 {
-                    for (int q = 0; q < h - 1; q++)
+                    for (int p = 0; p < w - 1; p++)
                     {
                         if (spaceUsed[q * w + p] == 0 &&
                             spaceUsed[q * w + p + 1] == 0 &&

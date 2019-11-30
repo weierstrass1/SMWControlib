@@ -181,7 +181,7 @@ namespace SMWControlibBackend.Graphics.Frames
                     curw = tm.Tile[2] - 55;
                 }
 
-                if (tm.Size == 16 && curw > 0) curw++;
+                if (tm.Size == 16) curw++;
                 if (blocksPerLine[curl] < curw + 1) 
                     blocksPerLine[curl] = curw + 1;
                 if (tm.Size == 16 && blocksPerLine[curl + 1] < curw + 1) 

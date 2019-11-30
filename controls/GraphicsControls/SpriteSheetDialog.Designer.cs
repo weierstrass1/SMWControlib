@@ -42,6 +42,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.w = new System.Windows.Forms.NumericUpDown();
             this.h = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.noLoad = new System.Windows.Forms.CheckBox();
+            this.name = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.paletteBox1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -70,7 +74,7 @@
             this.lss.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
             this.lss.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lss.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-            this.lss.Location = new System.Drawing.Point(72, 416);
+            this.lss.Location = new System.Drawing.Point(387, 176);
             this.lss.Name = "lss";
             this.lss.Size = new System.Drawing.Size(143, 23);
             this.lss.TabIndex = 22;
@@ -84,7 +88,7 @@
             this.accept.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
             this.accept.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.accept.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-            this.accept.Location = new System.Drawing.Point(95, 445);
+            this.accept.Location = new System.Drawing.Point(214, 266);
             this.accept.Name = "accept";
             this.accept.Size = new System.Drawing.Size(99, 23);
             this.accept.TabIndex = 23;
@@ -100,7 +104,7 @@
             this.frameSelector.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
             this.frameSelector.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
             this.frameSelector.FormattingEnabled = true;
-            this.frameSelector.Location = new System.Drawing.Point(161, 176);
+            this.frameSelector.Location = new System.Drawing.Point(274, 176);
             this.frameSelector.Name = "frameSelector";
             this.frameSelector.Size = new System.Drawing.Size(107, 20);
             this.frameSelector.TabIndex = 19;
@@ -140,7 +144,7 @@
             // 
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(12, 262);
+            this.panel1.Location = new System.Drawing.Point(274, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(256, 148);
             this.panel1.TabIndex = 24;
@@ -158,7 +162,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.label1.Location = new System.Drawing.Point(15, 206);
+            this.label1.Location = new System.Drawing.Point(270, 205);
             this.label1.Margin = new System.Windows.Forms.Padding(6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 20);
@@ -170,7 +174,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.label2.Location = new System.Drawing.Point(15, 238);
+            this.label2.Location = new System.Drawing.Point(270, 237);
             this.label2.Margin = new System.Windows.Forms.Padding(6);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 20);
@@ -179,14 +183,14 @@
             // 
             // w
             // 
-            this.w.Location = new System.Drawing.Point(87, 210);
+            this.w.Location = new System.Drawing.Point(342, 209);
             this.w.Maximum = new decimal(new int[] {
             100000,
             0,
             0,
             0});
             this.w.Minimum = new decimal(new int[] {
-            1,
+            8,
             0,
             0,
             0});
@@ -194,21 +198,21 @@
             this.w.Size = new System.Drawing.Size(120, 18);
             this.w.TabIndex = 27;
             this.w.Value = new decimal(new int[] {
-            1,
+            16,
             0,
             0,
             0});
             // 
             // h
             // 
-            this.h.Location = new System.Drawing.Point(87, 238);
+            this.h.Location = new System.Drawing.Point(342, 237);
             this.h.Maximum = new decimal(new int[] {
             100000,
             0,
             0,
             0});
             this.h.Minimum = new decimal(new int[] {
-            1,
+            8,
             0,
             0,
             0});
@@ -216,17 +220,65 @@
             this.h.Size = new System.Drawing.Size(120, 18);
             this.h.TabIndex = 28;
             this.h.Value = new decimal(new int[] {
-            1,
+            16,
             0,
             0,
             0});
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.label4.Location = new System.Drawing.Point(179, 150);
+            this.label4.Margin = new System.Windows.Forms.Padding(3);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(69, 12);
+            this.label4.TabIndex = 30;
+            this.label4.Text = "Don\'t Load";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // noLoad
+            // 
+            this.noLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noLoad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(50)))), ((int)(((byte)(150)))));
+            this.noLoad.Location = new System.Drawing.Point(161, 150);
+            this.noLoad.Name = "noLoad";
+            this.noLoad.Size = new System.Drawing.Size(12, 12);
+            this.noLoad.TabIndex = 29;
+            this.noLoad.UseVisualStyleBackColor = true;
+            // 
+            // name
+            // 
+            this.name.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(232)))), ((int)(((byte)(248)))));
+            this.name.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.name.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(32)))), ((int)(((byte)(176)))));
+            this.name.Location = new System.Drawing.Point(61, 241);
+            this.name.Name = "name";
+            this.name.Size = new System.Drawing.Size(187, 18);
+            this.name.TabIndex = 32;
+            this.name.Text = "Frame";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
+            this.label3.Location = new System.Drawing.Point(12, 243);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(43, 12);
+            this.label3.TabIndex = 31;
+            this.label3.Text = "Name:";
             // 
             // SpriteSheetDialog
             // 
             this.AcceptButton = this.accept;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
-            this.ClientSize = new System.Drawing.Size(281, 478);
+            this.ClientSize = new System.Drawing.Size(540, 299);
+            this.Controls.Add(this.name);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.noLoad);
             this.Controls.Add(this.h);
             this.Controls.Add(this.w);
             this.Controls.Add(this.label2);
@@ -269,5 +321,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown w;
         private System.Windows.Forms.NumericUpDown h;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox noLoad;
+        private System.Windows.Forms.TextBox name;
+        private System.Windows.Forms.Label label3;
     }
 }

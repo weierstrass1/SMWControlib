@@ -9,6 +9,7 @@ namespace SMWControlibControls.LogicControls
         HDMA hdma;
         public HDMAControl()
         {
+            hdma = new HDMA(new Effect(EffectType.Brightness, EffectOptions.Option0Static));
             InitializeComponent();
             Resize += resize;
             add.Click += addClick;

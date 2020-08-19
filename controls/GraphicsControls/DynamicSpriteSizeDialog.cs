@@ -40,7 +40,7 @@ namespace SMWControlibControls.GraphicsControls
         {
             if (s1632.Checked)
             {
-                desc.Text = desc16;
+                desc.Text = desc1632;
                 DynSize = DynamicSize.DynamicSprite32x16;
             }
         }

@@ -11,6 +11,7 @@ namespace SMWControlibBackend.Graphics
 {
     public class ImageNode : IComparable<ImageNode>
     {
+        public static double HeuristicWeigth = 1;
         public int X { get; private set; }
         public int Y { get; private set; }
         public int Size { get; private set; }
@@ -53,20 +54,7 @@ namespace SMWControlibBackend.Graphics
         void getCost()
         {
             bool found = false;
-            ImageNode aux = Father;
-            if (Size == 16)
-            {
-                while (aux != null)
-                {
-                    if (aux.Y == Y && aux.Size==16 && Math.Abs(X - aux.X) <= 8)
-                    {
-                        found = true;
-                        break;
-                    }
-                    
-                    aux = aux.Father;
-                }
-            }
+
             if (Father != null)
             {
                 Length8 = Father.Length8;
@@ -80,10 +68,7 @@ namespace SMWControlibBackend.Graphics
             if (Size == 16)
             {
                 Length16++;
-                if (!found)
-                    Cost += 256;
-                else
-                    Cost += 128;
+                Cost += 256;
             }
             else
             {
@@ -184,7 +169,7 @@ namespace SMWControlibBackend.Graphics
             {
                 imn = new ImageNode()
                 {
-                    X = Math.Min(Left, Right - size + 1),
+                    X = Math.Max(0,Math.Min(Left, Right - size + 1)),
                     Y = i,
                     Father = r,
                     Length8 = 0,
@@ -286,18 +271,20 @@ namespace SMWControlibBackend.Graphics
 
         public int CompareTo(ImageNode other)
         {
-            int blocks = Length8 + Length16 + HeuristicBlocks;
-            int blockso = other.Length8 + other.Length16 + other.HeuristicBlocks;
+
+            double blocks = Length8 + Length16 + HeuristicWeigth * HeuristicBlocks;
+            double blockso = other.Length8 + other.Length16 + HeuristicWeigth * other.HeuristicBlocks;
+
             if (blocks < blockso) return -1;
             else if (blocks > blockso) return 1;
-
-            if (Length16 < other.Length16) return -1;
-            else if (Length16 > other.Length16) return 1;
 
             int f = Cost + Heuristic;
             int fo = other.Cost + other.Heuristic;
             if (f < fo) return -1;
             else if (f > fo) return 1;
+
+            if (Length16 < other.Length16) return -1;
+            else if (Length16 > other.Length16) return 1;
 
             if (HeuristicBlocks < other.HeuristicBlocks) return -1;
             else if (HeuristicBlocks > other.HeuristicBlocks) return 1;
@@ -408,6 +395,7 @@ namespace SMWControlibBackend.Graphics
             int r, g, b;
 
             Color pcol;
+            List<byte> findMin = new List<byte>();
 
             for (byte i = 1; i < 16; i++)
             {
@@ -430,12 +418,45 @@ namespace SMWControlibBackend.Graphics
                             min = cur;
                         }
                     }
+
+                    if (min == 0)
+                    {
+                        ret.Add(minCol.ToArgb(), i);
+                        cols.Remove(minCol);
+                    }
+                    else
+                        findMin.Add(i);
+                }
+            }
+
+            foreach( byte i in findMin)
+            {
+                if (cols.Count > 0)
+                {
+                    min = -1;
+                    pcol = ColorPalette.GetGlobalColor(i, pid);
+                    foreach (Color col in cols)
+                    {
+                        r = col.R - pcol.R;
+                        r *= r;
+                        g = col.G - pcol.G;
+                        g *= g;
+                        b = col.B - pcol.B;
+                        b *= b;
+                        cur = r + g + b;
+                        if (min < 0 || cur < min)
+                        {
+                            minCol = col;
+                            min = cur;
+                        }
+                    }
+
                     ret.Add(minCol.ToArgb(), i);
                     cols.Remove(minCol);
                 }
             }
 
-            foreach(KeyValuePair<int,byte> kvp in ret)
+            foreach (KeyValuePair<int,byte> kvp in ret)
             {
                 ColorPalette.SetGlobalColor(kvp.Value, Color.FromArgb(kvp.Key),pid);
             }
@@ -647,9 +668,9 @@ namespace SMWControlibBackend.Graphics
                             baseX = q * 8;
                             baseY = p * 8;
                             spaceUsed[p * w + q] = 1;
-                            for (int x = 0; x < 8 && x + baseX < f.DynSize.Width; x++)
+                            for (int x = 0; x < 8 && x + baseX < f.DynSize.Width && imns8[i].X + x < bp.Width; x++)
                             {
-                                for (int y = 0; y < 8 && y + baseY < f.DynSize.Height; y++)
+                                for (int y = 0; y < 8 && y + baseY < f.DynSize.Height && imns8[i].Y + y < bp.Height; y++)
                                 {
                                     c = bp.GetPixel(imns8[i].X + x, imns8[i].Y + y);
                                     if (c.A == 255)
@@ -716,10 +737,7 @@ namespace SMWControlibBackend.Graphics
             while (ih.Count > 0)
             {
                 imnaux = ih.DeleteMin();
-                if(imnaux.Length8 + imnaux.Length16>9)
-                {
-                    int a = 0;
-                }
+
                 close.Add(imnaux);
 
                 newnodes = ImageNode.GetNodes(imnaux);

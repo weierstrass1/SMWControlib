@@ -126,6 +126,12 @@
     <Compile Include="GraphicsControls\NewProjectWindow.Designer.cs">
       <DependentUpon>NewProjectWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="GraphicsControls\SectionControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GraphicsControls\SectionControl.Designer.cs">
+      <DependentUpon>SectionControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="GraphicsControls\SpriteSheetDialog.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -51,6 +51,7 @@
     <Compile Include="Graphics\ColorPalette.cs" />
     <Compile Include="Graphics\ColorPaletteContainer.cs" />
     <Compile Include="Graphics\Frames\DynamicFrame.cs" />
+    <Compile Include="Graphics\Frames\GraphicSection.cs" />
     <Compile Include="Graphics\GlobalColorPaletteContainer.cs" />
     <Compile Include="Graphics\Frames\Animation.cs" />
     <Compile Include="Graphics\Frames\AnimationContainer.cs" />

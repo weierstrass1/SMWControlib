@@ -16,14 +16,14 @@ ReturnNoContact:
 	CLC                       
 	RTS
 ProcessInteract:
-	JSL SubHorzPos
+	%SubHorzPos()
 	LDA !ScratchF                  
 	CLC                       
 	ADC #$50                
 	CMP #$A0                
 	BCS ReturnNoContact       ; No contact, return 
-	JSL SubVertPos         
-	LDA !ScratchE                   
+	%SubVertPos()         
+	LDA !ScratchF                   
 	CLC                       
 	ADC #$60                
 	CMP #$C0                
@@ -157,11 +157,9 @@ Interaction:
 	REP #$20
 	CLC
 	ADC $01,s
-	PHA
-	SEP #$20
-	PLA 
+	SEP #$20 
 	STA !Scratch4
-	PLA
+	XBA
 	STA !ScratchA
 	PLA
 	PLA
@@ -179,11 +177,9 @@ Interaction:
 	REP #$20
 	CLC
 	ADC $01,s
-	PHA
 	SEP #$20
-	PLA 
 	STA !Scratch5
-	PLA
+	XBA
 	STA !ScratchB
 	PLA
 	PLA

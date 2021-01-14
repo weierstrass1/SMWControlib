@@ -118,41 +118,64 @@ namespace SMWControlibBackend.Graphics.Frames
             Tiles.Sort(func);
             IsDirty();
         }
-
+        public static int TilesUsed = 0;
         public static Tuple<string, string,string, byte[]> GetDynamicSource(Frame[] f)
         {
+            TilesUsed = 0;
             StringBuilder sb1 = new StringBuilder();
             StringBuilder sb2 = new StringBuilder();
+            StringBuilder sb3 = new StringBuilder();
             Tuple<int[], int[]> taux;
             int lastVal = 0;
             int lns = 0;
+            int maxRows = 0;
+            bool diffMaxRows = false;
+            int lr = 0;
             byte[] b = new byte[6144 * f.Length];
             for (int i = 0; i < f.Length; i++)
             {
                 lns = f[i].DynSize.Lines;
                 sb1.Append(f[i].Name+"_"+"ResourceOffset:\n\tdw ");
-                sb2.Append(f[i].Name + "_" + "ResourceSize:\n\tdw ");
+                sb2.Append(f[i].Name + "_" + "ResourceSize:\n\tdb ");
+                sb3.Append(f[i].Name + "_" + "ResourceLastRow:\n\tdb ");
                 taux = f[i].GetDynamicSource();
-                for (int j = 0; j < lns; j++)
-                {
-                    sb1.Append("$" + (lastVal + taux.Item1[j]).ToString("X4") + ",");
-                    sb2.Append("$" + (taux.Item2[j]).ToString("X4") + ",");
-                    Buffer.BlockCopy(f[i].GFX, 512 * j, b, lastVal + taux.Item1[j], taux.Item2[j]);
-                }
-                lastVal += (taux.Item1[lns - 1] + taux.Item2[lns - 1]);
+
+                sb1.Append("$" + (lastVal + taux.Item1[0]).ToString("X4") + ",");
+                sb2.Append("$" + taux.Item2[0].ToString("X2") + ",");
+                Buffer.BlockCopy(f[i].GFX, 0, b, lastVal + taux.Item1[0], taux.Item2[0] * 32);
+                sb1.Append("$" + (lastVal + taux.Item1[1]).ToString("X4") + ",");
+                sb2.Append("$" + taux.Item2[1].ToString("X2") + ",");
+                Buffer.BlockCopy(f[i].GFX, ((taux.Item2[0] + 16) / 16) * 512, b, lastVal + taux.Item1[1], taux.Item2[1] * 32);
+
+                lastVal += (taux.Item1[1] + 32 * taux.Item2[1]);
+                sb3.Append("$" + (f[i].lastRow * 16).ToString("X2") + "\n");
                 sb1.Remove(sb1.Length - 1, 1);
                 sb2.Remove(sb2.Length - 1, 1);
                 sb1.Append("\n");
                 sb2.Append("\n");
+                if (f[i].lastRow > maxRows && taux.Item2[1] != 0)
+                    maxRows = f[i].lastRow;
+                if (lr == 0 && taux.Item2[1] != 0) 
+                    lr = f[i].lastRow;
+                if (lr != 0 && lr != f[i].lastRow && taux.Item2[1] != 0)
+                    diffMaxRows = true;
             }
             byte[] br = new byte[lastVal];
             Buffer.BlockCopy(b, 0, br, 0, lastVal);
+
+            string it3 = "#$" + (maxRows * 16).ToString("X2");
+            if(diffMaxRows)
+            {
+                it3 = "!Scratch52";
+                sb2.Append("ResourceLastRow:\n" + sb3.ToString());
+            }
+
             Tuple<string, string, string, byte[]> t =
                 new Tuple<string, string, string, byte[]>
-                (sb1.ToString(), sb2.ToString(), "$" + lns.ToString("X2"), br);
+                (sb1.ToString(), sb2.ToString(), it3, br);
             return t;
         }
-
+        public int lastRow = 0;
         public Tuple<int[], int[]> GetDynamicSource()
         {
             int lns = DynSize.Lines;
@@ -197,11 +220,63 @@ namespace SMWControlibBackend.Graphics.Frames
                         ResOffset[i - 1] + blocksPerLine[i - 1] * 32;
                 else
                     ResOffset[i] = 0;
-                Ressize[i]= blocksPerLine[i] * 32;
+                Ressize[i]= blocksPerLine[i];
             }
 
-            Tuple<int[], int[]> tuple = new Tuple<int[], int[]>(ResOffset, Ressize);
-            
+            int lvalue = 0;
+            bool noaddzero = false;
+
+            for (int i = 1; i < blocksPerLine.Length && Ressize[i] != 0; i++) 
+            {
+                lvalue++;
+                if (Ressize[0] % 16 == 0)
+                {
+                    Ressize[0] += Ressize[i];
+                }
+                else
+                {
+                    noaddzero = true;
+                }
+            }
+
+            int[] retoff = new int[2];
+            int[] retsiz = new int[2];
+            retoff[0] = ResOffset[0];
+            retoff[1] = ResOffset[lvalue];
+            retsiz[0] = Ressize[0];
+            if (noaddzero)
+            {
+                retsiz[1]= Ressize[lvalue];
+            }
+            else
+            {
+                retsiz[1] = 0;
+                retoff[1] = retoff[0] + 32 * retsiz[0];
+            }
+
+            lastRow = (retsiz[0] + 15) / 16;
+
+            int tu = retsiz[0] / 32;
+
+            tu *= 8;
+
+            int rem = (retsiz[0] % 32);
+
+            if (rem > 16) rem -= (rem % 16);
+
+            rem += (rem % 2);
+
+            tu += (rem / 2);
+
+            if (TilesUsed < tu) 
+            {
+                TilesUsed = tu;
+            }
+
+            if (!noaddzero) lastRow++;
+
+            Tuple<int[], int[]> tuple = new Tuple<int[], int[]>(retoff, retsiz);
+
             return tuple;
         }
 

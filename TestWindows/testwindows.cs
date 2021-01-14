@@ -18,6 +18,7 @@ namespace TestWindows
         public testwindows()
         {
             InitializeComponent();
+            resizeableSpriteGridController1.MidChanged += midChanged;
             gfxButton1.Target = spriteGFXBox1;
             gfxButton2.Target = spriteGFXBox1;
             gfxButton3.Target = spriteGFXBox2;
@@ -98,20 +99,14 @@ namespace TestWindows
                 }
                 else if (NewProjectWindow.ProjectType == 1)
                 {
-                    if(DynamicSpriteSizeDialog.Show(this)==DialogResult.OK)
-                    {
-                        spritesheet.Visible = true;
-                        spriteGFXBox3.Width = DynamicSpriteSizeDialog.DynSize.Width * 2 + 4;
-                        spriteGFXBox3.Height = DynamicSpriteSizeDialog.DynSize.Height * 2 + 4;
-                        spriteGFXBox2.Height = 68;
-                        if(DynamicSpriteSizeDialog.DynSize >= DynamicSize.DynamicSprite96x96)
-                        {
-                            tabControl2.TabPages.Remove(tabPage4);
-                            spriteGFXBox1.Height = 132;
-                        }
-                    }
+                    spritesheet.Visible = true;
+                    spriteGFXBox3.Width = DynamicSize.DynamicSprite96x96.Width * 2 + 4;
+                    spriteGFXBox3.Height = DynamicSize.DynamicSprite96x96.Height * 2 + 4;
+                    spriteGFXBox2.Height = 68;
                 }
             }
+            resizeableSpriteGridController1.MidX = 136;
+            resizeableSpriteGridController1.MidY = 120;
         }
 
         private void ResizeableSpriteGridController1_Moved()
@@ -122,10 +117,15 @@ namespace TestWindows
 
         private void Spritesheet_Click(object sender, EventArgs e)
         {
-            if (SpriteSheetDialog.Show(this) == DialogResult.OK)
+            if (SpriteSheetDialog.Show(this, resizeableSpriteGridController1.MidX, resizeableSpriteGridController1.MidY) == DialogResult.OK) 
             {
                 frameCreator1.AddFrames(SpriteSheetDialog.NewFrames,
                     SpriteSheetDialog.FrameWidth, SpriteSheetDialog.FrameHeight);
+                if (resizeableSpriteGridController1.MidX == 0)
+                {
+                    resizeableSpriteGridController1.MidX = 136;
+                    resizeableSpriteGridController1.MidY = 120;
+                }
             }
         }
 
@@ -334,7 +334,7 @@ namespace TestWindows
                 path += "\\";
             }
             Tuple<string, string, string, byte[]> t = null;
-            if(NewProjectWindow.ProjectType==1)
+            if (NewProjectWindow.ProjectType == 1)
                 t = Frame.GetDynamicSource(frameCreator1.Frames);
 
             if (ExtractResourcesDialog.Code)
@@ -342,10 +342,15 @@ namespace TestWindows
                 RefreshCode();
                 string s = codeEditorController1.CodeEditor.Text;
                 Frame.GetFramesIndexs(frameCreator1.Frames);
-                
+
+                s = s.Replace(">ResTiles.", "#$" + Frame.TilesUsed.ToString("X2"));
                 s = s.Replace("dw >resoff.", t.Item1);
                 s = s.Replace("dw >ressz.", t.Item2);
                 s = s.Replace(">lns.", t.Item3);
+                if (t.Item3 == "!Scratch52")
+                    s = s.Replace(">difrows.", "LDA !FrameIndex,x\n\tTAY\n\tLDA ResourceLastRow,y\n\tSTA !Scratch52");
+                else
+                    s = s.Replace(">difrows.", "");
                 HitBox[] hbs = Frame.GetFramesHitboxesFromFrameList(frameCreator1.Frames,
                     ExtractResourcesDialog.FlipX,
                     ExtractResourcesDialog.FlipY);

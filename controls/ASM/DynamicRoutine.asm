@@ -8,5 +8,8 @@ ResourceOffset:
 ResourceSize:
     dw >ressz.
 
-!Lines = >lns.
+DynamicRoutine:
+    >difrows.
+	%EasyNormalSpriteDynamicRoutineFixedGFX("!FrameIndex,x", "!LastFrameIndex,x", !GFX00, "#ResourceOffset", "#ResourceSize", >lns.)
+RTS
 ;>End Dynamic Section

@@ -65,6 +65,8 @@ namespace SMWControlibControls.GraphicsControls
             spriteGridController1.ZoomChanged += zoomChanged;
             spriteGridController1.MidChanged += midChange;
             spriteGridController1.Init();
+            spriteGridController1.MidX = MidX;
+            spriteGridController1.MidY = MidY;
         }
         private void midChange()
         {

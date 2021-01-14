@@ -95,7 +95,7 @@ namespace SMWControlibControls.GraphicsControls
                     , borderSize, border.Height);
             }
         }
-
+        
         public void SetBorderVisible(bool visible)
         {
             if (visible)

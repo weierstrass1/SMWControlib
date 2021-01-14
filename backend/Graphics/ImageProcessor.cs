@@ -322,7 +322,7 @@ namespace SMWControlibBackend.Graphics
         public static Tile[,] Tiles8;
         public static Tile[,] Tiles16;
         public static TilePriority Priority;
-        public static List<Frame> FromSpriteSheetToFrames(Bitmap[] b, Dictionary<Int32, byte> Pal, string name, DynamicSize ds, PaletteId curId)
+        public static List<Frame> FromSpriteSheetToFrames(Bitmap[] b, int midX, int midY, Dictionary<Int32, byte> Pal, string name, DynamicSize ds, PaletteId curId)
         {
             if (name == "" || name == null) name = "Frame";
              Frame f;
@@ -331,8 +331,10 @@ namespace SMWControlibBackend.Graphics
             for (int i = 0; i < b.Length; i++)
             {
                 ImageNode imn = CropFrameInTiles(b[i]);
-                f = FillGFX(b[i], curId, imn, ds, Pal);
+                f = FillGFX(b[i], midX, midY, curId, imn, ds, Pal);
                 f.Name = name + i;
+                f.MidX = midX;
+                f.MidY = midY;
                 frames.Add(f);
             }
 
@@ -473,12 +475,14 @@ namespace SMWControlibBackend.Graphics
             return 0;
         }
 
-        public static Frame FillGFX(Bitmap bp,PaletteId pid,ImageNode imn,DynamicSize DZ, Dictionary<Int32, byte> pal)
+        public static Frame FillGFX(Bitmap bp, int midx, int midy, PaletteId pid, ImageNode imn, DynamicSize DZ, Dictionary<Int32, byte> pal)
         {
             Frame f = new Frame()
             {
                 Dynamic = true,
-                DynSize= DZ
+                DynSize = DZ,
+                MidX = midx,
+                MidY = midy
             };
             byte[,] gfx = new byte[128, f.DynSize.Height];
 
@@ -487,6 +491,7 @@ namespace SMWControlibBackend.Graphics
             ImageNode imnaux = imn;
             ImageNode imnaux2;
             int next = 0;
+            /*
             while(imnaux != null)
             {
                 imnaux2 = imnaux.Father;
@@ -510,7 +515,7 @@ namespace SMWControlibBackend.Graphics
                     imnaux2 = imnaux2.Father;
                 }
                 imnaux = imnaux.Father;
-            }
+            }*/
 
             ImageNode[] imns16 = new ImageNode[imn.Length16];
             ImageNode[] imns8 = new ImageNode[imn.Length8];
@@ -579,11 +584,11 @@ namespace SMWControlibBackend.Graphics
                 };
                 f.AddTile(tm);
                 baseX += 8;
-                for (int x = 0; x < 16 && x + baseX < f.DynSize.Width; x++)
+                for (int x = 0; x < 16 && imn1.X + x + 8 < bp.Width && x + baseX < f.DynSize.Width; x++)
                 {
                     for (int y = 0; y < 16 && y + baseY < f.DynSize.Height; y++)
                     {
-                        c = bp.GetPixel(imn1.X + 8 + x, imn1.Y + y);
+                        c = bp.GetPixel(imn1.X + x + 8, imn1.Y + y);
                         if (c.A == 255) 
                             gfx[baseX + x, baseY + y] = pal[c.ToArgb()];
                     }
@@ -630,7 +635,12 @@ namespace SMWControlibBackend.Graphics
                                 {
                                     c = bp.GetPixel(imns16[i].X + x, imns16[i].Y + y);
                                     if (c.A == 255)
-                                        gfx[baseX + x, baseY + y] = pal[c.ToArgb()];
+                                    {
+                                        if (pal.ContainsKey(c.ToArgb()))
+                                            gfx[baseX + x, baseY + y] = pal[c.ToArgb()];
+                                        else
+                                            throw new KeyNotFoundException();
+                                    }
                                 }
                             }
                             break;

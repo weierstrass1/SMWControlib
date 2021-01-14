@@ -3,11 +3,12 @@
 ;######################################
 
 !FrameIndex = !SpriteMiscTable1
-!AnimationTimer = !SpriteDecTimer1
+!AnimationTimer = !SpriteMiscTable7
 !AnimationIndex = !SpriteMiscTable2
 !AnimationFrameIndex = !SpriteMiscTable3
 !LocalFlip = !SpriteMiscTable4
 !GlobalFlip = !SpriteMiscTable5
+!LastFrameIndex = !SpriteMiscTable6
 
 ;######################################
 ;########### Init Routine #############
@@ -16,6 +17,11 @@ print "INIT ",pc
 	LDA #$00
 	STA !GlobalFlip,x
 	JSL InitWrapperChangeAnimationFromStart
+
+	LDA #$FF
+	STA !LastFrameIndex,x
+
+	%CheckSlotNormalSprite(>ResTiles., $00)
     ;Here you can write your Init Code
     ;This will be excecuted when the sprite is spawned 
 RTL
@@ -37,7 +43,17 @@ RTL
 Return:
 RTS
 SpriteCode:
+	JSR DynamicRoutine
 
+	LDA DZ_DS_Loc_US_Normal,x
+	TAX
+
+	LDA DZ_DS_Loc_IsValid,x
+	BNE +
+	LDX !SpriteIndex
+RTS
++
+	LDX !SpriteIndex 
     JSR GraphicRoutine                  ;Calls the graphic routine and updates sprite graphics
 
     ;Here you can put code that will be excecuted each frame even if the sprite is locked
@@ -49,7 +65,7 @@ SpriteCode:
 	LDA !LockAnimationFlag				    
 	BNE Return			                    ;if locked animation return.
 
-    JSL SubOffScreen
+    %SubOffScreen()
 
     JSR InteractMarioSprite
     ;After this routine, if the sprite interact with mario, Carry is Set.

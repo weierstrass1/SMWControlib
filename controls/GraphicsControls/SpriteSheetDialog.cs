@@ -16,6 +16,7 @@ namespace SMWControlibControls.GraphicsControls
     {
         Bitmap[] bps;
         Bitmap ss;
+        int mx, my;
         public static List<Frame> NewFrames { get; private set; } = new List<Frame>();
         Dictionary<Int32, byte> pal;
         public static int FrameWidth { get; private set; } = 0;
@@ -56,17 +57,23 @@ namespace SMWControlibControls.GraphicsControls
 
         private void Lss_Click(object sender, EventArgs e)
         {
-            if(openFileDialog1.ShowDialog(this)==DialogResult.OK)
+            bool showmsg = w.Value <= 16 || h.Value <= 16;
+
+            if (!showmsg || (showmsg && MessageBox.Show("The Frame's width or height is 16 or less, are you sure to continue?", 
+                "Uncommon Frame Size", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)) 
             {
-                ss = (Bitmap)Image.FromFile(openFileDialog1.FileName);
-                bps = ImageProcessor.GetFrames(ss, (int)w.Value, (int)h.Value);
-                frameRefresh();
-                pictureBox1.Width = (ss.Width * pictureBox1.Height) / ss.Height;
-                pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-                using (Graphics g = Graphics.FromImage(pictureBox1.Image))
+                if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
                 {
-                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-                    g.DrawImage(ss, 0, 0, pictureBox1.Width, pictureBox1.Height);
+                    ss = (Bitmap)Image.FromFile(openFileDialog1.FileName);
+                    bps = ImageProcessor.GetFrames(ss, (int)w.Value, (int)h.Value);
+                    frameRefresh();
+                    pictureBox1.Width = (ss.Width * pictureBox1.Height) / ss.Height;
+                    pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+                    using (Graphics g = Graphics.FromImage(pictureBox1.Image))
+                    {
+                        g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                        g.DrawImage(ss, 0, 0, pictureBox1.Width, pictureBox1.Height);
+                    }
                 }
             }
         }
@@ -89,26 +96,39 @@ namespace SMWControlibControls.GraphicsControls
 
         private void Accept_Click(object sender, EventArgs e)
         {
-            if(noLoad.Checked)
+            pal = new Dictionary<Int32, byte>();
+            int c;
+            for (byte i = 0; i < 16; i++)
             {
-                pal = new Dictionary<Int32, byte>();
-                for (byte i = 0; i < 16; i++)
-                {
-                    PaletteId a = ColorPalette.SelectedPalette;
-                    pal.Add(ColorPalette.GetGlobalColor(i).ToArgb(), i);
-                }
+                PaletteId a = ColorPalette.SelectedPalette;
+                c = ColorPalette.GetGlobalColor(i).ToArgb();
+                if (!pal.ContainsKey(c)) 
+                    pal.Add(c, i);
             }
             NewFrames.Clear();
-            NewFrames = ImageProcessor.FromSpriteSheetToFrames(bps, pal, name.Text, DynamicSpriteSizeDialog.DynSize, ColorPalette.SelectedPalette);
+            try
+            {
+                NewFrames = ImageProcessor.FromSpriteSheetToFrames(bps, mx, my, pal, name.Text, DynamicSpriteSizeDialog.DynSize, ColorPalette.SelectedPalette);
+            }
+            catch(KeyNotFoundException)
+            {
+                MessageBox.Show("A color on the image, doesn't exist on the color palette. Please load the palette of the image.",
+                    "Color Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             DialogResult = DialogResult.OK;
             FrameWidth = (int)w.Value;
             FrameHeight = (int)h.Value;
             Dispose();
         }
 
-        public static new DialogResult Show(IWin32Window Owner)
+        public static new DialogResult Show(IWin32Window Owner, int midx, int midy)
         {
-            SpriteSheetDialog ssd = new SpriteSheetDialog();
+            SpriteSheetDialog ssd = new SpriteSheetDialog
+            {
+                mx = midx,
+                my = midy
+            };
             return ssd.ShowDialog(Owner);
         }
     }

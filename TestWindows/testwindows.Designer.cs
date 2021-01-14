@@ -33,6 +33,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.resizeableSpriteGridController1 = new SMWControlibControls.GraphicsControls.ResizeableSpriteGridController();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.spritesheet = new System.Windows.Forms.Button();
             this.frameCreator1 = new SMWControlibControls.GraphicsControls.FrameCreator();
             this.paletteButton1 = new SMWControlibControls.GraphicsControls.PaletteButton();
             this.paletteBox1 = new SMWControlibControls.GraphicsControls.PaletteBox();
@@ -85,7 +86,6 @@
             this.saveFile = new System.Windows.Forms.SaveFileDialog();
             this.openFile = new System.Windows.Forms.OpenFileDialog();
             this.folderdialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.spritesheet = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -115,10 +115,11 @@
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("MS Reference Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(0, 24);
+            this.tabControl1.Location = new System.Drawing.Point(0, 30);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1116, 618);
+            this.tabControl1.Size = new System.Drawing.Size(1674, 933);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -127,10 +128,11 @@
             this.tabPage1.Controls.Add(this.resizeableSpriteGridController1);
             this.tabPage1.Controls.Add(this.panel2);
             this.tabPage1.Controls.Add(this.panel1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Location = new System.Drawing.Point(4, 31);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1108, 590);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage1.Size = new System.Drawing.Size(1666, 898);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Frames";
             // 
@@ -139,11 +141,12 @@
             this.resizeableSpriteGridController1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.resizeableSpriteGridController1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.resizeableSpriteGridController1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.resizeableSpriteGridController1.Location = new System.Drawing.Point(283, 3);
-            this.resizeableSpriteGridController1.MidX = 0;
-            this.resizeableSpriteGridController1.MidY = 0;
+            this.resizeableSpriteGridController1.Location = new System.Drawing.Point(424, 4);
+            this.resizeableSpriteGridController1.Margin = new System.Windows.Forms.Padding(6);
+            this.resizeableSpriteGridController1.MidX = -136;
+            this.resizeableSpriteGridController1.MidY = 120;
             this.resizeableSpriteGridController1.Name = "resizeableSpriteGridController1";
-            this.resizeableSpriteGridController1.Size = new System.Drawing.Size(549, 584);
+            this.resizeableSpriteGridController1.Size = new System.Drawing.Size(828, 890);
             this.resizeableSpriteGridController1.TabIndex = 14;
             // 
             // panel2
@@ -154,18 +157,36 @@
             this.panel2.Controls.Add(this.paletteButton1);
             this.panel2.Controls.Add(this.paletteBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(832, 3);
+            this.panel2.Location = new System.Drawing.Point(1252, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(273, 584);
+            this.panel2.Size = new System.Drawing.Size(410, 890);
             this.panel2.TabIndex = 13;
+            // 
+            // spritesheet
+            // 
+            this.spritesheet.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
+            this.spritesheet.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
+            this.spritesheet.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
+            this.spritesheet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.spritesheet.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
+            this.spritesheet.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+            this.spritesheet.Location = new System.Drawing.Point(9, 447);
+            this.spritesheet.Margin = new System.Windows.Forms.Padding(4);
+            this.spritesheet.Name = "spritesheet";
+            this.spritesheet.Size = new System.Drawing.Size(306, 34);
+            this.spritesheet.TabIndex = 3;
+            this.spritesheet.Text = "Load Sprite Sheet";
+            this.spritesheet.UseVisualStyleBackColor = false;
+            this.spritesheet.Visible = false;
             // 
             // frameCreator1
             // 
             this.frameCreator1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.frameCreator1.Location = new System.Drawing.Point(1, 175);
-            this.frameCreator1.Margin = new System.Windows.Forms.Padding(1, 3, 3, 0);
+            this.frameCreator1.Location = new System.Drawing.Point(2, 262);
+            this.frameCreator1.Margin = new System.Windows.Forms.Padding(2, 4, 4, 0);
             this.frameCreator1.Name = "frameCreator1";
-            this.frameCreator1.Size = new System.Drawing.Size(209, 118);
+            this.frameCreator1.Size = new System.Drawing.Size(314, 177);
             this.frameCreator1.TabIndex = 2;
             // 
             // paletteButton1
@@ -176,9 +197,10 @@
             this.paletteButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.paletteButton1.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.paletteButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(250)))));
-            this.paletteButton1.Location = new System.Drawing.Point(6, 146);
+            this.paletteButton1.Location = new System.Drawing.Point(9, 219);
+            this.paletteButton1.Margin = new System.Windows.Forms.Padding(4);
             this.paletteButton1.Name = "paletteButton1";
-            this.paletteButton1.Size = new System.Drawing.Size(75, 23);
+            this.paletteButton1.Size = new System.Drawing.Size(112, 34);
             this.paletteButton1.StartFolder = "";
             this.paletteButton1.TabIndex = 1;
             this.paletteButton1.Text = "Load";
@@ -188,9 +210,10 @@
             // 
             this.paletteBox1.FirstPaletteToShow = 8;
             this.paletteBox1.Image = ((System.Drawing.Image)(resources.GetObject("paletteBox1.Image")));
-            this.paletteBox1.Location = new System.Drawing.Point(6, 12);
+            this.paletteBox1.Location = new System.Drawing.Point(9, 18);
+            this.paletteBox1.Margin = new System.Windows.Forms.Padding(4);
             this.paletteBox1.Name = "paletteBox1";
-            this.paletteBox1.Size = new System.Drawing.Size(256, 128);
+            this.paletteBox1.Size = new System.Drawing.Size(384, 192);
             this.paletteBox1.TabIndex = 0;
             this.paletteBox1.TabStop = false;
             this.paletteBox1.Zoom = 16;
@@ -200,9 +223,10 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.panel1.Controls.Add(this.tabControl2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Location = new System.Drawing.Point(4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(280, 584);
+            this.panel1.Size = new System.Drawing.Size(420, 890);
             this.panel1.TabIndex = 12;
             // 
             // tabControl2
@@ -213,9 +237,10 @@
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl2.Font = new System.Drawing.Font("MS Reference Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
+            this.tabControl2.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(280, 584);
+            this.tabControl2.Size = new System.Drawing.Size(420, 890);
             this.tabControl2.TabIndex = 8;
             // 
             // tabPage3
@@ -225,10 +250,11 @@
             this.tabPage3.Controls.Add(this.gfxButton2);
             this.tabPage3.Controls.Add(this.gfxButton1);
             this.tabPage3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Location = new System.Drawing.Point(4, 31);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(272, 556);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage3.Size = new System.Drawing.Size(412, 855);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "SP1/SP2";
             // 
@@ -239,14 +265,14 @@
             this.spriteGFXBox1.Image = ((System.Drawing.Image)(resources.GetObject("spriteGFXBox1.Image")));
             this.spriteGFXBox1.ImageHeigth = 128;
             this.spriteGFXBox1.ImageWidth = 128;
-            this.spriteGFXBox1.Location = new System.Drawing.Point(6, 9);
-            this.spriteGFXBox1.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
+            this.spriteGFXBox1.Location = new System.Drawing.Point(9, 14);
+            this.spriteGFXBox1.Margin = new System.Windows.Forms.Padding(4, 9, 4, 4);
             this.spriteGFXBox1.Name = "spriteGFXBox1";
             this.spriteGFXBox1.Selection = new System.Drawing.Rectangle(0, 0, 16, 16);
             this.spriteGFXBox1.SelectionAccuracy = 8;
             this.spriteGFXBox1.SelectionColor = System.Drawing.Color.White;
             this.spriteGFXBox1.SelectionMinSize = 8;
-            this.spriteGFXBox1.Size = new System.Drawing.Size(260, 260);
+            this.spriteGFXBox1.Size = new System.Drawing.Size(388, 388);
             this.spriteGFXBox1.SP = 0;
             this.spriteGFXBox1.TabIndex = 4;
             this.spriteGFXBox1.TabStop = false;
@@ -262,10 +288,11 @@
             this.gfxButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gfxButton2.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gfxButton2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-            this.gfxButton2.Location = new System.Drawing.Point(112, 275);
+            this.gfxButton2.Location = new System.Drawing.Point(168, 412);
+            this.gfxButton2.Margin = new System.Windows.Forms.Padding(4);
             this.gfxButton2.Name = "gfxButton2";
             this.gfxButton2.Position = 64;
-            this.gfxButton2.Size = new System.Drawing.Size(100, 23);
+            this.gfxButton2.Size = new System.Drawing.Size(150, 34);
             this.gfxButton2.StartFolder = "";
             this.gfxButton2.TabIndex = 3;
             this.gfxButton2.Text = "Load Bottom";
@@ -281,10 +308,11 @@
             this.gfxButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gfxButton1.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gfxButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-            this.gfxButton1.Location = new System.Drawing.Point(6, 275);
+            this.gfxButton1.Location = new System.Drawing.Point(9, 412);
+            this.gfxButton1.Margin = new System.Windows.Forms.Padding(4);
             this.gfxButton1.Name = "gfxButton1";
             this.gfxButton1.Position = 0;
-            this.gfxButton1.Size = new System.Drawing.Size(100, 23);
+            this.gfxButton1.Size = new System.Drawing.Size(150, 34);
             this.gfxButton1.StartFolder = "";
             this.gfxButton1.TabIndex = 2;
             this.gfxButton1.Text = "Load Top";
@@ -297,10 +325,11 @@
             this.tabPage4.Controls.Add(this.spriteGFXBox2);
             this.tabPage4.Controls.Add(this.gfxButton3);
             this.tabPage4.Controls.Add(this.gfxButton4);
-            this.tabPage4.Location = new System.Drawing.Point(4, 24);
+            this.tabPage4.Location = new System.Drawing.Point(4, 31);
+            this.tabPage4.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(272, 556);
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage4.Size = new System.Drawing.Size(412, 855);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "SP3/SP4";
             // 
@@ -311,14 +340,14 @@
             this.spriteGFXBox2.Image = ((System.Drawing.Image)(resources.GetObject("spriteGFXBox2.Image")));
             this.spriteGFXBox2.ImageHeigth = 128;
             this.spriteGFXBox2.ImageWidth = 128;
-            this.spriteGFXBox2.Location = new System.Drawing.Point(6, 9);
-            this.spriteGFXBox2.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
+            this.spriteGFXBox2.Location = new System.Drawing.Point(9, 14);
+            this.spriteGFXBox2.Margin = new System.Windows.Forms.Padding(4, 9, 4, 4);
             this.spriteGFXBox2.Name = "spriteGFXBox2";
             this.spriteGFXBox2.Selection = new System.Drawing.Rectangle(0, 0, 16, 16);
             this.spriteGFXBox2.SelectionAccuracy = 8;
             this.spriteGFXBox2.SelectionColor = System.Drawing.Color.White;
             this.spriteGFXBox2.SelectionMinSize = 8;
-            this.spriteGFXBox2.Size = new System.Drawing.Size(260, 260);
+            this.spriteGFXBox2.Size = new System.Drawing.Size(388, 388);
             this.spriteGFXBox2.SP = 1;
             this.spriteGFXBox2.TabIndex = 6;
             this.spriteGFXBox2.TabStop = false;
@@ -334,10 +363,11 @@
             this.gfxButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gfxButton3.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gfxButton3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-            this.gfxButton3.Location = new System.Drawing.Point(112, 275);
+            this.gfxButton3.Location = new System.Drawing.Point(168, 412);
+            this.gfxButton3.Margin = new System.Windows.Forms.Padding(4);
             this.gfxButton3.Name = "gfxButton3";
             this.gfxButton3.Position = 64;
-            this.gfxButton3.Size = new System.Drawing.Size(100, 23);
+            this.gfxButton3.Size = new System.Drawing.Size(150, 34);
             this.gfxButton3.StartFolder = "";
             this.gfxButton3.TabIndex = 5;
             this.gfxButton3.Text = "Load Bottom";
@@ -353,10 +383,11 @@
             this.gfxButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gfxButton4.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gfxButton4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-            this.gfxButton4.Location = new System.Drawing.Point(6, 275);
+            this.gfxButton4.Location = new System.Drawing.Point(9, 412);
+            this.gfxButton4.Margin = new System.Windows.Forms.Padding(4);
             this.gfxButton4.Name = "gfxButton4";
             this.gfxButton4.Position = 0;
-            this.gfxButton4.Size = new System.Drawing.Size(100, 23);
+            this.gfxButton4.Size = new System.Drawing.Size(150, 34);
             this.gfxButton4.StartFolder = "";
             this.gfxButton4.TabIndex = 4;
             this.gfxButton4.Text = "Load Top";
@@ -368,10 +399,11 @@
             this.tabPage7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.tabPage7.Controls.Add(this.spriteGFXBox3);
             this.tabPage7.Controls.Add(this.gfxButton6);
-            this.tabPage7.Location = new System.Drawing.Point(4, 24);
+            this.tabPage7.Location = new System.Drawing.Point(4, 31);
+            this.tabPage7.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(272, 556);
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage7.Size = new System.Drawing.Size(412, 855);
             this.tabPage7.TabIndex = 2;
             this.tabPage7.Text = "Dynamic Space";
             // 
@@ -382,14 +414,14 @@
             this.spriteGFXBox3.Image = ((System.Drawing.Image)(resources.GetObject("spriteGFXBox3.Image")));
             this.spriteGFXBox3.ImageHeigth = 128;
             this.spriteGFXBox3.ImageWidth = 128;
-            this.spriteGFXBox3.Location = new System.Drawing.Point(6, 9);
-            this.spriteGFXBox3.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
+            this.spriteGFXBox3.Location = new System.Drawing.Point(9, 14);
+            this.spriteGFXBox3.Margin = new System.Windows.Forms.Padding(4, 9, 4, 4);
             this.spriteGFXBox3.Name = "spriteGFXBox3";
             this.spriteGFXBox3.Selection = new System.Drawing.Rectangle(0, 0, 16, 16);
             this.spriteGFXBox3.SelectionAccuracy = 8;
             this.spriteGFXBox3.SelectionColor = System.Drawing.Color.White;
             this.spriteGFXBox3.SelectionMinSize = 8;
-            this.spriteGFXBox3.Size = new System.Drawing.Size(260, 260);
+            this.spriteGFXBox3.Size = new System.Drawing.Size(388, 388);
             this.spriteGFXBox3.SP = 1;
             this.spriteGFXBox3.TabIndex = 9;
             this.spriteGFXBox3.TabStop = false;
@@ -405,10 +437,11 @@
             this.gfxButton6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gfxButton6.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gfxButton6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-            this.gfxButton6.Location = new System.Drawing.Point(6, 275);
+            this.gfxButton6.Location = new System.Drawing.Point(9, 412);
+            this.gfxButton6.Margin = new System.Windows.Forms.Padding(4);
             this.gfxButton6.Name = "gfxButton6";
             this.gfxButton6.Position = 0;
-            this.gfxButton6.Size = new System.Drawing.Size(100, 23);
+            this.gfxButton6.Size = new System.Drawing.Size(150, 34);
             this.gfxButton6.StartFolder = "";
             this.gfxButton6.TabIndex = 7;
             this.gfxButton6.Text = "Load";
@@ -422,10 +455,11 @@
             this.tabPage2.Controls.Add(this.panel3);
             this.tabPage2.Controls.Add(this.panel4);
             this.tabPage2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Location = new System.Drawing.Point(4, 31);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1108, 590);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage2.Size = new System.Drawing.Size(1666, 898);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Animations";
             // 
@@ -435,9 +469,10 @@
             this.animationPlayer1.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
             this.animationPlayer1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.animationPlayer1.Interval = 16;
-            this.animationPlayer1.Location = new System.Drawing.Point(3, 3);
+            this.animationPlayer1.Location = new System.Drawing.Point(4, 4);
+            this.animationPlayer1.Margin = new System.Windows.Forms.Padding(6);
             this.animationPlayer1.Name = "animationPlayer1";
-            this.animationPlayer1.Size = new System.Drawing.Size(834, 359);
+            this.animationPlayer1.Size = new System.Drawing.Size(1256, 552);
             this.animationPlayer1.SpeedFPS = 62;
             this.animationPlayer1.TabIndex = 6;
             // 
@@ -446,9 +481,10 @@
             this.panel3.Controls.Add(this.frameSelector1);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(837, 3);
+            this.panel3.Location = new System.Drawing.Point(1260, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(268, 359);
+            this.panel3.Size = new System.Drawing.Size(402, 552);
             this.panel3.TabIndex = 4;
             // 
             // frameSelector1
@@ -458,9 +494,10 @@
             this.frameSelector1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.frameSelector1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.frameSelector1.FramesPerRow = 2;
-            this.frameSelector1.Location = new System.Drawing.Point(0, 27);
+            this.frameSelector1.Location = new System.Drawing.Point(0, 40);
+            this.frameSelector1.Margin = new System.Windows.Forms.Padding(6);
             this.frameSelector1.Name = "frameSelector1";
-            this.frameSelector1.Size = new System.Drawing.Size(268, 332);
+            this.frameSelector1.Size = new System.Drawing.Size(402, 512);
             this.frameSelector1.TabIndex = 3;
             // 
             // label1
@@ -469,10 +506,10 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Top;
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(6);
+            this.label1.Margin = new System.Windows.Forms.Padding(9);
             this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(6);
-            this.label1.Size = new System.Drawing.Size(113, 27);
+            this.label1.Padding = new System.Windows.Forms.Padding(9);
+            this.label1.Size = new System.Drawing.Size(163, 40);
             this.label1.TabIndex = 2;
             this.label1.Text = "Select Frames";
             // 
@@ -482,9 +519,10 @@
             this.panel4.Controls.Add(this.label2);
             this.panel4.Controls.Add(this.panel5);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(3, 362);
+            this.panel4.Location = new System.Drawing.Point(4, 556);
+            this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1102, 225);
+            this.panel4.Size = new System.Drawing.Size(1658, 338);
             this.panel4.TabIndex = 5;
             // 
             // animationEditor1
@@ -494,9 +532,10 @@
             this.animationEditor1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.animationEditor1.Dock = System.Windows.Forms.DockStyle.Top;
             this.animationEditor1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.animationEditor1.Location = new System.Drawing.Point(0, 27);
+            this.animationEditor1.Location = new System.Drawing.Point(0, 40);
+            this.animationEditor1.Margin = new System.Windows.Forms.Padding(6);
             this.animationEditor1.Name = "animationEditor1";
-            this.animationEditor1.Size = new System.Drawing.Size(894, 208);
+            this.animationEditor1.Size = new System.Drawing.Size(1348, 310);
             this.animationEditor1.TabIndex = 1;
             // 
             // label2
@@ -505,10 +544,10 @@
             this.label2.Dock = System.Windows.Forms.DockStyle.Top;
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Margin = new System.Windows.Forms.Padding(6);
+            this.label2.Margin = new System.Windows.Forms.Padding(9);
             this.label2.Name = "label2";
-            this.label2.Padding = new System.Windows.Forms.Padding(6);
-            this.label2.Size = new System.Drawing.Size(138, 27);
+            this.label2.Padding = new System.Windows.Forms.Padding(9);
+            this.label2.Size = new System.Drawing.Size(201, 40);
             this.label2.TabIndex = 3;
             this.label2.Text = "Animation Frames";
             // 
@@ -517,9 +556,10 @@
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel5.Controls.Add(this.animationCreator1);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel5.Location = new System.Drawing.Point(894, 0);
+            this.panel5.Location = new System.Drawing.Point(1348, 0);
+            this.panel5.Margin = new System.Windows.Forms.Padding(4);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(208, 225);
+            this.panel5.Size = new System.Drawing.Size(310, 338);
             this.panel5.TabIndex = 0;
             // 
             // animationCreator1
@@ -529,8 +569,9 @@
             this.animationCreator1.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
             this.animationCreator1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.animationCreator1.Location = new System.Drawing.Point(0, 0);
+            this.animationCreator1.Margin = new System.Windows.Forms.Padding(6);
             this.animationCreator1.Name = "animationCreator1";
-            this.animationCreator1.Size = new System.Drawing.Size(204, 221);
+            this.animationCreator1.Size = new System.Drawing.Size(306, 334);
             this.animationCreator1.TabIndex = 0;
             // 
             // tabPage5
@@ -539,19 +580,21 @@
             this.tabPage5.Controls.Add(this.interactionGrid1);
             this.tabPage5.Controls.Add(this.interactionMenu1);
             this.tabPage5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
-            this.tabPage5.Location = new System.Drawing.Point(4, 24);
+            this.tabPage5.Location = new System.Drawing.Point(4, 31);
+            this.tabPage5.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1108, 590);
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage5.Size = new System.Drawing.Size(1666, 898);
             this.tabPage5.TabIndex = 2;
             this.tabPage5.Text = "Interaction";
             // 
             // interactionGrid1
             // 
             this.interactionGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.interactionGrid1.Location = new System.Drawing.Point(3, 3);
+            this.interactionGrid1.Location = new System.Drawing.Point(4, 4);
+            this.interactionGrid1.Margin = new System.Windows.Forms.Padding(6);
             this.interactionGrid1.Name = "interactionGrid1";
-            this.interactionGrid1.Size = new System.Drawing.Size(868, 584);
+            this.interactionGrid1.Size = new System.Drawing.Size(1309, 890);
             this.interactionGrid1.TabIndex = 1;
             // 
             // interactionMenu1
@@ -561,19 +604,21 @@
             this.interactionMenu1.Dock = System.Windows.Forms.DockStyle.Right;
             this.interactionMenu1.Font = new System.Drawing.Font("MS Reference Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.interactionMenu1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.interactionMenu1.Location = new System.Drawing.Point(871, 3);
+            this.interactionMenu1.Location = new System.Drawing.Point(1313, 4);
+            this.interactionMenu1.Margin = new System.Windows.Forms.Padding(6);
             this.interactionMenu1.Name = "interactionMenu1";
-            this.interactionMenu1.Size = new System.Drawing.Size(234, 584);
+            this.interactionMenu1.Size = new System.Drawing.Size(349, 890);
             this.interactionMenu1.TabIndex = 0;
             // 
             // tabPage6
             // 
             this.tabPage6.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage6.Controls.Add(this.codeEditorController1);
-            this.tabPage6.Location = new System.Drawing.Point(4, 24);
+            this.tabPage6.Location = new System.Drawing.Point(4, 31);
+            this.tabPage6.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(1108, 590);
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage6.Size = new System.Drawing.Size(1666, 898);
             this.tabPage6.TabIndex = 3;
             this.tabPage6.Text = "Logic";
             // 
@@ -583,15 +628,17 @@
             this.codeEditorController1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.codeEditorController1.Font = new System.Drawing.Font("MS Reference Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.codeEditorController1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
-            this.codeEditorController1.Location = new System.Drawing.Point(3, 3);
-            this.codeEditorController1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.codeEditorController1.Location = new System.Drawing.Point(4, 4);
+            this.codeEditorController1.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.codeEditorController1.Name = "codeEditorController1";
-            this.codeEditorController1.Size = new System.Drawing.Size(1102, 584);
+            this.codeEditorController1.Size = new System.Drawing.Size(1658, 890);
             this.codeEditorController1.TabIndex = 0;
             // 
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
             this.windowToolStripMenuItem,
@@ -599,7 +646,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1116, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1674, 30);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -617,7 +664,7 @@
             this.toolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.ShowShortcutKeys = false;
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(42, 20);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(60, 26);
             this.toolStripMenuItem1.Text = "File";
             // 
             // newProjectToolStripMenuItem
@@ -625,7 +672,7 @@
             this.newProjectToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.newProjectToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(223, 34);
             this.newProjectToolStripMenuItem.Text = "New Project";
             this.newProjectToolStripMenuItem.Visible = false;
             // 
@@ -634,7 +681,7 @@
             this.loadProj.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.loadProj.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.loadProj.Name = "loadProj";
-            this.loadProj.Size = new System.Drawing.Size(153, 22);
+            this.loadProj.Size = new System.Drawing.Size(223, 34);
             this.loadProj.Text = "Load";
             // 
             // save
@@ -642,7 +689,7 @@
             this.save.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.save.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.save.Name = "save";
-            this.save.Size = new System.Drawing.Size(153, 22);
+            this.save.Size = new System.Drawing.Size(223, 34);
             this.save.Text = "Save";
             // 
             // saveAs
@@ -650,7 +697,7 @@
             this.saveAs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.saveAs.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.saveAs.Name = "saveAs";
-            this.saveAs.Size = new System.Drawing.Size(153, 22);
+            this.saveAs.Size = new System.Drawing.Size(223, 34);
             this.saveAs.Text = "Save as";
             // 
             // extratTo
@@ -658,7 +705,7 @@
             this.extratTo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.extratTo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.extratTo.Name = "extratTo";
-            this.extratTo.Size = new System.Drawing.Size(153, 22);
+            this.extratTo.Size = new System.Drawing.Size(223, 34);
             this.extratTo.Text = "Extract To";
             // 
             // windowToolStripMenuItem
@@ -673,7 +720,7 @@
             this.windowToolStripMenuItem.Font = new System.Drawing.Font("MS Reference Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.windowToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.windowToolStripMenuItem.Name = "windowToolStripMenuItem";
-            this.windowToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
+            this.windowToolStripMenuItem.Size = new System.Drawing.Size(100, 26);
             this.windowToolStripMenuItem.Text = "Window";
             this.windowToolStripMenuItem.Visible = false;
             // 
@@ -682,7 +729,7 @@
             this.spriteGridSettingsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.spriteGridSettingsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.spriteGridSettingsToolStripMenuItem.Name = "spriteGridSettingsToolStripMenuItem";
-            this.spriteGridSettingsToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.spriteGridSettingsToolStripMenuItem.Size = new System.Drawing.Size(350, 34);
             this.spriteGridSettingsToolStripMenuItem.Text = "Sprite Grid Settings";
             // 
             // interactionGridSettingsToolStripMenuItem
@@ -690,7 +737,7 @@
             this.interactionGridSettingsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.interactionGridSettingsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.interactionGridSettingsToolStripMenuItem.Name = "interactionGridSettingsToolStripMenuItem";
-            this.interactionGridSettingsToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.interactionGridSettingsToolStripMenuItem.Size = new System.Drawing.Size(350, 34);
             this.interactionGridSettingsToolStripMenuItem.Text = "Interaction Grid Settings";
             // 
             // animationsSettingsToolStripMenuItem
@@ -698,7 +745,7 @@
             this.animationsSettingsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.animationsSettingsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.animationsSettingsToolStripMenuItem.Name = "animationsSettingsToolStripMenuItem";
-            this.animationsSettingsToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.animationsSettingsToolStripMenuItem.Size = new System.Drawing.Size(350, 34);
             this.animationsSettingsToolStripMenuItem.Text = "Animations Settings";
             // 
             // textEditorSettingsToolStripMenuItem
@@ -706,7 +753,7 @@
             this.textEditorSettingsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.textEditorSettingsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.textEditorSettingsToolStripMenuItem.Name = "textEditorSettingsToolStripMenuItem";
-            this.textEditorSettingsToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.textEditorSettingsToolStripMenuItem.Size = new System.Drawing.Size(350, 34);
             this.textEditorSettingsToolStripMenuItem.Text = "Text Editor Settings";
             // 
             // othersSettingsToolStripMenuItem
@@ -714,7 +761,7 @@
             this.othersSettingsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.othersSettingsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.othersSettingsToolStripMenuItem.Name = "othersSettingsToolStripMenuItem";
-            this.othersSettingsToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.othersSettingsToolStripMenuItem.Size = new System.Drawing.Size(350, 34);
             this.othersSettingsToolStripMenuItem.Text = "Others Settings";
             // 
             // helpToolStripMenuItem
@@ -726,7 +773,7 @@
             this.helpToolStripMenuItem.Font = new System.Drawing.Font("MS Reference Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.helpToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(69, 26);
             this.helpToolStripMenuItem.Text = "Help";
             this.helpToolStripMenuItem.Visible = false;
             // 
@@ -735,7 +782,7 @@
             this.fuckYouToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.fuckYouToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.fuckYouToolStripMenuItem.Name = "fuckYouToolStripMenuItem";
-            this.fuckYouToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.fuckYouToolStripMenuItem.Size = new System.Drawing.Size(185, 34);
             this.fuckYouToolStripMenuItem.Text = "Content";
             // 
             // aboutToolStripMenuItem
@@ -748,7 +795,7 @@
             this.aboutToolStripMenuItem.Font = new System.Drawing.Font("MS Reference Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(82, 26);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Visible = false;
             // 
@@ -757,7 +804,7 @@
             this.versionToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.versionToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.versionToolStripMenuItem.Name = "versionToolStripMenuItem";
-            this.versionToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.versionToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
             this.versionToolStripMenuItem.Text = "Version";
             // 
             // creditsToolStripMenuItem
@@ -765,41 +812,27 @@
             this.creditsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(180)))));
             this.creditsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
             this.creditsToolStripMenuItem.Name = "creditsToolStripMenuItem";
-            this.creditsToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.creditsToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
             this.creditsToolStripMenuItem.Text = "Credits";
-            // 
-            // spritesheet
-            // 
-            this.spritesheet.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(40)))), ((int)(((byte)(150)))));
-            this.spritesheet.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(20)))), ((int)(((byte)(75)))));
-            this.spritesheet.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(60)))), ((int)(((byte)(224)))));
-            this.spritesheet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.spritesheet.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
-            this.spritesheet.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-            this.spritesheet.Location = new System.Drawing.Point(6, 298);
-            this.spritesheet.Name = "spritesheet";
-            this.spritesheet.Size = new System.Drawing.Size(204, 23);
-            this.spritesheet.TabIndex = 3;
-            this.spritesheet.Text = "Load Sprite Sheet";
-            this.spritesheet.UseVisualStyleBackColor = false;
-            this.spritesheet.Visible = false;
             // 
             // testwindows
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(248)))));
-            this.ClientSize = new System.Drawing.Size(1116, 642);
+            this.ClientSize = new System.Drawing.Size(1674, 963);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.MinimumSize = new System.Drawing.Size(691, 333);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(1026, 472);
             this.Name = "testwindows";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dyzen Sprite Maker";
             this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))));
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);

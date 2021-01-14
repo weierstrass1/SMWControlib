@@ -66,9 +66,17 @@ RTS
 ;>Description: Decides what will be the next frame.
 ;>RoutineLength: Short
 AnimationRoutine:
+	%CheckEvenOrOdd("DZ_DS_Loc_US_Normal")
+	BNE +
+RTS
++
+
     LDA !AnimationTimer,x
     BEQ +
 
+	DEC A
+	DEC A
+	STA !AnimationTimer,x
 	RTS
 
 +

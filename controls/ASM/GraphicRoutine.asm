@@ -13,7 +13,10 @@
 ;>RoutineLength: Short
 GraphicRoutine:
 
-    JSL GetDrawInfo                     ;Calls GetDrawInfo to get the free slot and the XDisp and YDisp
+    %GetDrawInfo()                     ;Calls GetDrawInfo to get the free slot and the XDisp and YDisp
+
+	%GetVramDisp(DZ_DS_Loc_US_Normal)
+	STA !ScratchE
 
     STZ !Scratch3                       ;$02 = Free Slot but in 16bits
     STY !Scratch2
@@ -36,7 +39,7 @@ GraphicRoutine:
     PHX                                 ;Preserve X
     
     STZ !Scratch7
-    LDA !FrameIndex,x
+    LDA !LastFrameIndex,x
     STA !Scratch6                       ;$06 = Frame Index but in 16bits
 
     REP #$30                            ;A/X/Y 16bits mode
@@ -66,7 +69,7 @@ GraphicRoutine:
     CPY #$00FD
     BCS .return                         ;Y can't be more than #$00FD
 -
-<sametile1>    LDA Tiles,x
+<sametile1>    %RemapOamTile("Tiles,x", !ScratchE)
 </sametile1>    STA !TileCode,y                     ;Set the Tile code of the tile Y
 
 <sameprop1>    LDA Properties,x

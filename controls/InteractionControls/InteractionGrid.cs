@@ -571,7 +571,7 @@ namespace SMWControlibControls.InteractionControls
             Image = new Bitmap(Width, Height);
 
             Bitmap b = null;
-            if (selectedFrame != null)
+            if (selectedFrame != null && Zoom != null)
             {
                 b = new Bitmap(256 * zoom, 240 * zoom);
                 Bitmap nb = selectedFrame.GetBitmap();

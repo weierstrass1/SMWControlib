@@ -45,6 +45,7 @@ namespace SMWControlibControls.GraphicsControls
             set
             {
                 trackBar1.Value = Math.Abs(value);
+                midChange();
             }
         }
         public int MidY
@@ -56,12 +57,14 @@ namespace SMWControlibControls.GraphicsControls
             set
             {
                 trackBar2.Value = Math.Abs(value);
+                midChange();
             }
         }
 
         public SpriteGridController()
         {
             InitializeComponent();
+            spriteGrid1.MidChanged += midChange;
             spriteGrid1.SizeChanged += sizeChanged;
             SizeChanged += sizeChanged;
             grid.Checked = spriteGrid1.ActivateGrid;
@@ -70,6 +73,8 @@ namespace SMWControlibControls.GraphicsControls
             grid.Checked = true;
             trackBar1.ValueChanged += tb1ValueChanged;
             trackBar2.ValueChanged += tb2ValueChanged;
+            trackBar1.Value = 136;
+            trackBar2.Value = 120;
             zoom.SelectedIndexChanged += selectedIndexChanged;
             zoom.SelectedIndex = 1;
             cellSize.SelectedIndexChanged += cellSizeSelectedIndexChanged;
@@ -80,7 +85,6 @@ namespace SMWControlibControls.GraphicsControls
             moveRight.Click += moveRightClick;
             mirrorH.Click += mirrorHClick;
             mirrorV.Click += mirrorVClick;
-            spriteGrid1.MidChanged += midChange;
             spriteGrid1.MovingMouse += spriteGrid1MouseMove;
             /*
             toolTip1.SetToolTip(mirrorH,

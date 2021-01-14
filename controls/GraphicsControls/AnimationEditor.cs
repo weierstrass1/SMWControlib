@@ -73,45 +73,43 @@ namespace SMWControlibControls.GraphicsControls
                 afe.SetBorderVisible(true);
             }
         }
-
+        void ClearLayoutTable()
+        {
+            foreach (Control c in tableLayoutPanel1.Controls)
+            {
+                c.Parent = null;
+                c.Dispose();
+            }
+            tableLayoutPanel1.Controls.Clear();
+            tableLayoutPanel1.ColumnCount = 0;
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }
         private void buildTable()
         {
             if (animation == null || animation.Length == 0)
             {
+
+                ClearLayoutTable();
                 tableLayoutPanel1.ColumnCount = 1;
-
-                foreach(Control c in tableLayoutPanel1.Controls)
-                {
-                    c.Dispose();
-                }
-                tableLayoutPanel1.Controls.Clear();
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-
                 tableLayoutPanel1.Width = 208 * tableLayoutPanel1.ColumnCount;
                 AnimationFrameEditor afex = new AnimationFrameEditor();
                 afex.AddClick += addClick;
+                afex.Name = "NULL";
 
                 tableLayoutPanel1.Controls.Add(afex, 0, 0);
                 return;
             }
-            int scroll = panel1.HorizontalScroll.Value;
+            int scroll = panel1.HorizontalScroll.Maximum;
+            tableLayoutPanel1.SuspendLayout();
+            ClearLayoutTable();
+
             tableLayoutPanel1.ColumnCount = animation.Length;
-
-            foreach (Control c in tableLayoutPanel1.Controls)
-            {
-                c.Dispose();
-            }
-            tableLayoutPanel1.Controls.Clear();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-
             tableLayoutPanel1.Width = 208 * tableLayoutPanel1.ColumnCount;
 
             FrameMask fm = animation[0];
             int i = 0;
             AnimationFrameEditor afe;
-            SuspendUpdate.Suspend(tableLayoutPanel1);
             while (fm != null)
             {
                 tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 208));
@@ -128,15 +126,24 @@ namespace SMWControlibControls.GraphicsControls
                 afe.FlipYChanged += flipChanged;
                 afe.FlipX = fm.FlipX;
                 afe.FlipY = fm.FlipY;
-                
-                
-                tableLayoutPanel1.Controls.Add(afe, i, 0);
+                afe.Name = $"FrameEditor{i}";
+
+                if (tableLayoutPanel1.Controls.Contains(afe))
+                    tableLayoutPanel1.Controls.Remove(afe);
+
+                try
+                {
+                    tableLayoutPanel1.Controls.Add(afe, i, 0);
+                }
+                catch(Exception)
+                {
+
+                }
                 fm = fm.Next;
                 i++;
             }
             panel1.AutoScrollPosition = new Point(scroll, panel1.AutoScrollPosition.Y);
-            SuspendUpdate.Resume(tableLayoutPanel1);
-            tableLayoutPanel1.Refresh();
+            tableLayoutPanel1.ResumeLayout();
         }
 
         private void timeChanged(AnimationFrameEditor obj)

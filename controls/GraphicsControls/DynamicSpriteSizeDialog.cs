@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SMWControlibBackend.Graphics.Frames;
 
@@ -13,7 +6,7 @@ namespace SMWControlibControls.GraphicsControls
 {
     public partial class DynamicSpriteSizeDialog : Form
     {
-        public static DynamicSize DynSize = DynamicSize.DynamicSprite96x96;
+        public static DynamicSize DynSize = DynamicSize.DynamicSprite112x112;
         static string desc16 = "Dynamic sprite that use a space of 16x16 or less on the VRAM per frame.\n\nIt doesn't require 50% More Mode.\n\nIt can be of 60fps or 30fps.";
         static string desc1632 = "Dynamic sprite that use a space of 32x16 or less on the VRAM per frame.\n\nIt doesn't require 50% More Mode.\n\nIt can be of 60fps or 30fps.";
         static string desc32 = "Dynamic sprite that use a space of 64x16 or less on the VRAM per frame.\n\nIt doesn't require 50% More Mode.\n\nIt can be of 60fps or 30fps.";

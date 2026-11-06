@@ -1,0 +1,74 @@
+ValueTuple`2;ValueTuple`2.Item1;ValueTuple`2.Item2
+"(ResourceSize:, 
+Frame0_ResourceSize:
+	db $05,$04
+Frame1_ResourceSize:
+	db $07,$06
+Frame2_ResourceSize:
+	db $07,$06
+Frame3_ResourceSize:
+	db $06,$06
+Frame4_ResourceSize:
+	db $07,$04
+Frame5_ResourceSize:
+	db $08,$06
+Frame6_ResourceSize:
+	db $08,$06
+Frame7_ResourceSize:
+	db $08,$06
+Frame8_ResourceSize:
+	db $07,$06
+Frame9_ResourceSize:
+	db $07,$06
+Frame10_ResourceSize:
+	db $06,$04
+Frame11_ResourceSize:
+	db $06,$04
+Frame12_ResourceSize:
+	db $06,$04
+Frame13_ResourceSize:
+	db $06,$04
+Frame14_ResourceSize:
+	db $06,$04
+Frame15_ResourceSize:
+	db $08,$08
+Frame16_ResourceSize:
+	db $06,$04
+ResourceLastRow:
+    db $10)";ResourceSize:;"
+Frame0_ResourceSize:
+	db $05,$04
+Frame1_ResourceSize:
+	db $07,$06
+Frame2_ResourceSize:
+	db $07,$06
+Frame3_ResourceSize:
+	db $06,$06
+Frame4_ResourceSize:
+	db $07,$04
+Frame5_ResourceSize:
+	db $08,$06
+Frame6_ResourceSize:
+	db $08,$06
+Frame7_ResourceSize:
+	db $08,$06
+Frame8_ResourceSize:
+	db $07,$06
+Frame9_ResourceSize:
+	db $07,$06
+Frame10_ResourceSize:
+	db $06,$04
+Frame11_ResourceSize:
+	db $06,$04
+Frame12_ResourceSize:
+	db $06,$04
+Frame13_ResourceSize:
+	db $06,$04
+Frame14_ResourceSize:
+	db $06,$04
+Frame15_ResourceSize:
+	db $08,$08
+Frame16_ResourceSize:
+	db $06,$04
+ResourceLastRow:
+    db $10"

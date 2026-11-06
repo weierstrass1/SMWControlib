@@ -1,6 +1,7 @@
 ﻿using SMWControlibBackend.Graphics;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 
 namespace SMWControlibBackend.Interaction
@@ -44,7 +45,7 @@ namespace SMWControlibBackend.Interaction
             return base.Equals(obj);
         }
 
-        public abstract string GetHitBoxString(string[] actionNames);
+        public abstract string[] GetHitBoxString(string[] actionNames);
 
         public abstract HitBox GetFlippedBox(bool FlipX, bool FlipY, int midX, int midY);
 
@@ -122,12 +123,33 @@ namespace SMWControlibBackend.Interaction
 
         public static string GetHitboxesFromArray(HitBox[] hitboxes, string[] actionNames)
         {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < hitboxes.Length; i++)
-            {
-                sb.Append(hitboxes[i].GetHitBoxString(actionNames) + "\t");
-            }
-            return sb.ToString();
+            List<string[]> strings = hitboxes
+                                        .Select(x => x.GetHitBoxString(actionNames))
+                                        .ToList();
+            string types = string.Join(",", strings
+                                .Select(x => x[0]).ToArray());
+            string xOffsets = string.Join(",", strings
+                                .Select(x => x[1]).ToArray());
+            string yOffsets = string.Join(",", strings
+                                .Select(x => x[2]).ToArray());
+            string widths = string.Join(",", strings
+                                .Select(x => x[3]).ToArray());
+            string heights = string.Join(",", strings
+                                .Select(x => x[4]).ToArray());
+            string acts1 = string.Join(",", strings
+                                .Select(x => x[5]).ToArray());
+            string acts2 = acts1;
+
+            types = $"HitboxType:\n\tdw {types}";
+            xOffsets = $"HitboxXOffset:\n\tdw {xOffsets}";
+            yOffsets = $"HitboxYOffset:\n\tdw {yOffsets}";
+            widths = $"HitboxWidth:\n\tdw {widths}";
+            heights = $"HitboxHeight:\n\tdw {heights}";
+            acts1 = $"HitboxAction1:\n\tdw {acts1}";
+            acts2 = $"HitboxAction2:\n\tdw {acts2}";
+
+            return string.Join("\n", types, xOffsets, yOffsets, widths, heights,
+                                acts1, acts2);
         }
 
         public abstract HitBox Clone();

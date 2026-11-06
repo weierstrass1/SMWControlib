@@ -47,8 +47,9 @@
             this.section1.Controls.Add(this.left);
             this.section1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.section1.Location = new System.Drawing.Point(0, 0);
+            this.section1.Margin = new System.Windows.Forms.Padding(4);
             this.section1.Name = "section1";
-            this.section1.Size = new System.Drawing.Size(599, 571);
+            this.section1.Size = new System.Drawing.Size(898, 856);
             this.section1.TabIndex = 1;
             // 
             // spriteGridController1
@@ -57,51 +58,58 @@
             this.spriteGridController1.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold);
             this.spriteGridController1.Location = new System.Drawing.Point(0, 0);
             this.spriteGridController1.Margin = new System.Windows.Forms.Padding(0);
-            this.spriteGridController1.MaximumSize = new System.Drawing.Size(547, 560);
-            this.spriteGridController1.MinimumSize = new System.Drawing.Size(439, 120);
+            this.spriteGridController1.MaximumSize = new System.Drawing.Size(810, 881);
+            this.spriteGridController1.MidX = -136;
+            this.spriteGridController1.MidY = 120;
+            this.spriteGridController1.MinimumSize = new System.Drawing.Size(658, 180);
             this.spriteGridController1.Name = "spriteGridController1";
-            this.spriteGridController1.Size = new System.Drawing.Size(547, 560);
+            this.spriteGridController1.Size = new System.Drawing.Size(810, 852);
             this.spriteGridController1.TabIndex = 4;
             // 
             // down
             // 
             this.down.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.down.Location = new System.Drawing.Point(0, 567);
+            this.down.Location = new System.Drawing.Point(0, 852);
+            this.down.Margin = new System.Windows.Forms.Padding(4);
             this.down.Name = "down";
-            this.down.Size = new System.Drawing.Size(595, 0);
+            this.down.Size = new System.Drawing.Size(894, 0);
             this.down.TabIndex = 3;
             // 
             // up
             // 
             this.up.Dock = System.Windows.Forms.DockStyle.Top;
             this.up.Location = new System.Drawing.Point(0, 0);
+            this.up.Margin = new System.Windows.Forms.Padding(4);
             this.up.Name = "up";
-            this.up.Size = new System.Drawing.Size(595, 0);
+            this.up.Size = new System.Drawing.Size(894, 0);
             this.up.TabIndex = 2;
             // 
             // right
             // 
             this.right.Dock = System.Windows.Forms.DockStyle.Right;
-            this.right.Location = new System.Drawing.Point(595, 0);
+            this.right.Location = new System.Drawing.Point(894, 0);
+            this.right.Margin = new System.Windows.Forms.Padding(4);
             this.right.Name = "right";
-            this.right.Size = new System.Drawing.Size(0, 567);
+            this.right.Size = new System.Drawing.Size(0, 852);
             this.right.TabIndex = 1;
             // 
             // left
             // 
             this.left.Dock = System.Windows.Forms.DockStyle.Left;
             this.left.Location = new System.Drawing.Point(0, 0);
+            this.left.Margin = new System.Windows.Forms.Padding(4);
             this.left.Name = "left";
-            this.left.Size = new System.Drawing.Size(0, 567);
+            this.left.Size = new System.Drawing.Size(0, 852);
             this.left.TabIndex = 0;
             // 
             // ResizeableSpriteGridController
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.section1);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ResizeableSpriteGridController";
-            this.Size = new System.Drawing.Size(599, 571);
+            this.Size = new System.Drawing.Size(898, 856);
             this.section1.ResumeLayout(false);
             this.ResumeLayout(false);
 

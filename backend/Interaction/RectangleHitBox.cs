@@ -1,6 +1,5 @@
 ﻿using SMWControlibBackend.Graphics;
 using System.Drawing;
-using System.Text;
 
 namespace SMWControlibBackend.Interaction
 {
@@ -95,21 +94,8 @@ namespace SMWControlibBackend.Interaction
             return rhb;
         }
 
-        public override string GetHitBoxString(string[] actionNames)
+        public override string[] GetHitBoxString(string[] actionNames)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("db ");
-            string s = (XOffset).ToString("X2");
-            s = s.Substring(s.Length - 2);
-            sb.Append("$01,$" + s + ",$");
-            s = (YOffset).ToString("X2");
-            s = s.Substring(s.Length - 2);
-            sb.Append(s + ",$");
-            s = (Width).ToString("X2");
-            s = s.Substring(s.Length - 2);
-            sb.Append(s + ",$");
-            s = (Height).ToString("X2");
-            s = s.Substring(s.Length - 2);
             int i;
             for (i = 0; i < actionNames.Length; i++)
             {
@@ -118,8 +104,22 @@ namespace SMWControlibBackend.Interaction
                     break;
                 }
             }
-            sb.Append(s + ",$" + (i).ToString("X2") + "\n");
-            return sb.ToString();
+            i *= 2;
+            string xOff = XOffset.ToString("X4");
+            string yOff = YOffset.ToString("X4");
+            string w = Width.ToString("X4");
+            string h = Height.ToString("X4");
+            string act = i.ToString("X4");
+            return new string[]
+            {
+                "$0001",
+                $"${xOff.Substring(xOff.Length-4,4)}",
+                $"${yOff.Substring(yOff.Length-4,4)}",
+                $"${w.Substring(w.Length-4,4)}",
+                $"${h.Substring(h.Length-4,4)}",
+                $"${act.Substring(act.Length-4,4)}",
+            };
+            
         }
 
         public override HitBox Clone()

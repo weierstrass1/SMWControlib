@@ -176,6 +176,7 @@ namespace SMWControlibBackend.Graphics
                 prop[0] = (byte)((int)Priority | pal | (int)SP);
                 if (flipX) prop[0] += 64;
                 if (flipY) prop[0] += 128;
+                prop[0] &= 0xC0;
                 return prop;
             }
         }

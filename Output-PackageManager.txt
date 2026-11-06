@@ -1,0 +1,3 @@
+﻿
+
+Attempting to gather dependency information for package 'ImageTileCropper.1.0.0' with respect to project 'SMWControlibBackend', targeting '.NETFramework,Version=v4.6.1'

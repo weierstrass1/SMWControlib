@@ -79,7 +79,7 @@ namespace SMWControlibControls.GraphicsControls
                 SelectedFrame.GetBitmap();
             }
 
-            if (SelectedFrame == null)
+            if (SelectedFrame == null && frames != null && frames.Count > 0) 
                 SelectedFrame = frames[0];
         }
 

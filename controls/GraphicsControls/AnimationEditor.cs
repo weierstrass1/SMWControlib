@@ -75,10 +75,22 @@ namespace SMWControlibControls.GraphicsControls
         }
         void ClearLayoutTable()
         {
-            foreach (Control c in tableLayoutPanel1.Controls)
+            AnimationFrameEditor afe;
+            Control c;
+            while (tableLayoutPanel1.Controls.Count > 0) 
             {
+                c = tableLayoutPanel1.Controls[0];
                 c.Parent = null;
+                afe = (AnimationFrameEditor)c;
+                afe.AddClick -= addClick;
+                afe.RemoveClick -= removeClick;
+                afe.ExchangeClick -= exchangeClick;
+                afe.TimeChanged -= timeChanged;
+                afe.FlipXChanged -= flipChanged;
+                afe.FlipYChanged -= flipChanged;
+                afe.FrameMask = null;
                 c.Dispose();
+                tableLayoutPanel1.Controls.Remove(c);
             }
             tableLayoutPanel1.Controls.Clear();
             tableLayoutPanel1.ColumnCount = 0;

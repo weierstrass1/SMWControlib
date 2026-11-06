@@ -136,7 +136,7 @@ namespace SMWControlibBackend.Graphics.Frames
             {
                 lns = f[i].DynSize.Lines;
                 sb1.Append(f[i].Name+"_"+"ResourceOffset:\n\tdw ");
-                sb2.Append(f[i].Name + "_" + "ResourceSize:\n\tdb ");
+                sb2.Append(f[i].Name + "_" + "PoseChunksSizes:\n\tdb ");
                 sb3.Append(f[i].Name + "_" + "ResourceLastRow:\n\tdb ");
                 taux = f[i].GetDynamicSource();
 
@@ -1298,7 +1298,7 @@ namespace SMWControlibBackend.Graphics.Frames
             return sb.ToString();
         }
 
-        public static string GetTilesYDispFromFrameList(Frame[] frames, bool FlipX, bool FlipY)
+        public static string GetTilesYDispFromFrameList(Frame[] frames, bool FlipY)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("\n");
@@ -1329,33 +1329,6 @@ namespace SMWControlibBackend.Graphics.Frames
                 if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
                     sb1.Remove(sb1.Length - 1, 1);
                 sb.Append(sb1 + "\n");
-            }
-            if (FlipX)
-            {
-                for (int i = 0; i < frames.Length; i++)
-                {
-                    counter = 0;
-                    sb1 = new StringBuilder();
-                    sb1.Append("Frame" + i + "_" + frames[i] + "_YDispFlipX:\n");
-                    foreach (TileMask tm in frames[i].Tiles)
-                    {
-                        if (counter % 16 == 0)
-                        {
-                            if (sb1.Length > 0)
-                            {
-                                sb1.Remove(sb1.Length - 1, 1);
-                                sb1.Append("\n\t");
-                            }
-
-                            sb1.Append("db ");
-                        }
-                        sb1.Append(tm.YDispString + ",");
-                        counter++;
-                    }
-                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
-                        sb1.Remove(sb1.Length - 1, 1);
-                    sb.Append(sb1 + "\n");
-                }
             }
 
             if (FlipY)
@@ -1392,46 +1365,13 @@ namespace SMWControlibBackend.Graphics.Frames
                 }
             }
 
-            if (FlipX && FlipY)
-            {
-                for (int i = 0; i < frames.Length; i++)
-                {
-                    counter = 0;
-                    sb1 = new StringBuilder();
-                    sb1.Append("Frame" + i + "_" + frames[i] + "_YDispFlipXY:\n");
-                    foreach (TileMask tm in frames[i].Tiles)
-                    {
-                        if (counter % 16 == 0)
-                        {
-                            if (sb1.Length > 0)
-                            {
-                                sb1.Remove(sb1.Length - 1, 1);
-                                sb1.Append("\n\t");
-                            }
-
-                            sb1.Append("db ");
-                        }
-                        y = tm.YDisp;
-                        dy = frames[i].MidY - ((y / tm.Zoom) - 112);
-                        tm.YDisp = frames[i].MidY + 112 + dy;
-                        if (tm.Size == 8) tm.YDisp += 8;
-                        tm.YDisp *= tm.Zoom;
-                        sb1.Append(tm.YDispString + ",");
-                        tm.YDisp = y;
-                        counter++;
-                    }
-                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
-                        sb1.Remove(sb1.Length - 1, 1);
-                    sb.Append(sb1 + "\n");
-                }
-            }
             if (sb.Length > 0 && (sb[sb.Length - 1] == ',' || sb[sb.Length - 1] == '\n'))
                 sb.Remove(sb.Length - 1, 1);
 
             return sb.ToString();
         }
 
-        public static string GetTilesXDispFromFrameList(Frame[] frames, bool FlipX, bool FlipY)
+        public static string GetTilesXDispFromFrameList(Frame[] frames, bool FlipX)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("\n");
@@ -1498,80 +1438,18 @@ namespace SMWControlibBackend.Graphics.Frames
                 }
             }
 
-            if (FlipY)
-            {
-                for (int i = 0; i < frames.Length; i++)
-                {
-                    counter = 0;
-                    sb1 = new StringBuilder();
-                    sb1.Append("Frame" + i + "_" + frames[i] + "_XDispFlipY:\n");
-                    foreach (TileMask tm in frames[i].Tiles)
-                    {
-                        if (counter % 16 == 0)
-                        {
-                            if (sb1.Length > 0)
-                            {
-                                sb1.Remove(sb1.Length - 1, 1);
-                                sb1.Append("\n\t");
-                            }
-
-                            sb1.Append("db ");
-                        }
-                        sb1.Append(tm.XDispString + ",");
-                        counter++;
-                    }
-                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
-                        sb1.Remove(sb1.Length - 1, 1);
-                    sb.Append(sb1 + "\n");
-                }
-            }
-
-            if (FlipX && FlipY)
-            {
-                for (int i = 0; i < frames.Length; i++)
-                {
-                    counter = 0;
-                    sb1 = new StringBuilder();
-                    sb1.Append("Frame" + i + "_" + frames[i] + "_XDispFlipXY:\n");
-                    foreach (TileMask tm in frames[i].Tiles)
-                    {
-                        if (counter % 16 == 0)
-                        {
-                            if (sb1.Length > 0)
-                            {
-                                sb1.Remove(sb1.Length - 1, 1);
-                                sb1.Append("\n\t");
-                            }
-
-                            sb1.Append("db ");
-                        }
-                        x = tm.XDisp;
-                        dx = frames[i].MidX - ((x / tm.Zoom) - 128);
-                        tm.XDisp = frames[i].MidX + 128 + dx;
-                        if (tm.Size == 8) tm.XDisp += 8;
-                        tm.XDisp *= tm.Zoom;
-                        sb1.Append(tm.XDispString + ",");
-                        tm.XDisp = x;
-                        counter++;
-                    }
-                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
-                        sb1.Remove(sb1.Length - 1, 1);
-                    sb.Append(sb1 + "\n");
-                }
-            }
             if (sb.Length > 0 && (sb[sb.Length - 1] == ',' || sb[sb.Length - 1] == '\n'))
                 sb.Remove(sb.Length - 1, 1);
 
             return sb.ToString();
         }
 
-        public static string GetTilesPropertiesFromFrameList(Frame[] frames, bool FlipX, bool FlipY, bool SameProp)
+        public static string GetTilesPropertiesFromFrameList(Frame[] frames)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("\n");
             StringBuilder sb1;
             int counter;
-            bool fx, fy;
 
             for (int i = 0; i < frames.Length; i++)
             {
@@ -1598,108 +1476,13 @@ namespace SMWControlibBackend.Graphics.Frames
                 sb.Append(sb1 + "\n");
             }
 
-            if (FlipX)
-            {
-                for (int i = 0; i < frames.Length; i++)
-                {
-                    counter = 0;
-                    sb1 = new StringBuilder();
-                    sb1.Append("Frame" + i + "_" + frames[i] + "_PropertiesFlipX:\n");
-                    foreach (TileMask tm in frames[i].Tiles)
-                    {
-                        if (counter % 16 == 0)
-                        {
-                            if (sb1.Length > 0)
-                            {
-                                sb1.Remove(sb1.Length - 1, 1);
-                                sb1.Append("\n\t");
-                            }
-
-                            sb1.Append("db ");
-                        }
-                        fx = tm.FlipX;
-                        if(!SameProp) tm.FlipX = !tm.FlipX;
-                        sb1.Append(tm.Properties + ",");
-                        tm.FlipX = fx;
-                        counter++;
-                    }
-                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
-                        sb1.Remove(sb1.Length - 1, 1);
-                    sb.Append(sb1 + "\n");
-                }
-            }
-
-            if (FlipY)
-            {
-                for (int i = 0; i < frames.Length; i++)
-                {
-                    counter = 0;
-                    sb1 = new StringBuilder();
-                    sb1.Append("Frame" + i + "_" + frames[i] + "_PropertiesFlipY:\n");
-                    foreach (TileMask tm in frames[i].Tiles)
-                    {
-                        if (counter % 16 == 0)
-                        {
-                            if (sb1.Length > 0)
-                            {
-                                sb1.Remove(sb1.Length - 1, 1);
-                                sb1.Append("\n\t");
-                            }
-
-                            sb1.Append("db ");
-                        }
-                        fy = tm.FlipY;
-                        if (!SameProp) tm.FlipY = !tm.FlipY;
-                        sb1.Append(tm.Properties + ",");
-                        tm.FlipY = fy;
-                        counter++;
-                    }
-                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
-                        sb1.Remove(sb1.Length - 1, 1);
-                    sb.Append(sb1 + "\n");
-                }
-            }
-
-            if (FlipX && FlipY)
-            {
-                for (int i = 0; i < frames.Length; i++)
-                {
-                    counter = 0;
-                    sb1 = new StringBuilder();
-                    sb1.Append("Frame" + i + "_" + frames[i] + "_PropertiesFlipXY:\n");
-                    foreach (TileMask tm in frames[i].Tiles)
-                    {
-                        if (counter % 16 == 0)
-                        {
-                            if (sb1.Length > 0)
-                            {
-                                sb1.Remove(sb1.Length - 1, 1);
-                                sb1.Append("\n\t");
-                            }
-
-                            sb1.Append("db ");
-                        }
-                        fx = tm.FlipX;
-                        tm.FlipX = !tm.FlipX;
-                        fy = tm.FlipY;
-                        if (!SameProp) tm.FlipY = !tm.FlipY;
-                        sb1.Append(tm.Properties + ",");
-                        tm.FlipX = fx;
-                        tm.FlipY = fy;
-                        counter++;
-                    }
-                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
-                        sb1.Remove(sb1.Length - 1, 1);
-                    sb.Append(sb1 + "\n");
-                }
-            }
             if (sb.Length > 0 && (sb[sb.Length - 1] == ',' || sb[sb.Length - 1] == '\n'))
                 sb.Remove(sb.Length - 1, 1);
 
             return sb.ToString();
         }
 
-        public static string GetTilesSizesFromFrameList(Frame[] frames, bool FlipX, bool FlipY)
+        public static string GetTilesSizesFromFrameList(Frame[] frames)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("\n");
@@ -1731,94 +1514,12 @@ namespace SMWControlibBackend.Graphics.Frames
                 sb.Append(sb1 + "\n");
             }
 
-            if (FlipX)
-            {
-                for (int i = 0; i < frames.Length; i++)
-                {
-                    counter = 0;
-                    sb1 = new StringBuilder();
-                    sb1.Append("Frame" + i + "_" + frames[i] + "_SizesFlipX:\n");
-                    foreach (TileMask tm in frames[i].Tiles)
-                    {
-                        if (counter % 16 == 0)
-                        {
-                            if (sb1.Length > 0)
-                            {
-                                sb1.Remove(sb1.Length - 1, 1);
-                                sb1.Append("\n\t");
-                            }
-
-                            sb1.Append("db ");
-                        }
-                        sb1.Append(tm.SizeString + ",");
-                        counter++;
-                    }
-                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
-                        sb1.Remove(sb1.Length - 1, 1);
-                    sb.Append(sb1 + "\n");
-                }
-            }
-
-            if (FlipY)
-            {
-                for (int i = 0; i < frames.Length; i++)
-                {
-                    counter = 0;
-                    sb1 = new StringBuilder();
-                    sb1.Append("Frame" + i + "_" + frames[i] + "_SizesFlipY:\n");
-                    foreach (TileMask tm in frames[i].Tiles)
-                    {
-                        if (counter % 16 == 0)
-                        {
-                            if (sb1.Length > 0)
-                            {
-                                sb1.Remove(sb1.Length - 1, 1);
-                                sb1.Append("\n\t");
-                            }
-
-                            sb1.Append("db ");
-                        }
-                        sb1.Append(tm.SizeString + ",");
-                        counter++;
-                    }
-                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
-                        sb1.Remove(sb1.Length - 1, 1);
-                    sb.Append(sb1 + "\n");
-                }
-            }
-
-            if (FlipX && FlipY)
-            {
-                for (int i = 0; i < frames.Length; i++)
-                {
-                    counter = 0;
-                    sb1 = new StringBuilder();
-                    sb1.Append("Frame" + i + "_" + frames[i] + "_SizesFlipXY:\n");
-                    foreach (TileMask tm in frames[i].Tiles)
-                    {
-                        if (counter % 16 == 0)
-                        {
-                            if (sb1.Length > 0)
-                            {
-                                sb1.Remove(sb1.Length - 1, 1);
-                                sb1.Append("\n\t");
-                            }
-
-                            sb1.Append("db ");
-                        }
-                        sb1.Append(tm.SizeString + ",");
-                        counter++;
-                    }
-                    if (sb1.Length > 0 && sb1[sb1.Length - 1] == ',')
-                        sb1.Remove(sb1.Length - 1, 1);
-                    sb.Append(sb1 + "\n");
-                }
-            }
             if (sb.Length > 0 && (sb[sb.Length - 1] == ',' || sb[sb.Length - 1] == '\n'))
                 sb.Remove(sb.Length - 1, 1);
 
             return sb.ToString();
         }
+        
         public Bitmap GetBitmap()
         {
             if (!dirty && bitmap != null) return bitmap;
@@ -1843,14 +1544,18 @@ namespace SMWControlibBackend.Graphics.Frames
                 if (my > maxY) maxY = my;
             }
 
-            bitmap = new Bitmap(maxX - MinX, maxY - MinY);
+            bitmap = new Bitmap( maxX - MinX, maxY - MinY);
             using (System.Drawing.Graphics g =
                 System.Drawing.Graphics.FromImage(bitmap))
             {
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
                 foreach(TileMask tm in Tiles)
                 {
-                    g.DrawImage(tm.GetBitmap(), tm.XDisp / tm.Zoom - MinX, tm.YDisp / tm.Zoom - MinY, tm.Size, tm.Size);
+                    g.DrawImage(tm.GetBitmap(),
+                                    (tm.XDisp / tm.Zoom) - MinX,
+                                    (tm.YDisp / tm.Zoom) - MinY,
+                                    tm.Size,
+                                    tm.Size);
                 }
             }
             return bitmap;

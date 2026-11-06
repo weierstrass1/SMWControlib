@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SMWControlibBackend</RootNamespace>
     <AssemblyName>SMWControlibBackend</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,13 +33,40 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="C5, Version=1.1.1.0, Culture=neutral, PublicKeyToken=06a1b38866503b69, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Desktop\repos\Master Transformer\backend\bin\Debug\C5.dll</HintPath>
+    <Reference Include="C5, Version=2.5.0.0, Culture=neutral, PublicKeyToken=282361b99ded7e8e, processorArchitecture=MSIL">
+      <HintPath>..\packages\C5.2.5.3\lib\net45\C5.dll</HintPath>
+    </Reference>
+    <Reference Include="ILGPU, Version=0.10.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ILGPU.0.10.1\lib\net47\ILGPU.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.5.0.0\lib\net461\System.Collections.Immutable.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=4.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Common.5.0.2\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Metadata, Version=1.4.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.Metadata.1.8.0\lib\netstandard2.0\System.Reflection.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -69,6 +97,7 @@
     <Compile Include="Interaction\InteractionPointContainer.cs" />
     <Compile Include="Interaction\RectangleHitBox.cs" />
     <Compile Include="Interaction\RectangleHitboxContainer.cs" />
+    <Compile Include="Logic\CodeManager.cs" />
     <Compile Include="Logic\HitBoxAction.cs" />
     <Compile Include="Logic\ArgsTypes.cs" />
     <Compile Include="Logic\Asar.cs" />
@@ -98,11 +127,50 @@
     <Content Include="asar.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="C5.dll">
+    <Content Include="Code\SpriteType\Cluster\Dynamic\Definesflip.asm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Code\SpriteType\Cluster\Dynamic\Definesanim.asm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Code\SpriteType\Cluster\Dynamic\Defines.asm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Code\SpriteType\Cluster\Dynamic\Initanim.asm" />
+    <Content Include="Code\SpriteType\Cluster\Dynamic\Init.asm" />
+    <Content Include="Code\SpriteType\Cluster\Dynamic\InitregularInteraction.asm" />
+    <Content Include="Code\SpriteType\Cluster\Regular\Defines.asm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Code\SpriteType\Cluster\Regular\Definesanim.asm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Code\SpriteType\Cluster\Regular\Definesflip.asm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Code\SpriteType\Cluster\Regular\Init.asm" />
+    <Content Include="Code\SpriteType\Cluster\SemiDynamic\Defines.asm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Code\SpriteType\Cluster\SemiDynamic\Definesanim.asm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Code\SpriteType\Cluster\SemiDynamic\Definesflip.asm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Code\SpriteType\Cluster\SharedDynamic\Defines.asm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Code\SpriteType\Cluster\SharedDynamic\Definesanim.asm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Code\SpriteType\Cluster\SharedDynamic\Definesflip.asm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Resources\DefaultPalette.pal">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -118,6 +186,26 @@
     <None Include="Resources\GFX13.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Code\SpriteType\Extended\Dynamic\" />
+    <Folder Include="Code\SpriteType\Extended\Regular\" />
+    <Folder Include="Code\SpriteType\Extended\SemiDynamic\" />
+    <Folder Include="Code\SpriteType\Extended\SharedDynamic\" />
+    <Folder Include="Code\SpriteType\Normal\Dynamic\" />
+    <Folder Include="Code\SpriteType\Normal\Regular\" />
+    <Folder Include="Code\SpriteType\Normal\SemiDynamic\" />
+    <Folder Include="Code\SpriteType\Normal\SharedDynamic\" />
+    <Folder Include="Code\SpriteType\OW\Dynamic\" />
+    <Folder Include="Code\SpriteType\OW\Regular\" />
+    <Folder Include="Code\SpriteType\OW\SemiDynamic\" />
+    <Folder Include="Code\SpriteType\OW\SharedDynamic\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\TileOptimizer\TileOptimizer\TileOptimizer.csproj">
+      <Project>{fb2d0cda-28a1-43c2-bef0-9218b152ad19}</Project>
+      <Name>TileOptimizer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

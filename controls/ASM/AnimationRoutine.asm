@@ -1,125 +1,118 @@
-;>Section Animations
-;######################################
-;########## Animation Space ###########
-;######################################
-
-;This space is for routines used for graphics
-;if you don't know enough about asm then
-;don't edit them.
 InitWrapperChangeAnimationFromStart:
 	PHB
     PHK
     PLB
-	STZ !AnimationIndex,x
+	STA !AnimationIndex,x
 	JSR ChangeAnimationFromStart
 	PLB
-	RTL
-
->ChangeRoutines.
+RTS
 
 ChangeAnimationFromStart:
-	STZ !AnimationFrameIndex,x
+    LDA #$00
+	STA !AnimationPoseIndex,x
 
-	STZ !Scratch1
+	LDA #$01
+	STA $8A
+
+	STZ $01
 	LDA !AnimationIndex,x
-	STA !Scratch0					;$00 = Animation index in 16 bits
+	STA $00					;$00 = Animation index in 16 bits
 
-	STZ !Scratch3
-	LDA !AnimationFrameIndex,x
-	STA !Scratch2					;$02 = Animation Frame index in 16 bits
+	STZ $03
+	LDA !AnimationPoseIndex,x
+	STA $02					;$02 = Animation Pose index in 16 bits
 
-	STZ !Scratch5
-	STX !Scratch4					;$04 = sprite index in 16 bits
+	STZ $05
+	STX $04					;$04 = sprite index in 16 bits
 
 	REP #$30						;A7X/Y of 16 bits
-	LDX !Scratch4					;X = sprite index in 16 bits
+	LDX $04					;X = sprite index in 16 bits
 
-	LDA !Scratch0
+	LDA $00
 	ASL
 	TAY								;Y = 2*Animation index
 
 	LDA !Scratch2
 	CLC
 	ADC AnimationIndexer,y
-	TAY								;Y = Position of the first frame of the animation + animation frame index
+	TAY								;Y = Position of the first Pose of the animation + animation Pose index
 
-	SEP #$20						;A of 8 bits
-
-	LDA Frames,y
-	STA !FrameIndex,x				;New Frame = Frames[New Animation Frame Index]
-
-	LDA Times,y
-	STA !AnimationTimer,x			;Time = Times[New Animation Frame Index]
-
-<localflip>	LDA Flips,y
-	STA !LocalFlip,x				;Flip = Flips[New Animation Frame Index]
-
-</localflip>	LDA !Scratch2
-	STA !AnimationFrameIndex,x
-
-	SEP #$10						;X/Y of 8 bits
-	LDX !Scratch4					;X = sprite index in 8 bits
-RTS
+	BRA SetUpAnimationPose
 	
+ChangeAnimation:
+	ASL
+	STA $00
 
-;>Routine: AnimationRoutine
-;>Description: Decides what will be the next frame.
-;>RoutineLength: Short
+	STY $02|!dp
+
+	TYA
+	LDY $00|!dp
+	CLC
+	ADC AnimationIndexer,y
+	TAY								;Y = Position of the first Pose of the animation + animation Pose index
+
+	BRA SetUpAnimationPose
+
 AnimationRoutine:
-	%CheckEvenOrOdd("DZ_DS_Loc_US_Normal")
-	BNE +
+	LDA $8A
+	BEQ +
 RTS
 +
-
     LDA !AnimationTimer,x
     BEQ +
-
-	DEC A
+	CMP #$FF
+	BNE ++
+RTS
+++
 	DEC A
 	STA !AnimationTimer,x
 	RTS
 
 +
-	STZ !Scratch1
+	STZ $01
 	LDA !AnimationIndex,x
-	STA !Scratch0					;$00 = Animation index in 16 bits
+	STA $00					;$00 = Animation index in 16 bits
 
-	STZ !Scratch3
-	LDA !AnimationFrameIndex,x
-	STA !Scratch2					;$02 = Animation Frame index in 16 bits
+	STZ $03
+	LDA !AnimationPoseIndex,x
+	STA $02					;$02 = Animation Pose index in 16 bits
 
-	STZ !Scratch5
-	STX !Scratch4					;$04 = sprite index in 16 bits
+	STZ $05
+	STX $04					;$04 = sprite index in 16 bits
 
 	REP #$30						;A7X/Y of 16 bits
-	LDX !Scratch4					;X = sprite index in 16 bits
+	LDX $04					;X = sprite index in 16 bits
 
-	LDA !Scratch0
+	LDA $00
 	ASL
 	TAY								;Y = 2*Animation index
 
-	INC !Scratch2					;New Animation Frame Index = Animation Frame Index + 1
+	INC $02					;New Animation Pose Index = Animation Pose Index + 1
 
-	LDA !Scratch2			        ;if Animation Frame index < Animation Lenght then Animation Frame index++
-	CMP AnimationLenght,y			;else go to the frame where start the loop.
+	LDA $02			        ;if Animation Pose index < Animation Lenght then Animation Pose index++
+	CMP AnimationLenght,y			;else go to the Pose where start the loop.
 	BCC +							
 
 	LDA AnimationLastTransition,y
-	STA !Scratch2					;New Animation Frame Index = first frame of the loop.
+	STA $02					;New Animation Pose Index = first Pose of the loop.
 
 +
-	LDA !Scratch2
+	LDA $02
 	CLC
 	ADC AnimationIndexer,y
-	TAY								;Y = Position of the first frame of the animation + animation frame index
+	TAY								;Y = Position of the first Pose of the animation + animation Pose index
 
+SetUpAnimationPose:
 	SEP #$20						;A of 8 bits
 
-	LDA Frames,y
-	STA !FrameIndex,x				;New Frame = Frames[New Animation Frame Index]
+	LDA Poses,y
+	STA !PoseIndex,x				;New Pose = Poses[New Animation Pose Index]
 
 	LDA Times,y
-	STA !AnimationTimer,x			;Time = Times[New Animation Frame Index]
+	STA !AnimationTimer,x			;Time = Times[New Animation Pose Index]
+
+	LDA $02
+	STA !AnimationPoseIndex,x
 
 <localflip>	LDA Flips,y
 	STA !LocalFlip,x				;Flip = Flips[New Animation Frame Index]
@@ -128,11 +121,8 @@ RTS
 	STA !AnimationFrameIndex,x
 
 	SEP #$10						;X/Y of 8 bits
-	LDX !Scratch4					;X = sprite index in 8 bits
+	LDX $04					;X = sprite index in 8 bits
 RTS
-;>EndRoutine
-
-;All words that starts with '>' and finish with '.' will be replaced by Dyzen
 
 AnimationLenght:
 	dw >anl.
@@ -152,4 +142,4 @@ Times:
 Flips:
 	db >aff.
 
-</localflip>;>End Animations Section
+</localflip>

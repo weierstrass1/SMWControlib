@@ -2,12 +2,7 @@
 using SMWControlibBackend.Graphics.Frames;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SMWControlibControls.GraphicsControls
@@ -17,6 +12,7 @@ namespace SMWControlibControls.GraphicsControls
         Bitmap[] bps;
         Bitmap ss;
         int mx, my;
+        bool cancelFrame;
         public static List<Frame> NewFrames { get; private set; } = new List<Frame>();
         Dictionary<Int32, byte> pal;
         public static int FrameWidth { get; private set; } = 0;
@@ -52,7 +48,12 @@ namespace SMWControlibControls.GraphicsControls
 
         private void Lfs_Click(object sender, EventArgs e)
         {
-            pal = ImageProcessor.GetPalette(ss, ColorPalette.SelectedPalette);
+            if(ss == null)
+            {
+                MessageBox.Show("Load a Sprite Sheet First.", "Sprite Sheet not loaded.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+                pal = ImageProcessor.GetPalette(ss, ColorPalette.SelectedPalette);
         }
 
         private void Lss_Click(object sender, EventArgs e)
@@ -106,20 +107,15 @@ namespace SMWControlibControls.GraphicsControls
                     pal.Add(c, i);
             }
             NewFrames.Clear();
-            try
+
+            if (FrameOptimizerDialog.Show(this, bps, NewFrames, mx, my, pal, name.Text) == DialogResult.OK)
             {
-                NewFrames = ImageProcessor.FromSpriteSheetToFrames(bps, mx, my, pal, name.Text, DynamicSpriteSizeDialog.DynSize, ColorPalette.SelectedPalette);
+
+                DialogResult = DialogResult.OK;
+                FrameWidth = (int)w.Value;
+                FrameHeight = (int)h.Value;
+                Dispose();
             }
-            catch(KeyNotFoundException)
-            {
-                MessageBox.Show("A color on the image, doesn't exist on the color palette. Please load the palette of the image.",
-                    "Color Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            DialogResult = DialogResult.OK;
-            FrameWidth = (int)w.Value;
-            FrameHeight = (int)h.Value;
-            Dispose();
         }
 
         public static new DialogResult Show(IWin32Window Owner, int midx, int midy)

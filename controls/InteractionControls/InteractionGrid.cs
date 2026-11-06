@@ -578,7 +578,9 @@ namespace SMWControlibControls.InteractionControls
                 using (Graphics g = Graphics.FromImage(b))
                 {
                     g.InterpolationMode = InterpolationMode.NearestNeighbor;
-                    g.DrawImage(nb, SelectedFrame.MinX * zoom, SelectedFrame.MinY * zoom, 
+                    g.DrawImage(nb,
+                        (SelectedFrame.MinX + 0.5f) * zoom,
+                        (SelectedFrame.MinY - 0.5f) * zoom,
                         nb.Width * zoom, nb.Height * zoom);
                 }
             }

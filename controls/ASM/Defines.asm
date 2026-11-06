@@ -1,2 +1,2 @@
-;@MyBinFile.bin	
+incsrc "./NormalSpriteDefines.asm"
 

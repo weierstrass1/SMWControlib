@@ -86,6 +86,15 @@ namespace SMWControlibControls.GraphicsControls
             border.MouseMove += mouseMove;
             border.MouseLeave += mouseLeave;
             EnabledChanged += enabledChanged;
+            Disposed += ImageButton_Disposed;
+        }
+
+        private void ImageButton_Disposed(object sender, EventArgs e)
+        {
+            border.Dispose();
+            pressedBox.Dispose();
+            Source.Dispose();
+            DestroyHandle();
         }
 
         private bool detectCollision(int x, int y)

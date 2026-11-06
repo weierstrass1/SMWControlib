@@ -38,6 +38,7 @@ namespace TestWindows
             }
             spriteGFXBox1.SelectionChanged += selectionChanged;
             spriteGFXBox2.SelectionChanged += selectionChanged;
+            spriteGFXBox3.SelectionChanged += selectionChanged;
             paletteButton1.target = paletteBox1;
             frameCreator1.SelectionChanged += frameCreator1_SelectionChanged;
             spriteGFXBox1.GraphicsLoaded += graphicsLoaded;
@@ -100,8 +101,8 @@ namespace TestWindows
                 else if (NewProjectWindow.ProjectType == 1)
                 {
                     spritesheet.Visible = true;
-                    spriteGFXBox3.Width = DynamicSize.DynamicSprite96x96.Width * 2 + 4;
-                    spriteGFXBox3.Height = DynamicSize.DynamicSprite96x96.Height * 2 + 4;
+                    spriteGFXBox3.Width = DynamicSize.DynamicSprite112x112.Width * 2 + 4;
+                    spriteGFXBox3.Height = DynamicSize.DynamicSprite112x112.Height * 2 + 4;
                     spriteGFXBox2.Height = 68;
                 }
             }
@@ -208,17 +209,10 @@ namespace TestWindows
             saveFile.Filter = "Dyzen Project File (*.dyz)|*.dyz";
             saveFile.DefaultExt = "dyz";
             if (projectPath != null)
-            {
                 saveFile.FileName = Path.GetFileNameWithoutExtension(projectPath);
-            }
-            if (saveFile.ShowDialog() == DialogResult.OK)
-            {
-                projectPath = saveFile.FileName;
-            }
-            else
-            {
+            if (saveFile.ShowDialog() != DialogResult.OK)
                 return;
-            }
+            projectPath = saveFile.FileName;
             if (Path.GetFileNameWithoutExtension(projectPath) == "")
                 return;
             if (File.Exists(projectPath)) File.Delete(projectPath);
@@ -277,18 +271,11 @@ namespace TestWindows
             {
                 saveFile.Filter = "Dyzen Project File (*.dyz)|*.dyz";
                 saveFile.DefaultExt = "dyz";
-                if (projectPath != null) 
-                {
+                if (projectPath != null)
                     saveFile.FileName = Path.GetFileNameWithoutExtension(projectPath);
-                }
-                if (saveFile.ShowDialog() == DialogResult.OK)
-                {
-                    projectPath = saveFile.FileName;
-                }
-                else
-                {
+                if (saveFile.ShowDialog() != DialogResult.OK)
                     return;
-                }
+                projectPath = saveFile.FileName;
             }
             if (Path.GetFileNameWithoutExtension(projectPath) == "")
                 return;
@@ -327,10 +314,8 @@ namespace TestWindows
             else if (boolcounter > 1)
             {
                 path += ExtractResourcesDialog.ProjectName;
-                if (!Directory.Exists(path)) 
-                {
+                if (!Directory.Exists(path))
                     Directory.CreateDirectory(path);
-                }
                 path += "\\";
             }
             Tuple<string, string, string, byte[]> t = null;
@@ -343,14 +328,37 @@ namespace TestWindows
                 string s = codeEditorController1.CodeEditor.Text;
                 Frame.GetFramesIndexs(frameCreator1.Frames);
 
-                s = s.Replace(">ResTiles.", "#$" + Frame.TilesUsed.ToString("X2"));
-                s = s.Replace("dw >resoff.", t.Item1);
-                s = s.Replace("dw >ressz.", t.Item2);
-                s = s.Replace(">lns.", t.Item3);
-                if (t.Item3 == "!Scratch52")
-                    s = s.Replace(">difrows.", "LDA !FrameIndex,x\n\tTAY\n\tLDA ResourceLastRow,y\n\tSTA !Scratch52");
-                else
-                    s = s.Replace(">difrows.", "");
+                string dynamicinfo = File.ReadAllText(Path.Combine("ASM", "DynamicInfo.asm"));
+                dynamicinfo = dynamicinfo
+                                .Replace("dw >ressz.", t.Item2)
+                                .Replace("<GFXName>", $"{ExtractResourcesDialog.ProjectName}.bin");
+
+                if (File.Exists(path + ExtractResourcesDialog.ProjectName + ".dynamicinfo"))
+                    File.Delete(path + ExtractResourcesDialog.ProjectName + ".dynamicinfo");
+                File.WriteAllText(path + ExtractResourcesDialog.ProjectName + ".dynamicinfo", dynamicinfo);
+
+                string drawinfo = File.ReadAllText(Path.Combine("ASM", "Drawinfo.asm"));
+                drawinfo = drawinfo
+                            .Replace("db >tiles.",
+                                Frame.GetTilesCodesFromFrameList(frameCreator1.Frames,
+                                ExtractResourcesDialog.FlipX,
+                                ExtractResourcesDialog.FlipY))
+                            .Replace("db >props.",
+                                Frame.GetTilesPropertiesFromFrameList(frameCreator1.Frames))
+                            .Replace("db >xdisps.",
+                                Frame.GetTilesXDispFromFrameList(frameCreator1.Frames,
+                                ExtractResourcesDialog.FlipX))
+                            .Replace("db >ydisps.",
+                                Frame.GetTilesYDispFromFrameList(frameCreator1.Frames,
+                                ExtractResourcesDialog.FlipY))
+                            .Replace("db >sizes.",
+                                Frame.GetTilesSizesFromFrameList(frameCreator1.Frames));
+
+                if (File.Exists(path + ExtractResourcesDialog.ProjectName + ".drawinfo"))
+                    File.Delete(path + ExtractResourcesDialog.ProjectName + ".drawinfo");
+                File.WriteAllText(path + ExtractResourcesDialog.ProjectName + ".drawinfo", drawinfo);
+
+
                 HitBox[] hbs = Frame.GetFramesHitboxesFromFrameList(frameCreator1.Frames,
                     ExtractResourcesDialog.FlipX,
                     ExtractResourcesDialog.FlipY);
@@ -372,44 +380,7 @@ namespace TestWindows
                     HitBox.GetHitboxesFromArray(hbs, interactionMenu1.GetActionNames()));
                 s = s.Replace("dw >hbacts.",
                     interactionMenu1.GetActionString(codeEditorController1.CodeEditor.Text));
-                s = s.Replace("dw >fls.",
-                    Frame.GetFramesLengthFromFrameList(frameCreator1.Frames,
-                    ExtractResourcesDialog.FlipX,
-                    ExtractResourcesDialog.FlipY));
-                s = s.Replace("dw >ffps.",
-                    Frame.GetFramesFlippersFromFrameList(frameCreator1.Frames,
-                    ExtractResourcesDialog.FlipX,
-                    ExtractResourcesDialog.FlipY));
-                s = s.Replace("dw >fsp.",
-                    Frame.GetFramesStartsFromFrameList(frameCreator1.Frames,
-                    ExtractResourcesDialog.FlipX,
-                    ExtractResourcesDialog.FlipY));
-                s = s.Replace("dw >fep.",
-                    Frame.GetFramesEndsFromFrameList(frameCreator1.Frames,
-                    ExtractResourcesDialog.FlipX,
-                    ExtractResourcesDialog.FlipY));
-                s = s.Replace("db >tiles.",
-                    Frame.GetTilesCodesFromFrameList(frameCreator1.Frames,
-                    ExtractResourcesDialog.FlipX,
-                    ExtractResourcesDialog.FlipY));
-                bool sameprop = Frame.SameProp(frameCreator1.Frames);
-                s = s.Replace("db >props.",
-                    Frame.GetTilesPropertiesFromFrameList(frameCreator1.Frames,
-                    ExtractResourcesDialog.FlipX,
-                    ExtractResourcesDialog.FlipY,
-                    sameprop));
-                s = s.Replace("db >xdisps.",
-                    Frame.GetTilesXDispFromFrameList(frameCreator1.Frames,
-                    ExtractResourcesDialog.FlipX,
-                    ExtractResourcesDialog.FlipY));
-                s = s.Replace("db >ydisps.",
-                    Frame.GetTilesYDispFromFrameList(frameCreator1.Frames,
-                    ExtractResourcesDialog.FlipX,
-                    ExtractResourcesDialog.FlipY));
-                s = s.Replace("db >sizes.",
-                    Frame.GetTilesSizesFromFrameList(frameCreator1.Frames,
-                    ExtractResourcesDialog.FlipX,
-                    ExtractResourcesDialog.FlipY));
+                
                 s = s.Replace("dw >anl.",
                     Animation.GetAnimationLenghts(animationCreator1.Animations));
                 s = s.Replace("dw >alt.",
@@ -422,7 +393,7 @@ namespace TestWindows
                     Animation.GetAnimationTimes(animationCreator1.Animations));
                 s = s.Replace("db >aff.",
                     Animation.GetAnimationFlips(animationCreator1.Animations));
-
+                s = s.Replace("<Name>", ExtractResourcesDialog.ProjectName);
                 s = File.ReadAllText(@".\ASM\Defines.asm") + "\n" + s;
                 if (File.Exists(path + ExtractResourcesDialog.ProjectName + ".asm"))
                     File.Delete(path + ExtractResourcesDialog.ProjectName + ".asm");

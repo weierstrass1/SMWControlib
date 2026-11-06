@@ -36,7 +36,8 @@ namespace SMWControlibBackend.Graphics
                 {
                     for (int j = 0; j < 8; j++)
                     {
-                        colors[i * 2 + w * 4 + (7 - j)] = (byte)((bits[j, i + w]) +
+                        colors[i * 2 + w * 4 + (7 - j)] = 
+                            (byte)((bits[j, i + w]) +
                             (bits[j, i + w + 1] * 2) +
                             (bits[j, i + w + 16] * 4) +
                             (bits[j, i + w + 17] * 8));

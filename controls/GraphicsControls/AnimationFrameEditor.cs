@@ -18,9 +18,12 @@ namespace SMWControlibControls.GraphicsControls
             set
             {
                 frameMask = value;
-                numericUpDown1.Value = frameMask.Time;
-                FlipX = frameMask.FlipX;
-                FlipY = frameMask.FlipY;
+                if (frameMask != null)
+                {
+                    numericUpDown1.Value = frameMask.Time;
+                    FlipX = frameMask.FlipX;
+                    FlipY = frameMask.FlipY;
+                }
             }
         }
         public event Action<AnimationFrameEditor> AddClick,
@@ -60,6 +63,7 @@ namespace SMWControlibControls.GraphicsControls
             numericUpDown1.ValueChanged += valueChanged;
             checkBox1.CheckedChanged += flipXCheckedChanged;
             checkBox2.CheckedChanged += flipYCheckedChanged;
+            Disposed += AnimationFrameEditor_Disposed;
             started = false;
 
             border = new PictureBox()
@@ -95,7 +99,19 @@ namespace SMWControlibControls.GraphicsControls
                     , borderSize, border.Height);
             }
         }
-        
+
+        private void AnimationFrameEditor_Disposed(object sender, EventArgs e)
+        {
+            border.Parent = null;
+            rectangle.Parent = null;
+            imageButton1.Dispose();
+            imageButton2.Dispose();
+            imageButton3.Dispose();
+            numericUpDown1.Dispose();
+            checkBox1.Dispose();
+            checkBox2.Dispose();
+            DestroyHandle();
+        }
         public void SetBorderVisible(bool visible)
         {
             if (visible)
@@ -169,6 +185,8 @@ namespace SMWControlibControls.GraphicsControls
         {
             ExchangeClick?.Invoke(this);
         }
+
+        
 
         protected override void OnPaint(PaintEventArgs e)
         {

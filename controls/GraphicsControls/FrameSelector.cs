@@ -97,7 +97,7 @@ namespace SMWControlibControls.GraphicsControls
                 };
                 pb.Click += pictureBoxClick;
                 tableLayoutPanel1.Controls.Add(pb, x, y);
-                pb.Image = new Bitmap(pb.Width - 3, pb.Height - 3);
+                pb.Image = new Bitmap(pb.Width, pb.Height);
                 
                 using (Graphics g = Graphics.FromImage(pb.Image))
                 {

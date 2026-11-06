@@ -8,8 +8,9 @@
     <OutputType>Library</OutputType>
     <RootNamespace>SMWControlibControls</RootNamespace>
     <AssemblyName>SMWControlibControls</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,6 +34,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\AutocompleteMenu-ScintillaNET.dll</HintPath>
     </Reference>
+    <Reference Include="C5, Version=2.5.0.0, Culture=neutral, PublicKeyToken=282361b99ded7e8e, processorArchitecture=MSIL">
+      <HintPath>..\packages\C5.2.5.3\lib\net45\C5.dll</HintPath>
+    </Reference>
+    <Reference Include="ILGPU, Version=0.10.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ILGPU.0.10.1\lib\net47\ILGPU.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageTileCropper, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageTileCropper.1.0.0\lib\netstandard2.0\ImageTileCropper.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
@@ -40,8 +50,30 @@
       <HintPath>.\ScintillaNET.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.5.0.0\lib\net461\System.Collections.Immutable.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing.Common, Version=4.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Common.5.0.2\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Metadata, Version=1.4.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.Metadata.1.8.0\lib\netstandard2.0\System.Reflection.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -101,6 +133,12 @@
     </Compile>
     <Compile Include="GraphicsControls\FrameInfoDialog.Designer.cs">
       <DependentUpon>FrameInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GraphicsControls\FrameOptimizerDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GraphicsControls\FrameOptimizerDialog.Designer.cs">
+      <DependentUpon>FrameOptimizerDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="GraphicsControls\FrameSelector.cs">
       <SubType>UserControl</SubType>
@@ -376,6 +414,10 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\TileOptimizer\TileOptimizer\TileOptimizer.csproj">
+      <Project>{fb2d0cda-28a1-43c2-bef0-9218b152ad19}</Project>
+      <Name>TileOptimizer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\backend\SMWControlibBackend.csproj">
       <Project>{e3597996-fb65-49cc-9cac-d621b996f6dc}</Project>
       <Name>SMWControlibBackend</Name>
@@ -405,6 +447,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GraphicsControls\FrameInfoDialog.resx">
       <DependentUpon>FrameInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphicsControls\FrameOptimizerDialog.resx">
+      <DependentUpon>FrameOptimizerDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GraphicsControls\FrameSelector.resx">
       <DependentUpon>FrameSelector.cs</DependentUpon>
@@ -514,6 +559,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="CSVs\Syntax\args.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -523,6 +569,7 @@
     <None Include="CSVs\Syntax\groups.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
     <None Include="Settings\GridSettings.set">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -605,6 +652,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ASM\Defines.asm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ASM\Drawinfo.asm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ASM\DynamicInfo.asm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ASM\DynamicRoutine.asm">

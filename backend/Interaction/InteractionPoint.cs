@@ -83,7 +83,7 @@ namespace SMWControlibBackend.Interaction
             throw new NotImplementedException();
         }
 
-        public override string GetHitBoxString(string[] actionNames)
+        public override string[] GetHitBoxString(string[] actionNames)
         {
             throw new NotImplementedException();
         }

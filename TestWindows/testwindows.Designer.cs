@@ -830,7 +830,7 @@
             this.MinimumSize = new System.Drawing.Size(1026, 472);
             this.Name = "testwindows";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Dyzen Sprite Maker";
+            this.Text = "Dyxen Sprite Maker";
             this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))));
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.tabControl1.ResumeLayout(false);
